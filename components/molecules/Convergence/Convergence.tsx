@@ -1,6 +1,6 @@
 import './Convergence.scss';
 import React, { FC } from 'react';
-import Waves from '../../../../../components/molecules/Waves/Waves';
+import Waves from '../Waves/Waves';
 import Gauge from '../../../../candidate/components/atoms/Gauge/Gauge';
 
 interface IConvergence {
