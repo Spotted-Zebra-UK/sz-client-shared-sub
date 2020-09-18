@@ -1,0 +1,11 @@
+.SoftSkillSynergy {
+  margin-bottom: 80px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-column-gap: 70px;
+
+  &__Container {
+    display: grid;
+    align-items: center;
+  }
+}
