@@ -1,0 +1,29 @@
+.SoftSkillOverviewFull {
+  height: 333px;
+  margin-bottom: 45px;
+  display: grid;
+  grid-template-columns: 560px 1fr;
+  grid-column-gap: 80px;
+
+  &:last-child {
+    margin-bottom: 32px;
+  }
+
+  &__SoftSkill {
+    grid-column-gap: 40px;
+
+    &__Details {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-column-gap: inherit;
+
+      &__Text {
+        font-size: 18px;
+
+        @media screen and (max-width: 900px) {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
