@@ -1,6 +1,6 @@
 import './SoftSkillScore.scss';
 import React, { FC } from 'react';
-import { colorResolver } from '../../../../../helpers/colorResolver';
+import { colorResolver } from '../../../helpers/colorResolver';
 
 interface ISoftSkillScore {
   color: string;
