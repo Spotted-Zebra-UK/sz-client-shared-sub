@@ -1,0 +1,42 @@
+.Trait {
+  margin-bottom: 15px;
+  border-radius: 50%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 16px;
+  align-items: center;
+
+  @media screen and (max-width: 900px) {
+    grid-column-gap: 16px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__Status {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+
+    @media screen and (max-width: 900px) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__Bullet {
+    font-size: 18px;
+    font-weight: bold;
+    
+    &::first-letter {
+      text-transform: capitalize;
+    }
+
+    @media screen and (max-width: 900px) {
+      font-size: 14px;
+    }
+  }
+}
