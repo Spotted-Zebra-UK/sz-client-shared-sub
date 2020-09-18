@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Wave from '../../atoms/Wave/Wave';
-import { waveResolver } from '../../../../../helpers/waveResolver';
+import { waveResolver } from '../../../helpers/waveResolver';
 
 interface IWaves {
   number: number;
