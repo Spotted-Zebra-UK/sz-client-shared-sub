@@ -1,6 +1,6 @@
 import './SoftSkill.scss';
 import React, { FC } from 'react';
-import { ITrait } from '../../../../../components/atoms/Trait/Trait';
+import { ITrait } from '../Trait/Trait';
 
 export interface ISoftSkill {
   id?: number;
