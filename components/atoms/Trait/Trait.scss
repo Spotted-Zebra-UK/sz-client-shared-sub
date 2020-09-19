@@ -3,12 +3,8 @@
   border-radius: 50%;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-column-gap: 16px;
+  grid-column-gap: inherit;
   align-items: center;
-
-  @media screen and (max-width: 1024px) {
-    grid-column-gap: 16px;
-  }
 
   &:last-child {
     margin-bottom: 0;

@@ -10,12 +10,18 @@
   }
 
   &__SoftSkill {
-    grid-column-gap: 40px;
+    .SoftSkill {
+      grid-column-gap: 30px;
+
+      @media screen and (max-width: 1024px) {
+        grid-column-gap: 40px;
+      }
+    }
 
     &__Details {
       display: grid;
       grid-template-columns: auto auto;
-      grid-column-gap: inherit;
+      grid-column-gap: 30px;
 
       &__Text {
         font-size: 18px;
@@ -25,5 +31,9 @@
         }
       }
     }
+  }
+
+  &__Traits {
+    grid-column-gap: 16px;
   }
 }
