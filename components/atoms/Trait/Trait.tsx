@@ -2,16 +2,23 @@ import './Trait.scss';
 import React, { FC } from 'react';
 import { colorResolver } from '../../../helpers/colorResolver';
 
+export enum TraitOrientation {
+  GOOD = 'GOOD',
+  BAD = 'BAD',
+}
+
 export interface ITrait {
   id?: number;
+  name?: string;
   color: string;
   icon: string;
   bullet: string;
+  orientation?: TraitOrientation;
 }
 
 const Trait: FC<ITrait> = props => {
   const { color, icon, bullet } = props;
-  const backgroundColor = {backgroundColor: colorResolver(color, 0.2)};
+  const backgroundColor = { backgroundColor: colorResolver(color, 0.2) };
 
   return (
     <div className="Trait">

@@ -1,8 +1,8 @@
 import './SoftSkillOverviewFull.scss';
 import React, { FC } from 'react';
-import Trait from '../../atoms/Trait/Trait';
-import SoftSkillScore from '../../atoms/SoftSkillScore/SoftSkillScore';
 import SoftSkill, { ISoftSkill } from '../../atoms/SoftSkill/SoftSkill';
+import SoftSkillScore from '../../atoms/SoftSkillScore/SoftSkillScore';
+import Trait from '../../atoms/Trait/Trait';
 
 interface ISoftSkillOverviewFull {
   softSkill: ISoftSkill;
@@ -32,7 +32,7 @@ const SoftSkillOverviewFull: FC<ISoftSkillOverviewFull> = props => {
         {softSkill.traits?.map(trait => {
           return (
             <Trait
-              key={trait.id}
+              key={trait.name}
               color={trait.color}
               icon={trait.icon}
               bullet={trait.bullet}
