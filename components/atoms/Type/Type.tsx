@@ -11,7 +11,7 @@ const Type: FC<IType> = props => {
 
   return (
     <div className="Type">
-      <img src="Category/Cognitive.svg" alt="type.svg" className="Type__Image" />
+      <img src="Type/Cognitive.svg" alt="type.svg" className="Type__Image" />
       <h5 className="Type__Name">{name}</h5>
       <h5 className="Type__Score">{grade}</h5>
     </div>
