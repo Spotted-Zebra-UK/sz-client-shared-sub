@@ -1,4 +1,4 @@
-import { waveSets } from "../static/WaveSets";
+import { waveSets } from '../static/WaveSets';
 
 export const waveResolver = (set: number) => {
   switch (set) {
@@ -23,7 +23,19 @@ export const waveResolver = (set: number) => {
     case 7:
       return waveSets[7];
 
-    default:
+    case 8:
       return waveSets[8];
+
+    case 9:
+      return waveSets[9];
+
+    case 10:
+      return waveSets[10];
+
+    case 11:
+      return waveSets[11];
+
+    default:
+      return waveSets[12];
   }
 };

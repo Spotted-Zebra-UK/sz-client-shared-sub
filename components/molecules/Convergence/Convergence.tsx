@@ -2,26 +2,34 @@ import './Convergence.scss';
 import React, { FC } from 'react';
 import Gauge from '../../atoms/Gauge/Gauge';
 import Waves from '../Waves/Waves';
+import { waveResolver } from '../../../helpers/waveResolver';
 
 interface IConvergence {
   totalScore: number;
   totalGrade: string;
-  position: string;
   numberOfWaves: number;
 }
 
 const Convergence: FC<IConvergence> = props => {
-  const { totalScore, totalGrade, position, numberOfWaves } = props;
+  const { totalScore, totalGrade, numberOfWaves } = props;
+  const setToRender = waveResolver(numberOfWaves);
 
   return (
     <div className="Convergence">
       <div className="Convergence__Content">
         <Gauge score={totalScore} grade={totalGrade} />
-        <h5>{position}</h5>
       </div>
 
       <div className="Convergence__Waves">
-        <Waves amount={numberOfWaves} />
+        <>
+          <div className="Convergence__Waves__Tablet">
+            <Waves set={setToRender.tablet} />
+          </div>
+
+          <div className="Convergence__Waves__Desktop">
+            <Waves set={setToRender.desktop} />
+          </div>
+        </>
       </div>
     </div>
   );

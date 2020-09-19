@@ -1,18 +1,16 @@
 import React, { FC } from 'react';
 import Wave, { IWave } from '../../atoms/Wave/Wave';
-import { waveResolver } from '../../../helpers/waveResolver';
 
 interface IWaves {
-  amount: number;
+  set: IWave[];
 }
 
 const Waves: FC<IWaves> = props => {
-  const { amount } = props;
-  const setToRender = waveResolver(amount);
+  const { set } = props;
 
   return (
     <>
-      {setToRender.map((wave: IWave) => {
+      {set.map((wave: IWave) => {
         return (
           <Wave
             key={wave.id}

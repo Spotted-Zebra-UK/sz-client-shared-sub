@@ -1,122 +1,546 @@
-import { IWave } from "../components/atoms/Wave/Wave";
+import { IWave } from '../components/atoms/Wave/Wave';
 
-interface IWaveSet {
-  readonly 1: IWave[];
-  readonly 2: IWave[];
-  readonly 3: IWave[];
-  readonly 4: IWave[];
-  readonly 5: IWave[];
-  readonly 6: IWave[];
-  readonly 7: IWave[];
-  readonly 8: IWave[];
+interface ISet {
+  readonly tablet: IWave[];
+  readonly desktop: IWave[];
 }
 
-const left0 = {
+interface IWaveSet {
+  readonly 1: ISet;
+  readonly 2: ISet;
+  readonly 3: ISet;
+  readonly 4: ISet;
+  readonly 5: ISet;
+  readonly 6: ISet;
+  readonly 7: ISet;
+  readonly 8: ISet;
+  readonly 9: ISet;
+  readonly 10: ISet;
+  readonly 11: ISet;
+  readonly 12: ISet;
+}
+
+// -- Tablet
+const tablet0Left = {
   id: 1,
-  src: 'Convergence/WaveS-PDF.svg',
-  top: '130px',
-  left: '-71px',
+  src: 'Convergence/WaveS-Tablet.svg',
+  top: '90px',
+  left: '-101px',
   transform: 'scale(1, 1)',
 };
-const right0 = {
+const tablet0Right = {
   id: 2,
-  src: 'Convergence/WaveS-PDF.svg',
-  top: '130px',
-  right: '-71px',
+  src: 'Convergence/WaveS-Tablet.svg',
+  top: '90px',
+  right: '-101px',
   transform: 'scale(-1, 1)',
 };
-const topLeft15 = {
+const tablet15TopLeft = {
   id: 3,
-  src: 'Convergence/WaveM-PDF.svg',
-  top: '80px',
-  left: '-71px',
+  src: 'Convergence/WaveM-Tablet.svg',
+  top: '40px',
+  left: '-101px',
   transform: 'scale(1, 1)',
 };
-const bottomLeft15 = {
+const tablet15BottomLeft = {
   id: 4,
-  src: 'Convergence/WaveM-PDF.svg',
-  bottom: '80px',
-  left: '-71px',
+  src: 'Convergence/WaveM-Tablet.svg',
+  bottom: '40px',
+  left: '-101px',
   transform: 'scale(1, -1)',
 };
-const topRight15 = {
+const tablet15TopRight = {
   id: 5,
-  src: 'Convergence/WaveM-PDF.svg',
-  top: '80px',
-  right: '-71px',
+  src: 'Convergence/WaveM-Tablet.svg',
+  top: '40px',
+  right: '-101px',
   transform: 'scale(-1, 1)',
 };
-const bottomRight15 = {
+const tablet15BottomRight = {
   id: 6,
-  src: 'Convergence/WaveM-PDF.svg',
-  bottom: '80px',
-  right: '-71px',
+  src: 'Convergence/WaveM-Tablet.svg',
+  bottom: '40px',
+  right: '-101px',
   transform: 'scale(-1, -1)',
 };
-const topLeft30 = {
+const tablet30TopLeft = {
   id: 7,
-  src: 'Convergence/WaveL-PDF.svg',
-  top: '30px',
-  left: '-73px',
+  src: 'Convergence/WaveL-Tablet.svg',
+  top: '-10px',
+  left: '-101px',
   transform: 'scale(1, 1)',
 };
-const bottomLeft30 = {
+const tablet30BottomLeft = {
   id: 8,
-  src: 'Convergence/WaveL-PDF.svg',
-  bottom: '30px',
-  left: '-73px',
+  src: 'Convergence/WaveL-Tablet.svg',
+  bottom: '-10px',
+  left: '-101px',
   transform: 'scale(1, -1)',
 };
-const topRight30 = {
+const tablet30TopRight = {
   id: 9,
-  src: 'Convergence/WaveL-PDF.svg',
-  top: '30px',
-  right: '-73px',
+  src: 'Convergence/WaveL-Tablet.svg',
+  top: '-10px',
+  right: '-101px',
   transform: 'scale(-1, 1)',
 };
-const bottomRight30 = {
+const tablet30BottomRight = {
   id: 10,
-  src: 'Convergence/WaveL-PDF.svg',
-  bottom: '30px',
-  right: '-73px',
+  src: 'Convergence/WaveL-Tablet.svg',
+  bottom: '-10px',
+  right: '-101px',
   transform: 'scale(-1, -1)',
 };
-const topLeft45 = {
+const tablet45TopLeft = {
   id: 11,
-  src: 'Convergence/WaveXL-PDF.svg',
-  top: '-20px',
-  left: '-74px',
+  src: 'Convergence/WaveXL-Tablet.svg',
+  top: '-60px',
+  left: '-101px',
   transform: 'scale(1, 1)',
 };
-const bottomLeft45 = {
+const tablet45BottomLeft = {
   id: 12,
-  src: 'Convergence/WaveXL-PDF.svg',
-  bottom: '-20px',
-  left: '-74px',
+  src: 'Convergence/WaveXL-Tablet.svg',
+  bottom: '-60px',
+  left: '-101px',
   transform: 'scale(1, -1)',
 };
-const topRight45 = {
+const tablet45TopRight = {
   id: 13,
-  src: 'Convergence/WaveXL-PDF.svg',
-  top: '-20px',
-  right: '-74px',
+  src: 'Convergence/WaveXL-Tablet.svg',
+  top: '-60px',
+  right: '-101px',
   transform: 'scale(-1, 1)',
 };
-const bottomRight45 = {
+const tablet45BottomRight = {
   id: 14,
-  src: 'Convergence/WaveXL-PDF.svg',
-  bottom: '-20px',
-  right: '-74px',
+  src: 'Convergence/WaveXL-Tablet.svg',
+  bottom: '-60px',
+  right: '-101px',
+  transform: 'scale(-1, -1)',
+};
+const tablet60TopLeft = {
+  id: 15,
+  src: 'Convergence/WaveXXL-Tablet.svg',
+  top: '-110px',
+  left: '-101px',
+  transform: 'scale(1, 1)',
+};
+const tablet60BottomLeft = {
+  id: 16,
+  src: 'Convergence/WaveXXL-Tablet.svg',
+  bottom: '-110px',
+  left: '-101px',
+  transform: 'scale(1, -1)',
+};
+const tablet60TopRight = {
+  id: 17,
+  src: 'Convergence/WaveXXL-Tablet.svg',
+  top: '-110px',
+  right: '-101px',
+  transform: 'scale(-1, 1)',
+};
+const tablet60BottomRight = {
+  id: 18,
+  src: 'Convergence/WaveXXL-Tablet.svg',
+  bottom: '-110px',
+  right: '-101px',
+  transform: 'scale(-1, -1)',
+};
+const tablet75TopLeft = {
+  id: 19,
+  src: 'Convergence/WaveXXXL-Tablet.svg',
+  top: '-160px',
+  left: '-102px',
+  transform: 'scale(1, 1)',
+};
+const tablet75BottomLeft = {
+  id: 20,
+  src: 'Convergence/WaveXXXL-Tablet.svg',
+  bottom: '-160px',
+  left: '-102px',
+  transform: 'scale(1, -1)',
+};
+const tablet75TopRight = {
+  id: 21,
+  src: 'Convergence/WaveXXXL-Tablet.svg',
+  top: '-160px',
+  right: '-102px',
+  transform: 'scale(-1, 1)',
+};
+const tablet75BottomRight = {
+  id: 22,
+  src: 'Convergence/WaveXXXL-Tablet.svg',
+  bottom: '-160px',
+  right: '-102px',
+  transform: 'scale(-1, -1)',
+};
+
+// -- Desktop
+const desktop0Left = {
+  id: 23,
+  src: 'Convergence/WaveS-Desktop.svg',
+  top: '90px',
+  left: '-205px',
+  transform: 'scale(1, 1)',
+};
+const desktop0Right = {
+  id: 24,
+  src: 'Convergence/WaveS-Desktop.svg',
+  top: '90px',
+  right: '-205px',
+  transform: 'scale(-1, -1)',
+};
+const desktop15TopLeft = {
+  id: 25,
+  src: 'Convergence/WaveM-Desktop.svg',
+  top: '40px',
+  left: '-205px',
+  transform: 'scale(1, 1)',
+};
+const desktop15BottomLeft = {
+  id: 26,
+  src: 'Convergence/WaveM-Desktop.svg',
+  bottom: '40px',
+  left: '-205px',
+  transform: 'scale(1, -1)',
+};
+const desktop15TopRight = {
+  id: 27,
+  src: 'Convergence/WaveM-Desktop.svg',
+  top: '40px',
+  right: '-205px',
+  transform: 'scale(-1, 1)',
+};
+const desktop15BottomRight = {
+  id: 28,
+  src: 'Convergence/WaveM-Desktop.svg',
+  bottom: '40px',
+  right: '-205px',
+  transform: 'scale(-1, -1)',
+};
+const desktop30TopLeft = {
+  id: 29,
+  src: 'Convergence/WaveL-Desktop.svg',
+  top: '-10px',
+  left: '-205px',
+  transform: 'scale(1, 1)',
+};
+const desktop30BottomLeft = {
+  id: 30,
+  src: 'Convergence/WaveL-Desktop.svg',
+  bottom: '-10px',
+  left: '-205px',
+  transform: 'scale(1, -1)',
+};
+const desktop30TopRight = {
+  id: 31,
+  src: 'Convergence/WaveL-Desktop.svg',
+  top: '-10px',
+  right: '-205px',
+  transform: 'scale(-1, 1)',
+};
+const desktop30BottomRight = {
+  id: 32,
+  src: 'Convergence/WaveL-Desktop.svg',
+  bottom: '-10px',
+  right: '-205px',
+  transform: 'scale(-1, -1)',
+};
+const desktop45TopLeft = {
+  id: 33,
+  src: 'Convergence/WaveXL-Desktop.svg',
+  top: '-60px',
+  left: '-205px',
+  transform: 'scale(1, 1)',
+};
+const desktop45BottomLeft = {
+  id: 34,
+  src: 'Convergence/WaveXL-Desktop.svg',
+  bottom: '-60px',
+  left: '-205px',
+  transform: 'scale(1, -1)',
+};
+const desktop45TopRight = {
+  id: 35,
+  src: 'Convergence/WaveXL-Desktop.svg',
+  top: '-60px',
+  right: '-205px',
+  transform: 'scale(-1, 1)',
+};
+const desktop45BottomRight = {
+  id: 36,
+  src: 'Convergence/WaveXL-Desktop.svg',
+  bottom: '-60px',
+  right: '-205px',
+  transform: 'scale(-1, -1)',
+};
+const desktop60TopLeft = {
+  id: 37,
+  src: 'Convergence/WaveXXL-Desktop.svg',
+  top: '-110px',
+  left: '-205px',
+  transform: 'scale(1, 1)',
+};
+const desktop60BottomLeft = {
+  id: 38,
+  src: 'Convergence/WaveXXL-Desktop.svg',
+  bottom: '-110px',
+  left: '-205px',
+  transform: 'scale(1, -1)',
+};
+const desktop60TopRight = {
+  id: 39,
+  src: 'Convergence/WaveXXL-Desktop.svg',
+  top: '-110px',
+  right: '-205px',
+  transform: 'scale(-1, 1)',
+};
+const desktop60BottomRight = {
+  id: 40,
+  src: 'Convergence/WaveXXL-Desktop.svg',
+  bottom: '-110px',
+  right: '-205px',
+  transform: 'scale(-1, -1)',
+};
+const desktop75TopLeft = {
+  id: 41,
+  src: 'Convergence/WaveXXXL-Desktop.svg',
+  top: '-155px',
+  left: '-205px',
+  transform: 'scale(1, 1)',
+};
+const desktop75BottomLeft = {
+  id: 42,
+  src: 'Convergence/WaveXXXL-Desktop.svg',
+  bottom: '-155px',
+  left: '-205px',
+  transform: 'scale(1, -1)',
+};
+const desktop75TopRight = {
+  id: 43,
+  src: 'Convergence/WaveXXXL-Desktop.svg',
+  top: '-155px',
+  right: '-205px',
+  transform: 'scale(-1, 1)',
+};
+const desktop75BottomRight = {
+  id: 44,
+  src: 'Convergence/WaveXXXL-Desktop.svg',
+  bottom: '-155px',
+  right: '-205px',
   transform: 'scale(-1, -1)',
 };
 
 export const waveSets: IWaveSet = {
-  1: [left0],
-  2: [left0, right0],
-  3: [topLeft15, bottomLeft15, right0],
-  4: [topLeft15, bottomLeft15, topRight15, bottomRight15],
-  5: [topLeft30, left0, bottomLeft30, topRight15, bottomRight15],
-  6: [topLeft30, left0, bottomLeft30, topRight30, right0, bottomRight30],
-  7: [topLeft45, topLeft15, bottomLeft15, bottomLeft45, topRight30, right0, bottomRight30],
-  8: [topLeft45, topLeft15, bottomLeft15, bottomLeft45, topRight45, topRight15, bottomRight15, bottomRight45],
+  1: {
+    tablet: [tablet0Left],
+    desktop: [desktop0Left],
+  },
+  2: {
+    tablet: [tablet0Left, tablet0Right],
+    desktop: [desktop0Left, desktop0Right],
+  },
+  3: {
+    tablet: [tablet15TopLeft, tablet15BottomLeft, tablet0Right],
+    desktop: [desktop15TopLeft, desktop15BottomLeft, desktop0Right],
+  },
+  4: {
+    tablet: [
+      tablet15TopLeft,
+      tablet15BottomLeft,
+      tablet15TopRight,
+      tablet15BottomRight,
+    ],
+    desktop: [
+      desktop15TopLeft,
+      desktop15BottomLeft,
+      desktop15TopRight,
+      desktop15BottomRight,
+    ],
+  },
+  5: {
+    tablet: [
+      tablet30TopLeft,
+      tablet0Left,
+      tablet30BottomLeft,
+      tablet15TopRight,
+      tablet15BottomRight,
+    ],
+    desktop: [
+      desktop30TopLeft,
+      desktop0Left,
+      desktop30BottomLeft,
+      desktop15TopRight,
+      desktop15BottomRight,
+    ],
+  },
+  6: {
+    tablet: [
+      tablet30TopLeft,
+      tablet0Left,
+      tablet30BottomLeft,
+      tablet30TopRight,
+      tablet0Right,
+      tablet30BottomRight,
+    ],
+    desktop: [
+      desktop30TopLeft,
+      desktop0Left,
+      desktop30BottomLeft,
+      desktop30TopRight,
+      desktop0Right,
+      desktop30BottomRight,
+    ],
+  },
+  7: {
+    tablet: [
+      tablet45TopLeft,
+      tablet15TopLeft,
+      tablet15BottomLeft,
+      tablet45BottomLeft,
+      tablet30TopRight,
+      tablet0Right,
+      tablet30BottomRight,
+    ],
+    desktop: [
+      desktop45TopLeft,
+      desktop15TopLeft,
+      desktop15BottomLeft,
+      desktop45BottomLeft,
+      desktop30TopRight,
+      desktop0Right,
+      desktop30BottomRight,
+    ],
+  },
+  8: {
+    tablet: [
+      tablet45TopLeft,
+      tablet15TopLeft,
+      tablet15BottomLeft,
+      tablet45BottomLeft,
+      tablet45TopRight,
+      tablet15TopRight,
+      tablet15BottomRight,
+      tablet45BottomRight,
+    ],
+    desktop: [
+      desktop45TopLeft,
+      desktop15TopLeft,
+      desktop15BottomLeft,
+      desktop45BottomLeft,
+      desktop45TopRight,
+      desktop15TopRight,
+      desktop15BottomRight,
+      desktop45BottomRight,
+    ],
+  },
+  9: {
+    tablet: [
+      tablet60TopLeft,
+      tablet30TopLeft,
+      tablet0Left,
+      tablet30BottomLeft,
+      tablet60BottomLeft,
+      tablet45TopRight,
+      tablet15TopRight,
+      tablet15BottomRight,
+      tablet45BottomRight,
+    ],
+    desktop: [
+      desktop60TopLeft,
+      desktop30TopLeft,
+      desktop0Left,
+      desktop30BottomLeft,
+      desktop60BottomLeft,
+      desktop45TopRight,
+      desktop15TopRight,
+      desktop15BottomRight,
+      desktop45BottomRight,
+    ],
+  },
+  10: {
+    tablet: [
+      tablet60TopLeft,
+      tablet30TopLeft,
+      tablet0Left,
+      tablet30BottomLeft,
+      tablet60BottomLeft,
+      tablet60TopRight,
+      tablet30TopRight,
+      tablet0Right,
+      tablet30BottomRight,
+      tablet60BottomRight,
+    ],
+    desktop: [
+      desktop60TopLeft,
+      desktop30TopLeft,
+      desktop0Left,
+      desktop30BottomLeft,
+      desktop60BottomLeft,
+      desktop60TopRight,
+      desktop30TopRight,
+      desktop0Right,
+      desktop30BottomRight,
+      desktop60BottomRight,
+    ],
+  },
+  11: {
+    tablet: [
+      tablet75TopLeft,
+      tablet45TopLeft,
+      tablet15TopLeft,
+      tablet15BottomLeft,
+      tablet45BottomLeft,
+      tablet75BottomLeft,
+      tablet60TopRight,
+      tablet30TopRight,
+      tablet0Right,
+      tablet30BottomRight,
+      tablet60BottomRight,
+    ],
+    desktop: [
+      desktop75TopLeft,
+      desktop45TopLeft,
+      desktop15TopLeft,
+      desktop15BottomLeft,
+      desktop45BottomLeft,
+      desktop75BottomLeft,
+      desktop60TopRight,
+      desktop30TopRight,
+      desktop0Right,
+      desktop30BottomRight,
+      desktop60BottomRight,
+    ],
+  },
+  12: {
+    tablet: [
+      tablet75TopLeft,
+      tablet45TopLeft,
+      tablet15TopLeft,
+      tablet15BottomLeft,
+      tablet45BottomLeft,
+      tablet75BottomLeft,
+      tablet75TopRight,
+      tablet45TopRight,
+      tablet15TopRight,
+      tablet15BottomRight,
+      tablet45BottomRight,
+      tablet75BottomRight,
+    ],
+    desktop: [
+      desktop75TopLeft,
+      desktop45TopLeft,
+      desktop15TopLeft,
+      desktop15BottomLeft,
+      desktop45BottomLeft,
+      desktop75BottomLeft,
+      desktop75TopRight,
+      desktop45TopRight,
+      desktop15TopRight,
+      desktop15BottomRight,
+      desktop45BottomRight,
+      desktop75BottomRight,
+    ],
+  },
 };

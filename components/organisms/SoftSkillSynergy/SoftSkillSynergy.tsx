@@ -13,7 +13,8 @@ interface ISoftSkillSynergy {
 
 const SoftSkillSynergy: FC<ISoftSkillSynergy> = props => {
   const { softSkills, totalScore, totalGrade, position } = props;
-  const breakPoint = softSkills.length > 8 ? 4 : Math.ceil(softSkills.length / 2);
+  const breakPoint =
+    softSkills.length > 12 ? 6 : Math.ceil(softSkills.length / 2);
   const maximumNumberOfCards = 8;
 
   return (
@@ -29,7 +30,6 @@ const SoftSkillSynergy: FC<ISoftSkillSynergy> = props => {
       <Convergence
         totalScore={totalScore}
         totalGrade={totalGrade}
-        position={position}
         numberOfWaves={softSkills.length}
       />
 
