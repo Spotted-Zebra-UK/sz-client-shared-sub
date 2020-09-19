@@ -1,17 +1,17 @@
 import './Convergence.scss';
 import React, { FC } from 'react';
+import Gauge from '../../atoms/Gauge/Gauge';
 import Waves from '../Waves/Waves';
-import Gauge from '../../../../candidate/components/atoms/Gauge/Gauge';
 
 interface IConvergence {
   totalScore: number;
   totalGrade: string;
   position: string;
-  numberOfSoftSkills: number;
+  numberOfWaves: number;
 }
 
 const Convergence: FC<IConvergence> = props => {
-  const { totalScore, totalGrade, position, numberOfSoftSkills } = props;
+  const { totalScore, totalGrade, position, numberOfWaves } = props;
 
   return (
     <div className="Convergence">
@@ -21,7 +21,7 @@ const Convergence: FC<IConvergence> = props => {
       </div>
 
       <div className="Convergence__Waves">
-        <Waves number={numberOfSoftSkills} />
+        <Waves amount={numberOfWaves} />
       </div>
     </div>
   );

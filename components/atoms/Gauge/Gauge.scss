@@ -1,0 +1,12 @@
+.Gauge {
+  width: 160px;
+  background: #ffffff;
+  border-radius: 50%;
+  margin: 0 auto;
+  position: relative;
+
+  &__Score {
+    font-size: 48px;
+    font-weight: bold;
+  }
+}
