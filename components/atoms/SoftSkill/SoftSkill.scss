@@ -5,7 +5,7 @@
   grid-column-gap: inherit;
   align-items: center;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1024px) {
     margin-bottom: 24px;
     grid-column-gap: 16px;
   }
@@ -14,7 +14,7 @@
     width: 48px;
     height: 48px;
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 1024px) {
       width: 40px;
       height: 40px;
     }
@@ -22,12 +22,12 @@
 
   &__Name {
     font-size: 24px;
-    
+
     &::first-letter {
       text-transform: capitalize;
     }
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 1024px) {
       font-size: 18px;
     }
   }

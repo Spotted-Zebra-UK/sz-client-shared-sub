@@ -6,7 +6,7 @@
   grid-column-gap: 16px;
   align-items: center;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1024px) {
     grid-column-gap: 16px;
   }
 
@@ -21,7 +21,7 @@
     text-align: center;
     position: relative;
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 1024px) {
       width: 40px;
       height: 40px;
     }
@@ -30,12 +30,12 @@
   &__Bullet {
     font-size: 18px;
     font-weight: bold;
-    
+
     &::first-letter {
       text-transform: capitalize;
     }
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 1024px) {
       font-size: 14px;
     }
   }

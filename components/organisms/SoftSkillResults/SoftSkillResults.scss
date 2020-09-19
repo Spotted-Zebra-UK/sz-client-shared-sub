@@ -13,7 +13,11 @@
 
   &__List {
     display: grid;
-    grid-template-columns: repeat(3, 340px);
-    grid-column-gap: 15px;
+    grid-template-columns: repeat(3, auto);
+    grid-column-gap: 75px;
+
+    @media screen and (max-width: 1440px) {
+      grid-column-gap: 55px;
+    }
   }
 }
