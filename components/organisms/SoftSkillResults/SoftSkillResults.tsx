@@ -1,7 +1,7 @@
+import './SoftSkillResults.scss';
 import React, { FC } from 'react';
 import { ISoftSkill } from '../../atoms/SoftSkill/SoftSkill';
 import SoftSkillOverviewPartial from '../../molecules/SoftSkillOverviewPartial/SoftSkillOverviewPartial';
-import './SoftSkillResults.scss';
 
 interface ISoftSkillResults {
   heading: string;
@@ -14,12 +14,8 @@ const SoftSkillResults: FC<ISoftSkillResults> = props => {
 
   return (
     <div className="SoftSkillResults">
-      <h4 className="SoftSkillResults__Heading">
-        {heading}
-      </h4>
-      <h6 className="SoftSkillResults__Caption">
-        {caption}
-      </h6>
+      <h4 className="SoftSkillResults__Heading">{heading}</h4>
+      <h6 className="SoftSkillResults__Caption">{caption}</h6>
 
       <div className="SoftSkillResults__List">
         {softSkills.map((softSkill: ISoftSkill) => {
