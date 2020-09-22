@@ -19,7 +19,7 @@ const SoftSkill: FC<ISoftSkill> = props => {
   return (
     <div className="SoftSkill">
       <img
-        src={`SoftSkill/${name}.svg`}
+        src={`${process.env.PUBLIC_URL}/SoftSkill/${name}.svg`}
         alt={`${name}.svg`}
         className="SoftSkill__Icon"
       />

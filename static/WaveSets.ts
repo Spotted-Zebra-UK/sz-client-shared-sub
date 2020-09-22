@@ -23,154 +23,154 @@ interface IWaveSet {
 // -- Tablet
 const tablet0Left = {
   id: 1,
-  src: 'Convergence/WaveS-Tablet.svg',
+  src: 'Convergence/waveS-Tablet.svg',
   top: '90px',
   left: '-101px',
   transform: 'scale(1, 1)',
 };
 const tablet0Right = {
   id: 2,
-  src: 'Convergence/WaveS-Tablet.svg',
+  src: 'Convergence/waveS-Tablet.svg',
   top: '90px',
   right: '-101px',
   transform: 'scale(-1, 1)',
 };
 const tablet15TopLeft = {
   id: 3,
-  src: 'Convergence/WaveM-Tablet.svg',
+  src: 'Convergence/waveM-Tablet.svg',
   top: '40px',
   left: '-101px',
   transform: 'scale(1, 1)',
 };
 const tablet15BottomLeft = {
   id: 4,
-  src: 'Convergence/WaveM-Tablet.svg',
+  src: 'Convergence/waveM-Tablet.svg',
   bottom: '40px',
   left: '-101px',
   transform: 'scale(1, -1)',
 };
 const tablet15TopRight = {
   id: 5,
-  src: 'Convergence/WaveM-Tablet.svg',
+  src: 'Convergence/waveM-Tablet.svg',
   top: '40px',
   right: '-101px',
   transform: 'scale(-1, 1)',
 };
 const tablet15BottomRight = {
   id: 6,
-  src: 'Convergence/WaveM-Tablet.svg',
+  src: 'Convergence/waveM-Tablet.svg',
   bottom: '40px',
   right: '-101px',
   transform: 'scale(-1, -1)',
 };
 const tablet30TopLeft = {
   id: 7,
-  src: 'Convergence/WaveL-Tablet.svg',
+  src: 'Convergence/waveL-Tablet.svg',
   top: '-10px',
   left: '-101px',
   transform: 'scale(1, 1)',
 };
 const tablet30BottomLeft = {
   id: 8,
-  src: 'Convergence/WaveL-Tablet.svg',
+  src: 'Convergence/waveL-Tablet.svg',
   bottom: '-10px',
   left: '-101px',
   transform: 'scale(1, -1)',
 };
 const tablet30TopRight = {
   id: 9,
-  src: 'Convergence/WaveL-Tablet.svg',
+  src: 'Convergence/waveL-Tablet.svg',
   top: '-10px',
   right: '-101px',
   transform: 'scale(-1, 1)',
 };
 const tablet30BottomRight = {
   id: 10,
-  src: 'Convergence/WaveL-Tablet.svg',
+  src: 'Convergence/waveL-Tablet.svg',
   bottom: '-10px',
   right: '-101px',
   transform: 'scale(-1, -1)',
 };
 const tablet45TopLeft = {
   id: 11,
-  src: 'Convergence/WaveXL-Tablet.svg',
+  src: 'Convergence/waveXL-Tablet.svg',
   top: '-60px',
   left: '-101px',
   transform: 'scale(1, 1)',
 };
 const tablet45BottomLeft = {
   id: 12,
-  src: 'Convergence/WaveXL-Tablet.svg',
+  src: 'Convergence/waveXL-Tablet.svg',
   bottom: '-60px',
   left: '-101px',
   transform: 'scale(1, -1)',
 };
 const tablet45TopRight = {
   id: 13,
-  src: 'Convergence/WaveXL-Tablet.svg',
+  src: 'Convergence/waveXL-Tablet.svg',
   top: '-60px',
   right: '-101px',
   transform: 'scale(-1, 1)',
 };
 const tablet45BottomRight = {
   id: 14,
-  src: 'Convergence/WaveXL-Tablet.svg',
+  src: 'Convergence/waveXL-Tablet.svg',
   bottom: '-60px',
   right: '-101px',
   transform: 'scale(-1, -1)',
 };
 const tablet60TopLeft = {
   id: 15,
-  src: 'Convergence/WaveXXL-Tablet.svg',
+  src: 'Convergence/waveXXL-Tablet.svg',
   top: '-110px',
   left: '-101px',
   transform: 'scale(1, 1)',
 };
 const tablet60BottomLeft = {
   id: 16,
-  src: 'Convergence/WaveXXL-Tablet.svg',
+  src: 'Convergence/waveXXL-Tablet.svg',
   bottom: '-110px',
   left: '-101px',
   transform: 'scale(1, -1)',
 };
 const tablet60TopRight = {
   id: 17,
-  src: 'Convergence/WaveXXL-Tablet.svg',
+  src: 'Convergence/waveXXL-Tablet.svg',
   top: '-110px',
   right: '-101px',
   transform: 'scale(-1, 1)',
 };
 const tablet60BottomRight = {
   id: 18,
-  src: 'Convergence/WaveXXL-Tablet.svg',
+  src: 'Convergence/waveXXL-Tablet.svg',
   bottom: '-110px',
   right: '-101px',
   transform: 'scale(-1, -1)',
 };
 const tablet75TopLeft = {
   id: 19,
-  src: 'Convergence/WaveXXXL-Tablet.svg',
+  src: 'Convergence/waveXXXL-Tablet.svg',
   top: '-160px',
   left: '-102px',
   transform: 'scale(1, 1)',
 };
 const tablet75BottomLeft = {
   id: 20,
-  src: 'Convergence/WaveXXXL-Tablet.svg',
+  src: 'Convergence/waveXXXL-Tablet.svg',
   bottom: '-160px',
   left: '-102px',
   transform: 'scale(1, -1)',
 };
 const tablet75TopRight = {
   id: 21,
-  src: 'Convergence/WaveXXXL-Tablet.svg',
+  src: 'Convergence/waveXXXL-Tablet.svg',
   top: '-160px',
   right: '-102px',
   transform: 'scale(-1, 1)',
 };
 const tablet75BottomRight = {
   id: 22,
-  src: 'Convergence/WaveXXXL-Tablet.svg',
+  src: 'Convergence/waveXXXL-Tablet.svg',
   bottom: '-160px',
   right: '-102px',
   transform: 'scale(-1, -1)',
@@ -179,154 +179,154 @@ const tablet75BottomRight = {
 // -- Desktop
 const desktop0Left = {
   id: 23,
-  src: 'Convergence/WaveS-Desktop.svg',
+  src: 'Convergence/waveS-Desktop.svg',
   top: '90px',
   left: '-205px',
   transform: 'scale(1, 1)',
 };
 const desktop0Right = {
   id: 24,
-  src: 'Convergence/WaveS-Desktop.svg',
+  src: 'Convergence/waveS-Desktop.svg',
   top: '90px',
   right: '-205px',
   transform: 'scale(-1, -1)',
 };
 const desktop15TopLeft = {
   id: 25,
-  src: 'Convergence/WaveM-Desktop.svg',
+  src: 'Convergence/waveM-Desktop.svg',
   top: '40px',
   left: '-205px',
   transform: 'scale(1, 1)',
 };
 const desktop15BottomLeft = {
   id: 26,
-  src: 'Convergence/WaveM-Desktop.svg',
+  src: 'Convergence/waveM-Desktop.svg',
   bottom: '40px',
   left: '-205px',
   transform: 'scale(1, -1)',
 };
 const desktop15TopRight = {
   id: 27,
-  src: 'Convergence/WaveM-Desktop.svg',
+  src: 'Convergence/waveM-Desktop.svg',
   top: '40px',
   right: '-205px',
   transform: 'scale(-1, 1)',
 };
 const desktop15BottomRight = {
   id: 28,
-  src: 'Convergence/WaveM-Desktop.svg',
+  src: 'Convergence/waveM-Desktop.svg',
   bottom: '40px',
   right: '-205px',
   transform: 'scale(-1, -1)',
 };
 const desktop30TopLeft = {
   id: 29,
-  src: 'Convergence/WaveL-Desktop.svg',
+  src: 'Convergence/waveL-Desktop.svg',
   top: '-10px',
   left: '-205px',
   transform: 'scale(1, 1)',
 };
 const desktop30BottomLeft = {
   id: 30,
-  src: 'Convergence/WaveL-Desktop.svg',
+  src: 'Convergence/waveL-Desktop.svg',
   bottom: '-10px',
   left: '-205px',
   transform: 'scale(1, -1)',
 };
 const desktop30TopRight = {
   id: 31,
-  src: 'Convergence/WaveL-Desktop.svg',
+  src: 'Convergence/waveL-Desktop.svg',
   top: '-10px',
   right: '-205px',
   transform: 'scale(-1, 1)',
 };
 const desktop30BottomRight = {
   id: 32,
-  src: 'Convergence/WaveL-Desktop.svg',
+  src: 'Convergence/waveL-Desktop.svg',
   bottom: '-10px',
   right: '-205px',
   transform: 'scale(-1, -1)',
 };
 const desktop45TopLeft = {
   id: 33,
-  src: 'Convergence/WaveXL-Desktop.svg',
+  src: 'Convergence/waveXL-Desktop.svg',
   top: '-60px',
   left: '-205px',
   transform: 'scale(1, 1)',
 };
 const desktop45BottomLeft = {
   id: 34,
-  src: 'Convergence/WaveXL-Desktop.svg',
+  src: 'Convergence/waveXL-Desktop.svg',
   bottom: '-60px',
   left: '-205px',
   transform: 'scale(1, -1)',
 };
 const desktop45TopRight = {
   id: 35,
-  src: 'Convergence/WaveXL-Desktop.svg',
+  src: 'Convergence/waveXL-Desktop.svg',
   top: '-60px',
   right: '-205px',
   transform: 'scale(-1, 1)',
 };
 const desktop45BottomRight = {
   id: 36,
-  src: 'Convergence/WaveXL-Desktop.svg',
+  src: 'Convergence/waveXL-Desktop.svg',
   bottom: '-60px',
   right: '-205px',
   transform: 'scale(-1, -1)',
 };
 const desktop60TopLeft = {
   id: 37,
-  src: 'Convergence/WaveXXL-Desktop.svg',
+  src: 'Convergence/waveXXL-Desktop.svg',
   top: '-110px',
   left: '-205px',
   transform: 'scale(1, 1)',
 };
 const desktop60BottomLeft = {
   id: 38,
-  src: 'Convergence/WaveXXL-Desktop.svg',
+  src: 'Convergence/waveXXL-Desktop.svg',
   bottom: '-110px',
   left: '-205px',
   transform: 'scale(1, -1)',
 };
 const desktop60TopRight = {
   id: 39,
-  src: 'Convergence/WaveXXL-Desktop.svg',
+  src: 'Convergence/waveXXL-Desktop.svg',
   top: '-110px',
   right: '-205px',
   transform: 'scale(-1, 1)',
 };
 const desktop60BottomRight = {
   id: 40,
-  src: 'Convergence/WaveXXL-Desktop.svg',
+  src: 'Convergence/waveXXL-Desktop.svg',
   bottom: '-110px',
   right: '-205px',
   transform: 'scale(-1, -1)',
 };
 const desktop75TopLeft = {
   id: 41,
-  src: 'Convergence/WaveXXXL-Desktop.svg',
+  src: 'Convergence/waveXXXL-Desktop.svg',
   top: '-155px',
   left: '-205px',
   transform: 'scale(1, 1)',
 };
 const desktop75BottomLeft = {
   id: 42,
-  src: 'Convergence/WaveXXXL-Desktop.svg',
+  src: 'Convergence/waveXXXL-Desktop.svg',
   bottom: '-155px',
   left: '-205px',
   transform: 'scale(1, -1)',
 };
 const desktop75TopRight = {
   id: 43,
-  src: 'Convergence/WaveXXXL-Desktop.svg',
+  src: 'Convergence/waveXXXL-Desktop.svg',
   top: '-155px',
   right: '-205px',
   transform: 'scale(-1, 1)',
 };
 const desktop75BottomRight = {
   id: 44,
-  src: 'Convergence/WaveXXXL-Desktop.svg',
+  src: 'Convergence/waveXXXL-Desktop.svg',
   bottom: '-155px',
   right: '-205px',
   transform: 'scale(-1, -1)',
