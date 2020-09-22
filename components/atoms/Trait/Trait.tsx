@@ -19,7 +19,7 @@ export interface ITrait {
 const Trait: FC<ITrait> = props => {
   const { color, icon, bullet } = props;
   const backgroundColor = { backgroundColor: colorResolver(color, 0.2) };
-  console.log(icon);
+
   return (
     <div className="Trait">
       <div className="Trait__Status" style={backgroundColor}>
