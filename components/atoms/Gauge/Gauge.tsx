@@ -4,26 +4,35 @@ import React, { FC } from 'react';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 
 interface IGauge {
-  score: number;
+  score?: number;
   grade?: string;
 }
 
-const Gauge: FC<IGauge> = props => {
-  const { score, grade } = props;
-
+const Gauge: FC<IGauge> = ({ score, grade }) => {
+  const styles = buildStyles({
+    rotation: 1 / 2 + 1 / 8,
+    strokeLinecap: 'butt',
+    trailColor: '#eee',
+    textSize: 40,
+    textColor: 'black',
+  });
   return (
     <div className="Gauge">
+      <svg style={{ height: 0, width: 0 }}>
+        <defs>
+          <linearGradient id="sz-gradient" gradientTransform="rotate(90)">
+            <stop offset="0%" stopColor="#b75bff" />
+            <stop offset="50%" stopColor="#10b7ff" />
+          </linearGradient>
+        </defs>
+      </svg>
       <CircularProgressbar
-        value={score}
+        value={score || 0}
+        text={`${grade}`}
         circleRatio={0.75}
-        strokeWidth={3}
-        styles={buildStyles({
-          rotation: 1 / 2 + 1 / 8,
-          pathColor: 'lightblue',
-          trailColor: '#eeeeee',
-        })}
+        strokeWidth={4}
+        styles={styles}
       />
-      <h2 className="Gauge__Score AbsolutelyCentered">{grade}</h2>
     </div>
   );
 };

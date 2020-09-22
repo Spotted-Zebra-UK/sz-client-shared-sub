@@ -1,8 +1,8 @@
 import './Convergence.scss';
 import React, { FC } from 'react';
+import { waveResolver } from '../../../helpers/waveResolver';
 import Gauge from '../../atoms/Gauge/Gauge';
 import Waves from '../Waves/Waves';
-import { waveResolver } from '../../../helpers/waveResolver';
 
 interface IConvergence {
   totalScore: number;

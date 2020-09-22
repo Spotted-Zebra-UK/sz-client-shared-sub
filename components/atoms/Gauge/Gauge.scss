@@ -9,4 +9,8 @@
     font-size: 48px;
     font-weight: bold;
   }
+
+  .CircularProgressbar .CircularProgressbar-path {
+    stroke: url(#sz-gradient) !important;
+  }
 }
