@@ -21,7 +21,14 @@ const Wave: FC<IWave> = props => {
     transform,
   };
 
-  return <img src={src} alt="wave.svg" className="Wave" style={waveStyle} />;
+  return (
+    <img
+      src={`${process.env.PUBLIC_URL}/${src}`}
+      alt="wave.svg"
+      className="Wave"
+      style={waveStyle}
+    />
+  );
 };
 
 export default Wave;

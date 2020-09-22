@@ -23,7 +23,11 @@ const Trait: FC<ITrait> = props => {
   return (
     <div className="Trait">
       <div className="Trait__Status" style={backgroundColor}>
-        <img src={icon} alt="status.svg" className="AbsolutelyCentered" />
+        <img
+          src={`${process.env.PUBLIC_URL}/${icon}`}
+          alt="status.svg"
+          className="AbsolutelyCentered"
+        />
       </div>
 
       <h6 className="Trait__Bullet">{bullet}</h6>
