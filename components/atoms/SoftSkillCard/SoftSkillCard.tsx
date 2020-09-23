@@ -10,7 +10,12 @@ interface ISoftSkillCard {
 const SoftSkillCard: FC<ISoftSkillCard> = props => {
   const { softSkill } = props;
   const progressBar = {
-    width: `${softSkill.score}%`,
+    width:
+      softSkill.score !== undefined
+        ? softSkill.score >= 0
+          ? `${softSkill.score}%`
+          : 0
+        : undefined,
     backgroundColor: colorResolver(softSkill.color || '', 1),
     opacity: 1,
   };
