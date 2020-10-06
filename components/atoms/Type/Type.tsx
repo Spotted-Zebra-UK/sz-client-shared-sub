@@ -12,7 +12,7 @@ const Type: FC<IType> = props => {
   return (
     <div className="Type">
       <img
-        src={`${process.env.PUBLIC_URL}/Type/Cognitive.svg`}
+        src={`${process.env.PUBLIC_URL}/Type/${name}.svg`}
         alt="type.svg"
         className="Type__Image"
       />
