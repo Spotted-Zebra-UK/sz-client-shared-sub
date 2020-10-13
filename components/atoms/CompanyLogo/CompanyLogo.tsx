@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 interface ICompanyLogo {
-  url: string;
+  url?: string;
   name: string;
 }
 
