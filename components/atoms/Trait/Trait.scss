@@ -25,7 +25,10 @@
 
   &__Bullet {
     font-size: 18px;
-    font-weight: bold;
+    
+    &--Bold {
+      font-weight: bold;
+    }
 
     &::first-letter {
       text-transform: capitalize;
