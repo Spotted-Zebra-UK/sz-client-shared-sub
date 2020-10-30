@@ -1,13 +1,19 @@
 .SoftSkillOverviewFull {
   margin-bottom: 45px;
-  display: grid;
+  display: flex;
 
   &:last-child {
     margin-bottom: 32px;
   }
 
   &__SoftSkill {
-    grid-column-gap: 40px;
+    flex: 1.5;
+
+    .SoftSkill {
+      &__Name {
+        margin-left: 40px;
+      }
+    }
 
     &__Details {
       display: grid;
@@ -16,6 +22,7 @@
 
       &__Text {
         font-size: 18px;
+        margin-left: 38px;
 
         @media screen and (max-width: 899px) {
           font-size: 14px;
@@ -25,6 +32,9 @@
   }
 
   &__Traits {
-    grid-column-gap: 16px;
+    flex: 1;
+    .Trait__Status {
+      margin-right: 16px;
+    }
   }
 }

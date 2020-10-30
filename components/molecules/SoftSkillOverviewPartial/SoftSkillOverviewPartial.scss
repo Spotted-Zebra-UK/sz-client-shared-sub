@@ -1,3 +1,13 @@
 .SoftSkillOverviewPartial {
-  grid-column-gap: 25px;
+  .SoftSkill {
+    &__Icon {
+      margin-right: 24px;
+    }
+  }
+
+  .Trait {
+    &__Status {
+      margin-right: 28px;
+    }
+  }
 }

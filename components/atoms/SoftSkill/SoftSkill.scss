@@ -1,9 +1,7 @@
 .SoftSkill,
 .Misc {
   margin-bottom: 30px;
-  display: grid;
-  grid-template-columns: max-content auto;
-  grid-column-gap: inherit;
+  display: flex;
   align-items: center;
 
   @media screen and (max-width: 1024px) {
@@ -13,11 +11,6 @@
   &__Icon {
     width: 48px;
     height: 48px;
-
-    @media screen and (max-width: 1024px) {
-      width: 40px;
-      height: 40px;
-    }
   }
 
   &__Name {
