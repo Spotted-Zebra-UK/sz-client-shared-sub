@@ -8,6 +8,7 @@
 
   &__SoftSkill {
     flex: 1.5;
+    margin-right: 20px;
 
     .SoftSkill {
       &__Name {
@@ -18,7 +19,6 @@
     &__Details {
       display: grid;
       grid-template-columns: auto auto;
-      grid-column-gap: inherit;
 
       &__Text {
         font-size: 18px;
