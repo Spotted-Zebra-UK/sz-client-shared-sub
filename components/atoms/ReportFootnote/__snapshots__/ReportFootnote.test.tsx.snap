@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReportFootnote should render correctly by default 1`] = `
+<div
+  className="ReportFootnote"
+>
+  <span
+    className="ReportFootnote__Position"
+  >
+    test-position
+  </span>
+  <span
+    className="ReportFootnote__Text"
+  >
+     | Candidate report created 
+  </span>
+  <span
+    className="ReportFootnote__Date"
+  >
+    1 January 1970
+  </span>
+</div>
+`;
