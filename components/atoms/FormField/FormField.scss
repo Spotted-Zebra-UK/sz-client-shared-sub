@@ -1,0 +1,22 @@
+@import '../../../variables';
+
+.FormField {
+  &__Label__Text {
+    font-size: $p2-font-size;
+    line-height: $small-line-height;
+    text-align: left;
+  }
+
+  &__Label__Text--HasError {
+    color: $purple;
+  }
+
+  &__Error {
+    color: $purple;
+    font-size: $p2-font-size;
+    min-height: 16px;
+    line-height: $small-line-height;
+    margin-top: 8px;
+    text-align: left;
+  }
+}

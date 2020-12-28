@@ -1,0 +1,98 @@
+@import '../../../variables';
+
+.Login {
+  min-width: 300px;
+  max-width: 400px;
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__Top {
+    margin-bottom: 10px;
+    margin-top: 20px;
+
+    &__Logo {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+
+    &__TitleWrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    &__Title {
+      height: 126px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+
+      &__Row {
+        font-size: $h2-font-size;
+        font-weight: $medium-bold;
+        line-height: $large-line-height;
+      }
+    }
+  }
+
+  &__NotificationWrapper {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .LoginForm {
+    min-height: min-content;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__RedirectToRestorePassword {
+    margin-bottom: 20px;
+    text-align: center;
+
+    &__Link {
+      font-weight: $medium-bold;
+    }
+  }
+}
+
+@media only screen and (min-height: 550px) {
+  .Login {
+    display: flex;
+    flex-direction: column;
+    min-height: min-content;
+    max-height: 820px;
+
+    &__Top {
+      min-height: min-content;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}
+
+@media only screen and (max-height: 550px) {
+  .Login {
+    &__Top {
+      &__TitleWrapper {
+        min-height: 220px;
+      }
+    }
+
+    .LoginForm {
+      min-height: 220px;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import '../../../variables';
+
+.LogoutButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    path {
+      fill: rgba(0, 0, 0, 0.54);
+    }
+  }
+}
+
+.LogoutButton.IconButton {
+  padding: 0;
+}

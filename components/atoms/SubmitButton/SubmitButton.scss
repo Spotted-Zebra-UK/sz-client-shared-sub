@@ -1,0 +1,14 @@
+@import '../../../variables';
+
+.SubmitButton {
+  background-color: $green;
+  border: 0;
+  border-radius: $button-border-radius;
+  color: $white;
+  cursor: pointer;
+  font-size: $p1-font-size;
+  font-weight: $medium-bold;
+  line-height: $medium-line-height;
+  height: 56px;
+  width: 251px;
+}

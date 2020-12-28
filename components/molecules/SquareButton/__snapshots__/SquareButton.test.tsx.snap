@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SquareButton Button should render correctly when type is button 1`] = `
+<Button
+  className="SquareButton SquareButton--Green"
+  onClick={[MockFunction]}
+/>
+`;
+
+exports[`SquareButton Button should render correctly when type not provided 1`] = `
+<Button
+  className="SquareButton SquareButton--Green"
+  onClick={[MockFunction]}
+/>
+`;
+
+exports[`SquareButton Submit should render correctly when type is submit 1`] = `
+<SubmitButton
+  className="SquareButton SquareButton--Green"
+/>
+`;

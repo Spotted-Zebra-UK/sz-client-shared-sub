@@ -1,0 +1,31 @@
+@import '../../../variables';
+
+.CheckboxFormField {
+  height: 46px;
+
+  svg {
+    margin-right: 5px;
+  }
+
+  &__Label {
+    cursor: pointer;
+
+    &__Top {
+      display: flex;
+      align-items: center;
+
+      .Checkbox {
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        width: 0;
+      }
+    }
+
+    &__Error {
+      color: $purple;
+      font-size: $p2-font-size;
+      margin-top: 8px;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm should render correctly by default 1`] = `
+<form
+  className="LoginForm"
+  onSubmit={[Function]}
+>
+  <div
+    className="LoginForm__Fields"
+  >
+    <FormField
+      fieldName="email"
+      label="Email"
+    >
+      <Input
+        name="email"
+        onChange={[Function]}
+        placeholder="Email"
+        value=""
+      />
+    </FormField>
+    <FormField
+      fieldName="password"
+      label="Password"
+    >
+      <PasswordInput
+        name="password"
+        onChange={[Function]}
+        placeholder="Password"
+        value=""
+      />
+    </FormField>
+  </div>
+  <SquareButton
+    type="submit"
+  >
+    Sign in
+  </SquareButton>
+</form>
+`;

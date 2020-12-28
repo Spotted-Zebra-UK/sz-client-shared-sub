@@ -1,0 +1,14 @@
+@import '../../../variables';
+
+.BubblesBackground {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+
+  svg {
+    position: absolute;
+    width: 100%;
+  }
+}

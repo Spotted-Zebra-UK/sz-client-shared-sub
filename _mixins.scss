@@ -1,0 +1,15 @@
+@mixin loader-size($size) {
+  &__Animation {
+    > div {
+      height: $size;
+      width: $size;
+    }
+  }
+
+  &--Overlay {
+    .Loader__Animation {
+      top: calc(50% - #{$size / 2});
+      left: calc(50% - #{$size * 3 / 2});
+    }
+  }
+}
