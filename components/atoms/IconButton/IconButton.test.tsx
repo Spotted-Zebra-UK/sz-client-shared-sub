@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import { ReactComponent as Icon } from '../../../libs/sz-client-shared-sub/icons/Eye.svg';
+import { ReactComponent as Icon } from '../../../icons/Eye.svg';
 import IconButton from './IconButton';
 
 describe('IconButton', () => {

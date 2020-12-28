@@ -1,6 +1,6 @@
 import './SquareButton.scss';
 import React, { FC } from 'react';
-import { TButtonType } from '../../../../../interfaces/button';
+import { TButtonType } from '../../../interfaces/button';
 import { TColor } from '../../../interfaces/colors';
 import Button from '../../atoms/Button/Button';
 import SubmitButton from '../../atoms/SubmitButton/SubmitButton';
