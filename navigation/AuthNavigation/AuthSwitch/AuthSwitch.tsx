@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { TNotification } from '../../../../../interfaces/notification';
+import { TNotification } from '../../../interfaces/notification';
 import { AuthViews } from '../../../views/Authentication/Authentication.constants';
 import CreatePassword from '../../../views/Authentication/CreatePassword/CreatePassword';
 import DirectInvitation from '../../../views/Authentication/DirectInvitation/DirectInvitation';

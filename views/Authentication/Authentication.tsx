@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/indent */
 import React, { FC, useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
-import { TNotification } from '../../../../interfaces/notification';
 import { AUTH_TOKEN_STORAGE_KEY } from '../../constants/authentication';
+import { TNotification } from '../../interfaces/notification';
 import { authenticationRoutes } from '../../navigation/AuthNavigation/authNavigation.constants';
 import AuthSwitch from '../../navigation/AuthNavigation/AuthSwitch/AuthSwitch';
 import { IPrivateRouteRedirectLocationState } from '../../navigation/PrivateRoute/PrivateRoute';

@@ -2,7 +2,6 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { TNotification } from '../../../../../interfaces/notification';
 import SignUpPresentational from '../../../components/organisms/SignUp/SignUp';
 import {
   AUTH_TOKEN_STORAGE_KEY,
@@ -14,6 +13,7 @@ import {
   IRegisterAccountInput,
   IRegisterAccountResponse,
 } from '../../../interfaces/authentication';
+import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
 
