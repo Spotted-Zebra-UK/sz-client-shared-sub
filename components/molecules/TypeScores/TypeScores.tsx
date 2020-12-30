@@ -12,7 +12,7 @@ const TypeScores: FC<ITypeScores> = props => {
   return (
     <div className="TypeScores">
       {typeScores.map(type => {
-        return <Type key={type.name} name={type.name} grade={type.grade} />
+        return <Type key={type.name} name={type.name} grade={type.grade} />;
       })}
     </div>
   );

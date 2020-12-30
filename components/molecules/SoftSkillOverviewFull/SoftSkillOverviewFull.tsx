@@ -1,11 +1,12 @@
 import './SoftSkillOverviewFull.scss';
 import React, { FC } from 'react';
-import SoftSkill, { ISoftSkill } from '../../atoms/SoftSkill/SoftSkill';
+import { TCandidateReportSoftSkill } from '../../../interfaces/candidateReport';
+import SoftSkill from '../../atoms/SoftSkill/SoftSkill';
 import SoftSkillScore from '../../atoms/SoftSkillScore/SoftSkillScore';
 import Trait from '../../atoms/Trait/Trait';
 
 interface ISoftSkillOverviewFull {
-  softSkill: ISoftSkill;
+  softSkill: TCandidateReportSoftSkill;
 }
 
 const SoftSkillOverviewFull: FC<ISoftSkillOverviewFull> = props => {
@@ -21,10 +22,9 @@ const SoftSkillOverviewFull: FC<ISoftSkillOverviewFull> = props => {
             color={softSkill.color || ''}
             grade={softSkill.grade || ''}
           />
-          <p
-            className="SoftSkillOverviewFull__SoftSkill__Details__Text"
-            dangerouslySetInnerHTML={{ __html: `${softSkill.text}` }}
-          />
+          <p className="SoftSkillOverviewFull__SoftSkill__Details__Text">
+            `${softSkill.text}`
+          </p>
         </div>
       </div>
 

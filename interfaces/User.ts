@@ -1,4 +1,4 @@
-import { IName } from "./Name";
+import { IName } from './Name';
 
 export interface IUser {
   name: IName;

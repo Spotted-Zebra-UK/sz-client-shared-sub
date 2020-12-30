@@ -1,21 +1,16 @@
 import './SoftSkillCard.scss';
 import React, { FC } from 'react';
 import { colorResolver } from '../../../helpers/colorResolver';
-import { ISoftSkill } from '../SoftSkill/SoftSkill';
+import { TCandidateReportSoftSkill } from '../../../interfaces/candidateReport';
 
 interface ISoftSkillCard {
-  softSkill: ISoftSkill;
+  softSkill: TCandidateReportSoftSkill;
 }
 
 const SoftSkillCard: FC<ISoftSkillCard> = props => {
   const { softSkill } = props;
   const progressBar = {
-    width:
-      softSkill.score !== undefined
-        ? softSkill.score >= 0
-          ? `${softSkill.score}%`
-          : 0
-        : undefined,
+    width: softSkill.score ? `${softSkill.score}%` : 0,
     backgroundColor: colorResolver(softSkill.color || '', 1),
     opacity: 1,
   };

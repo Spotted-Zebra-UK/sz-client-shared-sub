@@ -1,11 +1,11 @@
 import './SoftSkillSynergy.scss';
 import React, { FC } from 'react';
-import { ISoftSkill } from '../../atoms/SoftSkill/SoftSkill';
+import { TCandidateReportSoftSkill } from '../../../interfaces/candidateReport';
 import SoftSkillCard from '../../atoms/SoftSkillCard/SoftSkillCard';
 import Convergence from '../../molecules/Convergence/Convergence';
 
 interface ISoftSkillSynergy {
-  softSkills: ISoftSkill[];
+  softSkills: TCandidateReportSoftSkill[];
   totalScore: number;
   totalGrade: string;
 }
