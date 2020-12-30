@@ -1,0 +1,30 @@
+.CandidateReportHeaderMobile {
+  width: 100%;
+  margin-bottom: 47px;
+  position: relative;
+
+  &__Navigation {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 3px;
+
+    a {
+      display: grid;
+      grid-template-columns: max-content max-content;
+      grid-column-gap: 16px;
+      align-items: center;
+
+      h6 {
+        font-size: 18px;
+      }
+    }
+  }
+
+  &__Options {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    position: absolute;
+    top: -13px;
+    right: -16px;
+  }
+}
