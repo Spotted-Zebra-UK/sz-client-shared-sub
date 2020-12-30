@@ -9,7 +9,7 @@ export interface ISoftSkill {
   score?: number;
   color?: string;
   orientation?: string;
-  text?: string[];
+  text?: string;
   traits?: ITrait[];
 }
 

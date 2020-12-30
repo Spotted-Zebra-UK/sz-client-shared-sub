@@ -1,12 +1,22 @@
 import './SoftSkillOverviewFull.scss';
 import React, { FC } from 'react';
-import { TCandidateReportSoftSkill } from '../../../interfaces/candidateReport';
 import SoftSkill from '../../atoms/SoftSkill/SoftSkill';
 import SoftSkillScore from '../../atoms/SoftSkillScore/SoftSkillScore';
 import Trait from '../../atoms/Trait/Trait';
 
 interface ISoftSkillOverviewFull {
-  softSkill: TCandidateReportSoftSkill;
+  softSkill: {
+    name: string;
+    color?: string;
+    grade?: string;
+    text?: string;
+    traits?: {
+      name?: string;
+      color: string;
+      icon: string;
+      bullet: string;
+    }[];
+  };
 }
 
 const SoftSkillOverviewFull: FC<ISoftSkillOverviewFull> = props => {
