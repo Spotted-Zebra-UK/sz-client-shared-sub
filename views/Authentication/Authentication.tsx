@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/indent */
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import { AUTH_TOKEN_STORAGE_KEY } from '../../constants/authentication';
 import { TNotification } from '../../interfaces/notification';
@@ -32,10 +32,11 @@ const Authentication: FC<IAuthentication> = ({
   const { state } = useLocation<
     IPrivateRouteRedirectLocationState | undefined
   >();
-  const authRedirectUrl =
+  const authRedirectUrl = useRef(
     state?.from && state.from.pathname
       ? `${state.from.pathname}${state.from.search || ''}`
-      : defaultRedirectUrl;
+      : defaultRedirectUrl
+  );
 
   const [authPrepopulatedValues, setAuthPrepopulatedValues] = useState<
     IAuthPrepouplatedValues
@@ -84,7 +85,7 @@ const Authentication: FC<IAuthentication> = ({
   return (
     <AuthSwitch
       authPrepopulatedValues={authPrepopulatedValues}
-      authRedirectUrl={authRedirectUrl}
+      authRedirectUrl={authRedirectUrl.current}
       authNotifications={authNotifications}
       directInvitationToken={directInvitationToken}
       setAuthPrepopulatedValues={handleSetAuthPrepopulatedValues}
