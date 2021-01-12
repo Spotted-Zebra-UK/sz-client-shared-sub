@@ -32,9 +32,10 @@ const SoftSkillOverviewFull: FC<ISoftSkillOverviewFull> = props => {
             color={softSkill.color || ''}
             grade={softSkill.grade || ''}
           />
-          <p className="SoftSkillOverviewFull__SoftSkill__Details__Text">
-            `${softSkill.text}`
-          </p>
+          <p
+            className="SoftSkillOverviewFull__SoftSkill__Details__Text"
+            dangerouslySetInnerHTML={{ __html: softSkill.text || '' }}
+          />
         </div>
       </div>
 
