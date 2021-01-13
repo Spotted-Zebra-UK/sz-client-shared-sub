@@ -58,7 +58,7 @@ const SignUp: FC<ISignUp> = ({
         if (message === Error.EXISTING_ACCOUNT) {
           addAuthNotification(AuthViews.LOGIN, {
             icon: 'Idea',
-            color: 'Green',
+            color: 'Purple',
             message: 'Your account has already been created',
           });
           history.push(authenticationRoutes.login);
