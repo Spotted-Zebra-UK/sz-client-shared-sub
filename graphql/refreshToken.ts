@@ -9,6 +9,7 @@ import {
   IRequestTokenRefreshInput,
   IRequestTokenRefreshResponse,
 } from '../interfaces/authentication';
+import { authenticationRoutes } from '../navigation/AuthNavigation/authNavigation.constants';
 
 export const REQUEST_TOKEN_REFRESH = gql`
   mutation RequestTokenRefresh($accessToken: String!, $refreshToken: String!) {
@@ -65,7 +66,7 @@ export const requestTokenRefresh = async (
   } catch (error) {
     localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
     localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
-    history.push('/login');
+    history.push(authenticationRoutes.login);
     client.clearStore();
     return false;
   }
