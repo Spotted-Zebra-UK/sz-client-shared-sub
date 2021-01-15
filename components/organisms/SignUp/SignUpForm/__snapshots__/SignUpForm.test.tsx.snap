@@ -42,6 +42,37 @@ exports[`SignUpForm should render correctly by default 1`] = `
         value=""
       />
     </FormField>
+    <FormField
+      fieldName="appliedFrom"
+      label="Applied from"
+    >
+      <Select
+        id="sign-up-applied-from"
+        name="appliedFrom"
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Audit",
+              "value": "audit",
+            },
+            Object {
+              "label": "Tax",
+              "value": "tax",
+            },
+            Object {
+              "label": "Business Support",
+              "value": "business support",
+            },
+            Object {
+              "label": "School leavers",
+              "value": "school leavers",
+            },
+          ]
+        }
+        value=""
+      />
+    </FormField>
   </div>
   <div
     className="SignUpForm__Bottom"

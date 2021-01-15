@@ -3,12 +3,9 @@
 .SignUpForm {
   .FormField--email,
   .FormField--fullName,
-  .FormField--password {
+  .FormField--password,
+  .FormField--appliedFrom {
     margin-bottom: 8px;
-  }
-
-  .FormField--confirmPassword {
-    margin-bottom: 10px;
   }
 
   .SquareButton {

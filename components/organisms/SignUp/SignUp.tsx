@@ -14,10 +14,12 @@ interface ISignUp {
     fullName: string,
     email: string,
     password: string,
+    appliedFrom: string,
     isPrivacyPolicyChecked: boolean
   ) => void;
   notification?: TNotification;
   loginRedirectUrl?: string;
+  hasAppliedFromField: boolean;
 }
 
 const SignUpPresentational: FC<ISignUp> = ({
@@ -26,6 +28,7 @@ const SignUpPresentational: FC<ISignUp> = ({
   onSignUp,
   notification,
   loginRedirectUrl,
+  hasAppliedFromField,
 }) => {
   return (
     <div
@@ -47,7 +50,12 @@ const SignUpPresentational: FC<ISignUp> = ({
           {notification ? <Notification notification={notification} /> : null}
         </div>
       </div>
-      <SignUpForm fullName={fullName} email={email} onSignUp={onSignUp} />
+      <SignUpForm
+        hasAppliedFromField={hasAppliedFromField}
+        fullName={fullName}
+        email={email}
+        onSignUp={onSignUp}
+      />
       {loginRedirectUrl ? (
         <div className="SignUp__RedirectToLogin">
           Already have an account? <Link to={loginRedirectUrl}>Sign in</Link>

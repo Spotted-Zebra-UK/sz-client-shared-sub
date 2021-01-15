@@ -34,3 +34,12 @@ export const parseInvitationToken = (
     },
   };
 };
+
+export const isWiserCompany = (urlString: string): boolean => {
+  const url = new URL(urlString);
+
+  const urlProject = url.searchParams.get('project');
+  const urlStage = url.searchParams.get('stageId');
+
+  return urlProject === '20' && urlStage === '22';
+};
