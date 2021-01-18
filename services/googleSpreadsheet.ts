@@ -45,7 +45,7 @@ const sheetId = process.env.REACT_APP_GOOGLE_SPREADSHEET_SHEET_ID || '';
 const googleSpreadsheet = new GoogleSpreadsheetService(
   spreadSheetId,
   clientEmail,
-  privateKey,
+  privateKey.replace(/\\n/g, '\n'),
   sheetId
 );
 
