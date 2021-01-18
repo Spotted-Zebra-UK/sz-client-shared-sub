@@ -37,10 +37,10 @@ class GoogleSpreadsheetService {
   }
 }
 
-const spreadSheetId = process.env.REACT_APP_SPREADSHEET_ID || '';
-const clientEmail = process.env.REACT_APP_CLIENT_EMAIL || '';
-const privateKey = process.env.REACT_APP_PRIVATE_KEY || '';
-const sheetId = process.env.REACT_APP_SHEET_ID || '';
+const spreadSheetId = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID || '';
+const clientEmail = process.env.REACT_APP_GOOGLE_SPREADSHEET_CLIENT_EMAIL || '';
+const privateKey = process.env.REACT_APP_GOOGLE_SPREADSHEET_PRIVATE_KEY || '';
+const sheetId = process.env.REACT_APP_GOOGLE_SPREADSHEET_SHEET_ID || '';
 
 const googleSpreadsheet = new GoogleSpreadsheetService(
   spreadSheetId,
