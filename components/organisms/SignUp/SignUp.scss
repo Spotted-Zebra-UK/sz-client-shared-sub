@@ -59,12 +59,13 @@
 
   &__RedirectToLogin {
     line-height: $medium-line-height;
-    margin: 10px auto;
+    margin: auto;
     text-align: center;
+    padding: 10px;
 
     a {
       color: $black;
-      font-weight: 500;
+      font-weight: $medium-bold;
       text-decoration: none;
     }
   }
