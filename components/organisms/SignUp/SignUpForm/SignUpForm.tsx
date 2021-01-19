@@ -173,7 +173,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
           <FormField
             error={errors && errors.appliedFrom && errors.appliedFrom.join(' ')}
             fieldName="appliedFrom"
-            label="Applied from"
+            label="Stream applied for"
           >
             <Select
               name="appliedFrom"
