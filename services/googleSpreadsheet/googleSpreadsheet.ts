@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/lines-between-class-members */
 import { GoogleSpreadsheet } from 'google-spreadsheet';
+import { devConfig, prodConfig } from './config';
 
 class GoogleSpreadsheetService {
   doc: GoogleSpreadsheet;
@@ -37,16 +38,13 @@ class GoogleSpreadsheetService {
   }
 }
 
-const spreadSheetId = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID || '';
-const clientEmail = process.env.REACT_APP_GOOGLE_SPREADSHEET_CLIENT_EMAIL || '';
-const privateKey = process.env.REACT_APP_GOOGLE_SPREADSHEET_PRIVATE_KEY || '';
-const sheetId = process.env.REACT_APP_GOOGLE_SPREADSHEET_SHEET_ID || '';
+const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
 
 const googleSpreadsheet = new GoogleSpreadsheetService(
-  spreadSheetId,
-  clientEmail,
-  privateKey.replace(/\\n/g, '\n'),
-  sheetId
+  config.spreadSheetId,
+  config.clientEmail,
+  config.privateKey,
+  config.sheetId
 );
 
 export default googleSpreadsheet;
