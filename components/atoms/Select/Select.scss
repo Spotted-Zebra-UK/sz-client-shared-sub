@@ -1,0 +1,11 @@
+@import '../../../variables';
+
+.Select {
+  border: 0;
+  border-bottom: 2px solid $black;
+  font-size: $p1-font-size;
+  height: 36px;
+  line-height: $medium-line-height;
+  width: 100%;
+  background-color: transparent;
+}

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/indent */
 import './SignUpForm.scss';
 import React, { FC, useState } from 'react';
-import Select from '../../../../../../components/atoms/Select/Select';
 import validate from '../../../../helpers/validate';
 import { TFormFieldValue } from '../../../../interfaces/form';
 import FormField from '../../../atoms/FormField/FormField';
 import Input from '../../../atoms/Input/Input';
+import Select from '../../../atoms/Select/Select';
 import PasswordInput from '../../../molecules/PasswordInput/PasswordInput';
 import SquareButton from '../../../molecules/SquareButton/SquareButton';
 import PrivacyPolicyCheckboxField from './PrivacyPolicyCheckboxField/PrivacyPolicyCheckboxField';
