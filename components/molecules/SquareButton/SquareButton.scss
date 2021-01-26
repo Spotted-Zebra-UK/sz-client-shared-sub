@@ -30,3 +30,8 @@
   background-color: $white;
   color: $black;
 }
+
+.SquareButton--Disabled {
+  background-color: rgba($color: $black, $alpha: 0.3);
+  cursor: not-allowed;
+}

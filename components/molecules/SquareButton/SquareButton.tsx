@@ -19,7 +19,9 @@ const SquareButton: FC<ISquareButton> = props => {
 
   const parsedClassName = `SquareButton${
     className ? ` ${className}` : ''
-  } SquareButton--${color || 'Green'}`;
+  } SquareButton--${color || 'Green'}${
+    restProps.isDisabled ? ' SquareButton--Disabled' : ''
+  }`;
 
   if (type === 'submit') {
     return (
