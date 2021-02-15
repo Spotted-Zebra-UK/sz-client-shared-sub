@@ -9,6 +9,7 @@ interface IInput {
   value: string;
   type?: 'text' | 'password';
   isDisabled?: boolean;
+  id?: string;
 }
 
 const Input: FunctionComponent<IInput> = props => {
