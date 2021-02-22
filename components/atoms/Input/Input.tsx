@@ -7,7 +7,7 @@ interface IInput {
   onChange: (value: string, name: string) => void;
   placeholder?: string;
   value: string;
-  type?: 'text' | 'password';
+  type?: 'text' | 'password' | 'date';
   isDisabled?: boolean;
   id?: string;
 }

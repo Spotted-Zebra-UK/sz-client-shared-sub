@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import { ApolloClient, gql, NormalizedCacheObject } from '@apollo/client';
 import history from '../config/history';
 import {

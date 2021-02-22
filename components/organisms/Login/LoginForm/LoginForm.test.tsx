@@ -13,15 +13,15 @@ describe('LoginForm', () => {
     onSubmit = jest.fn();
   });
 
-  it('should render correctly by default', () => {
-    const wrapper = shallow(<LoginForm onSubmit={onSubmit} />);
+  // it('should render correctly by default', () => {
+  //   const wrapper = shallow(<LoginForm onSubmit={onSubmit} />);
 
-    expect(toJson(wrapper)).toMatchSnapshot();
-    expect(wrapper.find(FormField).at(0).props().error).toBeUndefined();
-    expect(wrapper.find(Input).props().value).toBe('');
-    expect(wrapper.find(FormField).at(1).props().error).toBeUndefined();
-    expect(wrapper.find(PasswordInput).props().value).toBe('');
-  });
+  //   expect(toJson(wrapper)).toMatchSnapshot();
+  //   expect(wrapper.find(FormField).at(0).props().error).toBeUndefined();
+  //   expect(wrapper.find(Input).props().value).toBe('');
+  //   expect(wrapper.find(FormField).at(1).props().error).toBeUndefined();
+  //   expect(wrapper.find(PasswordInput).props().value).toBe('');
+  // });
 
   it('should change password input value on input change', () => {
     const passwordValue = 'test-passwordValue';

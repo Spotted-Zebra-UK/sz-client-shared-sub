@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import React, { FC, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
