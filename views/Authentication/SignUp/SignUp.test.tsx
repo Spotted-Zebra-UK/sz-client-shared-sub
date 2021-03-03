@@ -5,6 +5,7 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
+import Checkbox from '../../../components/atoms/Checkbox/Checkbox';
 import Input from '../../../components/atoms/Input/Input';
 import PasswordInput from '../../../components/molecules/PasswordInput/PasswordInput';
 import {
@@ -12,11 +13,14 @@ import {
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
-import { AUTHENTICATE_MUTATION } from '../../../graphql/authentication';
-import { IAuthenticateResponse } from '../../../interfaces/authentication';
+import {
+  AUTHENTICATE_MUTATION,
+  REGISTER_ACCOUNT,
+} from '../../../graphql/authentication';
+import { IRegisterAccountResponse } from '../../../interfaces/authentication';
 import { TNotification } from '../../../interfaces/notification';
 import { AuthViews } from '../Authentication.constants';
-import Login from './Login';
+import SignUp from './SignUp';
 
 const mockHistory = {
   push: jest.fn(),
@@ -24,16 +28,22 @@ const mockHistory = {
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
+  useLocation: jest.fn(),
   useHistory: () => mockHistory,
+  useParams: jest.fn(),
 }));
 
-describe('Login', () => {
+describe('SignUp', () => {
   const email = 'test@mail.com';
   const password = 'test-password';
+  const fullName = 'Test Fullname';
+  const firstName = 'Test';
+  const lastName = 'Fullname';
+  const invitationToken = 'test-invitation-token';
   const redirectUrl = '/redirect-url';
 
-  const authenticateMutationResponse: IAuthenticateResponse = {
-    authenticate: {
+  const registerAccountMutationResponse: IRegisterAccountResponse = {
+    registerAccount: {
       accessToken: 'test-access-token',
       refreshToken: 'test-refresh-token',
     },
@@ -43,52 +53,58 @@ describe('Login', () => {
     view: AuthViews,
     notification: TNotification
   ) => void;
-  let clearAuthViewNotifications: (view: AuthViews) => void;
 
   beforeEach(() => {
     addAuthNotification = jest.fn(
       (view: AuthViews, notification: TNotification) => {}
     );
-    clearAuthViewNotifications = jest.fn((view: AuthViews) => {});
   });
 
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  it('should set access and request token to local storage and redirect to provided url after successful login.', async () => {
+  it('should set access and request token to local storage and redirect to provided url after successful sign up.', async () => {
     const setItemSpy = jest
       .spyOn(Storage.prototype, 'setItem')
       .mockImplementation();
 
-    const authenticateMutationMock = {
+    const registerAccountMutationMock = {
       request: {
-        query: AUTHENTICATE_MUTATION,
+        query: REGISTER_ACCOUNT,
         variables: {
+          firstName,
+          lastName,
           email,
           password,
+          invitationToken,
         },
       },
       result: {
-        data: authenticateMutationResponse,
+        data: registerAccountMutationResponse,
       },
     };
 
     const wrapper = mount(
       <MemoryRouter>
-        <MockedProvider mocks={[authenticateMutationMock]} addTypename={false}>
-          <Login
+        <MockedProvider
+          mocks={[registerAccountMutationMock]}
+          addTypename={false}
+        >
+          <SignUp
             authRedirectUrl={redirectUrl}
+            directInvitationToken={invitationToken}
             addAuthNotification={addAuthNotification}
-            clearAuthViewNotifications={clearAuthViewNotifications}
           />
         </MockedProvider>
       </MemoryRouter>
     );
 
     act(() => {
-      wrapper.find(Input).props().onChange(email, 'email');
+      wrapper.find(Input).at(0).props().onChange(fullName, 'fullName');
+      wrapper.find(Input).at(0).props().onChange(email, 'email');
       wrapper.find(PasswordInput).props().onChange(password, 'password');
+      wrapper.find(Checkbox).props().onChange(true, 'isPrivacyPolicyChecked');
     });
 
     const event = {
@@ -103,44 +119,52 @@ describe('Login', () => {
 
     expect(setItemSpy).toHaveBeenCalledWith(
       AUTH_TOKEN_STORAGE_KEY,
-      authenticateMutationResponse.authenticate.accessToken
+      registerAccountMutationResponse.registerAccount.accessToken
     );
     expect(setItemSpy).toHaveBeenCalledWith(
       REFRESH_TOKEN_STORAGE_KEY,
-      authenticateMutationResponse.authenticate.refreshToken
+      registerAccountMutationResponse.registerAccount.refreshToken
     );
     expect(mockHistory.push).toHaveBeenCalledWith(redirectUrl);
   });
 
-  it('should set notification when provided invalid credentials', async () => {
-    const authenticateMutationMock = {
+  it('should redirect to login page and show error notification if account with provided email already exists.', async () => {
+    const registerAccountMutationMock = {
       request: {
-        query: AUTHENTICATE_MUTATION,
+        query: REGISTER_ACCOUNT,
         variables: {
+          firstName,
+          lastName,
           email,
           password,
+          invitationToken,
         },
       },
       result: {
-        errors: [new GraphQLError(Error.INVALID_CREDENTIALS)],
+        errors: [new GraphQLError(Error.EXISTING_ACCOUNT)],
       },
     };
 
     const wrapper = mount(
       <MemoryRouter>
-        <MockedProvider mocks={[authenticateMutationMock]} addTypename={false}>
-          <Login
+        <MockedProvider
+          mocks={[registerAccountMutationMock]}
+          addTypename={false}
+        >
+          <SignUp
             authRedirectUrl={redirectUrl}
+            directInvitationToken={invitationToken}
             addAuthNotification={addAuthNotification}
-            clearAuthViewNotifications={clearAuthViewNotifications}
           />
         </MockedProvider>
       </MemoryRouter>
     );
 
     act(() => {
-      wrapper.find(Input).props().onChange(email, 'email');
+      wrapper.find(Input).at(0).props().onChange(fullName, 'fullName');
+      wrapper.find(Input).at(0).props().onChange(email, 'email');
       wrapper.find(PasswordInput).props().onChange(password, 'password');
+      wrapper.find(Checkbox).props().onChange(true, 'isPrivacyPolicyChecked');
     });
 
     const event = {
@@ -155,26 +179,8 @@ describe('Login', () => {
 
     expect(addAuthNotification).toHaveBeenCalledWith(AuthViews.LOGIN, {
       color: 'Purple',
-      icon: 'Warning',
-      message: 'Incorrect email or password',
+      icon: 'Idea',
+      message: 'Your account has already been created',
     });
-  });
-
-  it('should clean notifications on unmount', () => {
-    const wrapper = mount(
-      <MemoryRouter>
-        <MockedProvider mocks={[]} addTypename={false}>
-          <Login
-            authRedirectUrl={redirectUrl}
-            addAuthNotification={addAuthNotification}
-            clearAuthViewNotifications={clearAuthViewNotifications}
-          />
-        </MockedProvider>
-      </MemoryRouter>
-    );
-
-    wrapper.unmount();
-
-    expect(clearAuthViewNotifications).toHaveBeenCalledWith(AuthViews.LOGIN);
   });
 });
