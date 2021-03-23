@@ -1,7 +1,6 @@
 import './DirectInvitation.scss';
 import React, { FC } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
-/* eslint-disable @typescript-eslint/indent */
 import { useQuery } from '@apollo/client';
 import Loader from '../../../components/atoms/Loader/Loader';
 import { GET_INVITATION_STATUS_QUERY } from '../../../graphql/directInvitation';

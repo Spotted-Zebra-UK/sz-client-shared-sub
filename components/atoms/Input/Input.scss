@@ -6,9 +6,18 @@
   font-size: $p1-font-size;
   height: 36px;
   line-height: $medium-line-height;
+  box-sizing: border-box;
   width: 100%;
+  background-color: transparent;
+  border-radius: 0;
 
   &:disabled {
     background-color: transparent;
+  }
+
+  &::placeholder {
+    font-size: $p1-font-size;
+    line-height: $medium-line-height;
+    color: rgba($black, 0.56);
   }
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import './SignUpForm.scss';
 import React, { FC, useState } from 'react';
 import validate from '../../../../helpers/validate';
@@ -135,6 +134,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
             error={errors && errors.fullName && errors.fullName.join(' ')}
             fieldName="fullName"
             label="Full name"
+            isLabelVisible={!!values.fullName}
           >
             <Input
               name="fullName"
@@ -148,6 +148,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
           error={errors && errors.email && errors.email.join(' ')}
           fieldName="email"
           label="Email"
+          isLabelVisible={!!values.email}
         >
           <Input
             name="email"
@@ -161,6 +162,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
           error={errors && errors.password && errors.password.join(' ')}
           fieldName="password"
           label="Create Password"
+          isLabelVisible={!!values.password}
         >
           <PasswordInput
             name="password"
@@ -174,6 +176,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
             error={errors && errors.appliedFrom && errors.appliedFrom.join(' ')}
             fieldName="appliedFrom"
             label="Stream applied for"
+            isLabelVisible={!!values.appliedFrom}
           >
             <Select
               name="appliedFrom"

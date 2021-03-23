@@ -8,4 +8,8 @@
   line-height: $medium-line-height;
   width: 100%;
   background-color: transparent;
+
+  option {
+    max-width: 200px;
+  }
 }

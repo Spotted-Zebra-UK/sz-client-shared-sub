@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import './RestorePasswordForm.scss';
 import React, { FC, useState } from 'react';
 import validate from '../../../../helpers/validate';
@@ -60,6 +59,7 @@ const RestorePasswordForm: FC<IRestorePasswordFormForm> = props => {
           error={errors && errors.email && errors.email.join(' ')}
           fieldName="email"
           label="Email"
+          isLabelVisible={!!values.email}
         >
           <Input
             name="email"

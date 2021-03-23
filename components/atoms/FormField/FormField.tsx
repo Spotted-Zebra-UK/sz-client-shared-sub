@@ -5,6 +5,7 @@ interface IFormField {
   error?: string;
   fieldName: string;
   label?: string;
+  isLabelVisible?: boolean;
 }
 
 const FormField: FunctionComponent<IFormField> = ({
@@ -12,19 +13,18 @@ const FormField: FunctionComponent<IFormField> = ({
   error,
   label,
   fieldName,
+  isLabelVisible = true,
 }) => {
   return (
     <div className={`FormField FormField--${fieldName}`}>
       <label className="FormField__Label" htmlFor={fieldName}>
-        {label ? (
-          <div
-            className={`FormField__Label__Text${
-              error ? ' FormField__Label__Text--HasError' : ''
-            }`}
-          >
-            {label}
-          </div>
-        ) : null}
+        <div
+          className={`FormField__Label__Text${
+            error ? ' FormField__Label__Text--HasError' : ''
+          }`}
+        >
+          {label && isLabelVisible ? label : ''}
+        </div>
         {children}
         <div className="FormField__Error">{error}</div>
       </label>

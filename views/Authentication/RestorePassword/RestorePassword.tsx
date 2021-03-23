@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-/* eslint-disable @typescript-eslint/indent */
 import { useMutation } from '@apollo/client';
 import RestorePasswordPresentational from '../../../components/organisms/RestorePassword/RestorePassword';
 import Error from '../../../enums/error';
