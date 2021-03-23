@@ -9,7 +9,7 @@ import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNav
 import { AuthViews } from '../Authentication.constants';
 
 interface IRestorePassword {
-  restorePasswordNotification: TNotification | undefined;
+  restorePasswordNotification?: TNotification;
   addAuthNotification: (view: AuthViews, notification: TNotification) => void;
 }
 

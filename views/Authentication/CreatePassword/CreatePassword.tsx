@@ -11,7 +11,7 @@ import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNav
 import { AuthViews } from '../Authentication.constants';
 
 interface ICreatePassword {
-  createPasswordNotification: TNotification | undefined;
+  createPasswordNotification?: TNotification;
   addAuthNotification: (view: AuthViews, notification: TNotification) => void;
 }
 

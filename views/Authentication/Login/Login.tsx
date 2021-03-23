@@ -17,18 +17,21 @@ import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNav
 import { AuthViews } from '../Authentication.constants';
 
 interface ILogin {
-  authPrepopulatedValues: {
+  // Prepopulates input fields in login form.
+  authPrepopulatedValues?: {
     email?: string;
     fullName?: string;
   };
+  // Url where user will be redirected after successful login.
   authRedirectUrl: string;
-  loginNotification: TNotification | undefined;
+  // Notification is visible if this prop is provided.
+  loginNotification?: TNotification | undefined;
   addAuthNotification: (view: AuthViews, notification: TNotification) => void;
   clearAuthViewNotifications: (view: AuthViews) => void;
 }
 
 const Login: FC<ILogin> = ({
-  authPrepopulatedValues,
+  authPrepopulatedValues = {},
   authRedirectUrl,
   loginNotification,
   addAuthNotification,
@@ -39,6 +42,10 @@ const Login: FC<ILogin> = ({
     AUTHENTICATE_MUTATION,
     {
       onCompleted: data => {
+        /**
+         * User should be redirected to provided url after
+         * successful login.
+         */
         localStorage.setItem(
           AUTH_TOKEN_STORAGE_KEY,
           data.authenticate.accessToken
@@ -52,6 +59,9 @@ const Login: FC<ILogin> = ({
       onError: props => {
         props.graphQLErrors.forEach(({ message }) => {
           if (message === Error.INVALID_CREDENTIALS) {
+            /**
+             * If invalid credentials provided, notification should be visible.
+             */
             addAuthNotification(AuthViews.LOGIN, {
               icon: 'Warning',
               color: 'Purple',

@@ -19,18 +19,18 @@ import googleSpreadsheet from '../../../services/googleSpreadsheet';
 import { AuthViews } from '../Authentication.constants';
 
 interface ISignUp {
-  authPrepopulatedValues: {
+  authPrepopulatedValues?: {
     email?: string;
     fullName?: string;
   };
   authRedirectUrl: string;
   directInvitationToken: string | undefined;
-  signUpNotification: TNotification | undefined;
+  signUpNotification?: TNotification | undefined;
   addAuthNotification: (view: AuthViews, notification: TNotification) => void;
 }
 
 const SignUp: FC<ISignUp> = ({
-  authPrepopulatedValues,
+  authPrepopulatedValues = {},
   authRedirectUrl,
   directInvitationToken,
   signUpNotification,
@@ -47,6 +47,10 @@ const SignUp: FC<ISignUp> = ({
     IRegisterAccountInput
   >(REGISTER_ACCOUNT, {
     onCompleted(data) {
+      /**
+       * User should be redirected to provided url after
+       * successful sign up.
+       */
       if (data?.registerAccount && data.registerAccount.accessToken) {
         localStorage.setItem(
           AUTH_TOKEN_STORAGE_KEY,
@@ -61,6 +65,9 @@ const SignUp: FC<ISignUp> = ({
     },
     onError: ({ graphQLErrors }) => {
       graphQLErrors.forEach(({ message }) => {
+        /**
+         * If account with provided email already exists, app should be redirected to login view and notification should be visible.
+         */
         if (message === Error.EXISTING_ACCOUNT) {
           addAuthNotification(AuthViews.LOGIN, {
             icon: 'Idea',
@@ -91,6 +98,12 @@ const SignUp: FC<ISignUp> = ({
       },
     });
 
+    /**
+     * Email and additional information should be added to google spreadsheet
+     * for candidates which invited to wiser company assessment.
+     *
+     * TODO: Delete when Candidate Information feature implemented.
+     */
     if (isWiser) {
       googleSpreadsheet.addRow({
         Email: email,
