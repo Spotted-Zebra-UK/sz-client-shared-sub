@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import SignUpPresentational from '../../../components/organisms/SignUp/SignUp';
@@ -8,14 +8,12 @@ import {
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
 import { REGISTER_ACCOUNT } from '../../../graphql/authentication';
-import { isWiserCompany } from '../../../helpers/invitations';
 import {
   IRegisterAccountInput,
   IRegisterAccountResponse,
 } from '../../../interfaces/authentication';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
-import googleSpreadsheet from '../../../services/googleSpreadsheet';
 import { AuthViews } from '../Authentication.constants';
 
 interface ISignUp {
@@ -36,11 +34,6 @@ const SignUp: FC<ISignUp> = ({
   signUpNotification,
   addAuthNotification,
 }) => {
-  const isWiser = useMemo(
-    () => isWiserCompany(window.location + authRedirectUrl),
-    [authRedirectUrl]
-  );
-
   const history = useHistory();
   const [registerAccount] = useMutation<
     IRegisterAccountResponse,
@@ -84,7 +77,6 @@ const SignUp: FC<ISignUp> = ({
     fullName: string,
     email: string,
     password: string,
-    appliedFrom: string,
     isPrivacyPolicyChecked: boolean
   ) => {
     const [firstName, lastName] = fullName.split(' ', 2);
@@ -97,19 +89,6 @@ const SignUp: FC<ISignUp> = ({
         invitationToken: directInvitationToken,
       },
     });
-
-    /**
-     * Email and additional information should be added to google spreadsheet
-     * for candidates which invited to wiser company assessment.
-     *
-     * TODO: Delete when Candidate Information feature implemented.
-     */
-    if (isWiser) {
-      googleSpreadsheet.addRow({
-        Email: email,
-        AppliedFrom: appliedFrom,
-      });
-    }
   };
 
   return (
@@ -119,7 +98,6 @@ const SignUp: FC<ISignUp> = ({
       onSignUp={handleSignUp}
       notification={signUpNotification}
       loginRedirectUrl={authenticationRoutes.login}
-      hasAppliedFromField={isWiser}
     />
   );
 };
