@@ -66,7 +66,7 @@ export const requestTokenRefresh = async (
     localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
     localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
     history.push(authenticationRoutes.login);
-    client.resetStore();
+    window.location.reload();
     return false;
   }
 };
