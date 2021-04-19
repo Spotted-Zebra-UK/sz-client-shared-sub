@@ -1,0 +1,29 @@
+@import '../../../variables';
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.Datepicker {
+  &__Button {
+    border: 0;
+    border-bottom: $form-input-border-bottom;
+    font-size: $p1-font-size;
+    height: $form-input-height;
+    line-height: $medium-line-height;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: transparent;
+    border-radius: 0;
+    text-align: start;
+  }
+
+  &__Button--Placeholder {
+    color: rgba($black, 0.56);
+  }
+
+  .react-datepicker__year-select {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
