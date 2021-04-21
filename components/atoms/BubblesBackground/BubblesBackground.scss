@@ -7,7 +7,24 @@
   justify-content: center;
   position: relative;
 
-  svg {
+  &__Bg--4 {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    svg {
+      display: block;
+      position: static;
+      width: auto;
+    }
+  }
+
+  &__Bg--3,
+  &__Bg--2,
+  &__Bg--1,
+  &__Bg--0 {
     position: absolute;
     width: 100%;
   }
