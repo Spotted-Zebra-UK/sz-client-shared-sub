@@ -1,8 +1,11 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import './Select.scss';
-import React, { ChangeEvent, FC } from 'react';
+import React, { FC, useMemo } from 'react';
+import RSSelect, { OptionTypeBase } from 'react-select';
 
-export type TSelectOption = { label: string; value: string };
+export type TSelectOption = {
+  label: string;
+  value: string;
+};
 
 interface ISelect {
   name: string;
@@ -14,32 +17,39 @@ interface ISelect {
 }
 
 const Select: FC<ISelect> = ({
-  name,
-  id,
-  value,
   options,
+  name,
   onChange,
-  placeholder,
+  id,
+  placeholder = '',
+  value,
 }) => {
-  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    onChange(event.target.value, name);
+  const handleChange = (selectedOption: OptionTypeBase | null) => {
+    onChange(selectedOption?.value || '', name);
   };
 
+  const valuesLabelObject: { [key in string]: string } = useMemo(
+    () =>
+      options.reduce((acc, curr) => ({ ...acc, [curr.value]: curr.label }), {}),
+    [options]
+  );
+
+  const selectedValue = value
+    ? { value, label: valuesLabelObject[value as string] }
+    : null;
+
   return (
-    <select
+    <RSSelect
       className="Select"
-      name={name}
+      classNamePrefix="Select"
       id={id}
-      value={value}
+      name={name}
+      options={[{ value: '', label: '' }, ...options]}
       onChange={handleChange}
-    >
-      <option value="">{placeholder || ''}</option>
-      {options.map(selectOption => (
-        <option key={selectOption.value} value={selectOption.value}>
-          {selectOption.label}
-        </option>
-      ))}
-    </select>
+      value={selectedValue}
+      placeholder={placeholder}
+      maxMenuHeight={150}
+    />
   );
 };
 

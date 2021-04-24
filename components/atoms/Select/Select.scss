@@ -1,15 +1,47 @@
 @import '../../../variables';
 
 .Select {
-  border: 0;
-  border-bottom: 2px solid $black;
-  font-size: $p1-font-size;
-  height: 36px;
-  line-height: $medium-line-height;
-  width: 100%;
-  background-color: transparent;
+  &__control {
+    border: 0 !important;
+    border-bottom: $form-input-border-bottom !important;
+    border-radius: 0 !important;
+    min-height: $form-input-height !important;
+    box-shadow: none !important;
 
-  option {
-    max-width: 200px;
+    &:focus {
+      outline: none !important;
+    }
+  }
+
+  &__value-container {
+    padding: 5px 0 !important;
+  }
+
+  &__indicator-separator {
+    display: none !important;
+  }
+
+  &__placeholder {
+    font-size: $p1-font-size;
+    line-height: $medium-line-height;
+    color: rgba($black, 0.56);
+  }
+
+  &__indicator {
+    svg {
+      width: 17px;
+
+      path {
+        fill: $black;
+      }
+    }
+  }
+
+  &__dropdown-indicator {
+    padding-right: 0 !important;
+  }
+
+  &__option {
+    min-height: 30px;
   }
 }
