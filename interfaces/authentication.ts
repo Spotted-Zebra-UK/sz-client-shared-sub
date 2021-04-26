@@ -49,3 +49,17 @@ export interface IUpdateIdentityPassword {
   recoveryToken: string;
   newPassword: string;
 }
+
+export interface IAuthenticateExternalResponse {
+  authenticateExternal: {
+    accessToken: string;
+    refreshToken: string;
+  };
+}
+
+export interface IAuthenticateExternalInput {
+  token: string;
+  firstName: string;
+  lastName: string;
+  site: string;
+}

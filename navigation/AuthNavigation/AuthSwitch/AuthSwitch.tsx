@@ -4,6 +4,7 @@ import { TNotification } from '../../../interfaces/notification';
 import { AuthViews } from '../../../views/Authentication/Authentication.constants';
 import CreatePassword from '../../../views/Authentication/CreatePassword/CreatePassword';
 import DirectInvitation from '../../../views/Authentication/DirectInvitation/DirectInvitation';
+import ExternalAuthentication from '../../../views/Authentication/ExternalAuthentication/ExternalAuthentication';
 import Login from '../../../views/Authentication/Login/Login';
 import RestorePassword from '../../../views/Authentication/RestorePassword/RestorePassword';
 import SignUp from '../../../views/Authentication/SignUp/SignUp';
@@ -75,6 +76,9 @@ const AuthSwitch: FC<IAuthSwitch> = ({
           }
           addAuthNotification={addAuthNotification}
         />
+      </Route>
+      <Route path={authenticationRoutes.externalAuthentication}>
+        <ExternalAuthentication />
       </Route>
       <Redirect
         from={authenticationRoutes.base}
