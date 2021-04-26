@@ -4,7 +4,6 @@ export const authenticationRoutes = {
   restorePassword: '/auth/restore-password',
   createPassword: '/auth/password-recovery',
   directInvitation: '/auth/direct-inv',
-  externalAuthentication: '/auth/external',
   base: '/auth',
   defaultAuthRedirectUrl: '/',
 };

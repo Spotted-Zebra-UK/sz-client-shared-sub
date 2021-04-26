@@ -53,22 +53,3 @@ export const UPDATE_IDENTITY_PASSWORD_MUTATION = gql`
     )
   }
 `;
-
-export const AUTHENITCATE_EXTERNAL_MUTATION = gql`
-  mutation AuthenticateExternal(
-    $token: String!
-    $firstName: String!
-    $lastName: String!
-    $site: String!
-  ) {
-    authenticateExternal(
-      token: $token
-      firstName: $firstName
-      lastName: $lastName
-      site: $site
-    ) {
-      accessToken
-      refreshToken
-    }
-  }
-`;
