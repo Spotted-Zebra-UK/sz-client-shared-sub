@@ -36,7 +36,9 @@ const ExternalAuthentication: FC<IExternalAuthentication> = () => {
     IAuthenticateExternalResponse,
     IAuthenticateExternalInput
   >(AUTHENITCATE_EXTERNAL_MUTATION, {
-    onError: () => {},
+    onError: () => {
+      history.push('/auth/login');
+    },
     onCompleted: data => {
       if (data) {
         localStorage.setItem(
