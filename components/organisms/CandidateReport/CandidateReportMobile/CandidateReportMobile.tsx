@@ -16,10 +16,11 @@ import { equalizeElementsHeight } from './equalizeElementsHeight';
 
 interface ICandidateReportMobile {
   candidateReport: ICandidateReportData;
+  isHeaderVisible?: boolean;
 }
 
 const CandidateReportMobile: FC<ICandidateReportMobile> = props => {
-  const { candidateReport } = props;
+  const { candidateReport, isHeaderVisible = true } = props;
   const { softSkills, totalScore, totalGrade, candidate } = candidateReport;
   const settings = {
     dots: true,
@@ -41,7 +42,9 @@ const CandidateReportMobile: FC<ICandidateReportMobile> = props => {
 
   return (
     <div className="CandidateReportMobile">
-      <CandidateReportHeaderMobile position={candidate.role} />
+      {isHeaderVisible ? (
+        <CandidateReportHeaderMobile position={candidate.role} />
+      ) : null}
       <div className="CandidateReportMobile__Convergence">
         <Bubbles set={BubbleSets.candidateReportMobile} />
         <Gauge score={totalScore} grade={totalGrade} />

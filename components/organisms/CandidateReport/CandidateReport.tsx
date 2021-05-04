@@ -8,9 +8,13 @@ import CandidateReportMobile from './CandidateReportMobile/CandidateReportMobile
 
 interface ICandidateReport {
   candidateReportSubId: string;
+  isHeaderVisible?: boolean;
 }
 
-const CandidateReport: FC<ICandidateReport> = ({ candidateReportSubId }) => {
+const CandidateReport: FC<ICandidateReport> = ({
+  candidateReportSubId,
+  isHeaderVisible,
+}) => {
   const getCandidateReportQueryResponse = useQuery(
     GET_CANDIDATE_REPORT_DATA_QUERY,
     {
@@ -29,11 +33,17 @@ const CandidateReport: FC<ICandidateReport> = ({ candidateReportSubId }) => {
     return (
       <>
         <MediaQuery minDeviceWidth={900}>
-          <CandidateReportDesktop candidateReport={response} />
+          <CandidateReportDesktop
+            candidateReport={response}
+            isHeaderVisible={isHeaderVisible}
+          />
         </MediaQuery>
 
         <MediaQuery maxDeviceWidth={899}>
-          <CandidateReportMobile candidateReport={response} />
+          <CandidateReportMobile
+            candidateReport={response}
+            isHeaderVisible={isHeaderVisible}
+          />
         </MediaQuery>
       </>
     );
