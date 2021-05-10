@@ -1,13 +1,12 @@
 import './Loader.scss';
 import React, { FC } from 'react';
-import { TColor } from '../../../interfaces/colors';
 
 interface ILoader {
   isOverlay?: boolean;
-  color?: TColor;
+  color?: 'Primary' | 'Secondary' | 'Tertiary';
 }
 
-const Loader: FC<ILoader> = ({ isOverlay, color = 'Green' }) => {
+const Loader: FC<ILoader> = ({ isOverlay, color = 'Primary' }) => {
   const className = `Loader Loader--${color}${
     isOverlay ? ' Loader--Overlay' : ''
   }`;

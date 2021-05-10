@@ -14,6 +14,8 @@ interface ISelect {
   options: TSelectOption[];
   placeholder?: string;
   onChange: (value: string, name: string) => void;
+  menuPlacement?: 'top' | 'bottom' | 'auto';
+  maxMenuHeight?: number;
 }
 
 const Select: FC<ISelect> = ({
@@ -23,6 +25,8 @@ const Select: FC<ISelect> = ({
   id,
   placeholder = '',
   value,
+  menuPlacement,
+  maxMenuHeight = 130,
 }) => {
   const handleChange = (selectedOption: OptionTypeBase | null) => {
     onChange(selectedOption?.value || '', name);
@@ -48,7 +52,8 @@ const Select: FC<ISelect> = ({
       onChange={handleChange}
       value={selectedValue}
       placeholder={placeholder}
-      maxMenuHeight={150}
+      maxMenuHeight={maxMenuHeight}
+      menuPlacement={menuPlacement}
     />
   );
 };
