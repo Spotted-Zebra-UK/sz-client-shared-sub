@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import CreatePasswordPresentational from '../../../components/organisms/CreatePassword/CreatePassword';
 import Error from '../../../enums/error';
@@ -9,6 +9,7 @@ import { IUpdateIdentityPassword } from '../../../interfaces/authentication';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import './CreatePassword.scss';
 
 interface ICreatePassword {
   createPasswordNotification?: TNotification;
@@ -39,7 +40,14 @@ const CreatePassword: FC<ICreatePassword> = ({
             addAuthNotification(AuthViews.CREATE_PASSWORD, {
               icon: 'Claps',
               color: 'Purple',
-              message: 'Recovery token is invalid or has been expired',
+              message: (
+                <span className="CreatePassword__ErrorNotificationMessage">
+                  The recovery link is invalid. You must use the link you have
+                  been sent within 1 hour. Please reset your password again by
+                  going{' '}
+                  <Link to={authenticationRoutes.restorePassword}>here</Link>.
+                </span>
+              ),
             });
           }
         });
