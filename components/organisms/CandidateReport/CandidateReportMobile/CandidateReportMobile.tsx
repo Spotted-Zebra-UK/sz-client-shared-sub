@@ -16,7 +16,7 @@ import { equalizeElementsHeight } from './equalizeElementsHeight';
 
 interface ICandidateReportMobile {
   candidateReport: ICandidateReportData;
-  isHeaderVisible?: boolean;
+  isHeaderVisible?: boolean | undefined;
 }
 
 const CandidateReportMobile: FC<ICandidateReportMobile> = props => {

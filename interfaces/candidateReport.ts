@@ -110,3 +110,16 @@ export interface ICandidateReportData {
   totalScore: number;
   typeScores: TTypeScore[];
 }
+
+export interface ICandidateReportCandidateDataInput {
+  subId: string;
+}
+
+export interface ICandidateReportCandidateDataResponse {
+  candidateReport: {
+    candidateData: string;
+    createdAt: string;
+    id: number;
+    subId: string;
+  };
+}
