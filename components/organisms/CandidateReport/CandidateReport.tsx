@@ -8,7 +8,7 @@ import {
 } from '../../../interfaces/candidateReport';
 import CandidateReportDesktop from './CandidateReportDesktop/CandidateReportDesktop';
 import CandidateReportMobile from './CandidateReportMobile/CandidateReportMobile';
-import { parseCandidateReport } from '../../../../../helpers/parseCandidateReport';
+import { parseCandidateReport } from './parseCandidateReport';
 
 interface ICandidateReport {
   candidateReportSubId: string;
