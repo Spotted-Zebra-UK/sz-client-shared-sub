@@ -13,7 +13,7 @@ import SoftSkillSynergy from '../../SoftSkillSynergy/SoftSkillSynergy';
 
 interface ICandidateReportDesktop {
   candidateReport: ICandidateReportData;
-  isHeaderVisible?: boolean;
+  isHeaderVisible?: boolean | undefined;
 }
 
 const CandidateReportDesktop: FC<ICandidateReportDesktop> = props => {

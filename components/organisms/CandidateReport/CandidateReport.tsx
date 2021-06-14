@@ -2,9 +2,13 @@ import React, { FC } from 'react';
 import MediaQuery from 'react-responsive';
 import { useQuery } from '@apollo/client';
 import { GET_CANDIDATE_REPORT_DATA_QUERY } from '../../../graphql/candidateReport';
-import { ICandidateReportData } from '../../../interfaces/candidateReport';
+import {
+  ICandidateReportCandidateDataInput,
+  ICandidateReportCandidateDataResponse,
+} from '../../../interfaces/candidateReport';
 import CandidateReportDesktop from './CandidateReportDesktop/CandidateReportDesktop';
 import CandidateReportMobile from './CandidateReportMobile/CandidateReportMobile';
+import { parseCandidateReport } from '../../../../../helpers/parseCandidateReport';
 
 interface ICandidateReport {
   candidateReportSubId: string;
@@ -15,20 +19,15 @@ const CandidateReport: FC<ICandidateReport> = ({
   candidateReportSubId,
   isHeaderVisible,
 }) => {
-  const getCandidateReportQueryResponse = useQuery(
-    GET_CANDIDATE_REPORT_DATA_QUERY,
-    {
-      variables: { subId: candidateReportSubId },
-    }
-  );
+  const getCandidateReportQueryResponse = useQuery<
+    ICandidateReportCandidateDataResponse,
+    ICandidateReportCandidateDataInput
+  >(GET_CANDIDATE_REPORT_DATA_QUERY, {
+    variables: { subId: candidateReportSubId },
+  });
 
   if (getCandidateReportQueryResponse.data) {
-    const response = {
-      ...getCandidateReportQueryResponse.data.response,
-      ...JSON.parse(
-        getCandidateReportQueryResponse.data.response.candidateData
-      ),
-    } as ICandidateReportData;
+    const response = parseCandidateReport(getCandidateReportQueryResponse.data);
 
     return (
       <>
