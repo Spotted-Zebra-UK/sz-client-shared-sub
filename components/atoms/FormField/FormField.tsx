@@ -2,7 +2,7 @@ import './FormField.scss';
 import React, { FunctionComponent } from 'react';
 
 interface IFormField {
-  error?: string;
+  error?: string | undefined;
   fieldName: string;
   label?: string;
   isLabelVisible?: boolean;
