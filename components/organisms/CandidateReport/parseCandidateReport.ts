@@ -49,5 +49,9 @@ export const parseCandidateReport = (
         ),
       })
     ),
+    typeScores: parsedCandidateData.typeScores.map((typeScore: any) => ({
+      ...typeScore,
+      grade: getGradeStringWithScoreAsDefault(typeScore.score, typeScore.grade),
+    })),
   } as ICandidateReportData;
 };
