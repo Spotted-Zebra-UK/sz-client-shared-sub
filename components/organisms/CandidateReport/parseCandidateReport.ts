@@ -19,7 +19,7 @@ export const getGradeStringWithScoreAsDefault = (
     return '';
   }
 
-  if (gradeType === GradeType.PERCENTAGE) {
+  if (gradeType === GradeType.PERCENTILE) {
     return `${Math.round(score)}`;
   }
 
