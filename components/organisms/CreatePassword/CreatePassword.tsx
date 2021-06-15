@@ -32,7 +32,7 @@ const CreatePassword: FC<ICreatePassword> = ({
       </div>
       <CreatePasswordForm onSubmit={onCreatePassword} />
       <div className="CreatePassword__RedirectToLogin">
-        Already have an accout?{' '}
+        Already have an account?{' '}
         <Link
           className="CreatePassword__RedirectToLogin__Link"
           to={loginRedirectUrl}

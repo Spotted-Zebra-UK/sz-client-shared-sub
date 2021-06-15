@@ -1,0 +1,64 @@
+@import '../../../variables';
+
+.Multiselect {
+  &__control {
+    border: 0 !important;
+    border-bottom: $form-input-border-bottom !important;
+    border-radius: 0 !important;
+    min-height: $form-input-height !important;
+    box-shadow: none !important;
+
+    &:focus {
+      outline: none !important;
+    }
+  }
+
+  &__value-container {
+    padding: 5px 0 !important;
+  }
+
+  &__placeholder {
+    font-size: $p1-font-size;
+    line-height: $medium-line-height;
+    color: rgba($black, 0.56);
+  }
+
+  &__indicator-separator {
+    display: none !important;
+  }
+
+  &__indicator {
+    svg {
+      width: 17px;
+
+      path {
+        fill: $black;
+      }
+    }
+  }
+
+  &__dropdown-indicator {
+    padding-right: 0 !important;
+  }
+
+  &__multi-value {
+    background-color: rgba($color: $blue, $alpha: 0.1) !important;
+    padding: 2px !important;
+
+    &__label {
+      color: $blue !important;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.44;
+    }
+
+    &__remove {
+      color: $blue !important;
+
+      &:hover {
+        background-color: transparent !important;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import React, { FC, useRef, useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import { AUTH_TOKEN_STORAGE_KEY } from '../../constants/authentication';

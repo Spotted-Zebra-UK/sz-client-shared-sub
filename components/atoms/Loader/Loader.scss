@@ -1,5 +1,6 @@
 @import '../../../variables';
 @import '../../../mixins';
+@import '../../../theme';
 
 .Loader {
   @include loader-size(18px);
@@ -15,6 +16,7 @@
       animation: bounce-delay 1.4s infinite ease-in-out both;
       border-radius: 100%;
       display: inline-block;
+      background-color: $green;
     }
 
     .Loader__Bounce__1 {
@@ -36,26 +38,32 @@
     }
   }
 
-  &--Green {
+  &--Primary {
     .Loader__Animation {
       > div {
-        background-color: $green;
+        @include themify($themes) {
+          background-color: themed('primaryContainedBackgroundColor');
+        }
       }
     }
   }
 
-  &--White {
+  &--Secondary {
     .Loader__Animation {
       > div {
-        background-color: $white;
+        @include themify($themes) {
+          background-color: themed('secondaryContainedBackgroundColor');
+        }
       }
     }
   }
 
-  &--Purple {
+  &--Tertiary {
     .Loader__Animation {
       > div {
-        background-color: $purple;
+        @include themify($themes) {
+          background-color: themed('tertiaryContainedBackgroundColor');
+        }
       }
     }
   }

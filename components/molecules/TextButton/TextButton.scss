@@ -1,0 +1,32 @@
+@import '../../../variables';
+
+.TextButton {
+  padding-top: 15px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1.44;
+  display: block;
+}
+
+.TextButton:active {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.TextButton--Green {
+  color: $green;
+}
+
+.TextButton--Purple {
+  color: $purple;
+}
+
+.TextButton--White {
+  color: rgba($color: $black, $alpha: 0.54);
+}
+
+.TextButton--Disabled {
+  color: rgba($color: $black, $alpha: 0.3);
+  cursor: not-allowed;
+}

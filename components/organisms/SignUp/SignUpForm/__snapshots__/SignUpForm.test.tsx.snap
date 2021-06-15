@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUpForm should render correctly by default 1`] = `
+<form
+  className="SignUpForm"
+  onSubmit={[Function]}
+>
+  <div
+    className="SignUpForm__Fields"
+  >
+    <FormField
+      fieldName="fullName"
+      isLabelVisible={false}
+      label="Full name"
+    >
+      <Input
+        name="fullName"
+        onChange={[Function]}
+        placeholder="Full name"
+        value=""
+      />
+    </FormField>
+    <FormField
+      fieldName="email"
+      isLabelVisible={false}
+      label="Email"
+    >
+      <Input
+        isDisabled={false}
+        name="email"
+        onChange={[Function]}
+        placeholder="Email"
+        value=""
+      />
+    </FormField>
+    <FormField
+      fieldName="password"
+      isLabelVisible={false}
+      label="Create Password"
+    >
+      <PasswordInput
+        name="password"
+        onChange={[Function]}
+        placeholder="Password"
+        value=""
+      />
+    </FormField>
+  </div>
+  <div
+    className="SignUpForm__Bottom"
+  >
+    <PrivacyPolicyCheckboxField
+      id="SignUpIsPrivacyPolicyChecked"
+      name="isPrivacyPolicyChecked"
+      onChange={[Function]}
+      value={false}
+    />
+    <SquareButton
+      type="submit"
+    >
+      Create an account
+    </SquareButton>
+  </div>
+</form>
+`;

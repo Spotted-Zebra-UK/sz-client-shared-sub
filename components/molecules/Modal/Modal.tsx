@@ -1,5 +1,6 @@
 import './Modal.scss';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { isMobile } from 'react-device-detect';
 import ReactModal from 'react-modal';
 
 interface IModal {
@@ -8,10 +9,27 @@ interface IModal {
 }
 
 const Modal: FC<IModal> = ({ children, onClose, className }) => {
+  const parsedClassName = `Modal${
+    isMobile ? ' Modal--Mobile' : ' Modal--Desktop'
+  }${className ? ` ${className}` : ''}`;
+
+  useEffect(() => {
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${window.scrollY}px`;
+    document.body.style.width = '100%';
+
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    };
+  }, []);
+
   return (
     <ReactModal
       ariaHideApp={false}
-      className={`Modal${className ? ` ${className}` : ''}`}
+      className={parsedClassName}
       isOpen
       onRequestClose={onClose}
       overlayClassName="ModalOverlay"

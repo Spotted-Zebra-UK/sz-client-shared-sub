@@ -13,10 +13,11 @@ import SoftSkillSynergy from '../../SoftSkillSynergy/SoftSkillSynergy';
 
 interface ICandidateReportDesktop {
   candidateReport: ICandidateReportData;
+  isHeaderVisible?: boolean | undefined;
 }
 
 const CandidateReportDesktop: FC<ICandidateReportDesktop> = props => {
-  const { candidateReport } = props;
+  const { candidateReport, isHeaderVisible = true } = props;
   const {
     softSkills,
     totalScore,
@@ -30,7 +31,9 @@ const CandidateReportDesktop: FC<ICandidateReportDesktop> = props => {
 
   return (
     <div className="CandidateReportDesktop">
-      <CandidateReportHeaderDesktop position={candidate.role} />
+      {isHeaderVisible ? (
+        <CandidateReportHeaderDesktop position={candidate.role} />
+      ) : null}
 
       <div className="Wrapper">
         <SoftSkillSynergy

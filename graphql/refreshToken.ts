@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import { ApolloClient, gql, NormalizedCacheObject } from '@apollo/client';
 import history from '../config/history';
 import {
@@ -67,7 +66,7 @@ export const requestTokenRefresh = async (
     localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
     localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
     history.push(authenticationRoutes.login);
-    client.clearStore();
+    window.location.reload();
     return false;
   }
 };

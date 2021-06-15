@@ -1,0 +1,42 @@
+@import './variables';
+
+$green-theme: (
+  primaryContainedBackgroundColor: $green,
+  secondaryContainedBackgroundColor: $purple,
+  tertiaryContainedBackgroundColor: $white,
+);
+
+$blue-theme: (
+  primaryContainedBackgroundColor: $dark-blue,
+  secondaryContainedBackgroundColor: $purple,
+  tertiaryContainedBackgroundColor: $white,
+);
+
+$themes: (
+  Green: $green-theme,
+  Blue: $blue-theme,
+);
+
+@mixin themify($themes: $themes) {
+  @each $theme, $mapTheme in $themes {
+    .Theme--#{$theme} & {
+      $theme-map: () !global; // values of current theme
+      @each $keyTheme, $submapTheme in $mapTheme {
+        $valueTheme: map-get(map-get($themes, $theme), '#{$keyTheme}');
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $keyTheme: $valueTheme,
+          )
+        ) !global;
+      }
+
+      @content;
+      $theme-map: null !global; // so it isn't accessible outside of mixin
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

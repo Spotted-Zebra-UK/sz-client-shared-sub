@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 // TODO: Uncomment when project id provided id invitation.
 import React, { FC } from 'react';
 // import { useQuery } from '@apollo/client';

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import './CreatePasswordForm.scss';
 import React, { FC, useState } from 'react';
 import validate from '../../../../helpers/validate';
@@ -57,6 +56,7 @@ const CreatePasswordForm: FC<ICreatePasswordFormForm> = props => {
           error={errors && errors.password && errors.password.join(' ')}
           fieldName="password"
           label="Password"
+          isLabelVisible={!!values.password}
         >
           <PasswordInput
             name="password"

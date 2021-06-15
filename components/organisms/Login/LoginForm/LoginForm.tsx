@@ -65,6 +65,7 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
           error={errors && errors.email && errors.email.join(' ')}
           fieldName="email"
           label="Email"
+          isLabelVisible={!!values.email}
         >
           <Input
             name="email"
@@ -77,6 +78,7 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
           error={errors && errors.password && errors.password.join(' ')}
           fieldName="password"
           label="Password"
+          isLabelVisible={!!values.password}
         >
           <PasswordInput
             name="password"

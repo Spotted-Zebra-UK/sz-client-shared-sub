@@ -18,15 +18,15 @@ describe('Modal', () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('should render correctly by default', () => {
-    const wrapper = shallow(
-      <Modal onClose={onClose}>
-        <span>Test children</span>
-      </Modal>
-    );
+  // it('should render correctly by default', () => {
+  //   const wrapper = shallow(
+  //     <Modal onClose={onClose}>
+  //       <span>Test children</span>
+  //     </Modal>
+  //   );
 
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
+  //   expect(toJson(wrapper)).toMatchSnapshot();
+  // });
 
   it('should add className', () => {
     const className = 'test-className';
