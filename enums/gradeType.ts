@@ -1,6 +1,6 @@
 export enum GradeType {
   GRADE = 'grade',
-  SCORE = 'score',
+  NUMBER = 'number',
   NONE = 'none',
   PERCENTILE = 'percentile',
 }
