@@ -1,0 +1,118 @@
+.ConvergenceDynamic {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+
+  // Style of central part
+  &__Center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__Content {
+      box-shadow: 1.3px 2.7px 10.7px 0 rgba(0, 0, 0, 0.12);
+      background-color: #ffffff;
+      border-radius: 16px;
+    }
+  }
+
+  // Style of waves rows
+  &__RightWavesWrapper,
+  &__LeftWavesWrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__RightWavesWrapper {
+    transform: scale(-1, -1);
+  }
+
+  .DynamicWave {
+    max-width: 53px;
+  }
+
+  .Wave--XXL {
+    max-height: 190px;
+  }
+
+  .WavesRow {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .WavesRow--Medium {
+    &__Wave--0 {
+      margin-bottom: -16px;
+    }
+
+    &__Wave--1 {
+      transform: scale(1, -1);
+      margin-top: -16px;
+    }
+  }
+
+  .WavesRow--Large {
+    &__Wave--0 {
+      margin-bottom: -33px;
+    }
+
+    &__Wave--2 {
+      transform: scale(1, -1);
+      margin-top: -33px;
+    }
+  }
+
+  .WavesRow--ExtraLarge {
+    &__Wave--0 {
+      margin-bottom: -79px;
+    }
+
+    &__Wave--2 {
+      transform: scale(1, -1);
+      margin-top: -33px;
+    }
+
+    &__Wave--3 {
+      transform: scale(1, -1);
+      margin-top: -79px;
+    }
+  }
+
+  // Style of boxes.
+  &__LeftBoxes,
+  &__RightBoxes {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: calc(50% - 50px);
+  }
+
+  &__LeftBoxes {
+    margin-right: -3px;
+    z-index: 2;
+  }
+
+  &__RightBoxes {
+    margin-left: -3px;
+    z-index: 2;
+  }
+
+  .BoxesRow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__Box {
+      border: solid 0.7px rgba($color: #000000, $alpha: 0.16);
+      height: 74px;
+      background-color: white;
+      border-radius: 6px;
+    }
+
+    &__Box:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+}
