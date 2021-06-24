@@ -3,7 +3,7 @@ import {
   SoftSkillDataSourceType,
   SoftSkillType,
 } from '../enums/successProfile.enum';
-import { Tests } from '../../../enums/test.enum';
+import { Tests } from '../enums/test.enum';
 
 export type TSuccessProfileReportSoftSkillDataSource = {
   id: number;
