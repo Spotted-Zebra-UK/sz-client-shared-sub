@@ -1,0 +1,59 @@
+@import '../../../../../../../variables';
+
+.SoftSkillDataSourcesRowCard {
+  border: solid 0.6px rgba($color: #000000, $alpha: 0.16);
+  padding: 8px;
+  border-radius: 6px;
+  background-color: $white;
+
+  &__Title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+
+    &__Icon {
+      max-height: 20px;
+      max-width: 20px;
+      margin-right: 6px;
+    }
+
+    &__Text {
+      line-height: 1.33;
+      letter-spacing: 0.2px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+
+  &__DataSourceIcons {
+    display: flex;
+
+    &__Item {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 2.7px;
+      margin-right: 4px;
+
+      svg {
+        path {
+          fill: $white;
+        }
+      }
+    }
+
+    &__Item--PURPLE {
+      background-color: $purple;
+    }
+
+    &__Item--GREEN {
+      background-color: $green;
+    }
+
+    &__Item--BLUE {
+      background-color: $blue;
+    }
+  }
+}

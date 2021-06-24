@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
-import { TSuccessProfileReport } from '../../../../../interfaces/successProfileReport.interface';
+import { TSuccessProfileReport } from '../../../helpers/successProfileReport.interface';
 import { PagesContextStore } from '../../../contexts/PageContext';
 import CoverPage from './CoverPage/CoverPage';
+import FirstPage from './FirstPage/FirstPage';
+import SoftSkillsSummaryPages from './SoftSkillsSummaryPages/SoftSkillsSummaryPages';
+import SuccessProfileSoftSkillDataSourcesPage from './SuccessProfileSoftSkillDataSourcesPage/SuccessProfileSoftSkillDataSourcesPage';
+import AboutAuthorPage from './AboutAuthorPage/AboutAuthorPage';
+import ExampleInterviewQuestionPage from './ExampleInterviewQuestionPage/ExampleInterviewQuestionPage';
 
 interface ISuccessProfileReportPDF {
   successProfileReport: TSuccessProfileReport;
@@ -48,7 +53,7 @@ const SuccessProfileReportPDF: FC<ISuccessProfileReportPDF> = ({
         projectName={projectName}
         projectCreatedAt={createdAt}
       />
-      <ExampleInterviewQuestion
+      <ExampleInterviewQuestionPage
         companyLogoUrl={companyLogoUrl}
         projectName={projectName}
         projectCreatedAt={createdAt}

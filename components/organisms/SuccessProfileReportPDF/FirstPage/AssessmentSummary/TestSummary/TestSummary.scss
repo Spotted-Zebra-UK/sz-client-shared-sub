@@ -1,0 +1,32 @@
+.TestSummary {
+  &__Heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    &__Icon {
+      max-width: 20px;
+      max-height: 20px;
+    }
+
+    &__Text {
+      line-height: 1.43;
+      font-size: 14px;
+      font-weight: 500;
+      margin-left: 6px;
+    }
+  }
+
+  &__Text {
+    font-size: 12px;
+    line-height: 1.33;
+    letter-spacing: 0.2px;
+    margin-bottom: 12px;
+  }
+
+  &__Time {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.43;
+  }
+}
