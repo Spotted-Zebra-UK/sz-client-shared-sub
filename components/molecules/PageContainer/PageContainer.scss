@@ -1,0 +1,24 @@
+@import '../../../variables';
+
+.PageContainer {
+  height: 1132px;
+  width: 800px;
+  background-color: $white;
+  overflow: hidden;
+  padding: 50px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  &__Content {
+    flex: 1;
+  }
+}
+
+@media screen {
+  .PageContainer {
+    border: 1px solid black;
+    margin: 40px auto;
+  }
+}
