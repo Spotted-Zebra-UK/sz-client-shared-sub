@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import testIcons from '../../../../../../../../constants/testIcons';
-import { Tests } from '../../../../../../../../enums/test.enum';
+import testIcons from '../../../../../../constants/testIcons';
+import { Tests } from '../../../../../../enums/test.enum';
 import { TSuccessProfileReportAssessmentSummaryTestSummary } from '../../../../../../helpers/successProfileReport.interface';
 import { getTotalTimeString } from '../AssessmentSummary.helpers';
 import './TestSummary.scss';
