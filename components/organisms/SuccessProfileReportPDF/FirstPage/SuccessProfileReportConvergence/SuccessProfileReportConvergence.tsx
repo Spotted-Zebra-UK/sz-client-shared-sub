@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import ConvergenceDynamic from '../../../../../../../components/molecules/ConvergenceDynamic/ConvergenceDynamic';
+import ConvergenceDynamic from '../../../../molecules/ConvergenceDynamic/ConvergenceDynamic';
 import { TSuccessProfileReportSoftSkill } from '../../../../../helpers/successProfileReport.interface';
 import SuccessProfileReportConvergenceCenter from './SuccessProfileReportConvergenceCenter/SuccessProfileReportConvergenceCenter';
 import SuccessProfileReportConvergenceSoftSkillBox from './SuccessProfileReportConvergenceSoftSkillBox/SuccessProfileReportConvergenceSoftSkillBox';
