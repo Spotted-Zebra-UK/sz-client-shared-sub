@@ -1,0 +1,16 @@
+.SoftSkillsSummaryPage {
+  .PageContainer__Content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 22px;
+  }
+
+  .SuccessProfileSoftSkillTypeSummary {
+    margin-bottom: 40px;
+  }
+
+  .SuccessProfileSoftSkillSummary {
+    margin-bottom: 60px;
+    height: calc(33% - 60px);
+  }
+}

@@ -1,0 +1,23 @@
+.FirstPage {
+  .PageContainer__Content {
+    padding-top: 22px;
+  }
+
+  .SuccessProfileSoftSkillTypesLegend {
+    margin-bottom: 35px;
+  }
+
+  &__SuccessProfileReportConvergenceWrapper {
+    height: 329px;
+    display: flex;
+    margin-bottom: 55px;
+  }
+
+  .RoleLevelChart {
+    margin-bottom: 55px;
+  }
+
+  .AssessmentSummary {
+    margin-bottom: 55px;
+  }
+}

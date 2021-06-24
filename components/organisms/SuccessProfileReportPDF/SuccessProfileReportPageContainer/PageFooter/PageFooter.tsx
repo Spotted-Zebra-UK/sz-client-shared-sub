@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import React, { FC, useContext } from 'react';
-import { PagesContext } from '../../../../libs/sz-client-shared-sub/contexts/PageContext';
-import { ReactComponent as SpottedZebraLogo } from '../../../../libs/sz-client-shared-sub/icons/SpottedZebraLogo.svg';
+import { PagesContext } from '../../../../../contexts/PageContext';
+import { ReactComponent as SpottedZebraLogo } from '../../../../../icons/SpottedZebraLogo.svg';
 import './PageFooter.scss';
 
 interface IPageFooter {
