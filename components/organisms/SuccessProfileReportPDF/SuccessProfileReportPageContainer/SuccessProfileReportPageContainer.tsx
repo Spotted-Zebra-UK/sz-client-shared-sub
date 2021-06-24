@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React, { FC, useContext, useEffect } from 'react';
-import PageContainer from '../../../../../../components/molecules/PageContainer/PageContainer';
+import PageContainer from '../../../molecules/PageContainer/PageContainer';
 import { PagesContext } from '../../../../contexts/PageContext';
 import PageFooter from './PageFooter/PageFooter';
 import PageHeader from './PageHeader/PageHeader';
