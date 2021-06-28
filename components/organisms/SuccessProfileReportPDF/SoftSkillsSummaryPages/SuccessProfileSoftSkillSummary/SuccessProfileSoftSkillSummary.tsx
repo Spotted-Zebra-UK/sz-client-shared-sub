@@ -1,8 +1,8 @@
+import './SuccessProfileSoftSkillSummary.scss';
 import React, { FC } from 'react';
 import { SoftSkillIcons } from '../../../../../constants/softSkillIcons';
 import { SoftSkillType } from '../../../../../enums/successProfile.enum';
-
-import './SuccessProfileSoftSkillSummary.scss';
+import EditorPreview from '../../../../molecules/Editor/EditorPreview/EditorPreview';
 
 interface ISuccessProfileSoftSkillSummary {
   softSkillId: number;
@@ -32,13 +32,13 @@ const SuccessProfileSoftSkillSummary: FC<ISuccessProfileSoftSkillSummary> = ({
         </h4>
         <div className="SuccessProfileSoftSkillSummary__Content__Summary">
           {mainText.split('\n').map((mainTextParagraph, index) => (
-            <p
+            <EditorPreview
               // eslint-disable-next-line react/no-array-index-key
               key={index}
-              className="SuccessProfileSoftSkillSummary__Content__Summary__Paragraph"
-            >
-              {mainTextParagraph}
-            </p>
+              className="SuccessProfileSoftSkillSummary__Content__Summary__Preview"
+              value={mainTextParagraph}
+              id={`softSkillSummary-${softSkillId}-${index}`}
+            />
           ))}
         </div>
       </div>

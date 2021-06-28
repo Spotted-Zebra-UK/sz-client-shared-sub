@@ -25,11 +25,14 @@
     }
 
     &__Summary {
-      &__Paragraph {
-        font-size: 12px;
-        line-height: 1.33;
-        letter-spacing: 0.2px;
-        margin-bottom: 10px;
+      &__Preview {
+        .ql-container.ql-snow {
+          border: 0;
+
+          p:not(:last-child) {
+            margin-bottom: 10px;
+          }
+        }
       }
     }
   }

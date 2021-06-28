@@ -1,8 +1,8 @@
+import './SuccessProfileSoftSkillTypeSummary.scss';
 import React, { FC } from 'react';
 import { SuccessProfileSoftSkillTypeIcons } from '../../../../../constants/softSkillIcons';
 import { SoftSkillType } from '../../../../../enums/successProfile.enum';
-
-import './SuccessProfileSoftSkillTypeSummary.scss';
+import EditorPreview from '../../../../molecules/Editor/EditorPreview/EditorPreview';
 
 interface ISuccessProfileSoftSkillTypeSummary {
   type: SoftSkillType;
@@ -27,9 +27,11 @@ const SuccessProfileSoftSkillTypeSummary: FC<ISuccessProfileSoftSkillTypeSummary
           {title}
         </h4>
       </div>
-      <p className="SuccessProfileSoftSkillTypeSummary__SummaryText">
-        {summary}
-      </p>
+      <EditorPreview
+        id={`success-profile-soft-skill-type-summary-${type}`}
+        className="SuccessProfileSoftSkillTypeSummary__SummaryTextPreview"
+        value={summary}
+      />
     </div>
   );
 };

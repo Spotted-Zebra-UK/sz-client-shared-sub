@@ -1,7 +1,7 @@
+import './EditorPreview.scss';
 import Quill from 'quill';
 import Delta from 'quill-delta';
 import React, { FC, useEffect, useRef } from 'react';
-import './EditorPreview.scss';
 
 interface IEditorPreview {
   id: string;
