@@ -17,13 +17,10 @@ export interface IEditor {
 const defaultOptions = {
   modules: {
     toolbar: [
-      ['bold', 'italic', 'underline', 'strike'],
+      ['bold', 'italic', 'underline'],
       ['link'],
-      ['blockquote', 'code-block'],
-      [{ header: 1 }, { header: 2 }],
       [{ list: 'ordered' }, { list: 'bullet' }],
       [{ size: ['small', false, 'large', 'huge'] }],
-      ['clean'],
     ],
   },
   theme: 'snow',
