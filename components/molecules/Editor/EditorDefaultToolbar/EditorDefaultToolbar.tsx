@@ -20,9 +20,9 @@ const EditorDefaultToolbar = forwardRef<HTMLDivElement, IEditorDefaultToolbar>(
           </button>
         </span>
         <span className="ql-formats">
-          <select className="ql-size">
+          <select defaultValue="normal" className="ql-size">
             <option value="small"></option>
-            <option selected></option>
+            <option value="normal"></option>
             <option value="large"></option>
             <option value="huge"></option>
           </select>
