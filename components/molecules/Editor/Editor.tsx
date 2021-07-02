@@ -2,29 +2,22 @@ import './Editor.scss';
 import Quill, { QuillOptionsStatic } from 'quill';
 import Delta from 'quill-delta';
 import React, { FC, useEffect, useRef, useState } from 'react';
+import EditorDefaultToolbar from './EditorDefaultToolbar/EditorDefaultToolbar';
 
 export interface IEditor {
   id: string;
   onChange: (id: string, value: string) => void;
   onFocus?: (id: string, value: string) => void;
   onBlur?: (id: string, value: string) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: string;
   className?: string;
   toolbarOptions?: QuillOptionsStatic | undefined;
+  ToolbarComponent?: React.ForwardRefExoticComponent<
+    { onUndo?: () => void; onRedo?: () => void } & React.RefAttributes<
+      HTMLDivElement
+    >
+  >;
 }
-
-const defaultOptions = {
-  modules: {
-    toolbar: [
-      ['bold', 'italic', 'underline'],
-      ['link'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ size: ['small', false, 'large', 'huge'] }],
-    ],
-  },
-  theme: 'snow',
-};
 
 const Editor: FC<IEditor> = ({
   id,
@@ -34,8 +27,10 @@ const Editor: FC<IEditor> = ({
   onBlur,
   toolbarOptions,
   className,
+  ToolbarComponent,
 }) => {
   const editorWrapperRef = useRef<HTMLDivElement>(null);
+  const editorToolbarRef = useRef<HTMLDivElement>(null);
   const editor = useRef<Quill>();
   const [isFocused, setFocused] = useState(false);
 
@@ -64,7 +59,19 @@ const Editor: FC<IEditor> = ({
   };
 
   useEffect(() => {
-    if (editorWrapperRef.current) {
+    if (editorWrapperRef.current && editorToolbarRef.current) {
+      const defaultOptions = {
+        modules: {
+          history: {
+            delay: 2000,
+            maxStack: 500,
+            userOnly: true,
+          },
+          toolbar: editorToolbarRef.current,
+        },
+        theme: 'snow',
+      };
+
       editor.current = new Quill(
         editorWrapperRef.current,
         toolbarOptions || defaultOptions
@@ -85,12 +92,39 @@ const Editor: FC<IEditor> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleUndo = () => {
+    if (editor.current) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (editor.current as any).history.undo();
+    }
+  };
+
+  const handleRedo = () => {
+    if (editor.current) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (editor.current as any).history.redo();
+    }
+  };
+
   return (
     <div
       className={`Editor${isFocused ? ' Editor--Focused' : ''}${
         className ? ` ${className}` : ''
       }`}
     >
+      {ToolbarComponent === undefined ? (
+        <EditorDefaultToolbar
+          ref={editorToolbarRef}
+          onUndo={handleUndo}
+          onRedo={handleRedo}
+        />
+      ) : (
+        <ToolbarComponent
+          ref={editorToolbarRef}
+          onUndo={handleUndo}
+          onRedo={handleRedo}
+        />
+      )}
       <div ref={editorWrapperRef} id={id} />
     </div>
   );
