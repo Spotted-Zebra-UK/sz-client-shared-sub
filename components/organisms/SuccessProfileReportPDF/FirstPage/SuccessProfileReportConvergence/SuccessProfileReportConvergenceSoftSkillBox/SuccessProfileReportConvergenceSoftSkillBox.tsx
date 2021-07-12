@@ -4,6 +4,7 @@ import {
   SuccessProfileSoftSkillTypeIcons,
 } from '../../../../../../constants/softSkillIcons';
 import { SoftSkillType } from '../../../../../../enums/successProfile.enum';
+import EditorPreview from '../../../../../molecules/Editor/EditorPreview/EditorPreview';
 import './SuccessProfileReportConvergenceSoftSkillBox.scss';
 
 interface ISuccessProfileReportConvergenceSoftSkillBox {
@@ -36,9 +37,11 @@ const SuccessProfileReportConvergenceSoftSkillBox: FC<ISuccessProfileReportConve
           {softSkillName}
         </div>
       </div>
-      <p className="SuccessProfileReportConvergenceSoftSkillBox__Summary">
-        {softSkillSummary}
-      </p>
+      <EditorPreview
+        className="SuccessProfileReportConvergenceSoftSkillBox__Summary"
+        value={softSkillSummary}
+        id={`softSkillShortSummary-${softSkillId}`}
+      />
     </div>
   );
 };
