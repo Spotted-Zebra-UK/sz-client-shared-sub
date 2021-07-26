@@ -1,0 +1,59 @@
+@import '../../../../variables';
+
+.CoverPage {
+  position: relative;
+
+  &__PurpleBubble {
+    width: 350px;
+    height: 350px;
+    top: 225px;
+    left: 140px;
+    background-color: $purple;
+  }
+
+  &__GreenBubble {
+    width: 160px;
+    height: 160px;
+    top: 613px;
+    left: 490px;
+    background-color: $green;
+  }
+
+  &__BlueBubble {
+    width: 270px;
+    height: 270px;
+    top: 678px;
+    left: -85px;
+    background-color: $blue;
+  }
+
+  &__Main {
+    position: absolute;
+    top: 300px;
+    left: 202px;
+    display: flex;
+    flex-direction: column;
+
+    &__Title {
+      font-size: 42px;
+      font-weight: 500;
+      line-height: 1.33;
+      letter-spacing: 0.5px;
+    }
+
+    &__ProjectName {
+      font-size: 56px;
+      font-weight: 500;
+      line-height: 1.29;
+      letter-spacing: 1px;
+      margin-left: -2px;
+    }
+
+    &__CreatedAt {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.5;
+      letter-spacing: normal;
+    }
+  }
+}

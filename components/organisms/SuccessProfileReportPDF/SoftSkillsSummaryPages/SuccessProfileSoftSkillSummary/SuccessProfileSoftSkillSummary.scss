@@ -1,0 +1,57 @@
+@import '../../../../../variables';
+
+.SuccessProfileSoftSkillSummary {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  &__IconWrapper {
+    margin-right: 16px;
+    padding: 6px;
+    border-radius: 6px;
+
+    svg {
+      max-width: 20px;
+      max-height: 20px;
+    }
+  }
+
+  &__Content {
+    &__SoftSkillName {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-top: 6px;
+      margin-bottom: 24px;
+    }
+
+    &__Summary {
+      &__Preview {
+        .ql-container.ql-snow {
+          border: 0;
+
+          p:not(:last-child) {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.SuccessProfileSoftSkillSummary--DIFFERENTIATOR {
+  .SuccessProfileSoftSkillSummary__IconWrapper {
+    border: 1px solid $purple;
+  }
+}
+
+.SuccessProfileSoftSkillSummary--CORE {
+  .SuccessProfileSoftSkillSummary__IconWrapper {
+    border: 1px solid $blue;
+  }
+}
+
+.SuccessProfileSoftSkillSummary--DIVERSITY {
+  .SuccessProfileSoftSkillSummary__IconWrapper {
+    border: 1px solid $green;
+  }
+}

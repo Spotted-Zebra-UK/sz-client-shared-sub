@@ -1,0 +1,32 @@
+.SuccessProfileReportConvergenceCenter {
+  min-height: 160px;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 10px;
+  box-sizing: border-box;
+
+  &__IconWrapper {
+    margin-bottom: 20px;
+
+    svg {
+      max-width: 40px;
+      max-height: 40px;
+    }
+  }
+
+  &__ProjectName {
+    line-height: 1.5;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  &__Subtitle {
+    font-size: 12px;
+    line-height: 1.33;
+    letter-spacing: 0.2px;
+    color: rgba(0, 0, 0, 0.54);
+  }
+}

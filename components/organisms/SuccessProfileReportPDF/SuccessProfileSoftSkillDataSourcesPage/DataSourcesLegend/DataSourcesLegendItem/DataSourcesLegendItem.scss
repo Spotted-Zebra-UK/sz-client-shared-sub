@@ -1,0 +1,27 @@
+@import '../../../../../../variables';
+
+.DataSourcesLegendItem {
+  display: flex;
+  align-items: center;
+
+  &__Icon {
+    width: 24px;
+    height: 24px;
+    background-color: rgba($color: $black, $alpha: 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    margin-right: 8px;
+
+    svg {
+      max-width: 12px;
+      max-height: 12px;
+    }
+  }
+
+  &__Title {
+    font-size: 14px;
+    line-height: 1.43;
+  }
+}
