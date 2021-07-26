@@ -15,4 +15,5 @@ export const DataSourcesIcons: {
   [SoftSkillDataSourceType.EMPLOYEE_SURVEY]: EmployeeSurveyIcon,
   [SoftSkillDataSourceType.INDUSTRY]: IndustryIcon,
   [SoftSkillDataSourceType.MANAGER_SURVEY]: ManagerSurveyIcon,
+  [SoftSkillDataSourceType.JD_REVIEW]: ManagerSurveyIcon,
 };

@@ -13,6 +13,7 @@ const dataSourceTitlesObj: { [key in SoftSkillDataSourceType]: string } = {
   [SoftSkillDataSourceType.EMPLOYEE_SURVEY]: 'Employee survey',
   [SoftSkillDataSourceType.INDUSTRY]: 'Industry',
   [SoftSkillDataSourceType.MANAGER_SURVEY]: 'Manager survey',
+  [SoftSkillDataSourceType.JD_REVIEW]: 'Jd review',
 };
 
 const DataSourcesLegendItem: FC<IDataSourcesLegendItem> = ({
