@@ -32,6 +32,11 @@ import { ReactComponent as AgilityAndAdaptabilityIcon } from '../icons/softSkill
 import { ReactComponent as SoftSkillCoreIcon } from '../icons/Puzzle.svg';
 import { ReactComponent as SoftSkillDifferentiatorIcon } from '../icons/Hot.svg';
 import { ReactComponent as SoftSkillDiversityIcon } from '../icons/Star.svg';
+import { ReactComponent as WeArePassionateIcon } from '../icons/softSkills/WeArePassionate.svg';
+import { ReactComponent as WeAreSupportiveAndCaringIcon } from '../icons/softSkills/WeAreSupportiveAndCaring.svg';
+import { ReactComponent as WeAreCuriousAndInnovativeIcon } from '../icons/softSkills/WeAreCuriousAndInnovative.svg';
+import { ReactComponent as WeHaveFunIcon } from '../icons/softSkills/WeHaveFun.svg';
+import { ReactComponent as WeWinTogetherIcon } from '../icons/softSkills/WeWinTogether.svg';
 import { SoftSkillType } from '../enums/successProfile.enum';
 
 export const SoftSkillIcons: {
@@ -68,6 +73,11 @@ export const SoftSkillIcons: {
   27: OptimismAndDeterminationIcon,
   28: InclusivityAndCollaborationIcon,
   29: AgilityAndAdaptabilityIcon,
+  30: WeArePassionateIcon,
+  31: WeWinTogetherIcon,
+  32: WeAreSupportiveAndCaringIcon,
+  33: WeAreCuriousAndInnovativeIcon,
+  34: WeHaveFunIcon,
 };
 
 export const SuccessProfileSoftSkillTypeIcons: {
