@@ -13,13 +13,13 @@ export interface ISoftSkill {
   traits?: ITrait[];
 }
 
-const SoftSkill: FC<ISoftSkill> = props => {
-  const { name } = props;
+const SoftSkill: FC<ISoftSkill> = ({ name }) => {
+  const iconName = name.replace("'", '');
 
   return (
     <div className="SoftSkill">
       <img
-        src={`${process.env.PUBLIC_URL}/SoftSkill/${name}.svg`}
+        src={`${process.env.PUBLIC_URL}/SoftSkill/${iconName}.svg`}
         alt={`${name}.svg`}
         className="SoftSkill__Icon"
       />
