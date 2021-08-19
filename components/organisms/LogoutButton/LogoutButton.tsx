@@ -1,7 +1,7 @@
 import './LogoutButton.scss';
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useApolloClient, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import {
   AUTH_TOKEN_STORAGE_KEY,
   REFRESH_TOKEN_STORAGE_KEY,
@@ -9,6 +9,7 @@ import {
 import { DEAUTHENTICATE_MUTATION } from '../../../graphql/authentication';
 import { ReactComponent as ExitIcon } from '../../../icons/Exit.svg';
 import { IDeauthenticateInput } from '../../../interfaces/authentication';
+import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import IconButton from '../../atoms/IconButton/IconButton';
 
 interface ILogoutButton {}
@@ -16,15 +17,14 @@ interface ILogoutButton {}
 const LogoutButton: FC<ILogoutButton> = () => {
   const accessToken = localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
   const history = useHistory();
-  const client = useApolloClient();
   const [deauthenticate] = useMutation<{}, IDeauthenticateInput>(
     DEAUTHENTICATE_MUTATION,
     {
       onCompleted: () => {
         localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
         localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
-        history.push('/auth/login');
-        client.resetStore();
+        history.push(authenticationRoutes.login);
+        window.location.reload();
       },
       onError: () => {},
     }
