@@ -25,16 +25,28 @@ const RestorePassword: FC<IRestorePassword> = ({
       addAuthNotification(AuthViews.RESTORE_PASSWORD, {
         icon: 'Mail',
         color: 'Blue',
-        message: 'We will send you an email with a link for reset password',
+        message:
+          'We will attempt to send a password reset link to your e-mail address.  If the e-mail is not registered, a reset link will not have been sent.',
       });
     },
-    onError: props => {
-      props.graphQLErrors.forEach(({ message }) => {
-        if (message === Error.EMAIL_NOT_FOUND) {
+    onError: ({ graphQLErrors }) => {
+      graphQLErrors.forEach(({ extensions }) => {
+        const { code } = extensions?.exception.response;
+        if (code === Error.INVALID_CREDENTIALS) {
           addAuthNotification(AuthViews.RESTORE_PASSWORD, {
-            icon: 'Claps',
+            icon: 'Mail',
+            color: 'Blue',
+            message:
+              'We will attempt to send a password reset link to your e-mail address.  If the e-mail is not registered, a reset link will not have been sent.',
+          });
+        }
+        if (code === Error.PASSWORD_TOO_WEAK) {
+          // TODO: Maybe move the message to be a standalone note on screen when trying to create/change a password
+          addAuthNotification(AuthViews.LOGIN, {
+            icon: 'Idea',
             color: 'Purple',
-            message: 'Email does not exist',
+            message:
+              'Your password must have at least 1 uppercase letter, 1 lowercase letter, 1 number or special character and be at least 8 characters long.',
           });
         }
       });
