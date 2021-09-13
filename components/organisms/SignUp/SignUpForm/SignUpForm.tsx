@@ -64,7 +64,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
       isPrivacyPolicyChecked: {
         exclusion: {
           within: { false: false },
-          message: '^Privacy Notice must be cheked.',
+          message: '^Privacy Notice must be checked.',
         },
       },
     });

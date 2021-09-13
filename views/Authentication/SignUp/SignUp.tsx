@@ -57,17 +57,29 @@ const SignUp: FC<ISignUp> = ({
       }
     },
     onError: ({ graphQLErrors }) => {
-      graphQLErrors.forEach(({ message }) => {
-        /**
-         * If account with provided email already exists, app should be redirected to login view and notification should be visible.
-         */
-        if (message === Error.EXISTING_ACCOUNT) {
-          addAuthNotification(AuthViews.LOGIN, {
-            icon: 'Idea',
-            color: 'Purple',
-            message: 'Your account has already been created',
-          });
-          history.push(authenticationRoutes.login);
+      graphQLErrors.forEach(({ extensions }) => {
+        if (extensions) {
+          const { code } = extensions.exception.response;
+          /**
+           * If account with provided email already exists, app should be redirected to login view and notification should be visible.
+           */
+          if (code === Error.EXISTING_ACCOUNT) {
+            addAuthNotification(AuthViews.LOGIN, {
+              icon: 'Idea',
+              color: 'Purple',
+              message: 'Your account has already been created',
+            });
+            history.push(authenticationRoutes.login);
+          }
+          if (code === Error.PASSWORD_TOO_WEAK) {
+            // TODO: Maybe move the message to be a standalone note on screen when trying to create/change a password
+            addAuthNotification(AuthViews.SIGN_UP, {
+              icon: 'Idea',
+              color: 'Purple',
+              message:
+                'Your password must have at least 1 uppercase letter, 1 lowercase letter, 1 number or special character and be at least 8 characters long.',
+            });
+          }
         }
       });
     },
