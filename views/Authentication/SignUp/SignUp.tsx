@@ -58,7 +58,7 @@ const SignUp: FC<ISignUp> = ({
     },
     onError: ({ graphQLErrors }) => {
       graphQLErrors.forEach(({ extensions, message }) => {
-        if (message === Error.INVALID_CREDENTIALS) {
+        if (message === Error.EXISTING_ACCOUNT) {
           addAuthNotification(AuthViews.LOGIN, {
             icon: 'Idea',
             color: 'Purple',
