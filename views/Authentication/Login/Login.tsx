@@ -57,35 +57,34 @@ const Login: FC<ILogin> = ({
         history.push(authRedirectUrl);
       },
       onError: props => {
-        props.graphQLErrors.forEach(({ extensions, message }) => {
-          // if (extensions) {
-          // const { code, message } = extensions?.exception.response;
-          // if (code === Error.INVALID_CREDENTIALS) {
-          /**
-           * If invalid credentials provided, notification should be visible.
-           */
-          if (message === Error.INVALID_CREDENTIALS) {
-            addAuthNotification(AuthViews.LOGIN, {
-              icon: 'Warning',
-              color: 'Purple',
-              message:
-                'Your email or password do not match, please try again or reset your password using the link below',
-            });
-          }
-          // if (code === Error.EXCEEDED_NUMBER_OF_ATTEMPTS) {
-          //   const substr = message.substr(
-          //     message.search('secondsLeft') + 13,
-          //     message.length
-          //   );
-          //   const secondsLeft = Math.ceil(+substr);
+        props.graphQLErrors.forEach(({ extensions }) => {
+          if (extensions) {
+            const { code, message } = extensions?.exception.response;
+            if (code === Error.INVALID_CREDENTIALS) {
+              /**
+               * If invalid credentials provided, notification should be visible.
+               */
+              addAuthNotification(AuthViews.LOGIN, {
+                icon: 'Warning',
+                color: 'Purple',
+                message:
+                  'Your email or password do not match, please try again or reset your password using the link below',
+              });
+            }
+            if (code === Error.EXCEEDED_NUMBER_OF_ATTEMPTS) {
+              const substr = message.substr(
+                message.search('secondsLeft') + 13,
+                message.length
+              );
+              const secondsLeft = Math.ceil(+substr);
 
-          //   addAuthNotification(AuthViews.LOGIN, {
-          //     icon: 'Warning',
-          //     color: 'Purple',
-          //     message: `Due to multiple failed login attempts, please wait ${secondsLeft} seconds before trying again `,
-          //   });
-          // }
-          // }
+              addAuthNotification(AuthViews.LOGIN, {
+                icon: 'Warning',
+                color: 'Purple',
+                message: `Due to multiple failed login attempts, please wait ${secondsLeft} seconds before trying again `,
+              });
+            }
+          }
         });
       },
     }
