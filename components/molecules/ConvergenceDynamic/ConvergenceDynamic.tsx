@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/indent */
 import React, { FC, ReactElement } from 'react';
 import _ from 'lodash';
-import { ReactComponent as WaveSImage } from '../../../icons/convergence/waveS-PDF.svg';
-import { ReactComponent as WaveLImage } from '../../../icons/convergence/waveL-PDF.svg';
-import { ReactComponent as WaveMImage } from '../../../icons/convergence/waveM-PDF.svg';
-import { ReactComponent as WaveXXLImage } from '../../../icons/convergence/waveXXL-PDF.svg';
+import { ReactComponent as DefWaveSImage } from '../../../icons/convergence/waveS-PDF.svg';
+import { ReactComponent as DefWaveLImage } from '../../../icons/convergence/waveL-PDF.svg';
+import { ReactComponent as DefWaveMImage } from '../../../icons/convergence/waveM-PDF.svg';
+import { ReactComponent as DefWaveXLImage } from '../../../icons/convergence/waveXXL-PDF.svg';
 import './ConvergenceDynamic.scss';
 
 interface IConvergenceDynamic {
@@ -11,6 +12,28 @@ interface IConvergenceDynamic {
   numberOfWaves: number;
   renderCenter?: ReactElement;
   renderBoxesContent?: ReactElement[];
+  waves?: {
+    WaveSImage: React.FunctionComponent<
+      React.SVGProps<SVGSVGElement> & {
+        title?: string | undefined;
+      }
+    >;
+    WaveMImage: React.FunctionComponent<
+      React.SVGProps<SVGSVGElement> & {
+        title?: string | undefined;
+      }
+    >;
+    WaveLImage: React.FunctionComponent<
+      React.SVGProps<SVGSVGElement> & {
+        title?: string | undefined;
+      }
+    >;
+    WaveXLImage: React.FunctionComponent<
+      React.SVGProps<SVGSVGElement> & {
+        title?: string | undefined;
+      }
+    >;
+  };
 }
 
 const ConvergenceDynamic: FC<IConvergenceDynamic> = ({
@@ -18,7 +41,13 @@ const ConvergenceDynamic: FC<IConvergenceDynamic> = ({
   numberOfWaves,
   renderCenter,
   renderBoxesContent,
+  waves
 }) => {
+  const WaveSImage = waves ? waves.WaveSImage : DefWaveSImage;
+  const WaveMImage = waves ? waves.WaveMImage : DefWaveMImage;
+  const WaveLImage = waves ? waves.WaveLImage : DefWaveLImage;
+  const WaveXLImage = waves ? waves.WaveXLImage : DefWaveXLImage;
+
   const renderWavesRow = (numberOfWavesInRow: number, rowId: string) => {
     if (numberOfWavesInRow === 1) {
       return (
@@ -50,10 +79,10 @@ const ConvergenceDynamic: FC<IConvergenceDynamic> = ({
     if (numberOfWavesInRow === 4) {
       return (
         <div className={`WavesRow WavesRow--ExtraLarge WavesRow--${rowId}`}>
-          <WaveXXLImage className="DynamicWave Wave--XXL WavesRow--ExtraLarge__Wave--0" />
+          <WaveXLImage className="DynamicWave Wave--XXL WavesRow--ExtraLarge__Wave--0" />
           <WaveMImage className="DynamicWave Wave--M WavesRow--ExtraLarge__Wave--1" />
           <WaveMImage className="DynamicWave Wave--M WavesRow--ExtraLarge__Wave--2" />
-          <WaveXXLImage className="DynamicWave Wave--XXL WavesRow--ExtraLarge__Wave--3" />
+          <WaveXLImage className="DynamicWave Wave--XXL WavesRow--ExtraLarge__Wave--3" />
         </div>
       );
     }
