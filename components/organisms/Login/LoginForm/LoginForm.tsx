@@ -13,7 +13,6 @@ interface ILoginFormValues {
 
 interface ILoginFormErrors {
   email: string[];
-  password: string[];
 }
 
 interface ILoginForm {
@@ -30,9 +29,6 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
 
   const loginValidate = () => {
     return validate(values, {
-      password: {
-        length: { minimum: 5 },
-      },
       email: {
         email: {
           message: '^Not a valid email',
@@ -75,7 +71,6 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
           />
         </FormField>
         <FormField
-          error={errors && errors.password && errors.password.join(' ')}
           fieldName="password"
           label="Password"
           isLabelVisible={!!values.password}
