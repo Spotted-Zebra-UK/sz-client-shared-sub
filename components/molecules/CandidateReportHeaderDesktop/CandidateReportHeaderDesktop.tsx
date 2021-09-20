@@ -14,7 +14,7 @@ const CandidateReportHeaderDesktop: FC<ICandidateReportHeaderDesktop> = props =>
     <header className="CandidateReportHeaderDesktop Wrapper">
       <div className="CandidateReportHeaderDesktop__Container">
         <div className="CandidateReportHeaderDesktop__Container__Navigation">
-          <Link to="/assessments">
+          <Link to="/stages">
             <img
               src={`${process.env.PUBLIC_URL}/CandidateReportHeader/arrowLeft.svg`}
               alt="ArrowLeft.svg"

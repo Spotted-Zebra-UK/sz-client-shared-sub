@@ -15,7 +15,7 @@ const CandidateReportHeaderMobile: FC<ICandidateReportHeaderMobile> = props => {
   return (
     <header className="CandidateReportHeaderMobile">
       <div className="CandidateReportHeaderMobile__Navigation">
-        <Link to="/assessments">
+        <Link to="/stages">
           <img
             src={`${process.env.PUBLIC_URL}/CandidateReportHeader/arrowLeft.svg`}
             alt="ArrowLeft.svg"
