@@ -1,5 +1,6 @@
 import './SignUpForm.scss';
 import React, { FC, useState } from 'react';
+import { passwordValidationRegex } from '../../../../constants/validation';
 import validate from '../../../../helpers/validate';
 import { TFormFieldValue } from '../../../../interfaces/form';
 import FormField from '../../../atoms/FormField/FormField';
@@ -59,7 +60,12 @@ const SignUpForm: FC<ISignUpForm> = props => {
         },
       },
       password: {
-        length: { minimum: 5 },
+        format: {
+          pattern: passwordValidationRegex,
+          flags: 'i',
+          message:
+            '^Password must have at least 1 uppercase letter, 1 lowercase letter, 1 number or special character and be at least 8 characters long.',
+        },
       },
       isPrivacyPolicyChecked: {
         exclusion: {

@@ -10,7 +10,9 @@
     font-weight: bold;
   }
 
-  .CircularProgressbar .CircularProgressbar-path {
-    stroke: url(#sz-gradient) !important;
+  &--Gradient {
+    .CircularProgressbar .CircularProgressbar-path {
+      stroke: url(#sz-gradient) !important;
+    }
   }
 }
