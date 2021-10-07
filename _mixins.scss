@@ -13,3 +13,13 @@
     }
   }
 }
+
+@mixin circle-div($size) {
+  min-width: $size;
+  max-width: $size;
+  min-height: $size;
+  max-height: $size;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}
