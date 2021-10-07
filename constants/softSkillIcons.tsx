@@ -78,6 +78,13 @@ export const SoftSkillIcons: {
   32: WeAreSupportiveAndCaringIcon,
   33: WeAreCuriousAndInnovativeIcon,
   34: WeHaveFunIcon,
+  54: ProducesGreatWorkIcon,
+  55: UpholdsEthicsAndValuesIcon,
+  56: ShowsPositivityIcon,
+  57: ThinksCommerciallyIcon,
+  58: LeadsPeopleIcon,
+  59: CollaboratesWithOthersIcon,
+  60: BuildsNetworksIcon,
 };
 
 const SSDefaultIcon = AdeptsToChangeIcon;
