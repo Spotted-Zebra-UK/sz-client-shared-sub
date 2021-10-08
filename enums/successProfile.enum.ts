@@ -4,6 +4,7 @@ export enum ContentRoleLevel {
   MANAGER_OF_MANAGERS = 'MANAGER_OF_MANAGERS',
   LEADER = 'LEADER',
   APPRENTICE = 'APPRENTICE',
+  TECHNICAL_EXPERT = 'TECHNICAL_EXPERT',
 }
 
 export enum SoftSkillType {
