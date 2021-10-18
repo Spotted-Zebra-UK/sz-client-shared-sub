@@ -3,7 +3,7 @@
 .FormField {
   &__Label {
     &__Text {
-      height: 16px;
+      min-height: 16px;
       font-size: $p2-font-size;
       line-height: $small-line-height;
       text-align: left;
