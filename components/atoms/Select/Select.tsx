@@ -26,7 +26,7 @@ const Select: FC<ISelect> = ({
   placeholder = '',
   value,
   menuPlacement,
-  maxMenuHeight = 130,
+  maxMenuHeight = 100,
 }) => {
   const handleChange = (selectedOption: OptionTypeBase | null) => {
     onChange(selectedOption?.value || '', name);
