@@ -85,6 +85,13 @@ export const SoftSkillIcons: {
   58: LeadsPeopleIcon,
   59: CollaboratesWithOthersIcon,
   60: BuildsNetworksIcon,
+  111: InfluencesOthersIcon,
+  108: LeadsPeopleIcon,
+  110: SupportsPeopleIcon,
+  106: ChangeAgilityIcon,
+  112: PeopleAgilityIcon,
+  107: ThinksCommerciallyIcon,
+  104: DevelopsStrategiesIcon,
 };
 
 const SSDefaultIcon = AdeptsToChangeIcon;
