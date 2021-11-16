@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import CheckboxFormField from '../../../../molecules/CheckboxFormField/CheckboxFormField';
 
-interface PrivacyPolicyCheckboxField {
+interface IPrivacyPolicyCheckboxField {
   value: boolean;
   onChange: (value: boolean, name: string) => void;
   name: string;
@@ -9,7 +9,7 @@ interface PrivacyPolicyCheckboxField {
   error?: string;
 }
 
-const PrivacyPolicyCheckboxField: FC<PrivacyPolicyCheckboxField> = props => {
+const PrivacyPolicyCheckboxField: FC<IPrivacyPolicyCheckboxField> = props => {
   const renderPrivacyPolicyCheckboxLabel = () => {
     return (
       <span className="SignUpForm__PrivacyPolicyCheckboxLabel">
