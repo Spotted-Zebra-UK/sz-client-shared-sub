@@ -78,6 +78,11 @@ export const SoftSkillIcons: {
   32: WeAreSupportiveAndCaringIcon,
   33: WeAreCuriousAndInnovativeIcon,
   34: WeHaveFunIcon,
+  43: CreatesIdeasIcon, // Strive for better
+  45: CreatesIdeasIcon, // We're not robots
+  46: MakesThingsHappenIcon, // We're not afraid to stick our necks out
+  47: LearningAgilityIcon, // We don't do things just because
+  48: CollaboratesWithOthersIcon, // We're not narrow minded
   54: ProducesGreatWorkIcon,
   55: UpholdsEthicsAndValuesIcon,
   56: ShowsPositivityIcon,
@@ -85,13 +90,16 @@ export const SoftSkillIcons: {
   58: LeadsPeopleIcon,
   59: CollaboratesWithOthersIcon,
   60: BuildsNetworksIcon,
-  111: InfluencesOthersIcon,
-  108: LeadsPeopleIcon,
-  110: SupportsPeopleIcon,
-  106: ChangeAgilityIcon,
-  112: PeopleAgilityIcon,
-  107: ThinksCommerciallyIcon,
-  104: DevelopsStrategiesIcon,
+  84: CollaboratesWithOthersIcon, // Win Together
+  103: MakesThingsHappenIcon, // Make it Happen
+  104: DevelopsStrategiesIcon, // Act Strategically
+  106: ChangeAgilityIcon, // Lead Change
+  107: ThinksCommerciallyIcon, // Drive accountability & results
+  108: LeadsPeopleIcon, // Lead people
+  109: CollaboratesWithOthersIcon, // Collaborate & Influence right
+  110: SupportsPeopleIcon, // Develop people
+  111: InfluencesOthersIcon, // Communicate
+  112: PeopleAgilityIcon, // Build Inclusive Culture
 };
 
 const SSDefaultIcon = AdeptsToChangeIcon;
