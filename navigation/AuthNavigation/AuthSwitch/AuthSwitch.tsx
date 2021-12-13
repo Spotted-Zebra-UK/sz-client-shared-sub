@@ -6,7 +6,6 @@ import CreatePassword from '../../../views/Authentication/CreatePassword/CreateP
 import DirectInvitation from '../../../views/Authentication/DirectInvitation/DirectInvitation';
 import Login from '../../../views/Authentication/Login/Login';
 import RestorePassword from '../../../views/Authentication/RestorePassword/RestorePassword';
-import SignUp from '../../../views/Authentication/SignUp/SignUp';
 import SignUpWrapper from '../../../views/Authentication/SignUp/SignUpWrapper/SignUpWrapper';
 import { authenticationRoutes } from '../authNavigation.constants';
 

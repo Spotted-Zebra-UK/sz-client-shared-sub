@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import SignUpPresentational from '../../../components/organisms/SignUp/SignUp';
@@ -12,7 +12,6 @@ import {
   IRegisterAccountInput,
   IRegisterAccountResponse,
 } from '../../../interfaces/authentication';
-import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
 import { ISignUpWrapper } from './SignUpWrapper/SignUpWrapper';

@@ -29,7 +29,7 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
   addAuthNotification,
 }) => {
   const [companyId, setCompanyId] = useState<number>();
-  const [getCompanyId, getCompanyIdResponse] = useLazyQuery<
+  const [getCompanyId] = useLazyQuery<
     IGetCompanyIdResponse,
     IGetCompanyIdInput
   >(GET_COMPANY_ID_BY_PROJECT, {
