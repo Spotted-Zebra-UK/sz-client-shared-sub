@@ -6,9 +6,9 @@ import {
   IGetCompanyIdResponse,
 } from '../../../../interfaces/authentication';
 import { GET_COMPANY_ID_BY_PROJECT } from '../../../../graphql/authentication';
-import { findProjectIdIndirectInvitationUrl } from '../../../../../../helpers/indirectInvitation';
 import { AuthViews } from '../../Authentication.constants';
 import { TNotification } from '../../../../interfaces/notification';
+import { findProjectIdIndirectInvitationUrl } from '../../../../helpers/invitations';
 
 export interface ISignUpWrapper {
   authPrepopulatedValues?: {

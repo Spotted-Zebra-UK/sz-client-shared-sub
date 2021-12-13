@@ -34,3 +34,15 @@ export const parseInvitationToken = (
     },
   };
 };
+
+export const findProjectIdIndirectInvitationUrl = (
+  url: string
+): { projectId: number, companyId: number} => {
+  const projectId = url.substring(url.search('project=') + 8, url.search('&'));
+  const companyId = url.substring(url.search('companyId=') + 10, url.search('&'));
+
+  return {
+    projectId: parseInt(projectId),
+    companyId: parseInt(companyId)
+  }
+};
