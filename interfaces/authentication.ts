@@ -3,6 +3,7 @@ export interface IRegisterAccountInput {
   lastName: string;
   email: string;
   password: string;
+  companyId: number;
   invitationToken?: string;
 }
 
@@ -10,6 +11,16 @@ export interface IRegisterAccountResponse {
   registerAccount: {
     accessToken: string;
     refreshToken: string;
+  };
+}
+
+export interface IGetCompanyIdInput {
+  id: number; // projectId
+}
+
+export interface IGetCompanyIdResponse {
+  getCompanyId: {
+    companyId: number;
   };
 }
 

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import SignUpPresentational from '../../../components/organisms/SignUp/SignUp';
@@ -15,16 +15,10 @@ import {
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { ISignUpWrapper } from './SignUpWrapper/SignUpWrapper';
 
-interface ISignUp {
-  authPrepopulatedValues?: {
-    email?: string;
-    fullName?: string;
-  };
-  authRedirectUrl: string;
-  directInvitationToken: string | undefined;
-  signUpNotification?: TNotification | undefined;
-  addAuthNotification: (view: AuthViews, notification: TNotification) => void;
+interface ISignUp extends ISignUpWrapper {
+  companyId: number;
 }
 
 const SignUp: FC<ISignUp> = ({
@@ -33,6 +27,7 @@ const SignUp: FC<ISignUp> = ({
   directInvitationToken,
   signUpNotification,
   addAuthNotification,
+  companyId,
 }) => {
   const history = useHistory();
   const [registerAccount] = useMutation<
@@ -98,6 +93,7 @@ const SignUp: FC<ISignUp> = ({
         lastName,
         email,
         password,
+        companyId,
         invitationToken: directInvitationToken,
       },
     });

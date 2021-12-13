@@ -9,12 +9,25 @@ export const AUTHENTICATE_MUTATION = gql`
   }
 `;
 
+export const GET_COMPANY_ID_BY_PROJECT = gql`
+  query CompanyIdByProject(
+    $id: Float!
+  ) {
+    getCompanyId(
+      id: $id
+    ) {
+      companyId
+    }
+  }
+`;
+
 export const REGISTER_ACCOUNT = gql`
   mutation RegisterAccountMutation(
     $firstName: String!
     $lastName: String!
     $email: String!
     $password: String!
+    $companyId: Float!
     $invitationToken: String
   ) {
     registerAccount(
@@ -22,6 +35,7 @@ export const REGISTER_ACCOUNT = gql`
       lastName: $lastName
       email: $email
       password: $password
+      companyId: $companyId
       invitationToken: $invitationToken
     ) {
       accessToken
