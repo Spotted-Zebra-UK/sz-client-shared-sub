@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import TwoFactorAuthentication from '../../../views/Authentication/TwoFactorAuthentication/TwoFactorAuthentication';
 import { TNotification } from '../../../interfaces/notification';
 import { AuthViews } from '../../../views/Authentication/Authentication.constants';
 import CreatePassword from '../../../views/Authentication/CreatePassword/CreatePassword';
@@ -47,6 +48,16 @@ const AuthSwitch: FC<IAuthSwitch> = ({
           authPrepopulatedValues={authPrepopulatedValues}
           authRedirectUrl={authRedirectUrl}
           loginNotification={authNotifications[AuthViews.LOGIN]}
+          addAuthNotification={addAuthNotification}
+          clearAuthViewNotifications={clearAuthViewNotifications}
+        />
+      </Route>
+      <Route path={authenticationRoutes.twoFactorAuthentication}>
+        <TwoFactorAuthentication
+          authRedirectUrl={authRedirectUrl}
+          loginNotification={
+            authNotifications[AuthViews.TWO_FACTOR_AUTHENTICATION]
+          }
           addAuthNotification={addAuthNotification}
           clearAuthViewNotifications={clearAuthViewNotifications}
         />
