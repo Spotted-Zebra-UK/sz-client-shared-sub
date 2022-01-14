@@ -1,16 +1,23 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import LoginPresentational from '../../../components/organisms/Login/Login';
 import {
   AUTH_TOKEN_STORAGE_KEY,
+  MFA_AUTH_TOKEN,
+  MFA_COOKIE,
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
-import { AUTHENTICATE_MUTATION } from '../../../graphql/authentication';
+import {
+  AUTHENTICATE_MUTATION,
+  MFA_ACCESS_TOKEN,
+} from '../../../graphql/authentication';
 import {
   IAuthenticateInput,
   IAuthenticateResponse,
+  IMfaAccessTokenInput,
+  IMfaAccessTokenResponse,
 } from '../../../interfaces/authentication';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
@@ -38,6 +45,22 @@ const Login: FC<ILogin> = ({
   clearAuthViewNotifications,
 }) => {
   const history = useHistory();
+  const mfaCookie: string[] = JSON.parse(
+    localStorage.getItem(MFA_COOKIE) || '[]'
+  );
+  const [credentials, setCredentials] = useState<{
+    email: string;
+    password: string;
+  }>({ email: '', password: '' });
+  const [mfaAccessToken] = useMutation<
+    IMfaAccessTokenResponse,
+    IMfaAccessTokenInput
+  >(MFA_ACCESS_TOKEN, {
+    onCompleted: data => {
+      localStorage.setItem(MFA_AUTH_TOKEN, data.mfaAccessToken.mfaAccessToken);
+      history.push(authenticationRoutes.twoFactorAuthentication);
+    },
+  });
   const [authenticate] = useMutation<IAuthenticateResponse, IAuthenticateInput>(
     AUTHENTICATE_MUTATION,
     {
@@ -84,6 +107,13 @@ const Login: FC<ILogin> = ({
                 message: `Due to multiple failed login attempts, please wait ${secondsLeft} seconds before trying again `,
               });
             }
+            if (code === Error.MFA_REQUIRED) {
+              mfaAccessToken({
+                variables: {
+                  ...credentials,
+                },
+              });
+            }
           }
         });
       },
@@ -98,10 +128,15 @@ const Login: FC<ILogin> = ({
   }, []);
 
   const handleLogin = (email: string, password: string) => {
+    setCredentials({
+      email,
+      password,
+    });
     authenticate({
       variables: {
         email,
         password,
+        mfaCookie,
       },
     });
   };

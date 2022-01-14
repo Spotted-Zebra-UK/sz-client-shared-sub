@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import TwoFactorAuthentication from '../../../views/Authentication/TwoFactorAuthentication/TwoFactorAuthentication';
 import { TNotification } from '../../../interfaces/notification';
 import { AuthViews } from '../../../views/Authentication/Authentication.constants';
 import CreatePassword from '../../../views/Authentication/CreatePassword/CreatePassword';
 import DirectInvitation from '../../../views/Authentication/DirectInvitation/DirectInvitation';
 import Login from '../../../views/Authentication/Login/Login';
 import RestorePassword from '../../../views/Authentication/RestorePassword/RestorePassword';
-import SignUp from '../../../views/Authentication/SignUp/SignUp';
+import SignUpWrapper from '../../../views/Authentication/SignUp/SignUpWrapper/SignUpWrapper';
 import { authenticationRoutes } from '../authNavigation.constants';
 
 interface IAuthSwitch {
@@ -51,8 +52,18 @@ const AuthSwitch: FC<IAuthSwitch> = ({
           clearAuthViewNotifications={clearAuthViewNotifications}
         />
       </Route>
+      <Route path={authenticationRoutes.twoFactorAuthentication}>
+        <TwoFactorAuthentication
+          authRedirectUrl={authRedirectUrl}
+          loginNotification={
+            authNotifications[AuthViews.TWO_FACTOR_AUTHENTICATION]
+          }
+          addAuthNotification={addAuthNotification}
+          clearAuthViewNotifications={clearAuthViewNotifications}
+        />
+      </Route>
       <Route path={authenticationRoutes.signUp}>
-        <SignUp
+        <SignUpWrapper
           authPrepopulatedValues={authPrepopulatedValues}
           authRedirectUrl={authRedirectUrl}
           signUpNotification={authNotifications[AuthViews.SIGN_UP]}

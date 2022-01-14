@@ -23,6 +23,7 @@ const initializeAuthNotifications: {
   [AuthViews.SIGN_UP]: undefined,
   [AuthViews.CREATE_PASSWORD]: undefined,
   [AuthViews.RESTORE_PASSWORD]: undefined,
+  [AuthViews.TWO_FACTOR_AUTHENTICATION]: undefined,
 };
 
 const Authentication: FC<IAuthentication> = ({
@@ -37,12 +38,11 @@ const Authentication: FC<IAuthentication> = ({
       : defaultRedirectUrl
   );
 
-  const [authPrepopulatedValues, setAuthPrepopulatedValues] = useState<
-    IAuthPrepouplatedValues
-  >({
-    fullName: '',
-    email: '',
-  });
+  const [authPrepopulatedValues, setAuthPrepopulatedValues] =
+    useState<IAuthPrepouplatedValues>({
+      fullName: '',
+      email: '',
+    });
   const [authNotifications, setAuthNotifications] = useState(
     initializeAuthNotifications
   );
