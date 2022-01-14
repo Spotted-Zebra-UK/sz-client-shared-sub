@@ -1,6 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import {
+  useAuthenticateMutation,
+  useMfaAccessTokenMutation,
+} from '../../../../../generated/graphql';
 import LoginPresentational from '../../../components/organisms/Login/Login';
 import {
   AUTH_TOKEN_STORAGE_KEY,
@@ -9,16 +13,6 @@ import {
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
-import {
-  AUTHENTICATE_MUTATION,
-  MFA_ACCESS_TOKEN,
-} from '../../../graphql/authentication';
-import {
-  IAuthenticateInput,
-  IAuthenticateResponse,
-  IMfaAccessTokenInput,
-  IMfaAccessTokenResponse,
-} from '../../../interfaces/authentication';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
@@ -37,6 +31,11 @@ interface ILogin {
   clearAuthViewNotifications: (view: AuthViews) => void;
 }
 
+interface ILoginFormValues {
+  email: string;
+  password: string;
+}
+
 const Login: FC<ILogin> = ({
   authPrepopulatedValues = {},
   authRedirectUrl,
@@ -44,81 +43,71 @@ const Login: FC<ILogin> = ({
   addAuthNotification,
   clearAuthViewNotifications,
 }) => {
+  const { t } = useTranslation();
   const history = useHistory();
   const mfaCookie: string[] = JSON.parse(
     localStorage.getItem(MFA_COOKIE) || '[]'
   );
-  const [credentials, setCredentials] = useState<{
-    email: string;
-    password: string;
-  }>({ email: '', password: '' });
-  const [mfaAccessToken] = useMutation<
-    IMfaAccessTokenResponse,
-    IMfaAccessTokenInput
-  >(MFA_ACCESS_TOKEN, {
-    onCompleted: data => {
+  const [mfaAccessToken] = useMfaAccessTokenMutation({
+    onCompleted(data) {
       localStorage.setItem(MFA_AUTH_TOKEN, data.mfaAccessToken.mfaAccessToken);
       history.push(authenticationRoutes.twoFactorAuthentication);
     },
   });
-  const [authenticate] = useMutation<IAuthenticateResponse, IAuthenticateInput>(
-    AUTHENTICATE_MUTATION,
-    {
-      onCompleted: data => {
-        /**
-         * User should be redirected to provided url after
-         * successful login.
-         */
-        localStorage.setItem(
-          AUTH_TOKEN_STORAGE_KEY,
-          data.authenticate.accessToken
-        );
-        localStorage.setItem(
-          REFRESH_TOKEN_STORAGE_KEY,
-          data.authenticate.refreshToken
-        );
-        history.push(authRedirectUrl);
-      },
-      onError: props => {
-        props.graphQLErrors.forEach(({ extensions }) => {
-          if (extensions) {
-            const { code, message } = extensions?.exception.response;
-            if (code === Error.INVALID_CREDENTIALS) {
-              /**
-               * If invalid credentials provided, notification should be visible.
-               */
-              addAuthNotification(AuthViews.LOGIN, {
-                icon: 'Warning',
-                color: 'Purple',
-                message:
-                  'Your email or password do not match, please try again or reset your password using the link below',
-              });
-            }
-            if (code === Error.EXCEEDED_NUMBER_OF_ATTEMPTS) {
-              const substr = message.substr(
-                message.search('secondsLeft') + 13,
-                message.length
-              );
-              const secondsLeft = Math.ceil(+substr);
 
-              addAuthNotification(AuthViews.LOGIN, {
-                icon: 'Warning',
-                color: 'Purple',
-                message: `Due to multiple failed login attempts, please wait ${secondsLeft} seconds before trying again `,
-              });
-            }
-            if (code === Error.MFA_REQUIRED) {
-              mfaAccessToken({
-                variables: {
-                  ...credentials,
-                },
-              });
-            }
+  const [authenticate] = useAuthenticateMutation({
+    onCompleted: data => {
+      /**
+       * User should be redirected to provided url after
+       * successful login.
+       */
+      localStorage.setItem(
+        AUTH_TOKEN_STORAGE_KEY,
+        data.authenticate.accessToken
+      );
+      localStorage.setItem(
+        REFRESH_TOKEN_STORAGE_KEY,
+        data.authenticate.refreshToken
+      );
+      history.push(authRedirectUrl);
+    },
+    onError: props => {
+      props.graphQLErrors.forEach(({ extensions }) => {
+        if (extensions) {
+          const { code, message } = extensions?.exception.response;
+          if (code === Error.INVALID_CREDENTIALS) {
+            /**
+             * If invalid credentials provided, notification should be visible.
+             */
+            addAuthNotification(AuthViews.LOGIN, {
+              icon: 'Warning',
+              color: 'Purple',
+              message: t('authentication.login.yourEmailOrPasswordDoNotMatch'),
+            });
           }
-        });
-      },
-    }
-  );
+          if (code === Error.EXCEEDED_NUMBER_OF_ATTEMPTS) {
+            const substr = message.substr(
+              message.search('secondsLeft') + 13,
+              message.length
+            );
+            const secondsLeft = Math.ceil(+substr);
+
+            addAuthNotification(AuthViews.LOGIN, {
+              icon: 'Warning',
+              color: 'Purple',
+              message: t(
+                'authentication.login.dueToMultipleFailedLoginAttempts',
+                { secondsLeft }
+              ),
+            });
+          }
+          if (code === Error.MFA_REQUIRED) {
+            setHasThrownAnError(true);
+          }
+        }
+      });
+    },
+  });
 
   useEffect(() => {
     return () => {
@@ -127,11 +116,30 @@ const Login: FC<ILogin> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /**
+   * States and useEffect below just to handle the case
+   * when user has 2fa enabled.
+   */
+  const [hasThrownAnError, setHasThrownAnError] = useState(false);
+  const [values, setValues] = useState<ILoginFormValues>({
+    email: '',
+    password: '',
+  });
+
+  useEffect(() => {
+    if (values.email && values.password) {
+      mfaAccessToken({
+        variables: {
+          email: values.email,
+          password: values.password,
+        },
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasThrownAnError]);
+
   const handleLogin = (email: string, password: string) => {
-    setCredentials({
-      email,
-      password,
-    });
+    setValues({ email, password });
     authenticate({
       variables: {
         email,

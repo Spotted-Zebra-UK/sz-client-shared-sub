@@ -1,6 +1,9 @@
 import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import {
+  useMfaAuthenticateMutation,
+  useRequestMfaCodeMutation,
+} from '../../../../../generated/graphql';
 import TwoFactorAuthenticationPresentational from '../../../components/organisms/TwoFactorAuthentication/TwoFactorAuthentication';
 import {
   AUTH_TOKEN_STORAGE_KEY,
@@ -8,19 +11,10 @@ import {
   MFA_COOKIE,
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
-import {
-  MFA_AUTHENTICATE,
-  MFA_REQUEST_CODE,
-} from '../../../graphql/authentication';
-import {
-  IMfaAuthenticateInput,
-  IMfaAuthenticateResponse,
-  IMfaRequestCodeInput,
-} from '../../../interfaces/authentication';
+import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
-import Error from '../../../enums/error';
 
 interface ITwoFactorAuthentication {
   // Url where user will be redirected after successful login.
@@ -39,11 +33,8 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
 }) => {
   const history = useHistory();
   const mfaAccessToken = localStorage.getItem(MFA_AUTH_TOKEN);
-  const [mfaAuthenticate] = useMutation<
-    IMfaAuthenticateResponse,
-    IMfaAuthenticateInput
-  >(MFA_AUTHENTICATE, {
-    onCompleted: data => {
+  const [mfaAuthenticate] = useMfaAuthenticateMutation({
+    onCompleted(data) {
       if (data?.mfaAuthenticate && data.mfaAuthenticate.accessToken) {
         localStorage.setItem(
           AUTH_TOKEN_STORAGE_KEY,
@@ -66,7 +57,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
     onError: ({ graphQLErrors }) => {
       graphQLErrors.forEach(({ extensions }) => {
         if (extensions) {
-          const { code } = extensions.exception.response;
+          const { code, message } = extensions.exception.response;
 
           if (code === Error.INVALID_MFA_CODE) {
             addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
@@ -84,14 +75,25 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
             });
             history.push(authenticationRoutes.login);
           }
+
+          if (code === Error.EXCEEDED_NUMBER_OF_ATTEMPTS) {
+            const substr = message.substr(
+              message.search('secondsLeft') + 13,
+              message.length
+            );
+            const secondsLeft = Math.ceil(+substr);
+
+            addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
+              icon: 'Warning',
+              color: 'Purple',
+              message: `Due to multiple failed login attempts, please wait ${secondsLeft} seconds before trying again `,
+            });
+          }
         }
       });
     },
   });
-  const [requestMfaCode] = useMutation<IMfaRequestCodeInput>(
-    MFA_REQUEST_CODE,
-    {}
-  );
+  const [requestMfaCode] = useRequestMfaCodeMutation();
 
   useEffect(() => {
     return () => {
@@ -117,6 +119,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
       },
     });
   };
+
   return (
     <TwoFactorAuthenticationPresentational
       loginNotification={loginNotification}

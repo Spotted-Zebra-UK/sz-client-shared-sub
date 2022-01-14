@@ -1,14 +1,9 @@
 import { FC, useEffect, useState } from 'react';
-import { useLazyQuery } from '@apollo/client';
-import SignUp from '../SignUp';
-import {
-  IGetCompanyIdInput,
-  IGetCompanyIdResponse,
-} from '../../../../interfaces/authentication';
-import { GET_COMPANY_ID_BY_PROJECT } from '../../../../graphql/authentication';
-import { AuthViews } from '../../Authentication.constants';
-import { TNotification } from '../../../../interfaces/notification';
+import { useCompanyIdByProjectLazyQuery } from '../../../../../../generated/graphql';
 import { findProjectIdIndirectInvitationUrl } from '../../../../helpers/invitations';
+import { TNotification } from '../../../../interfaces/notification';
+import { AuthViews } from '../../Authentication.constants';
+import SignUp from '../SignUp';
 
 export interface ISignUpWrapper {
   authPrepopulatedValues?: {
@@ -29,14 +24,11 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
   addAuthNotification,
 }) => {
   const [companyId, setCompanyId] = useState<number>();
-  const [getCompanyId] = useLazyQuery<
-    IGetCompanyIdResponse,
-    IGetCompanyIdInput
-  >(GET_COMPANY_ID_BY_PROJECT, {
-    onCompleted(data) {
+  const [getCompanyId] = useCompanyIdByProjectLazyQuery({
+    onCompleted: data => {
       setCompanyId(data.getCompanyId.companyId);
     },
-    onError(error) {},
+    onError: error => {},
   });
 
   useEffect(() => {
@@ -51,21 +43,20 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
     setCompanyId(companyId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  // if (companyId) {
+  return (
+    <SignUp
+      authPrepopulatedValues={authPrepopulatedValues}
+      authRedirectUrl={authRedirectUrl}
+      directInvitationToken={directInvitationToken}
+      signUpNotification={signUpNotification}
+      addAuthNotification={addAuthNotification}
+      companyId={companyId}
+    />
+  );
+  // }
 
-  if (companyId) {
-    return (
-      <SignUp
-        authPrepopulatedValues={authPrepopulatedValues}
-        authRedirectUrl={authRedirectUrl}
-        directInvitationToken={directInvitationToken}
-        signUpNotification={signUpNotification}
-        addAuthNotification={addAuthNotification}
-        companyId={companyId}
-      />
-    );
-  }
-
-  return null;
+  // return null;
 };
 
 export default SignUpWrapper;
