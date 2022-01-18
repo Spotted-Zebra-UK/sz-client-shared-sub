@@ -1,0 +1,5 @@
+query CompanyIdByProject($id: Float!) {
+  getCompanyId(id: $id) {
+    companyId
+  }
+}
