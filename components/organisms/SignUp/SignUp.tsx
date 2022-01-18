@@ -1,10 +1,12 @@
 import './SignUp.scss';
+import _ from 'lodash';
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import BubblesBackground from '../../../components/atoms/BubblesBackground/BubblesBackground';
+import Notification from '../../../components/atoms/Notification/Notification';
 import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
 import { TNotification } from '../../../interfaces/notification';
-import BubblesBackground from '../../atoms/BubblesBackground/BubblesBackground';
-import Notification from '../../atoms/Notification/Notification';
 import SignUpForm from './SignUpForm/SignUpForm';
 
 interface ISignUp {
@@ -27,6 +29,8 @@ const SignUpPresentational: FC<ISignUp> = ({
   notification,
   loginRedirectUrl,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div
       className={`SignUp${!fullName ? ' SignUp--Full' : ' SignUp--PreFilled'}`}
@@ -36,12 +40,16 @@ const SignUpPresentational: FC<ISignUp> = ({
         <div className="SignUp__Top__TitleWrapper">
           {fullName ? (
             <BubblesBackground className="SignUp__Top__Title">
-              <p className="SignUp__Top__Title__Row">Welcome</p>
+              <p className="SignUp__Top__Title__Row">
+                {_.capitalize(t('common.welcome'))}
+              </p>
               <p className="SignUp__Top__Title__Row">{fullName}!</p>
             </BubblesBackground>
           ) : (
             <BubblesBackground className="SignUp__Top__Title">
-              <p className="SignUp__Top__Title__Row">Welcome</p>
+              <p className="SignUp__Top__Title__Row">
+                {_.capitalize(t('common.welcome'))}
+              </p>
             </BubblesBackground>
           )}
           {notification ? <Notification notification={notification} /> : null}
@@ -50,7 +58,8 @@ const SignUpPresentational: FC<ISignUp> = ({
       <SignUpForm fullName={fullName} email={email} onSignUp={onSignUp} />
       {loginRedirectUrl ? (
         <div className="SignUp__RedirectToLogin">
-          Already have an account? <Link to={loginRedirectUrl}>Sign in</Link>
+          {t('authentication.signUp.alreadyHaveAccount')}{' '}
+          <Link to={loginRedirectUrl}>{t('common.signIn')}</Link>
         </div>
       ) : null}
     </div>
