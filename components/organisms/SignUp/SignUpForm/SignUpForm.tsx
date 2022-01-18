@@ -1,12 +1,14 @@
 import './SignUpForm.scss';
+import _ from 'lodash';
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import FormField from '../../../../components/atoms/FormField/FormField';
+import Input from '../../../../components/atoms/Input/Input';
+import PasswordInput from '../../../../components/molecules/PasswordInput/PasswordInput';
+import SquareButton from '../../../../components/molecules/SquareButton/SquareButton';
 import { passwordValidationRegex } from '../../../../constants/validation';
 import validate from '../../../../helpers/validate';
 import { TFormFieldValue } from '../../../../interfaces/form';
-import FormField from '../../../atoms/FormField/FormField';
-import Input from '../../../atoms/Input/Input';
-import PasswordInput from '../../../molecules/PasswordInput/PasswordInput';
-import SquareButton from '../../../molecules/SquareButton/SquareButton';
 import PrivacyPolicyCheckboxField from './PrivacyPolicyCheckboxField/PrivacyPolicyCheckboxField';
 
 interface ISignUpFormValues {
@@ -35,6 +37,7 @@ interface ISignUpForm {
 }
 
 const SignUpForm: FC<ISignUpForm> = props => {
+  const { t } = useTranslation();
   const [values, setValues] = useState<ISignUpFormValues>({
     fullName: props.fullName || '',
     email: props.email || '',
@@ -48,7 +51,9 @@ const SignUpForm: FC<ISignUpForm> = props => {
       fullName: {
         length: {
           minimum: 2,
-          tooShort: '^First name and last name must be provided.',
+          tooShort: `^${t(
+            'authentication.signUp.firstNameAndLastNameMustBeProvided'
+          )}`,
           tokenizer: (value: string) => {
             return value.split(/\s+/g);
           },
@@ -56,21 +61,20 @@ const SignUpForm: FC<ISignUpForm> = props => {
       },
       email: {
         email: {
-          message: '^Not a valid email.',
+          message: `^${t('common.notValidEmail')}`,
         },
       },
       password: {
         format: {
           pattern: passwordValidationRegex,
           flags: 'i',
-          message:
-            '^Password must have at least 1 uppercase letter, 1 lowercase letter, 1 number or special character and be at least 8 characters long.',
+          message: `^${t('authentication.signUp.yourPasswordMustHave')}`,
         },
       },
       isPrivacyPolicyChecked: {
         exclusion: {
           within: { false: false },
-          message: '^Privacy Notice must be checked.',
+          message: `^${t('authentication.signUp.privacyNoticeMustBeCached')}`,
         },
       },
     });
@@ -105,13 +109,13 @@ const SignUpForm: FC<ISignUpForm> = props => {
           <FormField
             error={errors && errors.fullName && errors.fullName.join(' ')}
             fieldName="fullName"
-            label="Full name"
+            label={t('authentication.signUp.fullName')}
             isLabelVisible={!!values.fullName}
           >
             <Input
               name="fullName"
               onChange={handleChange}
-              placeholder="Full name"
+              placeholder={t('authentication.signUp.fullName')}
               value={values.fullName}
             />
           </FormField>
@@ -119,13 +123,13 @@ const SignUpForm: FC<ISignUpForm> = props => {
         <FormField
           error={errors && errors.email && errors.email.join(' ')}
           fieldName="email"
-          label="Email"
+          label={_.capitalize(t('common.email'))}
           isLabelVisible={!!values.email}
         >
           <Input
             name="email"
             onChange={handleChange}
-            placeholder="Email"
+            placeholder={_.capitalize(t('common.email'))}
             value={values.email}
             isDisabled={!!props.email}
           />
@@ -133,13 +137,13 @@ const SignUpForm: FC<ISignUpForm> = props => {
         <FormField
           error={errors && errors.password && errors.password.join(' ')}
           fieldName="password"
-          label="Create Password"
+          label={t('authentication.signUp.createPassword')}
           isLabelVisible={!!values.password}
         >
           <PasswordInput
             name="password"
             onChange={handleChange}
-            placeholder="Password"
+            placeholder={_.capitalize(t('common.password'))}
             value={values.password}
           />
         </FormField>
@@ -152,7 +156,9 @@ const SignUpForm: FC<ISignUpForm> = props => {
           id="SignUpIsPrivacyPolicyChecked"
           error={errors?.isPrivacyPolicyChecked?.join(' ')}
         />
-        <SquareButton type="submit">Create an account</SquareButton>
+        <SquareButton type="submit">
+          {t('authentication.signUp.createAccount')}
+        </SquareButton>
       </div>
     </form>
   );
