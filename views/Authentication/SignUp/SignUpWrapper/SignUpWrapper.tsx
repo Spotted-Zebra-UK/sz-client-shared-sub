@@ -26,9 +26,12 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
   const [companyId, setCompanyId] = useState<number>();
   const [getCompanyId] = useCompanyIdByProjectLazyQuery({
     onCompleted: data => {
+      console.log('query completed');
       setCompanyId(data.getCompanyId.companyId);
     },
-    onError: error => {},
+    onError: error => {
+      console.log('query failed');
+    },
   });
 
   useEffect(() => {
@@ -38,6 +41,8 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
     if (projectId) {
       getCompanyId({ variables: { id: projectId } });
       return;
+    } else {
+      console.log('project id not found');
     }
 
     setCompanyId(companyId);
