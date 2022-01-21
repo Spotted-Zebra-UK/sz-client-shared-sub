@@ -43,20 +43,20 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
     setCompanyId(companyId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // if (companyId) {
-  return (
-    <SignUp
-      authPrepopulatedValues={authPrepopulatedValues}
-      authRedirectUrl={authRedirectUrl}
-      directInvitationToken={directInvitationToken}
-      signUpNotification={signUpNotification}
-      addAuthNotification={addAuthNotification}
-      companyId={companyId}
-    />
-  );
-  // }
+  if (companyId || !directInvitationToken) {
+    return (
+      <SignUp
+        authPrepopulatedValues={authPrepopulatedValues}
+        authRedirectUrl={authRedirectUrl}
+        directInvitationToken={directInvitationToken}
+        signUpNotification={signUpNotification}
+        addAuthNotification={addAuthNotification}
+        companyId={companyId}
+      />
+    );
+  }
 
-  // return null;
+  return null;
 };
 
 export default SignUpWrapper;
