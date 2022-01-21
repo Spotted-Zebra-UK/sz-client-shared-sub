@@ -48,6 +48,7 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
     setCompanyId(companyId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log('companyId', companyId);
   if (companyId || !directInvitationToken) {
     return (
       <SignUp
