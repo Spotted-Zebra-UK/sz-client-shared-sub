@@ -23,14 +23,20 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
   signUpNotification,
   addAuthNotification,
 }) => {
+  const { projectId } = findProjectIdIndirectInvitationUrl(authRedirectUrl);
+  findProjectIdIndirectInvitationUrl(authRedirectUrl);
   const [companyId, setCompanyId] = useState<number>();
+  const [queryFailedCount, setQueryFailedCount] = useState<number>(0);
   const [getCompanyId] = useCompanyIdByProjectLazyQuery({
     onCompleted: data => {
-      console.log('query completed');
       setCompanyId(data.getCompanyId.companyId);
     },
     onError: error => {
-      console.log('query failed');
+      setQueryFailedCount(queryFailedCount => queryFailedCount + 1);
+      if (queryFailedCount < 4 && error)
+        getCompanyId({
+          variables: { id: projectId },
+        });
     },
   });
 
@@ -41,14 +47,11 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
     if (projectId) {
       getCompanyId({ variables: { id: projectId } });
       return;
-    } else {
-      console.log('project id not found');
     }
 
     setCompanyId(companyId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log('companyId', companyId);
   if (companyId || !directInvitationToken) {
     return (
       <SignUp
