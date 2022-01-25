@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import CheckboxFormField from '../../../../molecules/CheckboxFormField/CheckboxFormField';
+import { useTranslation } from 'react-i18next';
+import CheckboxFormField from '../../../../../components/molecules/CheckboxFormField/CheckboxFormField';
 
 interface IPrivacyPolicyCheckboxField {
   value: boolean;
@@ -10,19 +11,20 @@ interface IPrivacyPolicyCheckboxField {
 }
 
 const PrivacyPolicyCheckboxField: FC<IPrivacyPolicyCheckboxField> = props => {
+  const { t } = useTranslation();
   const renderPrivacyPolicyCheckboxLabel = () => {
     return (
       <span className="SignUpForm__PrivacyPolicyCheckboxLabel">
-        I have read the{' '}
+        {t('authentication.signUp.iHaveReadThe')}{' '}
         <a
           className="SignUpForm__PrivacyPolicyCheckboxLabel__Link"
           href="https://www.spottedzebra.co.uk/privacy/privacy"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Privacy Notice
+          {t('authentication.signUp.privacyNotice')}
         </a>
-        , and I am an adult.
+        {t('authentication.signUp.iAmAnAdult')}
       </span>
     );
   };
