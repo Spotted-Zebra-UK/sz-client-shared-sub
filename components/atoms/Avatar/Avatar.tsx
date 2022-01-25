@@ -5,10 +5,11 @@ import { IUser } from '../../../interfaces/User';
 interface IAvatar {
   user: IUser;
   className: string;
+  rounded?: boolean;
 }
 
 const Avatar: FC<IAvatar> = props => {
-  const { user, className } = props;
+  const { user, className, rounded } = props;
   const { name, imageUrl, grade } = user;
 
   return imageUrl ? (
@@ -19,7 +20,7 @@ const Avatar: FC<IAvatar> = props => {
         grade
           ? `Avatar--Initials--${grade.charAt(0)}`
           : 'Avatar--Initials--Grey'
-      }`}
+      } ${!rounded && 'not-rounded'}`}
     >
       <span className="AbsolutelyCentered">
         {`${name.firstName.charAt(0)}${name.lastName.charAt(0)}`}

@@ -1,7 +1,9 @@
 .Avatar {
   border-radius: 50%;
   position: relative;
-
+  &.not-rounded {
+    border-radius: 10%;
+  }
   &--Medium {
     width: 64px;
     height: 64px;
@@ -12,11 +14,11 @@
   }
 
   &--Small {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
 
     &.Avatar--Initials {
-      font-size: 18px;
+      font-size: 12px;
     }
   }
 
@@ -50,4 +52,10 @@
   span {
     text-transform: uppercase;
   }
+}
+.AbsolutelyCentered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
