@@ -13,7 +13,7 @@
     }
   }
 
-  &--Small {
+  &--Small-Row {
     width: 36px;
     height: 36px;
 
@@ -21,7 +21,14 @@
       font-size: 12px;
     }
   }
+  &--Small {
+    width: 36px;
+    height: 36px;
 
+    &.Avatar--Initials {
+      font-size: 18px;
+    }
+  }
   &--Initials {
     &--A {
       background-color: rgba(10, 211, 173, 0.05);
@@ -43,6 +50,10 @@
       background-color: rgba(0, 0, 0, 0.05);
       color: rgb(204, 204, 204);
     }
+    &--N {
+      color: rgb(16, 183, 255);
+      background-color: rgba(16, 183, 255, 0.05);
+    }
   }
 
   &--Shadow {
@@ -58,4 +69,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.bold {
+  font-weight: 500;
 }
