@@ -17,6 +17,7 @@ mutation RegisterAccount(
   $invitationToken: String
   $language: Language!
   $companyId: Float
+  $projectId: Float
 ) {
   registerAccount(
     firstName: $firstName
@@ -26,6 +27,7 @@ mutation RegisterAccount(
     invitationToken: $invitationToken
     language: $language
     companyId: $companyId
+    projectId: $projectId
   ) {
     accessToken
     refreshToken
