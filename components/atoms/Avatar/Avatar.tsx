@@ -7,10 +7,11 @@ interface IAvatar {
   className: string;
   rounded?: boolean;
   boldFont?: boolean;
+  lastCharacters?: string;
 }
 
 const Avatar: FC<IAvatar> = props => {
-  const { user, className, rounded, boldFont } = props;
+  const { user, className, rounded, boldFont, lastCharacters } = props;
   const { name, imageUrl, grade } = user;
 
   return imageUrl ? (
@@ -25,6 +26,7 @@ const Avatar: FC<IAvatar> = props => {
     >
       <span className={`AbsolutelyCentered ${boldFont && 'bold'}`}>
         {`${name.firstName.charAt(0)}${name.lastName.charAt(0)}`}
+        {lastCharacters && lastCharacters}
       </span>
     </div>
   );
