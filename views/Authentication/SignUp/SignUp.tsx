@@ -15,6 +15,7 @@ import { ISignUpWrapper } from './SignUpWrapper/SignUpWrapper';
 
 interface ISignUp extends ISignUpWrapper {
   companyId?: number;
+  projectId?: number;
 }
 
 const SignUp: FC<ISignUp> = ({
@@ -24,6 +25,7 @@ const SignUp: FC<ISignUp> = ({
   signUpNotification,
   addAuthNotification,
   companyId,
+  projectId,
 }) => {
   const { i18n, t } = useTranslation();
   const history = useHistory();
@@ -92,6 +94,7 @@ const SignUp: FC<ISignUp> = ({
         invitationToken: directInvitationToken,
         language: getLanguageFromShortName(i18n.language),
         companyId,
+        projectId,
       },
     });
   };

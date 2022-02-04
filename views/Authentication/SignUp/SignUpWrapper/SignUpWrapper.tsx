@@ -23,28 +23,22 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
   signUpNotification,
   addAuthNotification,
 }) => {
-  const { projectId } = findProjectIdIndirectInvitationUrl(authRedirectUrl);
-  findProjectIdIndirectInvitationUrl(authRedirectUrl);
   const [companyId, setCompanyId] = useState<number>();
-  const [queryFailedCount, setQueryFailedCount] = useState<number>(0);
+  const [projectId, setProjectId] = useState<number>();
   const [getCompanyId] = useCompanyIdByProjectLazyQuery({
     onCompleted: data => {
       setCompanyId(data.getCompanyId.companyId);
     },
     onError: error => {
-      setQueryFailedCount(queryFailedCount => queryFailedCount + 1);
-      if (queryFailedCount < 4 && error)
-        getCompanyId({
-          variables: { id: projectId },
-        });
+      console.log('error', error);
     },
   });
 
   useEffect(() => {
     const { projectId, companyId } =
       findProjectIdIndirectInvitationUrl(authRedirectUrl);
-
     if (projectId) {
+      setProjectId(projectId);
       getCompanyId({ variables: { id: projectId } });
       return;
     }
@@ -52,20 +46,18 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
     setCompanyId(companyId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (companyId || !directInvitationToken) {
-    return (
-      <SignUp
-        authPrepopulatedValues={authPrepopulatedValues}
-        authRedirectUrl={authRedirectUrl}
-        directInvitationToken={directInvitationToken}
-        signUpNotification={signUpNotification}
-        addAuthNotification={addAuthNotification}
-        companyId={companyId}
-      />
-    );
-  }
 
-  return null;
+  return (
+    <SignUp
+      authPrepopulatedValues={authPrepopulatedValues}
+      authRedirectUrl={authRedirectUrl}
+      directInvitationToken={directInvitationToken}
+      signUpNotification={signUpNotification}
+      addAuthNotification={addAuthNotification}
+      companyId={companyId}
+      projectId={projectId}
+    />
+  );
 };
 
 export default SignUpWrapper;
