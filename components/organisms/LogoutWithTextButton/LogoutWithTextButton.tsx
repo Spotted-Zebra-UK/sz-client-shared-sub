@@ -46,7 +46,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
         <ExitIcon />
       </IconButton>
 
-      <label style={{ marginLeft: '10px', cursor: 'pointer' }}>log out</label>
+      <label style={{ marginLeft: '10px', cursor: 'pointer' }}>Log out</label>
     </div>
   );
 };

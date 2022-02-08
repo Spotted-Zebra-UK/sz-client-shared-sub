@@ -23,7 +23,6 @@ const DirectInvitation: FC<IDirectInvitation> = ({
 }) => {
   const { t } = useTranslation();
   const location = useLocation();
-  console.log(location);
   const invitationData = parseInvitationToken(location.search);
   const getInvitationStatusQueryResponse = useGetInvitationStatusQuery({
     variables: {
