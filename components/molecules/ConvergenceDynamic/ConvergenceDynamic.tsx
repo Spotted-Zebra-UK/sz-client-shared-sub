@@ -41,7 +41,7 @@ const ConvergenceDynamic: FC<IConvergenceDynamic> = ({
   numberOfWaves,
   renderCenter,
   renderBoxesContent,
-  waves
+  waves,
 }) => {
   const WaveSImage = waves ? waves.WaveSImage : DefWaveSImage;
   const WaveMImage = waves ? waves.WaveMImage : DefWaveMImage;
