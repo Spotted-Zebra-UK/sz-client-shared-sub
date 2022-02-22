@@ -1,6 +1,7 @@
 mutation Authenticate(
   $email: String!
   $password: String!
+  $clientType: ClientType
   $mfaCookie: [String!]
 ) {
   authenticate(email: $email, password: $password, mfaCookie: $mfaCookie) {
