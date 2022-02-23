@@ -35,8 +35,9 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
   });
 
   useEffect(() => {
-    const { projectId, companyId } =
-      findProjectIdIndirectInvitationUrl(authRedirectUrl);
+    const { projectId, companyId } = findProjectIdIndirectInvitationUrl(
+      authRedirectUrl
+    );
     if (projectId) {
       setProjectId(projectId);
       getCompanyId({ variables: { id: projectId } });

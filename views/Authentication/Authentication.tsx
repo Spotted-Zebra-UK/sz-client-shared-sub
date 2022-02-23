@@ -38,11 +38,12 @@ const Authentication: FC<IAuthentication> = ({
       : defaultRedirectUrl
   );
 
-  const [authPrepopulatedValues, setAuthPrepopulatedValues] =
-    useState<IAuthPrepouplatedValues>({
-      fullName: '',
-      email: '',
-    });
+  const [authPrepopulatedValues, setAuthPrepopulatedValues] = useState<
+    IAuthPrepouplatedValues
+  >({
+    fullName: '',
+    email: '',
+  });
   const [authNotifications, setAuthNotifications] = useState(
     initializeAuthNotifications
   );

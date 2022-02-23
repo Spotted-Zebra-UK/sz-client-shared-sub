@@ -40,8 +40,10 @@ const DirectInvitation: FC<IDirectInvitation> = ({
   }
 
   if (getInvitationStatusQueryResponse.data) {
-    const { isCompleted, isExpired } =
-      getInvitationStatusQueryResponse.data.getInvitationStatus;
+    const {
+      isCompleted,
+      isExpired,
+    } = getInvitationStatusQueryResponse.data.getInvitationStatus;
     if (isExpired) {
       // If invitation is expired and user should be notified.
       return (

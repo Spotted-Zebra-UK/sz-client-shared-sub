@@ -4,7 +4,12 @@ mutation Authenticate(
   $clientType: ClientType
   $mfaCookie: [String!]
 ) {
-  authenticate(email: $email, password: $password, mfaCookie: $mfaCookie) {
+  authenticate(
+    email: $email
+    password: $password
+    mfaCookie: $mfaCookie
+    clientType: $clientType
+  ) {
     accessToken
     refreshToken
   }
