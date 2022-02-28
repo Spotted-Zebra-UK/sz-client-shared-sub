@@ -100,6 +100,9 @@ export const SoftSkillIcons: {
   110: SupportsPeopleIcon, // Develop people
   111: InfluencesOthersIcon, // Communicate
   112: PeopleAgilityIcon, // Build Inclusive Culture
+  117: ProducesGreatWorkIcon, // Delivers great client outcomes
+  118: InfluencesOthersIcon,
+  119: ChangeAgilityIcon,
 };
 
 const SSDefaultIcon = AdeptsToChangeIcon;
