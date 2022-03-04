@@ -7,7 +7,7 @@ import {
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import { DEAUTHENTICATE_MUTATION } from '../../../graphql/authentication';
-import { ReactComponent as ExitIcon } from '../../../icons/Exit.svg';
+import IC_EXIT from '../../../icons/ic_logout.svg';
 import { IDeauthenticateInput } from '../../../interfaces/authentication';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import IconButton from '../../atoms/IconButton/IconButton';
@@ -43,10 +43,19 @@ const LogoutButton: FC<ILogoutButton> = () => {
   return (
     <div className="profile-menu-item" onClick={handleLogout}>
       <IconButton className="LogoutButton">
-        <ExitIcon />
+        <img src={IC_EXIT} className="icon-exit" alt="exit-icon" />
       </IconButton>
 
-      <label style={{ marginLeft: '10px', cursor: 'pointer' }}>Log out</label>
+      <label
+        style={{
+          marginLeft: '10px',
+          cursor: 'pointer',
+          color: '#656565',
+          fontSize: 15,
+        }}
+      >
+        Log out
+      </label>
     </div>
   );
 };
