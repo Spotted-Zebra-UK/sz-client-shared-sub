@@ -48,7 +48,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
 
       <label
         style={{
-          marginLeft: '10px',
+          marginLeft: '12.5px',
           cursor: 'pointer',
           color: '#656565',
           fontSize: 15,
