@@ -1,14 +1,15 @@
-import React, { FC, useRef, useState } from 'react';
-import { Redirect, useLocation } from 'react-router-dom';
-import { AUTH_TOKEN_STORAGE_KEY } from '../../constants/authentication';
-import { TNotification } from '../../interfaces/notification';
-import { authenticationRoutes } from '../../navigation/AuthNavigation/authNavigation.constants';
-import AuthSwitch from '../../navigation/AuthNavigation/AuthSwitch/AuthSwitch';
-import { IPrivateRouteRedirectLocationState } from '../../navigation/PrivateRoute/PrivateRoute';
-import { AuthViews } from './Authentication.constants';
+import React, { FC, useRef, useState } from "react";
+import { Redirect, useLocation } from "react-router-dom";
+import { AUTH_TOKEN_STORAGE_KEY } from "../../constants/authentication";
+import { TNotification } from "../../interfaces/notification";
+import { authenticationRoutes } from "../../navigation/AuthNavigation/authNavigation.constants";
+import AuthSwitch from "../../navigation/AuthNavigation/AuthSwitch/AuthSwitch";
+import { IPrivateRouteRedirectLocationState } from "../../navigation/PrivateRoute/PrivateRoute";
+import { AuthViews } from "./Authentication.constants";
 
 interface IAuthentication {
   defaultRedirectUrl?: string;
+  clientType?: string;
 }
 
 interface IAuthPrepouplatedValues {
@@ -28,22 +29,22 @@ const initializeAuthNotifications: {
 
 const Authentication: FC<IAuthentication> = ({
   defaultRedirectUrl = authenticationRoutes.defaultAuthRedirectUrl,
+  clientType,
 }) => {
   const { state } = useLocation<
     IPrivateRouteRedirectLocationState | undefined
   >();
   const authRedirectUrl = useRef(
     state?.from && state.from.pathname
-      ? `${state.from.pathname}${state.from.search || ''}`
+      ? `${state.from.pathname}${state.from.search || ""}`
       : defaultRedirectUrl
   );
 
-  const [authPrepopulatedValues, setAuthPrepopulatedValues] = useState<
-    IAuthPrepouplatedValues
-  >({
-    fullName: '',
-    email: '',
-  });
+  const [authPrepopulatedValues, setAuthPrepopulatedValues] =
+    useState<IAuthPrepouplatedValues>({
+      fullName: "",
+      email: "",
+    });
   const [authNotifications, setAuthNotifications] = useState(
     initializeAuthNotifications
   );
@@ -55,14 +56,14 @@ const Authentication: FC<IAuthentication> = ({
     view: AuthViews,
     notification: TNotification
   ) => {
-    setAuthNotifications(prevNotifications => ({
+    setAuthNotifications((prevNotifications) => ({
       ...prevNotifications,
       [view]: notification,
     }));
   };
 
   const handleClearAuthViewNotifications = (view: AuthViews) => {
-    setAuthNotifications(prevNotifications => ({
+    setAuthNotifications((prevNotifications) => ({
       ...prevNotifications,
       [view]: undefined,
     }));
@@ -92,6 +93,7 @@ const Authentication: FC<IAuthentication> = ({
       addAuthNotification={handleAddAuthNotification}
       clearAuthViewNotifications={handleClearAuthViewNotifications}
       setDirectInvitationToken={handleSetDirectInvitationToken}
+      clientType={clientType}
     />
   );
 };
