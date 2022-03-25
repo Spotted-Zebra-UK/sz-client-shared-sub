@@ -146,6 +146,7 @@ const Login: FC<ILogin> = ({
   });
 
   useEffect(() => {
+    document.body.style.backgroundColor = 'white';
     return () => {
       clearAuthViewNotifications(AuthViews.LOGIN);
     };
