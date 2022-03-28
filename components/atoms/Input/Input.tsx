@@ -22,6 +22,7 @@ const Input: FunctionComponent<IInput> = props => {
   return (
     <input
       className={`Input${className ? ` ${className}` : ''}`}
+      name={name}
       onChange={handleChange}
       onBlur={handleChange}
       value={value}

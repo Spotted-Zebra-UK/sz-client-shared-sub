@@ -31,6 +31,7 @@ const PasswordInput: FC<IPasswordInput> = ({
     <div className="PasswordInput">
       <input
         onChange={handleChange}
+        name={name}
         placeholder={placeholder}
         value={value}
         type={isVisible ? 'text' : 'password'}
