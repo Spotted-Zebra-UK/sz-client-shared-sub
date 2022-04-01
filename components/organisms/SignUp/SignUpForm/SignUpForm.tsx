@@ -38,6 +38,7 @@ interface ISignUpForm {
 
 const SignUpForm: FC<ISignUpForm> = props => {
   const { t } = useTranslation();
+  console.log('props of signup form', props.email);
   const [values, setValues] = useState<ISignUpFormValues>({
     fullName: props.fullName || '',
     email: props.email || '',
@@ -45,7 +46,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
     isPrivacyPolicyChecked: false,
   });
   const [errors, setErrors] = useState<ISignUpFormErrors | undefined>();
-
+  console.log('password', values.password);
   const loginValidate = () => {
     return validate(values, {
       fullName: {
