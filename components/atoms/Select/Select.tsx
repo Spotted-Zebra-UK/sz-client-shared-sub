@@ -1,6 +1,7 @@
 import './Select.scss';
 import React, { FC, useMemo } from 'react';
-import RSSelect, { OptionTypeBase } from 'react-select';
+import RSSelect, { ActionMeta, OnChangeValue } from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 
 export type TSelectOption = {
   label: string;
@@ -16,6 +17,8 @@ interface ISelect {
   onChange: (value: string, name: string) => void;
   menuPlacement?: 'top' | 'bottom' | 'auto';
   maxMenuHeight?: number;
+  searchable: boolean;
+  createable: boolean;
 }
 
 const Select: FC<ISelect> = ({
@@ -27,10 +30,28 @@ const Select: FC<ISelect> = ({
   value,
   menuPlacement,
   maxMenuHeight = 100,
+  searchable,
+  createable,
 }) => {
-  const handleChange = (selectedOption: OptionTypeBase | null) => {
-    onChange(selectedOption?.value || '', name);
+  console.log('createable', createable);
+  const handleChange = (
+    newValue: OnChangeValue<TSelectOption, false>,
+    actionMeta: ActionMeta<TSelectOption>
+  ) => {
+    console.group('Value Changed');
+    if (actionMeta.action === 'create-option' && newValue) {
+      options.push({ value: newValue.value, label: newValue.label });
+    }
+
+    onChange(newValue?.value || '', name);
+    console.log(options);
+
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
   };
+  // const handleChange = (selectedOption: OptionTypeBase | null) => {
+  //   onChange(selectedOption?.value || '', name);
+  // };
 
   const valuesLabelObject: { [key in string]: string } = useMemo(
     () =>
@@ -41,21 +62,24 @@ const Select: FC<ISelect> = ({
   const selectedValue = value
     ? { value, label: valuesLabelObject[value as string] }
     : null;
+  const props = {
+    className: 'Select',
+    classNamePrefix: 'Select',
+    id,
+    name,
+    options: [{ value: '', label: '' }, ...options],
+    onChange: handleChange,
+    value: selectedValue,
+    placeholder,
+    maxMenuHeight,
+    menuPlacement,
+    isSearchable: searchable,
+  };
+  if (createable) {
+    return <CreatableSelect {...props} />;
+  }
 
-  return (
-    <RSSelect
-      className="Select"
-      classNamePrefix="Select"
-      id={id}
-      name={name}
-      options={[{ value: '', label: '' }, ...options]}
-      onChange={handleChange}
-      value={selectedValue}
-      placeholder={placeholder}
-      maxMenuHeight={maxMenuHeight}
-      menuPlacement={menuPlacement}
-    />
-  );
+  return <RSSelect {...props} />;
 };
 
 export default Select;

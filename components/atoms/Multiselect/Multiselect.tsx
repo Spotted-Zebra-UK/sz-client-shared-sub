@@ -1,6 +1,6 @@
 import './Multiselect.scss';
 import React, { FC, useMemo } from 'react';
-import Select, { OptionsType } from 'react-select';
+import Select, { OnChangeValue } from 'react-select';
 import { TSelectOption } from '../Select/Select';
 
 interface IMultiselect {
@@ -20,7 +20,7 @@ const Multiselect: FC<IMultiselect> = ({
   placeholder = '',
   value,
 }) => {
-  const handleChange = (value: OptionsType<TSelectOption>) => {
+  const handleChange = (value: OnChangeValue<TSelectOption, true>) => {
     const values: string[] = value.map(valueItem => valueItem.value);
     onChange(values, name);
   };
