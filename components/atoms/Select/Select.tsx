@@ -49,14 +49,12 @@ const Select: FC<ISelect> = ({
     console.log(`action: ${actionMeta.action}`);
     console.groupEnd();
   };
-  // const handleChange = (selectedOption: OptionTypeBase | null) => {
-  //   onChange(selectedOption?.value || '', name);
-  // };
 
   const valuesLabelObject: { [key in string]: string } = useMemo(
     () =>
       options.reduce((acc, curr) => ({ ...acc, [curr.value]: curr.label }), {}),
-    [options]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [options && options.length]
   );
 
   const selectedValue = value
