@@ -33,7 +33,6 @@ const Select: FC<ISelect> = ({
   searchable,
   createable,
 }) => {
-  console.log('createable', createable);
   const handleChange = (
     newValue: OnChangeValue<TSelectOption, false>,
     actionMeta: ActionMeta<TSelectOption>
@@ -44,9 +43,7 @@ const Select: FC<ISelect> = ({
     }
 
     onChange(newValue?.value || '', name);
-    console.log(options);
 
-    console.log(`action: ${actionMeta.action}`);
     console.groupEnd();
   };
 
