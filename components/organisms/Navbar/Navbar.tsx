@@ -4,7 +4,7 @@ import ProfileMenu from 'libs/sz-client-shared-sub/components/organisms/ProfileM
 import { ReactComponent as Logo } from 'libs/sz-client-shared-sub/icons/SpottedZebraLogo.svg';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import IC_MENU from '../../../icons/iconsSVG/hamburger_menu.svg';
+import IC_MENU from '../../../../icons/hamburger_menu.svg';
 import ModuleSelector from './ModuleSelector/ModuleSelector';
 
 interface INavbar {
