@@ -1,0 +1,48 @@
+.container {
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
+  // padding: 28px 50px 28px 50px;
+  // box-shadow: 0 4px 4px 0 rgba(48, 54, 77, 0.04);
+  // background-color: #fff;
+  // width: 100vw;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  // box-sizing: border-box;
+}
+
+.profile-div {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+.profile-picture {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+}
+
+.ham-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.sub-container {
+  max-width: 1920px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 50px 28px 50px;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.second-div {
+  display: flex;
+  gap: 54px;
+}
