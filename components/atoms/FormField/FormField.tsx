@@ -18,13 +18,18 @@ const FormField: FunctionComponent<IFormField> = ({
   return (
     <div className={`FormField FormField--${fieldName}`}>
       <label className="FormField__Label" htmlFor={fieldName}>
-        <div
-          className={`FormField__Label__Text${
-            error ? ' FormField__Label__Text--HasError' : ''
-          }`}
-        >
-          {label && isLabelVisible ? label : ''}
-        </div>
+        {label && isLabelVisible ? (
+          <div
+            className={`FormField__Label__Text${
+              error ? ' FormField__Label__Text--HasError' : ''
+            }`}
+          >
+            {label}
+          </div>
+        ) : (
+          <></>
+        )}
+
         {children}
         <div className="FormField__Error">{error}</div>
       </label>
