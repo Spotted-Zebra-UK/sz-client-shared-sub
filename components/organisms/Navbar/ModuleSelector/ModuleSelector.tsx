@@ -48,7 +48,7 @@ const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
           className="project-module-first-div"
         >
           <img src={IC_RECRUITER} alt="ic-recruter" className="icon" />
-          <label className="module-title-div">Recruitment</label>
+          <div className="module-title-div">Recruitment</div>
         </div>
         {selectedModule === ProjectModuleType.Hiring && (
           <img
@@ -85,7 +85,7 @@ const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
           className="project-module-first-div"
         >
           <img src={IC_RECRUITER} alt="ic-recruter" className="icon" />
-          <label className="module-title-div">Talent Review</label>
+          <div className="module-title-div">Talent Review</div>
         </div>
         {selectedModule === ProjectModuleType.TalentReview && (
           <img
