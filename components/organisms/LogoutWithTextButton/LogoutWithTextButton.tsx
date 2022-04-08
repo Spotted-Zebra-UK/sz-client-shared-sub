@@ -23,8 +23,16 @@ const LogoutButton: FC<ILogoutButton> = () => {
       onCompleted: () => {
         localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
         localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
-        history.push(authenticationRoutes.login);
-        window.location.reload();
+        let redirectFrom = localStorage.getItem('redirectFrom');
+        let onCompleted = localStorage.getItem('onCompleted');
+        if (redirectFrom && onCompleted) {
+          localStorage.removeItem('redirectFrom');
+          localStorage.removeItem('onCompleted');
+          window.open(`${redirectFrom}?logout=true`, '_self');
+        } else {
+          history.push(authenticationRoutes.login);
+          window.location.reload();
+        }
       },
       onError: () => {},
     }
