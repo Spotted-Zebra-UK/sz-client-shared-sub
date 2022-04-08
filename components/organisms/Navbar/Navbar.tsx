@@ -1,10 +1,10 @@
 import './Navbar.scss';
-import { ProjectModuleType, useMeQuery, User } from 'generated/graphql';
+import { ProjectModuleType, User, useUserQuery } from 'generated/graphql';
+import ProfileMenu from 'libs/sz-client-shared-sub/components/organisms/ProfileMenu/ProfileMenu';
 import { ReactComponent as Logo } from 'libs/sz-client-shared-sub/icons/SpottedZebraLogo.svg';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import IC_MENU from '../../../../src/icons/iconsSVG/hamburger_menu.svg';
-import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import ModuleSelector from './ModuleSelector/ModuleSelector';
 
 interface INavbar {
@@ -15,11 +15,11 @@ interface INavbar {
 const Navbar: FC<INavbar> = ({ selectedModule, fromCompany }) => {
   const history = useHistory();
   const [profileMenuShow, setProfileMenuShow] = useState<boolean>(false);
-  const getUserResponse = useMeQuery({
+  const getUserResponse = useUserQuery({
     nextFetchPolicy: 'network-only',
     notifyOnNetworkStatusChange: true,
   });
-  const user = getUserResponse?.data?.me;
+  const user = getUserResponse?.data?.User;
   const componentRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener('mousedown', e => handleClick(e));
