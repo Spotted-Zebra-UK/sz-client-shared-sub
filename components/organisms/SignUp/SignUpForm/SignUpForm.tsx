@@ -45,7 +45,6 @@ const SignUpForm: FC<ISignUpForm> = props => {
     isPrivacyPolicyChecked: false,
   });
   const [errors, setErrors] = useState<ISignUpFormErrors | undefined>();
-
   const loginValidate = () => {
     return validate(values, {
       fullName: {
