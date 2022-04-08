@@ -46,7 +46,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
         <img src={IC_EXIT} className="icon-exit" alt="exit-icon" />
       </IconButton>
 
-      <label
+      <div
         style={{
           marginLeft: '12.5px',
           cursor: 'pointer',
@@ -55,7 +55,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
         }}
       >
         Log out
-      </label>
+      </div>
     </div>
   );
 };
