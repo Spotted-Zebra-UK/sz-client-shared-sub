@@ -1,10 +1,7 @@
 import './ModuleSelector.scss';
+import { ProjectModuleType, useCmModuleAccessQuery } from 'generated/graphql';
 import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-  ProjectModuleType,
-  useCmModuleAccessQuery,
-} from '../../../../generated/graphql';
 import IC_ARROW from '../../../../icons/iconsSVG/ic_down-arrow_small.svg';
 import IC_RECRUITER from '../../../../icons/iconsSVG/ic_recruitment.svg';
 

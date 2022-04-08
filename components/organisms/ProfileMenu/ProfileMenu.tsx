@@ -1,8 +1,8 @@
 import './ProfileMenu.scss';
 import React, { FC } from 'react';
-import { User } from '../../../generated/graphql';
-import Avatar from '../../../libs/sz-client-shared-sub/components/atoms/Avatar/Avatar';
-import LogoutWithTextButton from '../../../libs/sz-client-shared-sub/components/organisms/LogoutWithTextButton/LogoutWithTextButton';
+import { User } from '../../../../../generated/graphql';
+import Avatar from '../../atoms/Avatar/Avatar';
+import LogoutWithTextButton from '../LogoutWithTextButton/LogoutWithTextButton';
 
 interface IProfileMenu {
   user: User;
