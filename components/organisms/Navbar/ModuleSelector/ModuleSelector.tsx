@@ -9,7 +9,7 @@ import { Application } from '../../../../interfaces/Applications';
 
 interface IModuleSelector {
   selectedModuleProp?: ProjectModuleType;
-  fromCompany: boolean;
+  fromCompany?: boolean;
 }
 
 const ModuleSelector: FC<IModuleSelector> = ({
