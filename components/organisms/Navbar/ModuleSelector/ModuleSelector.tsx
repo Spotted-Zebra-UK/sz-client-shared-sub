@@ -58,14 +58,17 @@ const ModuleSelector: FC<IModuleSelector> = ({
       >
         <div
           onClick={e => {
-            if (fromCompany) {
-              history.push('/projects');
-            } else {
-              window.open(
-                `${getTargetUrl(Application.COMPANY)}/projects`,
-                '_self'
-              );
+            if (selectedModule === ProjectModuleType.TalentReview) {
+              if (fromCompany) {
+                history.push('/projects');
+              } else {
+                window.open(
+                  `${getTargetUrl(Application.COMPANY)}/projects`,
+                  '_self'
+                );
+              }
             }
+
             if (selectedModule === ProjectModuleType.Hiring) {
               e.preventDefault();
               setShowDropdown(showDropdown => !showDropdown);
@@ -91,14 +94,15 @@ const ModuleSelector: FC<IModuleSelector> = ({
       >
         <div
           onClick={() => {
-            setShowDropdown(false);
-            if (fromCompany) {
-              history.push('/talent-review/4');
-            } else {
-              window.open(
-                `${getTargetUrl(Application.COMPANY)}/talent-review/4`,
-                '_self'
-              );
+            if (selectedModule === ProjectModuleType.Hiring) {
+              if (fromCompany) {
+                history.push('/talent-review/4');
+              } else {
+                window.open(
+                  `${getTargetUrl(Application.COMPANY)}/talent-review/4`,
+                  '_self'
+                );
+              }
             }
             if (selectedModule === ProjectModuleType.TalentReview) {
               setShowDropdown(showDropdown => !showDropdown);
