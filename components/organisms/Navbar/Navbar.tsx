@@ -50,9 +50,7 @@ const Navbar: FC<INavbar> = ({ selectedModule, fromCompany }) => {
             onClick={() => history.push('/')}
           />
           <div className="second-div">
-            {fromCompany && (
-              <ModuleSelector selectedModuleProp={selectedModule} />
-            )}
+            <ModuleSelector selectedModuleProp={selectedModule} fromCompany />
             <div
               className="profile-div"
               ref={componentRef}

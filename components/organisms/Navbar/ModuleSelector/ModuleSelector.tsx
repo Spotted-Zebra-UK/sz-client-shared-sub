@@ -2,14 +2,20 @@ import './ModuleSelector.scss';
 import { ProjectModuleType, useCmModuleAccessQuery } from 'generated/graphql';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { getTargetUrl } from '../../../../helpers/getTargetURL';
 import IC_ARROW from '../../../../icons/ic_down-arrow_small.svg';
 import IC_RECRUITER from '../../../../icons/ic_recruitment.svg';
+import { Application } from '../../../../interfaces/Applications';
 
 interface IModuleSelector {
   selectedModuleProp?: ProjectModuleType;
+  fromCompany: boolean;
 }
 
-const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
+const ModuleSelector: FC<IModuleSelector> = ({
+  selectedModuleProp,
+  fromCompany,
+}) => {
   const [modules, setModules] = useState<ProjectModuleType[]>([]);
   const [selectedModule, setSelectedModule] = useState<
     ProjectModuleType | undefined
@@ -52,7 +58,14 @@ const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
       >
         <div
           onClick={e => {
-            history.push('/projects');
+            if (fromCompany) {
+              history.push('/projects');
+            } else {
+              window.open(
+                `${getTargetUrl(Application.COMPANY)}/projects`,
+                '_self'
+              );
+            }
             if (selectedModule === ProjectModuleType.Hiring) {
               e.preventDefault();
               setShowDropdown(showDropdown => !showDropdown);
@@ -79,7 +92,14 @@ const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
         <div
           onClick={() => {
             setShowDropdown(false);
-            history.push('/talent-review/4');
+            if (fromCompany) {
+              history.push('/talent-review/4');
+            } else {
+              window.open(
+                `${getTargetUrl(Application.COMPANY)}/talent-review/4`,
+                '_self'
+              );
+            }
             if (selectedModule === ProjectModuleType.TalentReview) {
               setShowDropdown(showDropdown => !showDropdown);
             }
@@ -96,7 +116,7 @@ const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
     ),
   };
 
-  if (selectedModule)
+  if (selectedModule && modules.length > 0)
     return (
       <div className="module-selector" ref={ref}>
         {showDropdown

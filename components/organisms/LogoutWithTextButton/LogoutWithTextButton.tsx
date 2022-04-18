@@ -28,7 +28,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
         if (redirectFrom && onCompleted) {
           localStorage.removeItem('redirectFrom');
           localStorage.removeItem('onCompleted');
-          window.open(`${redirectFrom}?logout=true`, '_self');
+          window.open(`${redirectFrom}`, '_self');
         } else {
           history.push(authenticationRoutes.login);
           window.location.reload();
