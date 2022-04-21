@@ -16,7 +16,7 @@ const Navbar: FC<INavbar> = ({ selectedModule, fromCompany }) => {
   const history = useHistory();
   const [profileMenuShow, setProfileMenuShow] = useState<boolean>(false);
   const getUserResponse = useUserQuery({
-    nextFetchPolicy: 'network-only',
+    fetchPolicy: 'network-only',
     notifyOnNetworkStatusChange: true,
   });
   const user = getUserResponse?.data?.User;
@@ -50,9 +50,10 @@ const Navbar: FC<INavbar> = ({ selectedModule, fromCompany }) => {
             onClick={() => history.push('/')}
           />
           <div className="second-div">
-            {fromCompany && (
-              <ModuleSelector selectedModuleProp={selectedModule} />
-            )}
+            <ModuleSelector
+              selectedModuleProp={selectedModule}
+              fromCompany={fromCompany}
+            />
             <div
               className="profile-div"
               ref={componentRef}

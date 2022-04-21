@@ -11,6 +11,11 @@
   width: 20px;
   height: 20px;
 }
+.icon-arrow {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
 
 .module-title-div {
   font-size: 14px;
@@ -43,4 +48,5 @@
   display: flex;
   gap: 8px;
   align-items: center;
+  cursor: pointer;
 }

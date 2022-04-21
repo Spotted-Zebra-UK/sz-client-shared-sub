@@ -1,22 +1,41 @@
 import './ModuleSelector.scss';
 import { ProjectModuleType, useCmModuleAccessQuery } from 'generated/graphql';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { getTargetUrl } from '../../../../helpers/getTargetURL';
 import IC_ARROW from '../../../../icons/ic_down-arrow_small.svg';
 import IC_RECRUITER from '../../../../icons/ic_recruitment.svg';
+import { Application } from '../../../../interfaces/Applications';
 
 interface IModuleSelector {
   selectedModuleProp?: ProjectModuleType;
+  fromCompany?: boolean;
 }
 
-const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
+const ModuleSelector: FC<IModuleSelector> = ({
+  selectedModuleProp,
+  fromCompany,
+}) => {
   const [modules, setModules] = useState<ProjectModuleType[]>([]);
   const [selectedModule, setSelectedModule] = useState<
     ProjectModuleType | undefined
   >(selectedModuleProp);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const history = useHistory();
+  const ref = useRef<HTMLDivElement>(null);
 
+  const handleClick = (event: MouseEvent) => {
+    if (ref.current && !ref.current.contains(event.target as HTMLElement)) {
+      setShowDropdown(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', e => handleClick(e));
+    return () => {
+      document.removeEventListener('mousedown', e => handleClick(e));
+    };
+  }, [showDropdown]);
   useCmModuleAccessQuery({
     onCompleted: data => {
       const cmModuleAccess = data.CmModuleAccess;
@@ -36,14 +55,24 @@ const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
             ? 'module-div'
             : 'second-module-div'
         }
-        onClick={() => {
-          setSelectedModule(ProjectModuleType.Hiring);
-        }}
       >
         <div
-          onClick={() => {
-            setShowDropdown(false);
-            history.push('/projects');
+          onClick={e => {
+            if (selectedModule === ProjectModuleType.TalentReview) {
+              if (fromCompany) {
+                history.push('/projects');
+              } else {
+                window.open(
+                  `${getTargetUrl(Application.COMPANY)}/projects`,
+                  '_self'
+                );
+              }
+            }
+
+            if (selectedModule === ProjectModuleType.Hiring) {
+              e.preventDefault();
+              setShowDropdown(showDropdown => !showDropdown);
+            }
           }}
           className="project-module-first-div"
         >
@@ -51,15 +80,7 @@ const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
           <div className="module-title-div">Recruitment</div>
         </div>
         {selectedModule === ProjectModuleType.Hiring && (
-          <img
-            src={IC_ARROW}
-            alt="ic-recruter"
-            className="icon"
-            onClick={e => {
-              e.preventDefault();
-              setShowDropdown(showDropdown => !showDropdown);
-            }}
-          />
+          <img src={IC_ARROW} alt="ic-recruter" className="icon-arrow" />
         )}
       </div>
     ),
@@ -70,17 +91,22 @@ const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
             ? 'second-module-div'
             : 'module-div'
         }
-        onClick={() => {
-          //   setShowDropdown(false);
-          history.push('/talent-review/4');
-
-          setSelectedModule(ProjectModuleType.TalentReview);
-        }}
       >
         <div
           onClick={() => {
-            setShowDropdown(false);
-            history.push('/talent-review/4');
+            if (selectedModule === ProjectModuleType.Hiring) {
+              if (fromCompany) {
+                history.push('/talent-review/4');
+              } else {
+                window.open(
+                  `${getTargetUrl(Application.COMPANY)}/talent-review/4`,
+                  '_self'
+                );
+              }
+            }
+            if (selectedModule === ProjectModuleType.TalentReview) {
+              setShowDropdown(showDropdown => !showDropdown);
+            }
           }}
           className="project-module-first-div"
         >
@@ -88,22 +114,15 @@ const ModuleSelector: FC<IModuleSelector> = ({ selectedModuleProp }) => {
           <div className="module-title-div">Talent Review</div>
         </div>
         {selectedModule === ProjectModuleType.TalentReview && (
-          <img
-            src={IC_ARROW}
-            alt="ic-recruter"
-            className="icon"
-            onClick={() => {
-              setShowDropdown(showDropdown => !showDropdown);
-            }}
-          />
+          <img src={IC_ARROW} alt="ic-recruter" className="icon-arrow" />
         )}
       </div>
     ),
   };
 
-  if (selectedModule)
+  if (selectedModule && modules.length > 0)
     return (
-      <div className="module-selector">
+      <div className="module-selector" ref={ref}>
         {showDropdown
           ? modules.map((cm, i) => <>{showCmModule[cm]}</>)
           : showCmModule[selectedModule]}
