@@ -1,0 +1,11 @@
+mutation AcceptIndirectInvitation(
+  $stageId: Int!
+  $projectId: Int
+  $hiringManagers: [HiringManager!]
+) {
+  AcceptIndirectInvitation: StageCandidateAcceptIndirectInvitation(
+    stageId: $stageId
+    projectId: $projectId
+    hiringManagers: $hiringManagers
+  )
+}

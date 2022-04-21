@@ -1,0 +1,13 @@
+query CalibrationConfigFindOne($ownerId: Int!, $type: AssignedType!) {
+  CalibrationConfigFindOne(ownerId: $ownerId, type: $type) {
+    id
+    ownerId
+    type
+    softSkillIds
+    gradeBands {
+      position
+      name
+      groupName
+    }
+  }
+}

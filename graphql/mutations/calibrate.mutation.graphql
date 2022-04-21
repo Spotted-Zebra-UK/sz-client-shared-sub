@@ -1,0 +1,32 @@
+mutation ResultAccessFindOne($stageCandidateId: Int!) {
+  ResultAccessFindOne(stageCandidateId: $stageCandidateId) {
+    label
+    status
+    allowedActions
+  }
+}
+
+mutation ResultCreateVersions($versions: [ResultCreateVersionArgs!]!) {
+  ResultCreateVersions(versions: $versions) {
+    id
+    parentId
+    type
+    childId
+    version
+    score {
+      customEvaluation
+    }
+    label
+    creatorService
+    creatorId
+  }
+}
+mutation StageCandidateUpdate(
+  $stageCandidateId: Int!
+  $status: StageCandidateStatus!
+) {
+  StageCandidateUpdate(id: $stageCandidateId, status: $status) {
+    id
+    status
+  }
+}
