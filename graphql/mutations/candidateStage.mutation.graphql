@@ -7,5 +7,17 @@ mutation AcceptIndirectInvitation(
     stageId: $stageId
     projectId: $projectId
     hiringManagers: $hiringManagers
-  )
+  ) {
+    candidateId
+    candidateProjectManagerIds
+    companyId
+    createdAt
+    deletedAt
+    doneBy
+    doneFor
+    id
+    lastDateOfCandidateAction
+    stageId
+    status
+  }
 }
