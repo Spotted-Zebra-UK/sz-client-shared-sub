@@ -1,0 +1,6 @@
+query SoftSkillFindMany($ids: [Int!]) {
+  SoftSkillFindMany(ids: $ids) {
+    name
+    id
+  }
+}

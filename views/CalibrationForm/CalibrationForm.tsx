@@ -12,12 +12,14 @@ interface ICalibrationForm {
   stageCandidateId: number;
   ownerId: number;
   userType: 'candidate' | 'company';
+  onCloseHandler: () => void;
 }
 
 const CalibrationForm: FC<ICalibrationForm> = ({
   ownerId,
   stageCandidateId,
   userType,
+  onCloseHandler,
 }) => {
   const [
     grades,
@@ -41,10 +43,8 @@ const CalibrationForm: FC<ICalibrationForm> = ({
   ] = useCalibrateForm({
     ownerId: ownerId,
     stageCandidateId: stageCandidateId,
-    onCloseHandler: () => {},
+    onCloseHandler,
   });
-
-  const onCloseHandler = () => {};
 
   return (
     <div className="calibration">

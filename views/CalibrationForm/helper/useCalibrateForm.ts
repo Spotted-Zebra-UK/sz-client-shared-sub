@@ -50,6 +50,7 @@ interface IUseCalibrateForm {
 export const useCalibrateForm = ({
   stageCandidateId,
   ownerId,
+  onCloseHandler,
 }: IUseCalibrateForm): [
   IGrade[],
   {
@@ -145,6 +146,13 @@ export const useCalibrateForm = ({
       variables: {
         versions: payload,
       },
+      onCompleted: () => {
+        onCloseHandler();
+      },
+      onError: error => {
+        console.log(error);
+        onCloseHandler();
+      },
     });
   };
   const onUpdateStatus = () => {
@@ -152,6 +160,13 @@ export const useCalibrateForm = ({
       variables: {
         stageCandidateId: stageCandidateId,
         status: StageCandidateStatus.SignedOff,
+      },
+      onCompleted: () => {
+        onCloseHandler();
+      },
+      onError: error => {
+        console.log(error);
+        onCloseHandler();
       },
     });
   };
