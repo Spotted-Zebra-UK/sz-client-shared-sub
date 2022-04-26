@@ -1,0 +1,11 @@
+query SoftSkills {
+  SoftSkills {
+    ...SoftSkill
+  }
+}
+
+query SoftSkillFindMany($ids: [Int!]) {
+  SoftSkillFindMany(ids: $ids) {
+    ...SoftSkill
+  }
+}

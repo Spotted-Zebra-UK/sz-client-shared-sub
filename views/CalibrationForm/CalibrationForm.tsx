@@ -1,5 +1,5 @@
 import './CalibrationForm.scss';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import Loader from '../../components/atoms/Loader/Loader';
 import PersonIconUrl, { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
@@ -57,7 +57,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
       {getCalibrateFormQueryResponse.data &&
         formSoftSkills[selectedScreen] &&
         getResultAccessResponse.data && (
-          <React.Fragment>
+          <>
             {userType === 'candidate' ? (
               <div className="calibration__header">
                 <PersonIcon className="calibration__header__icon" />
@@ -108,38 +108,35 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                 </div>
                 <div className="calibration__form__header__form-top">
                   {grades.map((group, index) => (
-                    <React.Fragment key={index}>
-                      <div className={`flex-${group.totalPoints}`}>
-                        <div
-                          className="label"
-                          style={{
-                            borderBottom: `3px solid ${
-                              colors[totalColors - 1 - (index % totalColors)]
-                            }`,
-                          }}
-                        >
-                          {group.name}
-                        </div>
-                        <div
-                          style={{
-                            backgroundColor:
-                              colors[totalColors - 1 - (index % totalColors)],
-                            height:
-                              (getSoftSkillsQueryResponse.data &&
-                              Array.isArray(
-                                getSoftSkillsQueryResponse.data
-                                  ?.SoftSkillFindMany
-                              )
-                                ? getSoftSkillsQueryResponse.data
-                                    ?.SoftSkillFindMany?.length
-                                : 0) * 120,
-                            opacity: '0.08',
-                          }}
-                        >
-                          {' '}
-                        </div>
+                    <div className={`flex-${group.totalPoints}`} key={index}>
+                      <div
+                        className="label"
+                        style={{
+                          borderBottom: `3px solid ${
+                            colors[totalColors - 1 - (index % totalColors)]
+                          }`,
+                        }}
+                      >
+                        {group.name}
                       </div>
-                    </React.Fragment>
+                      <div
+                        style={{
+                          backgroundColor:
+                            colors[totalColors - 1 - (index % totalColors)],
+                          height:
+                            (getSoftSkillsQueryResponse.data &&
+                            Array.isArray(
+                              getSoftSkillsQueryResponse.data?.SoftSkillFindMany
+                            )
+                              ? getSoftSkillsQueryResponse.data
+                                  ?.SoftSkillFindMany?.length
+                              : 0) * 120,
+                          opacity: '0.08',
+                        }}
+                      >
+                        {' '}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -147,12 +144,18 @@ const CalibrationForm: FC<ICalibrationForm> = ({
               {getSoftSkillsQueryResponse.data &&
                 formSoftSkills[selectedScreen] &&
                 formSuccessProfiles[selectedScreen] && (
-                  <React.Fragment>
+                  <>
                     {getSoftSkillsQueryResponse.data.SoftSkillFindMany?.map(
-                      (obj, key) => (
+                      (
+                        obj: {
+                          name: string;
+                          id: number;
+                        },
+                        key: number
+                      ) => (
                         <CalibrateField
                           key={key}
-                          index={key}
+                          index={key as number}
                           onChangeHandler={onChangeSoftSkill}
                           softsSkill={obj}
                           totalScore={totalScore - 1}
@@ -212,10 +215,9 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                           }
                         />
                       ))}
-                  </React.Fragment>
+                  </>
                 )}
             </div>
-            {/* Action Buttons */}
             <div className="calibration__action">
               <CalibrationAction
                 currentUser={
@@ -233,7 +235,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                 }
               />
             </div>
-          </React.Fragment>
+          </>
         )}
     </div>
   );
