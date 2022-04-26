@@ -10,9 +10,14 @@ import ModuleSelector from './ModuleSelector/ModuleSelector';
 interface INavbar {
   selectedModule?: CmAccessType;
   fromCompany?: boolean;
+  changeSelectedModule?: (module: CmAccessType) => void;
 }
 
-const Navbar: FC<INavbar> = ({ selectedModule, fromCompany }) => {
+const Navbar: FC<INavbar> = ({
+  selectedModule,
+  fromCompany,
+  changeSelectedModule,
+}) => {
   const history = useHistory();
   const [profileMenuShow, setProfileMenuShow] = useState<boolean>(false);
   const getUserResponse = useUserQuery({
@@ -53,6 +58,7 @@ const Navbar: FC<INavbar> = ({ selectedModule, fromCompany }) => {
             <ModuleSelector
               selectedModuleProp={selectedModule}
               fromCompany={fromCompany}
+              changeSelectedModule={changeSelectedModule}
             />
             <div
               className="profile-div"

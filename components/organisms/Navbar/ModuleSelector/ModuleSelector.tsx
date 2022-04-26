@@ -10,11 +10,13 @@ import { Application } from '../../../../interfaces/Applications';
 interface IModuleSelector {
   selectedModuleProp?: CmAccessType;
   fromCompany?: boolean;
+  changeSelectedModule?: (moduleType: CmAccessType) => void;
 }
 
 const ModuleSelector: FC<IModuleSelector> = ({
   selectedModuleProp,
   fromCompany,
+  changeSelectedModule,
 }) => {
   const [modules, setModules] = useState<CmAccessType[]>([]);
   const [selectedModule, setSelectedModule] = useState<
@@ -41,8 +43,11 @@ const ModuleSelector: FC<IModuleSelector> = ({
       const cmModuleAccess = data.CmAccess;
       if (cmModuleAccess?.defaultScreen) {
         setModules(cmModuleAccess?.access as CmAccessType[]);
-        if (!selectedModuleProp)
+        if (!selectedModuleProp && cmModuleAccess?.defaultScreen) {
           setSelectedModule(cmModuleAccess?.defaultScreen);
+          if (changeSelectedModule)
+            changeSelectedModule(cmModuleAccess?.defaultScreen);
+        }
       }
     },
   });
@@ -58,7 +63,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
       >
         <div
           onClick={e => {
-            if (selectedModule === CmAccessType.TalentReview) {
+            if (selectedModule === CmAccessType.Hiring) {
               if (fromCompany) {
                 history.push('/projects');
               } else {
@@ -94,7 +99,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
       >
         <div
           onClick={() => {
-            if (selectedModule === CmAccessType.Hiring) {
+            if (selectedModule === CmAccessType.TalentReview) {
               if (fromCompany) {
                 history.push('/talent-review/4');
               } else {
