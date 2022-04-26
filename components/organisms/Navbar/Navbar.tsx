@@ -1,5 +1,5 @@
 import './Navbar.scss';
-import { ProjectModuleType, User, useUserQuery } from 'generated/graphql';
+import { CmAccessType, User, useUserQuery } from 'generated/graphql';
 import ProfileMenu from 'libs/sz-client-shared-sub/components/organisms/ProfileMenu/ProfileMenu';
 import { ReactComponent as Logo } from 'libs/sz-client-shared-sub/icons/SpottedZebraLogo.svg';
 import React, { FC, useEffect, useRef, useState } from 'react';
@@ -8,7 +8,7 @@ import IC_MENU from '../../../icons/hamburger_menu.svg';
 import ModuleSelector from './ModuleSelector/ModuleSelector';
 
 interface INavbar {
-  selectedModule?: ProjectModuleType;
+  selectedModule?: CmAccessType;
   fromCompany?: boolean;
 }
 

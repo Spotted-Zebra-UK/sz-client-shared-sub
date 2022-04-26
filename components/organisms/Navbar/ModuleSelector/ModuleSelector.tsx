@@ -1,5 +1,5 @@
 import './ModuleSelector.scss';
-import { ProjectModuleType, useCmModuleAccessQuery } from 'generated/graphql';
+import { CmAccessType, useCmAccessQuery } from 'generated/graphql';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getTargetUrl } from '../../../../helpers/getTargetURL';
@@ -8,7 +8,7 @@ import IC_RECRUITER from '../../../../icons/ic_recruitment.svg';
 import { Application } from '../../../../interfaces/Applications';
 
 interface IModuleSelector {
-  selectedModuleProp?: ProjectModuleType;
+  selectedModuleProp?: CmAccessType;
   fromCompany?: boolean;
 }
 
@@ -16,9 +16,9 @@ const ModuleSelector: FC<IModuleSelector> = ({
   selectedModuleProp,
   fromCompany,
 }) => {
-  const [modules, setModules] = useState<ProjectModuleType[]>([]);
+  const [modules, setModules] = useState<CmAccessType[]>([]);
   const [selectedModule, setSelectedModule] = useState<
-    ProjectModuleType | undefined
+    CmAccessType | undefined
   >(selectedModuleProp);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const history = useHistory();
@@ -36,29 +36,29 @@ const ModuleSelector: FC<IModuleSelector> = ({
       document.removeEventListener('mousedown', e => handleClick(e));
     };
   }, [showDropdown]);
-  useCmModuleAccessQuery({
+  useCmAccessQuery({
     onCompleted: data => {
-      const cmModuleAccess = data.CmModuleAccess;
-      if (cmModuleAccess?.defaultModule) {
-        setModules(cmModuleAccess?.modules as ProjectModuleType[]);
+      const cmModuleAccess = data.CmAccess;
+      if (cmModuleAccess?.defaultScreen) {
+        setModules(cmModuleAccess?.access as CmAccessType[]);
         if (!selectedModuleProp)
-          setSelectedModule(cmModuleAccess?.defaultModule);
+          setSelectedModule(cmModuleAccess?.defaultScreen);
       }
     },
   });
 
   const showCmModule: { [key in string]: React.ReactElement } = {
-    [ProjectModuleType.Hiring]: (
+    [CmAccessType.Hiring]: (
       <div
         className={
-          selectedModule === ProjectModuleType.Hiring
+          selectedModule === CmAccessType.Hiring
             ? 'module-div'
             : 'second-module-div'
         }
       >
         <div
           onClick={e => {
-            if (selectedModule === ProjectModuleType.TalentReview) {
+            if (selectedModule === CmAccessType.TalentReview) {
               if (fromCompany) {
                 history.push('/projects');
               } else {
@@ -69,7 +69,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
               }
             }
 
-            if (selectedModule === ProjectModuleType.Hiring) {
+            if (selectedModule === CmAccessType.Hiring) {
               e.preventDefault();
               setShowDropdown(showDropdown => !showDropdown);
             }
@@ -79,22 +79,22 @@ const ModuleSelector: FC<IModuleSelector> = ({
           <img src={IC_RECRUITER} alt="ic-recruter" className="icon" />
           <div className="module-title-div">Recruitment</div>
         </div>
-        {selectedModule === ProjectModuleType.Hiring && (
+        {selectedModule === CmAccessType.Hiring && (
           <img src={IC_ARROW} alt="ic-recruter" className="icon-arrow" />
         )}
       </div>
     ),
-    [ProjectModuleType.TalentReview]: (
+    [CmAccessType.TalentReview]: (
       <div
         className={
-          selectedModule === ProjectModuleType.Hiring
+          selectedModule === CmAccessType.Hiring
             ? 'second-module-div'
             : 'module-div'
         }
       >
         <div
           onClick={() => {
-            if (selectedModule === ProjectModuleType.Hiring) {
+            if (selectedModule === CmAccessType.Hiring) {
               if (fromCompany) {
                 history.push('/talent-review/4');
               } else {
@@ -104,7 +104,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
                 );
               }
             }
-            if (selectedModule === ProjectModuleType.TalentReview) {
+            if (selectedModule === CmAccessType.TalentReview) {
               setShowDropdown(showDropdown => !showDropdown);
             }
           }}
@@ -113,7 +113,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
           <img src={IC_RECRUITER} alt="ic-recruter" className="icon" />
           <div className="module-title-div">Talent Review</div>
         </div>
-        {selectedModule === ProjectModuleType.TalentReview && (
+        {selectedModule === CmAccessType.TalentReview && (
           <img src={IC_ARROW} alt="ic-recruter" className="icon-arrow" />
         )}
       </div>
