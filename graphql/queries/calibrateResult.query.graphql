@@ -1,0 +1,16 @@
+query ResultFindMany($stageCandidateId: Int!, $type: BasicScoreType) {
+  ResultFindMany(stageCandidateId: $stageCandidateId, type: $type) {
+    id
+    parentId
+    type
+    childId
+    version
+    score {
+      customEvaluation
+      customScore
+    }
+    label
+    creatorService
+    creatorId
+  }
+}

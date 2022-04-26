@@ -1,0 +1,17 @@
+fragment SoftSkillTrait on SoftSkillTrait {
+  id
+  orientation
+  weight
+  traitId
+  traitName
+  trait {
+    id
+    name
+  }
+  softSkillId
+  softSkillName
+  softSkill {
+    id
+    name
+  }
+}
