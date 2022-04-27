@@ -1,14 +1,14 @@
-import React, { FC } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import TwoFactorAuthentication from "../../../views/Authentication/TwoFactorAuthentication/TwoFactorAuthentication";
-import { TNotification } from "../../../interfaces/notification";
-import { AuthViews } from "../../../views/Authentication/Authentication.constants";
-import CreatePassword from "../../../views/Authentication/CreatePassword/CreatePassword";
-import DirectInvitation from "../../../views/Authentication/DirectInvitation/DirectInvitation";
-import Login from "../../../views/Authentication/Login/Login";
-import RestorePassword from "../../../views/Authentication/RestorePassword/RestorePassword";
-import SignUpWrapper from "../../../views/Authentication/SignUp/SignUpWrapper/SignUpWrapper";
-import { authenticationRoutes } from "../authNavigation.constants";
+import React, { FC } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import TwoFactorAuthentication from '../../../views/Authentication/TwoFactorAuthentication/TwoFactorAuthentication';
+import { TNotification } from '../../../interfaces/notification';
+import { AuthViews } from '../../../views/Authentication/Authentication.constants';
+import CreatePassword from '../../../views/Authentication/CreatePassword/CreatePassword';
+import DirectInvitation from '../../../views/Authentication/DirectInvitation/DirectInvitation';
+import Login from '../../../views/Authentication/Login/Login';
+import RestorePassword from '../../../views/Authentication/RestorePassword/RestorePassword';
+import SignUpWrapper from '../../../views/Authentication/SignUp/SignUpWrapper/SignUpWrapper';
+import { authenticationRoutes } from '../authNavigation.constants';
 
 interface IAuthSwitch {
   authRedirectUrl: string;

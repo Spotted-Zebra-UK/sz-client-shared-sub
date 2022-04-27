@@ -17,8 +17,16 @@ interface IFloatingLabelInput {
 }
 
 const FloatingLabelInput: FC<IFloatingLabelInput> = props => {
-  const { type, value, onChange, isDisabled, name, hint, label, ...rest } =
-    props;
+  const {
+    type,
+    value,
+    onChange,
+    isDisabled,
+    name,
+    hint,
+    label,
+    ...rest
+  } = props;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value, name);

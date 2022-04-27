@@ -1,9 +1,9 @@
-import "./TwoFactorAuthenticationForm.scss";
-import React, { FunctionComponent, useState } from "react";
-import { useTranslation } from "react-i18next";
-import FormField from "../../../atoms/FormField/FormField";
-import Input from "../../../atoms/Input/Input";
-import SquareButton from "../../../molecules/SquareButton/SquareButton";
+import './TwoFactorAuthenticationForm.scss';
+import React, { FunctionComponent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import FormField from '../../../atoms/FormField/FormField';
+import Input from '../../../atoms/Input/Input';
+import SquareButton from '../../../molecules/SquareButton/SquareButton';
 
 interface ITwoFactorAuthenticationFormValues {
   mfaCode: number;
@@ -13,16 +13,14 @@ interface ITwoFactorAuthenticationForm {
   onSubmit: (mfaCode: number) => void;
 }
 
-const TwoFactorAuthenticationForm: FunctionComponent<
-  ITwoFactorAuthenticationForm
-> = (props) => {
+const TwoFactorAuthenticationForm: FunctionComponent<ITwoFactorAuthenticationForm> = props => {
   const { t } = useTranslation();
   const [values, setValues] = useState<ITwoFactorAuthenticationFormValues>();
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
 
   const handleChange = (value: string) => {
     setValues({ mfaCode: +value });
-    setError("");
+    setError('');
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -30,7 +28,7 @@ const TwoFactorAuthenticationForm: FunctionComponent<
     if (values && values.mfaCode) {
       props.onSubmit(values.mfaCode);
     } else {
-      setError(t("authentication.twoFactorAuthentication.insert6DigitCode"));
+      setError(t('authentication.twoFactorAuthentication.insert6DigitCode'));
     }
   };
 
@@ -46,13 +44,13 @@ const TwoFactorAuthenticationForm: FunctionComponent<
           <Input
             name="mfaCode"
             onChange={handleChange}
-            placeholder={t("authentication.twoFactorAuthentication.code")}
-            value={values?.mfaCode ? values.mfaCode.toString() : ""}
+            placeholder={t('authentication.twoFactorAuthentication.code')}
+            value={values?.mfaCode ? values.mfaCode.toString() : ''}
           />
         </FormField>
       </div>
       <SquareButton type="submit">
-        {t("authentication.twoFactorAuthentication.submit")}
+        {t('authentication.twoFactorAuthentication.submit')}
       </SquareButton>
     </form>
   );
