@@ -1,10 +1,10 @@
 import './Navbar.scss';
 import { CmAccessType, User, useUserQuery } from 'generated/graphql';
-import ProfileMenu from 'libs/sz-client-shared-sub/components/organisms/ProfileMenu/ProfileMenu';
 import { ReactComponent as Logo } from 'libs/sz-client-shared-sub/icons/SpottedZebraLogo.svg';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import IC_MENU from '../../../icons/hamburger_menu.svg';
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import ModuleSelector from './ModuleSelector/ModuleSelector';
 
 interface INavbar {
