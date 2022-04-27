@@ -56,7 +56,7 @@ const Navbar: FC<INavbar> = ({
           />
           <div className="second-div">
             <ModuleSelector
-              selectedModuleProp={selectedModule}
+              selectedModule={selectedModule}
               fromCompany={fromCompany}
               changeSelectedModule={changeSelectedModule}
             />
