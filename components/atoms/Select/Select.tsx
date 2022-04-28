@@ -19,6 +19,7 @@ interface ISelect {
   maxMenuHeight?: number;
   searchable: boolean;
   createable: boolean;
+  isDisabled?: boolean;
 }
 
 const Select: FC<ISelect> = ({
@@ -32,6 +33,7 @@ const Select: FC<ISelect> = ({
   maxMenuHeight = 100,
   searchable,
   createable,
+  isDisabled = false,
 }) => {
   const handleChange = (
     newValue: OnChangeValue<TSelectOption, false>,
@@ -69,6 +71,7 @@ const Select: FC<ISelect> = ({
     maxMenuHeight,
     menuPlacement,
     isSearchable: searchable,
+    isDisabled,
   };
   if (createable) {
     return <CreatableSelect {...props} />;
