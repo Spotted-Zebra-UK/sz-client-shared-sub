@@ -1,7 +1,9 @@
 import './CalibrationForm.scss';
 import { FC } from 'react';
 import Loader from '../../components/atoms/Loader/Loader';
-import PersonIconUrl, { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
+import PersonIconUrl, {
+  ReactComponent as PersonIcon,
+} from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
 import CalibrationAction from './CalibrationAction/CalibrationAction';
 import { useCalibrateForm } from './helper/useCalibrateForm';

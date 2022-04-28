@@ -171,16 +171,24 @@ export const useCalibrateForm = ({
     });
   };
 
-  const [getSoftSkills, getSoftSkillsQueryResponse] =
-    useSoftSkillFindManyLazyQuery();
+  const [
+    getSoftSkills,
+    getSoftSkillsQueryResponse,
+  ] = useSoftSkillFindManyLazyQuery();
 
-  const [getResultsSoftSkills, getResultsSoftSkillsResponse] =
-    useResultFindManyLazyQuery();
-  const [getResultsSuccessProfile, getResultsSuccessProfileResponse] =
-    useResultFindManyLazyQuery();
+  const [
+    getResultsSoftSkills,
+    getResultsSoftSkillsResponse,
+  ] = useResultFindManyLazyQuery();
+  const [
+    getResultsSuccessProfile,
+    getResultsSuccessProfileResponse,
+  ] = useResultFindManyLazyQuery();
 
-  const [getResultAccess, getResultAccessResponse] =
-    useResultAccessFindOneMutation();
+  const [
+    getResultAccess,
+    getResultAccessResponse,
+  ] = useResultAccessFindOneMutation();
 
   // Formatting GradeBands
   const formatGradeBands = (gradeBands: GradeBandModel[]) => {
@@ -241,8 +249,9 @@ export const useCalibrateForm = ({
         getCalibrateFormQueryResponse.data.CalibrationConfigFindOne
       ) {
         let step = 100 / (totalScore - 1);
-        let { gradeBands } =
-          getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
+        let {
+          gradeBands,
+        } = getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
         let index = score / step;
         let result = gradeBands![index]?.name || '';
         return result;
@@ -260,8 +269,9 @@ export const useCalibrateForm = ({
         getCalibrateFormQueryResponse.data &&
         getCalibrateFormQueryResponse.data.CalibrationConfigFindOne
       ) {
-        let { gradeBands } =
-          getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
+        let {
+          gradeBands,
+        } = getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
         let currentGradeBand = gradeBands?.find(grade => grade.name === value);
         if (!currentGradeBand) return 0;
         let step = 100 / (totalScore - 1);
