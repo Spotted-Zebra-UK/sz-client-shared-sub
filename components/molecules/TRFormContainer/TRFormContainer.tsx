@@ -24,6 +24,7 @@ interface ITRFormContainer {
   ) => void;
   isReadOnly: boolean;
   stageId: string;
+  onCloseHandler: () => void;
 }
 
 const TRFormContainer: FC<ITRFormContainer> = ({
@@ -32,6 +33,7 @@ const TRFormContainer: FC<ITRFormContainer> = ({
   onSubmit,
   isReadOnly,
   stageId,
+  onCloseHandler,
 }) => {
   const { t } = useTranslation();
   const requiredFieldMessage = `^${t('common.thisFieldIsRequired')}`;
@@ -222,7 +224,9 @@ const TRFormContainer: FC<ITRFormContainer> = ({
       </div>
       <div className="actions">
         {isReadOnly ? (
-          <SquareButton color="White">Close</SquareButton>
+          <SquareButton color="White" onClick={onCloseHandler}>
+            Close
+          </SquareButton>
         ) : (
           <SquareButton type="submit">
             {_.capitalize(t('common.next'))}
