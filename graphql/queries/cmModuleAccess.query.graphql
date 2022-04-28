@@ -1,0 +1,6 @@
+query CmAccess {
+  CmAccess {
+    access
+    defaultScreen
+  }
+}

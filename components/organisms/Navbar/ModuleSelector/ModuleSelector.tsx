@@ -1,31 +1,28 @@
 import './ModuleSelector.scss';
 import { CmAccessType, useCmAccessQuery } from 'generated/graphql';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { getTargetUrl } from '../../../../helpers/getTargetURL';
 import IC_ARROW from '../../../../icons/ic_down-arrow_small.svg';
 import IC_RECRUITER from '../../../../icons/ic_recruitment.svg';
 import { Application } from '../../../../interfaces/Applications';
 
 interface IModuleSelector {
-  selectedModuleProp?: CmAccessType;
+  selectedModule?: CmAccessType;
   fromCompany?: boolean;
   changeSelectedModule?: (moduleType: CmAccessType) => void;
 }
 
 const ModuleSelector: FC<IModuleSelector> = ({
-  selectedModuleProp,
+  selectedModule,
   fromCompany,
   changeSelectedModule,
 }) => {
   const [modules, setModules] = useState<CmAccessType[]>([]);
-  const [selectedModule, setSelectedModule] = useState<
-    CmAccessType | undefined
-  >(selectedModuleProp);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
-  const history = useHistory();
   const ref = useRef<HTMLDivElement>(null);
-
+  const location = useLocation();
+  const history = useHistory();
   const handleClick = (event: MouseEvent) => {
     if (ref.current && !ref.current.contains(event.target as HTMLElement)) {
       setShowDropdown(false);
@@ -38,13 +35,13 @@ const ModuleSelector: FC<IModuleSelector> = ({
       document.removeEventListener('mousedown', e => handleClick(e));
     };
   }, [showDropdown]);
+
   useCmAccessQuery({
     onCompleted: data => {
       const cmModuleAccess = data.CmAccess;
       if (cmModuleAccess?.defaultScreen) {
         setModules(cmModuleAccess?.access as CmAccessType[]);
-        if (!selectedModuleProp && cmModuleAccess?.defaultScreen) {
-          setSelectedModule(cmModuleAccess?.defaultScreen);
+        if (!selectedModule && cmModuleAccess?.defaultScreen) {
           if (changeSelectedModule)
             changeSelectedModule(cmModuleAccess?.defaultScreen);
         }
@@ -63,9 +60,12 @@ const ModuleSelector: FC<IModuleSelector> = ({
       >
         <div
           onClick={e => {
-            if (selectedModule === CmAccessType.Hiring) {
+            if (selectedModule === CmAccessType.TalentReview) {
               if (fromCompany) {
-                history.push('/projects');
+                if (changeSelectedModule)
+                  changeSelectedModule(CmAccessType.Hiring);
+                if (!location.pathname.includes('projects'))
+                  history.push('/projects');
               } else {
                 window.open(
                   `${getTargetUrl(Application.COMPANY)}/projects`,
@@ -73,11 +73,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
                 );
               }
             }
-
-            if (selectedModule === CmAccessType.Hiring) {
-              e.preventDefault();
-              setShowDropdown(showDropdown => !showDropdown);
-            }
+            setShowDropdown(showDropdown => !showDropdown);
           }}
           className="project-module-first-div"
         >
@@ -98,20 +94,21 @@ const ModuleSelector: FC<IModuleSelector> = ({
         }
       >
         <div
-          onClick={() => {
-            if (selectedModule === CmAccessType.TalentReview) {
+          onClick={e => {
+            if (selectedModule === CmAccessType.Hiring) {
               if (fromCompany) {
-                history.push('/talent-review/4');
+                if (changeSelectedModule)
+                  changeSelectedModule(CmAccessType.TalentReview);
+                if (!location.pathname.includes('projects'))
+                  history.push('/projects');
               } else {
                 window.open(
-                  `${getTargetUrl(Application.COMPANY)}/talent-review/4`,
+                  `${getTargetUrl(Application.COMPANY)}/projects`,
                   '_self'
                 );
               }
             }
-            if (selectedModule === CmAccessType.TalentReview) {
-              setShowDropdown(showDropdown => !showDropdown);
-            }
+            setShowDropdown(showDropdown => !showDropdown);
           }}
           className="project-module-first-div"
         >
@@ -125,7 +122,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
     ),
   };
 
-  if (selectedModule && modules.length > 0)
+  if (selectedModule && modules.length > 1)
     return (
       <div className="module-selector" ref={ref}>
         {showDropdown
