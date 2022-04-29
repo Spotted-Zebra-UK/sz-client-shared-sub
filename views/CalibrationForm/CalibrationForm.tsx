@@ -1,9 +1,7 @@
 import './CalibrationForm.scss';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import Loader from '../../components/atoms/Loader/Loader';
-import PersonIconUrl, {
-  ReactComponent as PersonIcon,
-} from '../../icons/calibrate/ic_person.svg';
+import PersonIconUrl, { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
 import CalibrationAction from './CalibrationAction/CalibrationAction';
 import { useCalibrateForm } from './helper/useCalibrateForm';
@@ -110,35 +108,39 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                 </div>
                 <div className="calibration__form__header__form-top">
                   {grades.map((group, index) => (
-                    <div className={`flex-${group.totalPoints}`} key={index}>
-                      <div
-                        className="label"
-                        style={{
-                          borderBottom: `3px solid ${
-                            colors[totalColors - 1 - (index % totalColors)]
-                          }`,
-                        }}
-                      >
-                        {group.name}
+                    <React.Fragment key={index}>
+                      <div className={`flex-${group.totalPoints}`} key={index}>
+                        <div
+                          className="label"
+                          style={{
+                            borderBottom: `3px solid ${
+                              colors[totalColors - 1 - (index % totalColors)]
+                            }`,
+                          }}
+                        >
+                          {group.name}
+                        </div>
+                        <div
+                          style={{
+                            backgroundColor:
+                              colors[totalColors - 1 - (index % totalColors)],
+                            height:
+                              (getSoftSkillsQueryResponse.data &&
+                              Array.isArray(
+                                getSoftSkillsQueryResponse.data
+                                  ?.SoftSkillFindMany
+                              )
+                                ? getSoftSkillsQueryResponse.data
+                                    ?.SoftSkillFindMany?.length
+                                : 0) * 120,
+                            opacity: '0.08',
+                            marginTop: 20,
+                          }}
+                        >
+                          {' '}
+                        </div>
                       </div>
-                      <div
-                        style={{
-                          backgroundColor:
-                            colors[totalColors - 1 - (index % totalColors)],
-                          height:
-                            (getSoftSkillsQueryResponse.data &&
-                            Array.isArray(
-                              getSoftSkillsQueryResponse.data?.SoftSkillFindMany
-                            )
-                              ? getSoftSkillsQueryResponse.data
-                                  ?.SoftSkillFindMany?.length
-                              : 0) * 120,
-                          opacity: '0.08',
-                        }}
-                      >
-                        {' '}
-                      </div>
-                    </div>
+                    </React.Fragment>
                   ))}
                 </div>
               </div>
