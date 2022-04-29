@@ -5,10 +5,6 @@ import {
   GetTestCardsQuery,
   GetTestCardsQueryVariables,
 } from 'generated/graphql';
-import {
-  RESPONDANT_FORM_QUERY,
-  RESPONDANT_FORM_UPDATE_MUTATION,
-} from 'graphql/form/respondantForm';
 import moment from 'moment';
 import { useEffect, useMemo, useState } from 'react';
 import {
@@ -22,6 +18,10 @@ import {
   API_DATE_FORMAT_DATE,
   DATE_FORMAT_DATE,
 } from '../constants/dateFormats';
+import {
+  RESPONDANT_FORM_QUERY,
+  RESPONDANT_FORM_UPDATE_MUTATION,
+} from '../graphql/form/respondantForm';
 import { TFormFieldValue } from '../interfaces/form';
 import {
   IRespondantFormQueryInput,

@@ -1,0 +1,50 @@
+query GetTestCards($stageCandidateId: Int!) {
+  GetTestCards(stageCandidateId: $stageCandidateId) {
+    projectId
+    projectName
+    stageId
+    stageName
+    companyLogoUrl
+    companyId
+    companyName
+    companyLogoUrl
+    startTime
+    endTime
+    stageStatus
+    stageCandidateStatus
+    isPracticeProject
+    projectModuleType
+    displayInstructions
+    displayOnboarding
+    stageCandidateId
+    # directReportId
+    # directReportName
+    doneFor
+    doneForFirstName
+    doneForLastName
+    projectPractice {
+      projectId
+      stageId
+    }
+    cards {
+      testId
+      testCandidateId
+      testType
+      testSubType
+      testStatus
+      testOrigin
+      timeRequirement
+      timePerQuestion
+      allowReset
+    }
+    formCards {
+      formType
+      associatedId
+      status
+    }
+    calibrationCards {
+      status
+      isAllowed
+    }
+  }
+}
