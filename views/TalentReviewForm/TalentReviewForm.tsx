@@ -15,6 +15,7 @@ interface ITalentReviewForm {
   stageCandidateId: string;
   stageId: string;
   isReadOnly: boolean;
+  onCloseHandler: () => void;
 }
 
 const TalentReviewForm: FC<ITalentReviewForm> = ({
@@ -22,6 +23,7 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
   stageCandidateId,
   stageId,
   isReadOnly,
+  onCloseHandler,
 }) => {
   const [fieldLayout, setFieldLayout] = useState<TalentReviewFormField>({
     levelFields: [],
@@ -81,6 +83,7 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
             onSubmit={handleSaveCandidateInformation}
             isReadOnly={isReadOnly}
             stageId={stageId}
+            onCloseHandler={onCloseHandler}
           />
         </>
       )}
