@@ -32,6 +32,9 @@ const Multiselect: FC<IMultiselect> = ({
   );
 
   const selectedValues: TSelectOption[] | undefined = useMemo(() => {
+    if (!Array.isArray(value)) {
+      return [];
+    }
     return value.map(valueItem => {
       return {
         value: valueItem,
