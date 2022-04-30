@@ -1,5 +1,5 @@
 import './ModuleSelector.scss';
-import { CmAccessType, useCmAccessQuery } from 'generated/graphql';
+import { CmAllowedAreaType, useCmAllowedAreaQuery } from 'generated/graphql';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getTargetUrl } from '../../../../helpers/getTargetURL';
@@ -8,9 +8,9 @@ import IC_RECRUITER from '../../../../icons/ic_recruitment.svg';
 import { Application } from '../../../../interfaces/Applications';
 
 interface IModuleSelector {
-  selectedModule?: CmAccessType;
+  selectedModule?: CmAllowedAreaType;
   fromCompany?: boolean;
-  changeSelectedModule?: (moduleType: CmAccessType) => void;
+  changeSelectedModule?: (moduleType: CmAllowedAreaType) => void;
 }
 
 const ModuleSelector: FC<IModuleSelector> = ({
@@ -18,7 +18,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
   fromCompany,
   changeSelectedModule,
 }) => {
-  const [modules, setModules] = useState<CmAccessType[]>([]);
+  const [modules, setModules] = useState<CmAllowedAreaType[]>([]);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
@@ -36,34 +36,34 @@ const ModuleSelector: FC<IModuleSelector> = ({
     };
   }, [showDropdown]);
 
-  useCmAccessQuery({
+  useCmAllowedAreaQuery({
     onCompleted: data => {
-      const cmModuleAccess = data.CmAccess;
-      if (cmModuleAccess?.defaultScreen) {
-        setModules(cmModuleAccess?.access as CmAccessType[]);
-        if (!selectedModule && cmModuleAccess?.defaultScreen) {
+      const cmModuleAccess = data.CmAllowedArea;
+      if (cmModuleAccess?.defaultArea) {
+        setModules(cmModuleAccess?.allowed as CmAllowedAreaType[]);
+        if (!selectedModule && cmModuleAccess?.defaultArea) {
           if (changeSelectedModule)
-            changeSelectedModule(cmModuleAccess?.defaultScreen);
+            changeSelectedModule(cmModuleAccess?.defaultArea);
         }
       }
     },
   });
 
   const showCmModule: { [key in string]: React.ReactElement } = {
-    [CmAccessType.Hiring]: (
+    [CmAllowedAreaType.Hiring]: (
       <div
         className={
-          selectedModule === CmAccessType.Hiring
+          selectedModule === CmAllowedAreaType.Hiring
             ? 'module-div'
             : 'second-module-div'
         }
       >
         <div
           onClick={e => {
-            if (selectedModule === CmAccessType.TalentReview) {
+            if (selectedModule === CmAllowedAreaType.TalentReview) {
               if (fromCompany) {
                 if (changeSelectedModule)
-                  changeSelectedModule(CmAccessType.Hiring);
+                  changeSelectedModule(CmAllowedAreaType.Hiring);
                 if (!location.pathname.includes('projects'))
                   history.push('/projects');
               } else {
@@ -80,25 +80,25 @@ const ModuleSelector: FC<IModuleSelector> = ({
           <img src={IC_RECRUITER} alt="ic-recruter" className="icon" />
           <div className="module-title-div">Recruitment</div>
         </div>
-        {selectedModule === CmAccessType.Hiring && (
+        {selectedModule === CmAllowedAreaType.Hiring && (
           <img src={IC_ARROW} alt="ic-recruter" className="icon-arrow" />
         )}
       </div>
     ),
-    [CmAccessType.TalentReview]: (
+    [CmAllowedAreaType.TalentReview]: (
       <div
         className={
-          selectedModule === CmAccessType.Hiring
+          selectedModule === CmAllowedAreaType.Hiring
             ? 'second-module-div'
             : 'module-div'
         }
       >
         <div
           onClick={e => {
-            if (selectedModule === CmAccessType.Hiring) {
+            if (selectedModule === CmAllowedAreaType.Hiring) {
               if (fromCompany) {
                 if (changeSelectedModule)
-                  changeSelectedModule(CmAccessType.TalentReview);
+                  changeSelectedModule(CmAllowedAreaType.TalentReview);
                 if (!location.pathname.includes('projects'))
                   history.push('/projects');
               } else {
@@ -115,7 +115,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
           <img src={IC_RECRUITER} alt="ic-recruter" className="icon" />
           <div className="module-title-div">Talent Review</div>
         </div>
-        {selectedModule === CmAccessType.TalentReview && (
+        {selectedModule === CmAllowedAreaType.TalentReview && (
           <img src={IC_ARROW} alt="ic-recruter" className="icon-arrow" />
         )}
       </div>

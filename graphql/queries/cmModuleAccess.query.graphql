@@ -1,6 +1,6 @@
-query CmAccess {
-  CmAccess {
-    access
-    defaultScreen
+query CmAllowedArea {
+  CmAllowedArea {
+    allowed
+    defaultArea
   }
 }
