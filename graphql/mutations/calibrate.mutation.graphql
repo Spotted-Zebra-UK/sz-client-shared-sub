@@ -1,4 +1,4 @@
-mutation ResultAccessFindOne($stageCandidateId: Int!) {
+query ResultAccessFindOne($stageCandidateId: Int!) {
   ResultAccessFindOne(stageCandidateId: $stageCandidateId) {
     label
     status

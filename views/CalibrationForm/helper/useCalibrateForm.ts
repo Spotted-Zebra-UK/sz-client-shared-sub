@@ -1,22 +1,23 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { LazyQueryResult, MutationResult, QueryResult } from '@apollo/client';
 import {
-  AssignedType,
   BasicScoreType,
   CalibrationConfigFindOneQuery,
   Exact,
-  GradeBandModel,
+  GradeBandUnion,
   InputMaybe,
-  ResultAccessFindOneMutation,
+  ResultAccessFindOneQuery,
   ResultAccessStatus,
-  ResultCreateVersionArgs,
+  ResultCreateOneTrCustomArgs,
   ResultFindManyQuery,
+  ResultMeasurementType,
   ResultModel,
   SoftSkillFindManyQuery,
   StageCandidateStatus,
+  TrCustomGradeBandModel,
   useCalibrationConfigFindOneQuery,
-  useResultAccessFindOneMutation,
-  useResultCreateVersionsMutation,
+  useResultAccessFindOneLazyQuery,
+  useResultCreateManyTrCustomMutation,
   useResultFindManyLazyQuery,
   useSoftSkillFindManyLazyQuery,
   useStageCandidateUpdateMutation,
@@ -68,12 +69,20 @@ export const useCalibrateForm = ({
   LazyQueryResult<
     ResultFindManyQuery,
     Exact<{
-      stageCandidateId: number;
-      type?: InputMaybe<BasicScoreType> | undefined;
+      doneBy: number;
+      doneFor: number;
+      projectId: number;
+      measurementId: number;
+      measurementType?: InputMaybe<ResultMeasurementType> | undefined;
     }>
   >,
 
-  MutationResult<ResultAccessFindOneMutation>,
+  LazyQueryResult<
+    ResultAccessFindOneQuery,
+    Exact<{
+      stageCandidateId: number;
+    }>
+  >,
   (value: number, index: number) => void,
   (value: number, index: number) => void,
   string[],
@@ -83,8 +92,7 @@ export const useCalibrateForm = ({
   QueryResult<
     CalibrationConfigFindOneQuery,
     Exact<{
-      ownerId: number;
-      type: AssignedType;
+      projectId: number;
     }>
   >,
   IFormScreen[],
@@ -114,46 +122,45 @@ export const useCalibrateForm = ({
     []
   );
 
-  const [createResultVersion] = useResultCreateVersionsMutation();
+  const [createResultVersion] = useResultCreateManyTrCustomMutation();
   const [updateStatus] = useStageCandidateUpdateMutation();
 
   const onCreateVersion = () => {
-    const payload: ResultCreateVersionArgs[] = [];
-    let label = getResultAccessResponse.data?.ResultAccessFindOne.label;
+    const payload: ResultCreateOneTrCustomArgs[] = [];
+    let label = getResultAccessResponse.data?.ResultAccessFindOne?.label || '';
     if (!label) return;
 
-    formSoftSkills[selectedScreen].updatedResult.forEach(data => {
-      payload.push({
-        previousId: data.id,
-        label: label || '',
-        creatorService: 'TR Calibiration',
-        score: {
-          customEvaluation: data.score.customEvaluation,
-        },
-      });
-    });
-    formSuccessProfiles[selectedScreen].updatedResult.forEach(data => {
-      payload.push({
-        previousId: data.id,
-        label: label || '',
-        creatorService: 'TR Calibiration',
-        score: {
-          customEvaluation: data.score.customEvaluation,
-        },
-      });
-    });
-    createResultVersion({
-      variables: {
-        versions: payload,
-      },
-      onCompleted: () => {
-        onCloseHandler();
-      },
-      onError: error => {
-        console.log(error);
-        onCloseHandler();
-      },
-    });
+    // formSoftSkills[selectedScreen].updatedResult.forEach(data => {
+    //   payload.push({
+    //     previousId: data.id,
+    //     label: label || '',
+    //     creatorService: 'TR Calibiration',
+    //     score: {
+    //       evaluation:data.scoreType,
+    //       score:data.score,
+    //     },
+    //   });
+    // });
+    // formSuccessProfiles[selectedScreen].updatedResult.forEach(data => {
+    //   payload.push({
+    //     previousId: data.id,
+    //     label: label || '',
+    //     creatorService: 'TR Calibiration',
+    //     score: data.score,
+    //   });
+    // });
+    // createResultVersion({
+    //   variables: {
+    //     versions: payload,
+    //   },
+    //   onCompleted: () => {
+    //     onCloseHandler();
+    //   },
+    //   onError: error => {
+    //     console.log(error);
+    //     onCloseHandler();
+    //   },
+    // });
   };
   const onUpdateStatus = () => {
     updateStatus({
@@ -171,35 +178,32 @@ export const useCalibrateForm = ({
     });
   };
 
-  const [
-    getSoftSkills,
-    getSoftSkillsQueryResponse,
-  ] = useSoftSkillFindManyLazyQuery();
+  const [getSoftSkills, getSoftSkillsQueryResponse] =
+    useSoftSkillFindManyLazyQuery();
 
-  const [
-    getResultsSoftSkills,
-    getResultsSoftSkillsResponse,
-  ] = useResultFindManyLazyQuery();
-  const [
-    getResultsSuccessProfile,
-    getResultsSuccessProfileResponse,
-  ] = useResultFindManyLazyQuery();
+  const [getResultsSoftSkills, getResultsSoftSkillsResponse] =
+    useResultFindManyLazyQuery();
+  const [getResultsSuccessProfile, getResultsSuccessProfileResponse] =
+    useResultFindManyLazyQuery();
 
-  const [
-    getResultAccess,
-    getResultAccessResponse,
-  ] = useResultAccessFindOneMutation();
+  const [getResultAccess, getResultAccessResponse] =
+    useResultAccessFindOneLazyQuery({
+      variables: {
+        stageCandidateId: stageCandidateId,
+      },
+    });
 
   // Formatting GradeBands
-  const formatGradeBands = (gradeBands: GradeBandModel[]) => {
+  const formatGradeBands = (gradeBands: GradeBandUnion[]) => {
     let newGrades: IGrade[] = [];
     let gradePointsDictionary: { [key: string]: number } = {};
 
     gradeBands.forEach(gradeBand => {
-      let tp: number = gradePointsDictionary[gradeBand.groupName];
+      let castedGradeBand = gradeBand as TrCustomGradeBandModel;
+      let tp: number = gradePointsDictionary[castedGradeBand.displayText];
       if (isNaN(tp)) {
-        gradePointsDictionary[gradeBand.groupName] = 1;
-      } else gradePointsDictionary[gradeBand.groupName] += 1;
+        gradePointsDictionary[castedGradeBand.displayText] = 1;
+      } else gradePointsDictionary[castedGradeBand.displayText] += 1;
     });
     newGrades = Object.keys(gradePointsDictionary).map(key => {
       return { name: key, totalPoints: gradePointsDictionary[key] };
@@ -209,8 +213,7 @@ export const useCalibrateForm = ({
 
   const getCalibrateFormQueryResponse = useCalibrationConfigFindOneQuery({
     variables: {
-      ownerId: ownerId,
-      type: AssignedType.Stage,
+      projectId: ownerId,
     },
     onError: () => {},
     onCompleted: data => {
@@ -219,14 +222,20 @@ export const useCalibrateForm = ({
       });
       getResultsSoftSkills({
         variables: {
-          stageCandidateId: stageCandidateId,
-          type: BasicScoreType.SoftSkill,
+          doneFor: 1,
+          doneBy: 2,
+          projectId: stageCandidateId,
+          measurementType: ResultMeasurementType.SoftSkill,
+          measurementId: 0,
         },
       });
       getResultsSuccessProfile({
         variables: {
-          stageCandidateId: stageCandidateId,
-          type: BasicScoreType.SuccessProfile,
+          doneFor: 1,
+          doneBy: 2,
+          projectId: stageCandidateId,
+          measurementType: ResultMeasurementType.SuccessProfile,
+          measurementId: 0,
         },
       });
       getResultAccess({
@@ -236,7 +245,10 @@ export const useCalibrateForm = ({
       });
 
       // Formatting gradebands
-      formatGradeBands(data.CalibrationConfigFindOne?.gradeBands || []);
+      formatGradeBands(
+        (data.CalibrationConfigFindOne
+          ?.gradeBands as TrCustomGradeBandModel[]) || []
+      );
     },
   });
 
@@ -249,12 +261,12 @@ export const useCalibrateForm = ({
         getCalibrateFormQueryResponse.data.CalibrationConfigFindOne
       ) {
         let step = 100 / (totalScore - 1);
-        let {
-          gradeBands,
-        } = getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
+        let { gradeBands } =
+          getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
         let index = score / step;
-        let result = gradeBands![index]?.name || '';
-        return result;
+
+        let result = (gradeBands![index] as TrCustomGradeBandModel) || '';
+        return result.evaluation;
       }
       return '';
     },
@@ -269,10 +281,11 @@ export const useCalibrateForm = ({
         getCalibrateFormQueryResponse.data &&
         getCalibrateFormQueryResponse.data.CalibrationConfigFindOne
       ) {
-        let {
-          gradeBands,
-        } = getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
-        let currentGradeBand = gradeBands?.find(grade => grade.name === value);
+        let gradeBands = getCalibrateFormQueryResponse.data
+          .CalibrationConfigFindOne.gradeBands as TrCustomGradeBandModel[];
+        let currentGradeBand = gradeBands?.find(
+          grade => grade.displayText === value
+        );
         if (!currentGradeBand) return 0;
         let step = 100 / (totalScore - 1);
         let result = (currentGradeBand.position - 1) * step;
@@ -291,11 +304,13 @@ export const useCalibrateForm = ({
 
       //setting Score
       let results = data.map(obj => {
+        let { score } = obj;
+        let castedScore = score as unknown as TrCustomGradeBandModel;
         return {
           ...obj,
           score: {
             ...obj.score,
-            customScore: getScore(obj.score.customEvaluation),
+            customScore: getScore(castedScore.evaluation),
           },
         };
       });
@@ -336,8 +351,9 @@ export const useCalibrateForm = ({
         }
       );
       if (
-        getResultAccessResponse.data?.ResultAccessFindOne.status ===
-        ResultAccessStatus.SignedOff
+        getResultAccessResponse?.data?.ResultAccessFindOne &&
+        getResultAccessResponse?.data?.ResultAccessFindOne.status ===
+          ResultAccessStatus.SignedOff
       ) {
         screens.pop();
       }
@@ -345,7 +361,7 @@ export const useCalibrateForm = ({
       else if (formType === BasicScoreType.SuccessProfile)
         setFormSuccessProfile(screens);
     },
-    [getResultAccessResponse.data?.ResultAccessFindOne.status, getScore]
+    [getResultAccessResponse?.data?.ResultAccessFindOne, getScore]
   );
 
   useEffect(() => {
@@ -359,7 +375,7 @@ export const useCalibrateForm = ({
       getResultsSoftSkillsResponse.data.ResultFindMany
     )
       getFormResult(
-        getResultsSoftSkillsResponse.data?.ResultFindMany,
+        getResultsSoftSkillsResponse.data?.ResultFindMany as ResultModel[],
         BasicScoreType.SoftSkill
       );
   }, [getFormResult, getResultsSoftSkillsResponse.data]);
@@ -371,7 +387,7 @@ export const useCalibrateForm = ({
       getResultsSuccessProfileResponse.data.ResultFindMany
     )
       getFormResult(
-        getResultsSuccessProfileResponse.data?.ResultFindMany,
+        getResultsSuccessProfileResponse.data.ResultFindMany as ResultModel[],
         BasicScoreType.SuccessProfile
       );
   }, [getFormResult, getResultsSuccessProfileResponse.data]);
@@ -381,9 +397,8 @@ export const useCalibrateForm = ({
     updateFormSoftSkills[selectedScreen].updatedResult[
       index
     ].score.customScore = value;
-    updateFormSoftSkills[selectedScreen].updatedResult[
-      index
-    ].score.customEvaluation = getCustomEvaluation(value);
+    updateFormSoftSkills[selectedScreen].updatedResult[index].score.evaluation =
+      getCustomEvaluation(value);
     setFormSoftSkills(updateFormSoftSkills);
   };
   const onChangeSuccessProfile = (value: number, index: number) => {
@@ -395,7 +410,7 @@ export const useCalibrateForm = ({
     ].score.customScore = value;
     updateFormSuccessProfile[selectedScreen].updatedResult[
       index
-    ].score.customEvaluation = getCustomEvaluation(value);
+    ].score.evaluation = getCustomEvaluation(value);
     setFormSuccessProfile(updateFormSuccessProfile);
   };
   const icons: string[] = [
