@@ -6,19 +6,13 @@ mutation ResultAccessFindOne($stageCandidateId: Int!) {
   }
 }
 
-mutation ResultCreateVersions($versions: [ResultCreateVersionArgs!]!) {
-  ResultCreateVersions(versions: $versions) {
+mutation ResultCreateManyTrCustom($args: [ResultCreateOneTrCustomArgs!]!) {
+  ResultCreateManyTrCustom(args: $args) {
     id
-    parentId
-    type
-    childId
-    version
-    score {
-      customEvaluation
-    }
+    version # The new version number is automatically added once you save
+    previousVersionId # will point to the result for the same SoftSkill, doneBy, doneFor and projectId with the version of this saved result minus 1
     label
-    creatorService
-    creatorId
+    # etc...
   }
 }
 mutation StageCandidateUpdate(
