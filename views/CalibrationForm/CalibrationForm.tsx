@@ -1,5 +1,6 @@
 import './CalibrationForm.scss';
 import React, { FC } from 'react';
+import { TrCustomResultScoreModel } from '../../../../generated/graphql';
 import Loader from '../../components/atoms/Loader/Loader';
 import PersonIconUrl, { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
@@ -87,7 +88,10 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                   {selectedScreen + 1}/{formSoftSkills.length}{' '}
                   {formSoftSkills[selectedScreen].name
                     ? formSoftSkills[selectedScreen].name
-                    : ` Make ${getResultAccessResponse.data.ResultAccessFindOne.label}`}
+                    : ` Make ${
+                        getResultAccessResponse.data?.ResultAccessFindOne
+                          ?.label || ''
+                      }`}
                 </div>
                 <button
                   className="calibration__navigation__icon-button"
@@ -156,83 +160,79 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                           id: number;
                         },
                         key: number
-                      ) => (
-                        <CalibrateField
-                          key={key}
-                          index={key as number}
-                          onChangeHandler={onChangeSoftSkill}
-                          softsSkill={obj}
-                          totalScore={totalScore - 1}
-                          initialData={
-                            formSoftSkills[selectedScreen]
-                              ? formSoftSkills[selectedScreen].originalResult[
-                                  key
-                                ].score.customScore || 0
-                              : 0
-                          }
-                          currentData={
-                            formSoftSkills[selectedScreen] &&
-                            Array.isArray(
-                              formSoftSkills[selectedScreen].updatedResult
-                            )
-                              ? formSoftSkills[selectedScreen].updatedResult![
-                                  key
-                                ].score.customScore || 0
-                              : 0
-                          }
-                          icon={icons[key]}
-                          showInitialField={true}
-                          isScreenCompleted={
-                            formSoftSkills[selectedScreen].isScreenCompleted
-                          }
-                        />
-                      )
+                      ) => {
+                        let originalScore = formSuccessProfiles[selectedScreen]
+                          ?.originalResult[selectedScreen]
+                          ?.score as TrCustomResultScoreModel;
+                        let updatedScore = formSuccessProfiles[selectedScreen]
+                          ?.originalResult[selectedScreen]
+                          ?.score as TrCustomResultScoreModel;
+                        return (
+                          <CalibrateField
+                            key={key}
+                            index={key as number}
+                            onChangeHandler={onChangeSoftSkill}
+                            softsSkill={obj}
+                            totalScore={totalScore - 1}
+                            initialData={originalScore.score || 0}
+                            currentData={
+                              formSoftSkills[selectedScreen] &&
+                              Array.isArray(
+                                formSoftSkills[selectedScreen].updatedResult
+                              )
+                                ? updatedScore.score || 0
+                                : 0
+                            }
+                            icon={icons[key]}
+                            showInitialField={true}
+                            isScreenCompleted={
+                              formSoftSkills[selectedScreen].isScreenCompleted
+                            }
+                          />
+                        );
+                      }
                     )}
                     {formSuccessProfiles[selectedScreen] &&
-                      successProfiles.map((obj, index) => (
-                        <CalibrateField
-                          key={obj.id}
-                          index={index}
-                          onChangeHandler={onChangeSuccessProfile}
-                          softsSkill={{ name: 'overall', id: obj.id }}
-                          totalScore={totalScore - 1}
-                          initialData={
-                            formSuccessProfiles[selectedScreen]?.originalResult[
-                              index
-                            ]?.score?.customScore || 0
-                          }
-                          currentData={
-                            formSuccessProfiles[selectedScreen]?.updatedResult[
-                              index
-                            ]?.score?.customScore || 0
-                          }
-                          icon={PersonIconUrl}
-                          showInitialField={true}
-                          isScreenCompleted={
-                            formSoftSkills[selectedScreen].isScreenCompleted
-                          }
-                          showHandlerLabel={true}
-                          handlerLabel={
-                            formSuccessProfiles[selectedScreen]?.updatedResult[
-                              index
-                            ]?.score?.customEvaluation || ''
-                          }
-                        />
-                      ))}
+                      successProfiles.map((obj, index) => {
+                        let originalScore = formSuccessProfiles[selectedScreen]
+                          ?.originalResult[index]
+                          ?.score as TrCustomResultScoreModel;
+                        let updatedScore = formSuccessProfiles[selectedScreen]
+                          ?.originalResult[index]
+                          ?.score as TrCustomResultScoreModel;
+                        return (
+                          <CalibrateField
+                            key={obj.id}
+                            index={index}
+                            onChangeHandler={onChangeSuccessProfile}
+                            softsSkill={{ name: 'overall', id: obj.id }}
+                            totalScore={totalScore - 1}
+                            initialData={originalScore.score || 0}
+                            currentData={updatedScore.score || 0}
+                            icon={PersonIconUrl}
+                            showInitialField={true}
+                            isScreenCompleted={
+                              formSoftSkills[selectedScreen].isScreenCompleted
+                            }
+                            showHandlerLabel={true}
+                            handlerLabel={updatedScore.evaluation || ''}
+                          />
+                        );
+                      })}
                   </>
                 )}
             </div>
             <div className="calibration__action">
               <CalibrationAction
                 currentUser={
-                  getResultAccessResponse.data?.ResultAccessFindOne.label || ''
+                  getResultAccessResponse.data?.ResultAccessFindOne?.label || ''
                 }
                 onCreateVersion={onCreateVersion}
                 onUpdateStatus={onUpdateStatus}
                 onCloseHandler={onCloseHandler}
                 actions={
-                  getResultAccessResponse.data.ResultAccessFindOne
-                    .allowedActions
+                  getResultAccessResponse.data?.ResultAccessFindOne
+                    ?.allowedActions
                 }
                 isScreenCompleted={
                   formSoftSkills[selectedScreen].isScreenCompleted
