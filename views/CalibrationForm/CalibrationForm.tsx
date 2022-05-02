@@ -46,7 +46,6 @@ const CalibrationForm: FC<ICalibrationForm> = ({
     stageCandidateId: stageCandidateId,
     onCloseHandler,
   });
-
   return (
     <div className="calibration">
       {getCalibrateFormQueryResponse.loading ||
@@ -165,8 +164,9 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                           ?.originalResult[selectedScreen]
                           ?.score as TrCustomResultScoreModel;
                         let updatedScore = formSuccessProfiles[selectedScreen]
-                          ?.originalResult[selectedScreen]
+                          ?.updatedResult[selectedScreen]
                           ?.score as TrCustomResultScoreModel;
+                        console.log(originalScore, updatedScore);
                         return (
                           <CalibrateField
                             key={key}

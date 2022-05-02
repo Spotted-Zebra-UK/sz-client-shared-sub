@@ -3,6 +3,7 @@ query CalibrationConfigFindOne($projectId: Int!) {
     id
     successProfileId
     softSkillIds
+    successProfileId
     gradeBands {
       __typename
       ... on TrCustomGradeBandModel {

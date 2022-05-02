@@ -2,7 +2,7 @@ query ResultFindMany(
   $doneBy: Int!
   $doneFor: Int!
   $projectId: Int!
-  $measurementId: Int!
+  $measurementIds: [Int!]
   $measurementType: ResultMeasurementType
 ) {
   ResultFindMany(
@@ -10,7 +10,7 @@ query ResultFindMany(
     doneFor: $doneFor
     projectId: $projectId
 
-    measurementId: $measurementId
+    measurementIds: $measurementIds
     measurementType: $measurementType
   ) {
     id

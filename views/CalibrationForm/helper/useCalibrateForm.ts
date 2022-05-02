@@ -72,7 +72,7 @@ export const useCalibrateForm = ({
       doneBy: number;
       doneFor: number;
       projectId: number;
-      measurementId: number;
+      measurementIds?: InputMaybe<number | number[]> | undefined;
       measurementType?: InputMaybe<ResultMeasurementType> | undefined;
     }>
   >,
@@ -213,7 +213,7 @@ export const useCalibrateForm = ({
 
   const getCalibrateFormQueryResponse = useCalibrationConfigFindOneQuery({
     variables: {
-      projectId: ownerId,
+      projectId: 1507,
     },
     onError: () => {},
     onCompleted: data => {
@@ -222,20 +222,22 @@ export const useCalibrateForm = ({
       });
       getResultsSoftSkills({
         variables: {
-          doneFor: 1,
-          doneBy: 2,
-          projectId: stageCandidateId,
+          doneBy: 12603,
+          doneFor: 12605,
+          projectId: 1507,
           measurementType: ResultMeasurementType.SoftSkill,
-          measurementId: 0,
+          measurementIds: data?.CalibrationConfigFindOne?.softSkillIds,
         },
       });
       getResultsSuccessProfile({
         variables: {
-          doneFor: 1,
-          doneBy: 2,
-          projectId: stageCandidateId,
+          doneBy: 12603,
+          doneFor: 12605,
+          projectId: 1507,
           measurementType: ResultMeasurementType.SuccessProfile,
-          measurementId: 0,
+          measurementIds: [
+            data?.CalibrationConfigFindOne?.successProfileId || 0,
+          ],
         },
       });
       getResultAccess({
@@ -358,8 +360,9 @@ export const useCalibrateForm = ({
         screens.pop();
       }
       if (formType === BasicScoreType.SoftSkill) setFormSoftSkills(screens);
-      else if (formType === BasicScoreType.SuccessProfile)
+      else if (formType === BasicScoreType.SuccessProfile) {
         setFormSuccessProfile(screens);
+      }
     },
     [getResultAccessResponse?.data?.ResultAccessFindOne, getScore]
   );
@@ -394,9 +397,12 @@ export const useCalibrateForm = ({
 
   const onChangeSoftSkill = (value: number, index: number) => {
     let updateFormSoftSkills = JSON.parse(JSON.stringify(formSoftSkills));
-    updateFormSoftSkills[selectedScreen].updatedResult[
-      index
-    ].score.customScore = value;
+    console.log(
+      'Changing',
+      updateFormSoftSkills[selectedScreen].updatedResult[index].score.score
+    );
+    updateFormSoftSkills[selectedScreen].updatedResult[index].score.score =
+      value;
     updateFormSoftSkills[selectedScreen].updatedResult[index].score.evaluation =
       getCustomEvaluation(value);
     setFormSoftSkills(updateFormSoftSkills);
@@ -423,7 +429,6 @@ export const useCalibrateForm = ({
   let colors: string[] = ['#00d3ad', '#10b7ff', '#b75bff', '#000'];
 
   let totalColors: number = colors.length;
-
   return [
     grades,
     successProfiles,
