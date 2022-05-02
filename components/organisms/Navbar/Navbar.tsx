@@ -1,5 +1,5 @@
 import './Navbar.scss';
-import { CmAccessType, User, useUserQuery } from 'generated/graphql';
+import { CmAllowedAreaType, User, useUserQuery } from 'generated/graphql';
 import { ReactComponent as Logo } from 'libs/sz-client-shared-sub/icons/SpottedZebraLogo.svg';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -8,9 +8,9 @@ import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import ModuleSelector from './ModuleSelector/ModuleSelector';
 
 interface INavbar {
-  selectedModule?: CmAccessType;
+  selectedModule?: CmAllowedAreaType;
   fromCompany?: boolean;
-  changeSelectedModule?: (module: CmAccessType) => void;
+  changeSelectedModule?: (module: CmAllowedAreaType) => void;
 }
 
 const Navbar: FC<INavbar> = ({

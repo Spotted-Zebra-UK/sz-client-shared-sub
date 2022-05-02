@@ -22,13 +22,9 @@
     .completed {
       color: rgba(0, 0, 0, 0.38);
     }
-    // &__icon-button {
-    //   background-color: #00d3ad;
-    //   svg:disabled {
-    //     background-color: red;
-
-    //   }
-    // }
+    &__icon-button {
+      background-color: #fff;
+    }
   }
   .AppBar {
     padding: 20px 20px 0;
@@ -102,7 +98,7 @@
         .label {
           border-bottom: 2px solid transparent;
           display: block;
-          min-height: 35px;
+          min-height: 50px;
           background-color: #fff;
           opacity: 1 !important;
           padding-bottom: 10px;

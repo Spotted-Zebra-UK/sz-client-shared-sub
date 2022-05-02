@@ -57,7 +57,6 @@ const Slider: FC<ISlider> = ({
 }) => {
   const handleChange = (newValue: number, index: number) => {
     onChange(newValue, index);
-    console.log(newValue);
   };
 
   const sliderWrapperStyle = useMemo(
