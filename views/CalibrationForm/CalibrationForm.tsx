@@ -11,16 +11,20 @@ import { ReactComponent as RightArrow } from './right_arrow.svg';
 
 interface ICalibrationForm {
   stageCandidateId: number;
-  ownerId: number;
   userType: 'candidate' | 'company';
   onCloseHandler: () => void;
+  doneFor: number;
+  doneBy: number;
+  projectId: number;
 }
 
 const CalibrationForm: FC<ICalibrationForm> = ({
-  ownerId,
   stageCandidateId,
   userType,
   onCloseHandler,
+  doneBy,
+  doneFor,
+  projectId,
 }) => {
   const [
     grades,
@@ -42,10 +46,18 @@ const CalibrationForm: FC<ICalibrationForm> = ({
     colors,
     totalScore,
   ] = useCalibrateForm({
-    ownerId: ownerId,
     stageCandidateId: stageCandidateId,
     onCloseHandler,
+    doneBy,
+    doneFor,
+    projectId,
   });
+  console.log(
+    'formSoftSkills',
+    formSoftSkills,
+    formSuccessProfiles,
+    selectedScreen
+  );
   return (
     <div className="calibration">
       {getCalibrateFormQueryResponse.loading ||
@@ -56,7 +68,8 @@ const CalibrationForm: FC<ICalibrationForm> = ({
         ))}
       {getCalibrateFormQueryResponse.data &&
         formSoftSkills[selectedScreen] &&
-        getResultAccessResponse.data && (
+        getResultAccessResponse.data &&
+        formSuccessProfiles[selectedScreen] && (
           <>
             {userType === 'candidate' ? (
               <div className="calibration__header">
@@ -160,13 +173,13 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                         },
                         key: number
                       ) => {
-                        let originalScore = formSuccessProfiles[selectedScreen]
-                          ?.originalResult[selectedScreen]
+                        console.log('here');
+                        let originalScore = formSoftSkills[selectedScreen]
+                          ?.originalResult[key]
                           ?.score as TrCustomResultScoreModel;
-                        let updatedScore = formSuccessProfiles[selectedScreen]
-                          ?.updatedResult[selectedScreen]
+                        let updatedScore = formSoftSkills[selectedScreen]
+                          ?.updatedResult[key]
                           ?.score as TrCustomResultScoreModel;
-                        console.log(originalScore, updatedScore);
                         return (
                           <CalibrateField
                             key={key}
@@ -184,7 +197,9 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                                 : 0
                             }
                             icon={icons[key]}
-                            showInitialField={true}
+                            showInitialField={
+                              userType === 'candidate' ? false : true
+                            }
                             isScreenCompleted={
                               formSoftSkills[selectedScreen].isScreenCompleted
                             }
@@ -198,7 +213,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                           ?.originalResult[index]
                           ?.score as TrCustomResultScoreModel;
                         let updatedScore = formSuccessProfiles[selectedScreen]
-                          ?.originalResult[index]
+                          ?.updatedResult[index]
                           ?.score as TrCustomResultScoreModel;
                         return (
                           <CalibrateField
@@ -210,9 +225,12 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                             initialData={originalScore.score || 0}
                             currentData={updatedScore.score || 0}
                             icon={PersonIconUrl}
-                            showInitialField={true}
+                            showInitialField={
+                              userType === 'candidate' ? false : true
+                            }
                             isScreenCompleted={
-                              formSoftSkills[selectedScreen].isScreenCompleted
+                              formSuccessProfiles[selectedScreen]
+                                .isScreenCompleted
                             }
                             showHandlerLabel={true}
                             handlerLabel={updatedScore.evaluation || ''}
@@ -222,23 +240,28 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                   </>
                 )}
             </div>
-            <div className="calibration__action">
-              <CalibrationAction
-                currentUser={
-                  getResultAccessResponse.data?.ResultAccessFindOne?.label || ''
-                }
-                onCreateVersion={onCreateVersion}
-                onUpdateStatus={onUpdateStatus}
-                onCloseHandler={onCloseHandler}
-                actions={
-                  getResultAccessResponse.data?.ResultAccessFindOne
-                    ?.allowedActions
-                }
-                isScreenCompleted={
-                  formSoftSkills[selectedScreen].isScreenCompleted
-                }
-              />
-            </div>
+            {getCalibrateFormQueryResponse.data &&
+              formSoftSkills[selectedScreen] &&
+              formSuccessProfiles[selectedScreen] && (
+                <div className="calibration__action">
+                  <CalibrationAction
+                    currentUser={
+                      getResultAccessResponse.data?.ResultAccessFindOne
+                        ?.label || ''
+                    }
+                    onCreateVersion={onCreateVersion}
+                    onUpdateStatus={onUpdateStatus}
+                    onCloseHandler={onCloseHandler}
+                    actions={
+                      getResultAccessResponse.data?.ResultAccessFindOne
+                        ?.allowedActions
+                    }
+                    isScreenCompleted={
+                      formSoftSkills[selectedScreen].isScreenCompleted
+                    }
+                  />
+                </div>
+              )}
           </>
         )}
     </div>
