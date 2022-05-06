@@ -8,6 +8,7 @@ import {
   InputMaybe,
   ResultAccessFindOneQuery,
   ResultAccessStatus,
+  ResultCreateOneTrCustomArgs,
   ResultFindManyQuery,
   ResultMeasurementType,
   ResultModel,
@@ -17,6 +18,7 @@ import {
   TrCustomResultScoreModel,
   useCalibrationConfigFindOneQuery,
   useResultAccessFindOneLazyQuery,
+  useResultCreateManyTrCustomMutation,
   useResultFindManyLazyQuery,
   useSoftSkillFindManyLazyQuery,
   useStageCandidateUpdateMutation,
@@ -126,11 +128,11 @@ export const useCalibrateForm = ({
     []
   );
 
-  // const [createResultVersion] = useResultCreateManyTrCustomMutation();
+  const [createResultVersion] = useResultCreateManyTrCustomMutation();
   const [updateStatus] = useStageCandidateUpdateMutation();
 
   const onCreateVersion = () => {
-    // const payload: ResultCreateOneTrCustomArgs[] = [];
+    const payload: ResultCreateOneTrCustomArgs[] = [];
     let label = getResultAccessResponse.data?.ResultAccessFindOne?.label || '';
     if (!label) return;
 
