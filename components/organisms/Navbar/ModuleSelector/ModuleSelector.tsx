@@ -57,26 +57,24 @@ const ModuleSelector: FC<IModuleSelector> = ({
             ? 'module-div'
             : 'second-module-div'
         }
-      >
-        <div
-          onClick={e => {
-            if (selectedModule === CmAllowedAreaType.TalentReview) {
-              if (fromCompany) {
-                if (changeSelectedModule)
-                  changeSelectedModule(CmAllowedAreaType.Hiring);
-                if (!location.pathname.includes('projects'))
-                  history.push('/projects');
-              } else {
-                window.open(
-                  `${getTargetUrl(Application.COMPANY)}/projects`,
-                  '_self'
-                );
-              }
+        onClick={e => {
+          if (selectedModule === CmAllowedAreaType.TalentReview) {
+            if (fromCompany) {
+              if (changeSelectedModule)
+                changeSelectedModule(CmAllowedAreaType.Hiring);
+              if (!location.pathname.includes('projects'))
+                history.push('/projects');
+            } else {
+              window.open(
+                `${getTargetUrl(Application.COMPANY)}/projects`,
+                '_self'
+              );
             }
-            setShowDropdown(showDropdown => !showDropdown);
-          }}
-          className="project-module-first-div"
-        >
+          }
+          setShowDropdown(showDropdown => !showDropdown);
+        }}
+      >
+        <div className="project-module-first-div">
           <img src={IC_RECRUITER} alt="ic-recruter" className="icon" />
           <div className="module-title-div">Recruitment</div>
         </div>
@@ -92,26 +90,24 @@ const ModuleSelector: FC<IModuleSelector> = ({
             ? 'second-module-div'
             : 'module-div'
         }
-      >
-        <div
-          onClick={e => {
-            if (selectedModule === CmAllowedAreaType.Hiring) {
-              if (fromCompany) {
-                if (changeSelectedModule)
-                  changeSelectedModule(CmAllowedAreaType.TalentReview);
-                if (!location.pathname.includes('projects'))
-                  history.push('/projects');
-              } else {
-                window.open(
-                  `${getTargetUrl(Application.COMPANY)}/projects`,
-                  '_self'
-                );
-              }
+        onClick={e => {
+          if (selectedModule === CmAllowedAreaType.Hiring) {
+            if (fromCompany) {
+              if (changeSelectedModule)
+                changeSelectedModule(CmAllowedAreaType.TalentReview);
+              if (!location.pathname.includes('projects'))
+                history.push('/projects');
+            } else {
+              window.open(
+                `${getTargetUrl(Application.COMPANY)}/projects`,
+                '_self'
+              );
             }
-            setShowDropdown(showDropdown => !showDropdown);
-          }}
-          className="project-module-first-div"
-        >
+          }
+          setShowDropdown(showDropdown => !showDropdown);
+        }}
+      >
+        <div className="project-module-first-div">
           <img src={IC_RECRUITER} alt="ic-recruter" className="icon" />
           <div className="module-title-div">Talent Review</div>
         </div>
