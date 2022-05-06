@@ -17,6 +17,7 @@ query GetTestCards($stageCandidateId: Int!) {
     displayInstructions
     displayOnboarding
     stageCandidateId
+    doneBy
     # directReportId
     # directReportName
     doneFor

@@ -1,16 +1,36 @@
-query ResultFindMany($stageCandidateId: Int!, $type: BasicScoreType) {
-  ResultFindMany(stageCandidateId: $stageCandidateId, type: $type) {
+query ResultFindMany(
+  $doneBy: Int!
+  $doneFor: Int!
+  $projectId: Int!
+  $measurementIds: [Int!]
+  $measurementType: ResultMeasurementType
+) {
+  ResultFindMany(
+    doneBy: $doneBy
+    doneFor: $doneFor
+    projectId: $projectId
+
+    measurementIds: $measurementIds
+    measurementType: $measurementType
+  ) {
     id
-    parentId
-    type
-    childId
     version
     score {
-      customEvaluation
-      customScore
+      __typename
+      ... on TrCustomResultScoreModel {
+        # This will be used for Entain
+        score
+        evaluation
+      }
+      ... on StatisticalResultScoreModel {
+        zScore
+        percentile
+        stenScore
+        grade
+      }
     }
+    previousVersionId
     label
-    creatorService
-    creatorId
+    # etc...
   }
 }

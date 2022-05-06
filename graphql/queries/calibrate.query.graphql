@@ -1,13 +1,16 @@
-query CalibrationConfigFindOne($ownerId: Int!, $type: AssignedType!) {
-  CalibrationConfigFindOne(ownerId: $ownerId, type: $type) {
+query CalibrationConfigFindOne($projectId: Int!) {
+  CalibrationConfigFindOne(projectId: $projectId) {
     id
-    ownerId
-    type
+    successProfileId
     softSkillIds
+    successProfileId
     gradeBands {
-      position
-      name
-      groupName
+      __typename
+      ... on TrCustomGradeBandModel {
+        position
+        evaluation
+        displayText
+      }
     }
   }
 }
