@@ -145,7 +145,7 @@ export const useCalibrateForm = ({
         label: label || '',
         score: {
           evaluation: score.evaluation,
-          score: score.score,
+          score: score.score / 20,
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
