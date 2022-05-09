@@ -447,7 +447,7 @@ export const useCalibrateForm = ({
     PersonIconUrl,
   ];
 
-  let colors: string[] = ['#00d3ad', '#10b7ff', '#b75bff', '#000'];
+  let colors: string[] = ['#00d3ad', '#10b7ff', '#000', '#b75bff'];
 
   let totalColors: number = colors.length;
   return [

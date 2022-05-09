@@ -127,11 +127,12 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                     <React.Fragment key={index}>
                       <div className={`flex-${group.totalPoints}`} key={index}>
                         <div
-                          className="label"
+                          className="header-label"
                           style={{
                             borderBottom: `3px solid ${
                               colors[totalColors - 1 - (index % totalColors)]
                             }`,
+                            marginTop: 20,
                           }}
                         >
                           {group.name}
@@ -150,7 +151,6 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                                     ?.SoftSkillFindMany?.length
                                 : 0) * 120,
                             opacity: '0.08',
-                            marginTop: 20,
                           }}
                         >
                           {' '}
