@@ -47,6 +47,7 @@ interface IFormScreen {
 interface IUseCalibrateForm {
   stageCandidateId: number;
   onCloseHandler: () => void;
+  onRedirectHandler: () => void;
   doneFor: number;
   doneBy: number;
   projectId: number;
@@ -55,6 +56,7 @@ interface IUseCalibrateForm {
 export const useCalibrateForm = ({
   stageCandidateId,
   onCloseHandler,
+  onRedirectHandler,
   doneBy,
   doneFor,
   projectId,
@@ -170,8 +172,10 @@ export const useCalibrateForm = ({
       variables: {
         args: payload,
       },
-      onCompleted: () => {
-        onCloseHandler();
+      onCompleted: data => {
+        if (data.ResultCreateManyTrCustom) {
+          onRedirectHandler();
+        }
       },
       onError: error => {
         console.log(error);
@@ -186,7 +190,7 @@ export const useCalibrateForm = ({
         status: StageCandidateStatus.SignedOff,
       },
       onCompleted: () => {
-        onCloseHandler();
+        onRedirectHandler();
       },
       onError: error => {
         console.log(error);
@@ -447,7 +451,7 @@ export const useCalibrateForm = ({
     PersonIconUrl,
   ];
 
-  let colors: string[] = ['#00d3ad', '#10b7ff', '#000', '#b75bff'];
+  let colors: string[] = ['#00d3ad', '#10b7ff', '#b75bff', '#000'];
 
   let totalColors: number = colors.length;
   return [

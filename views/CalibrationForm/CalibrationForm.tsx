@@ -13,6 +13,7 @@ interface ICalibrationForm {
   stageCandidateId: number;
   userType: 'candidate' | 'company';
   onCloseHandler: () => void;
+  onRedirectHandler: () => void;
   doneFor: number;
   doneBy: number;
   projectId: number;
@@ -22,6 +23,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
   stageCandidateId,
   userType,
   onCloseHandler,
+  onRedirectHandler,
   doneBy,
   doneFor,
   projectId,
@@ -48,16 +50,11 @@ const CalibrationForm: FC<ICalibrationForm> = ({
   ] = useCalibrateForm({
     stageCandidateId: stageCandidateId,
     onCloseHandler,
+    onRedirectHandler,
     doneBy,
     doneFor,
     projectId,
   });
-  console.log(
-    'formSoftSkills',
-    formSoftSkills,
-    formSuccessProfiles,
-    selectedScreen
-  );
   return (
     <div className="calibration">
       {getCalibrateFormQueryResponse.loading ||
@@ -173,7 +170,6 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                         },
                         key: number
                       ) => {
-                        console.log('here');
                         let originalScore = formSoftSkills[selectedScreen]
                           ?.originalResult[key]
                           ?.score as TrCustomResultScoreModel;
