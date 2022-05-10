@@ -449,8 +449,8 @@ export const useCalibrateForm = ({
     setFormSuccessProfile(updateFormSuccessProfile);
   };
   const icons: string[] = [
-    PerformanceIcon,
     PotentialIcon,
+    PerformanceIcon,
     ValuesIcon,
     PersonIconUrl,
   ];

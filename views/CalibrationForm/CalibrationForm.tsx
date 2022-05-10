@@ -58,7 +58,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
     getResultAccessResponse.error ||
     getSoftSkillsQueryResponse.error ||
     getCalibrateFormQueryResponse.error ||
-    getResultAccessResponse.data === null
+    getResultAccessResponse.data?.ResultAccessFindOne === null
   ) {
     return (
       <div className="calibration__NotificationWrapper">
@@ -181,7 +181,9 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                 formSoftSkills[selectedScreen] &&
                 formSuccessProfiles[selectedScreen] && (
                   <>
-                    {getSoftSkillsQueryResponse.data.SoftSkillFindMany?.map(
+                    {getSoftSkillsQueryResponse.data.SoftSkillFindMany?.sort(
+                      (a, b) => b.id - a.id
+                    )?.map(
                       (
                         obj: {
                           name: string;
