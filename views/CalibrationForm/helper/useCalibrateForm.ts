@@ -145,7 +145,7 @@ export const useCalibrateForm = ({
         label: label || '',
         score: {
           evaluation: score.evaluation,
-          score: score.score / 20,
+          score: score.score / 20 + 1.5,
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
@@ -160,7 +160,7 @@ export const useCalibrateForm = ({
         label: label || '',
         score: {
           evaluation: score.evaluation,
-          score: score.score,
+          score: score.score / 20 + 1.5,
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
