@@ -4,14 +4,15 @@ query ResultFindMany(
   $projectId: Int!
   $measurementIds: [Int!]
   $measurementType: ResultMeasurementType
+  $onlyLatestVersionPerLabel: Boolean
 ) {
   ResultFindMany(
     doneBy: $doneBy
     doneFor: $doneFor
     projectId: $projectId
-
     measurementIds: $measurementIds
     measurementType: $measurementType
+    onlyLatestVersionPerLabel: $onlyLatestVersionPerLabel
   ) {
     id
     version
@@ -31,6 +32,8 @@ query ResultFindMany(
     }
     previousVersionId
     label
+    measurementId
+    measurementType
     # etc...
   }
 }
