@@ -215,7 +215,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                                 : 0
                             }
                             icon={icons[key]}
-                            showInitialField={formSuccessProfiles.length > 1}
+                            showInitialField={true}
                             isScreenCompleted={
                               formSoftSkills[selectedScreen].isScreenCompleted
                             }
@@ -244,7 +244,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                             initialData={originalScore.score || 0}
                             currentData={updatedScore.score || 0}
                             icon={PersonIconUrl}
-                            showInitialField={formSuccessProfiles.length > 1}
+                            showInitialField={true}
                             isScreenCompleted={
                               formSuccessProfiles[selectedScreen]
                                 .isScreenCompleted
