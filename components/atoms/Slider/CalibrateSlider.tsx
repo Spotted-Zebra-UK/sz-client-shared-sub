@@ -59,12 +59,6 @@ const Slider: FC<ISlider> = ({
     onChange(newValue, index);
   };
 
-  const sliderWrapperStyle = useMemo(
-    () => ({
-      padding: handleSize / 2,
-    }),
-    [handleSize]
-  );
   const handleStyle1 = useMemo(
     () => ({
       ...baseHandleStyle,
