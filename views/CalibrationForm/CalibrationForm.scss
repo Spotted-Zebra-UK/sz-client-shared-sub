@@ -1,6 +1,14 @@
 .calibration {
-  width: 100%;
-  margin-bottom: 50px;
+  &__NotificationWrapper {
+    padding: 20px;
+
+    .Notification {
+      margin: auto;
+      max-width: 350px;
+    }
+  }
+  width: 770px;
+  margin: auto;
   .flex-1 {
     flex: 1;
     max-width: 110px;
@@ -39,7 +47,7 @@
   &__action {
     display: flex;
     justify-content: center;
-    margin: 20px auto;
+    margin: 30px auto;
     gap: 20px;
   }
   &__LoaderWrapper {
@@ -83,21 +91,21 @@
     &__header {
       display: flex;
       position: relative;
-      margin-bottom: 70px;
+      margin-bottom: 85px;
       &__heading-top {
         flex: 1;
       }
       &__form-top {
         position: absolute;
         flex: 3 3;
-        min-width: 616px;
+        min-width: 620px;
         display: flex;
         text-align: center;
         grid-gap: 10px;
         gap: 10px;
         max-width: 700px;
         flex-grow: 1;
-        right: -4%;
+        right: 1%;
         .header-label {
           border-bottom: 2px solid transparent;
           display: block;
@@ -126,7 +134,7 @@
 
     &__item {
       display: flex;
-      margin: 20px 0;
+      margin: 2px 0;
       &__heading {
         flex: 1;
         align-items: center;
@@ -139,7 +147,7 @@
         }
       }
       &__range-selector {
-        flex: 3;
+        flex: 5;
         position: relative;
         height: 50px;
         padding-left: 37px;

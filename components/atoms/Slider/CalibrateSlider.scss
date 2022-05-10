@@ -3,9 +3,14 @@
 }
 
 .slider {
+  padding: 20px 0px;
   position: absolute;
-  width: 85%;
-  left: 52px;
+  width: 78%;
+  left: 83px;
+
+  .rc-slider-dot:nth-child(2) {
+    margin-left: 5px !important;
+  }
 
   .rc-slider-disabled {
     background-color: transparent !important;
@@ -31,9 +36,11 @@
   }
 }
 .initial-slider {
+  padding: 20px 0px;
+
   position: absolute;
-  width: 85%;
-  left: 52px;
+  width: 78%;
+  left: 83px;
   .rc-slider-disabled {
     background-color: transparent !important;
     cursor: default !important;

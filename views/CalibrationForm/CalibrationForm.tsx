@@ -1,7 +1,9 @@
 import './CalibrationForm.scss';
+import { t } from 'i18next';
 import React, { FC } from 'react';
 import { TrCustomResultScoreModel } from '../../../../generated/graphql';
 import Loader from '../../components/atoms/Loader/Loader';
+import Notification from '../../components/atoms/Notification/Notification';
 import PersonIconUrl, { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
 import CalibrationAction from './CalibrationAction/CalibrationAction';
@@ -52,12 +54,26 @@ const CalibrationForm: FC<ICalibrationForm> = ({
     doneFor,
     projectId,
   });
-  console.log(
-    'formSoftSkills',
-    formSoftSkills,
-    formSuccessProfiles,
-    selectedScreen
-  );
+  if (
+    getResultAccessResponse.error ||
+    getSoftSkillsQueryResponse.error ||
+    getCalibrateFormQueryResponse.error ||
+    getResultAccessResponse.data === null
+  ) {
+    return (
+      <div className="calibration__NotificationWrapper">
+        <Notification
+          notification={{
+            icon: 'Warning',
+            color: 'Purple',
+            message: t(
+              'stages.unfortunatelyThereHasBeenProblemProcessingOneOrMoreOfYourTests'
+            ),
+          }}
+        />
+      </div>
+    );
+  }
   return (
     <div className="calibration">
       {getCalibrateFormQueryResponse.loading ||
@@ -82,7 +98,6 @@ const CalibrationForm: FC<ICalibrationForm> = ({
               <div className="calibration__navigation">
                 <button
                   className="calibration__navigation__icon-button"
-                  // disabled={true}
                   onClick={() => {
                     setSelectedScreen(prev => prev - 1);
                   }}
@@ -136,6 +151,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                           }}
                         >
                           {group.name}
+                          <sup> ?</sup>
                         </div>
                         <div
                           style={{
@@ -149,7 +165,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                               )
                                 ? getSoftSkillsQueryResponse.data
                                     ?.SoftSkillFindMany?.length
-                                : 0) * 120,
+                                : 0) * 85,
                             opacity: '0.08',
                           }}
                         >
@@ -173,9 +189,11 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                         },
                         key: number
                       ) => {
-                        console.log('here');
-                        let originalScore = formSoftSkills[selectedScreen]
-                          ?.originalResult[key]
+                        let originalScore = formSoftSkills[
+                          selectedScreen === 0
+                            ? selectedScreen
+                            : selectedScreen - 1
+                        ]?.originalResult[key]
                           ?.score as TrCustomResultScoreModel;
                         let updatedScore = formSoftSkills[selectedScreen]
                           ?.updatedResult[key]
@@ -197,9 +215,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                                 : 0
                             }
                             icon={icons[key]}
-                            showInitialField={
-                              userType === 'candidate' ? false : true
-                            }
+                            showInitialField={formSuccessProfiles.length > 1}
                             isScreenCompleted={
                               formSoftSkills[selectedScreen].isScreenCompleted
                             }
@@ -209,8 +225,11 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                     )}
                     {formSuccessProfiles[selectedScreen] &&
                       successProfiles.map((obj, index) => {
-                        let originalScore = formSuccessProfiles[selectedScreen]
-                          ?.originalResult[index]
+                        let originalScore = formSuccessProfiles[
+                          selectedScreen === 0
+                            ? selectedScreen
+                            : selectedScreen - 1
+                        ]?.originalResult[index]
                           ?.score as TrCustomResultScoreModel;
                         let updatedScore = formSuccessProfiles[selectedScreen]
                           ?.updatedResult[index]
@@ -220,14 +239,12 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                             key={obj.id}
                             index={index}
                             onChangeHandler={onChangeSuccessProfile}
-                            softsSkill={{ name: 'overall', id: obj.id }}
+                            softsSkill={{ name: 'Overall', id: obj.id }}
                             totalScore={totalScore - 1}
                             initialData={originalScore.score || 0}
                             currentData={updatedScore.score || 0}
                             icon={PersonIconUrl}
-                            showInitialField={
-                              userType === 'candidate' ? false : true
-                            }
+                            showInitialField={formSuccessProfiles.length > 1}
                             isScreenCompleted={
                               formSuccessProfiles[selectedScreen]
                                 .isScreenCompleted

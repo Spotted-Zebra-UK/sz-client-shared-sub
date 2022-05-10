@@ -118,7 +118,7 @@ export const useCalibrateForm = ({
   // TODO: Need to make it dynamic.
   const successProfiles = [
     {
-      name: 'overall',
+      name: 'Overall',
       id: 2000,
     },
   ];
@@ -196,15 +196,22 @@ export const useCalibrateForm = ({
   };
 
   const [getSoftSkills, getSoftSkillsQueryResponse] =
-    useSoftSkillFindManyLazyQuery();
+    useSoftSkillFindManyLazyQuery({
+      fetchPolicy: 'network-only',
+    });
 
   const [getResultsSoftSkills, getResultsSoftSkillsResponse] =
-    useResultFindManyLazyQuery();
+    useResultFindManyLazyQuery({
+      fetchPolicy: 'network-only',
+    });
   const [getResultsSuccessProfile, getResultsSuccessProfileResponse] =
-    useResultFindManyLazyQuery();
+    useResultFindManyLazyQuery({
+      fetchPolicy: 'network-only',
+    });
 
   const [getResultAccess, getResultAccessResponse] =
     useResultAccessFindOneLazyQuery({
+      fetchPolicy: 'network-only',
       variables: {
         stageCandidateId: stageCandidateId,
       },
@@ -229,6 +236,7 @@ export const useCalibrateForm = ({
   };
 
   const getCalibrateFormQueryResponse = useCalibrationConfigFindOneQuery({
+    fetchPolicy: 'network-only',
     variables: {
       projectId,
     },
@@ -441,13 +449,13 @@ export const useCalibrateForm = ({
     setFormSuccessProfile(updateFormSuccessProfile);
   };
   const icons: string[] = [
-    ValuesIcon,
     PerformanceIcon,
     PotentialIcon,
+    ValuesIcon,
     PersonIconUrl,
   ];
 
-  let colors: string[] = ['#00d3ad', '#10b7ff', '#000', '#b75bff'];
+  let colors: string[] = ['#00d3ad', '#10b7ff', '#b75bff', '#000'];
 
   let totalColors: number = colors.length;
   return [

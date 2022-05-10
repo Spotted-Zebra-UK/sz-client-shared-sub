@@ -92,9 +92,16 @@ const Slider: FC<ISlider> = ({
   const handleIconSize =
     (handleSize * DEFAULT_HANDLE_ICON_SIZE) / DEFAULT_HANDLE_SIZE;
 
+  const formatHandlerLabel = (label: string): string => {
+    let removedUnderscore = label.replaceAll('_', ' ');
+    let labelLowerCase = removedUnderscore.toLowerCase();
+    let result =
+      labelLowerCase.charAt(0).toUpperCase() + labelLowerCase.slice(1);
+    return result;
+  };
+
   return (
     <div
-      style={sliderWrapperStyle}
       className={` ${initial || initalDisabled ? 'initial-slider' : 'slider'}`}
     >
       <RCSlider
@@ -116,7 +123,7 @@ const Slider: FC<ISlider> = ({
               <div
                 className={`handler-label ${showHandlerLabel ? '' : 'hide'}`}
               >
-                {handlerLabel}
+                {formatHandlerLabel(handlerLabel || '')}
               </div>
             </Handle>
           );
