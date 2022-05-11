@@ -4,6 +4,7 @@ import {
   BasicScoreType,
   CalibrationConfigFindOneQuery,
   Exact,
+  GetTestCardsDocument,
   GradeBandUnion,
   InputMaybe,
   ResultAccessFindOneQuery,
@@ -181,13 +182,23 @@ export const useCalibrateForm = ({
       variables: {
         args: payload,
       },
-      onCompleted: () => {
-        onCloseHandler();
+      onCompleted: data => {
+        if (data.ResultCreateManyTrCustom) {
+          onCloseHandler();
+        }
       },
       onError: error => {
         console.log(error);
         onCloseHandler();
       },
+      refetchQueries: [
+        {
+          query: GetTestCardsDocument,
+          variables: {
+            stageCandidateId,
+          },
+        },
+      ],
     });
   };
   const onUpdateStatus = () => {
@@ -217,6 +228,14 @@ export const useCalibrateForm = ({
         console.log(error);
         onCloseHandler();
       },
+      refetchQueries: [
+        {
+          query: GetTestCardsDocument,
+          variables: {
+            stageCandidateId,
+          },
+        },
+      ],
     });
   };
 
