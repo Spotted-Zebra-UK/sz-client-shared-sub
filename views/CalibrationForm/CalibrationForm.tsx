@@ -193,13 +193,9 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                         },
                         key: number
                       ) => {
-                        let originalScore =
-                          // selectedScreen === formSoftSkills.length - 1 ||
-                          // selectedScreen === 0
-                          //   ? selectedScreen
-                          //   : selectedScreen - 1
-                          formSoftSkills[selectedScreen]?.originalResult[key]
-                            ?.score as TrCustomResultScoreModel;
+                        let originalScore = formSoftSkills[selectedScreen]
+                          ?.originalResult[key]
+                          ?.score as TrCustomResultScoreModel;
                         let updatedScore = formSoftSkills[selectedScreen]
                           ?.updatedResult[key]
                           ?.score as TrCustomResultScoreModel;
@@ -230,14 +226,9 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                     )}
                     {formSuccessProfiles[selectedScreen] &&
                       successProfiles.map((obj, index) => {
-                        let originalScore =
-                          // selectedScreen === formSuccessProfiles.length - 1 ||
-                          // selectedScreen === 0
-                          //   ? selectedScreen
-                          //   : selectedScreen - 1
-                          formSuccessProfiles[selectedScreen]?.originalResult[
-                            index
-                          ]?.score as TrCustomResultScoreModel;
+                        let originalScore = formSuccessProfiles[selectedScreen]
+                          ?.originalResult[index]
+                          ?.score as TrCustomResultScoreModel;
                         let updatedScore = formSuccessProfiles[selectedScreen]
                           ?.updatedResult[index]
                           ?.score as TrCustomResultScoreModel;

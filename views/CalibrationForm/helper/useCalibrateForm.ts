@@ -442,7 +442,7 @@ export const useCalibrateForm = ({
         setFormSuccessProfile(screens);
       }
     },
-    [getResultAccessResponse?.data?.ResultAccessFindOne, getScore]
+    [getResultAccessResponse.data?.ResultAccessFindOne, getScore, userType]
   );
 
   useEffect(() => {
