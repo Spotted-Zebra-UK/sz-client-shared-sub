@@ -47,7 +47,6 @@ interface IFormScreen {
 interface IUseCalibrateForm {
   stageCandidateId: number;
   onCloseHandler: () => void;
-  onRedirectHandler: () => void;
   doneFor: number;
   doneBy: number;
   projectId: number;
@@ -57,7 +56,6 @@ interface IUseCalibrateForm {
 export const useCalibrateForm = ({
   stageCandidateId,
   onCloseHandler,
-  onRedirectHandler,
   doneBy,
   doneFor,
   projectId,
@@ -185,7 +183,7 @@ export const useCalibrateForm = ({
       },
       onCompleted: data => {
         if (data.ResultCreateManyTrCustom) {
-          onRedirectHandler();
+          onCloseHandler();
         }
       },
       onError: error => {
@@ -216,7 +214,6 @@ export const useCalibrateForm = ({
             onCloseHandler();
           },
         });
-        onRedirectHandler();
       },
       onError: error => {
         console.log(error);
