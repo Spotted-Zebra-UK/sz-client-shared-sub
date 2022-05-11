@@ -15,6 +15,7 @@ interface ICalibrationForm {
   stageCandidateId: number;
   userType: 'candidate' | 'company';
   onCloseHandler: () => void;
+  onRedirectHandler: () => void;
   doneFor: number;
   doneBy: number;
   projectId: number;
@@ -24,6 +25,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
   stageCandidateId,
   userType,
   onCloseHandler,
+  onRedirectHandler,
   doneBy,
   doneFor,
   projectId,
@@ -50,6 +52,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
   ] = useCalibrateForm({
     stageCandidateId: stageCandidateId,
     onCloseHandler,
+    onRedirectHandler,
     doneBy,
     doneFor,
     projectId,
