@@ -4,6 +4,7 @@ import {
   BasicScoreType,
   CalibrationConfigFindOneQuery,
   Exact,
+  GetTestCardsDocument,
   GradeBandUnion,
   InputMaybe,
   ResultAccessFindOneQuery,
@@ -50,6 +51,7 @@ interface IUseCalibrateForm {
   doneFor: number;
   doneBy: number;
   projectId: number;
+  userType: 'candidate' | 'company';
 }
 
 export const useCalibrateForm = ({
@@ -58,6 +60,7 @@ export const useCalibrateForm = ({
   doneBy,
   doneFor,
   projectId,
+  userType,
 }: IUseCalibrateForm): [
   IGrade[],
   {
@@ -131,11 +134,10 @@ export const useCalibrateForm = ({
   const [createResultVersion] = useResultCreateManyTrCustomMutation();
   const [updateStatus] = useStageCandidateUpdateMutation();
 
-  const onCreateVersion = () => {
+  const getResultCreateOneTrCustomArgs = (
+    label: string
+  ): ResultCreateOneTrCustomArgs[] => {
     const payload: ResultCreateOneTrCustomArgs[] = [];
-    let label = getResultAccessResponse.data?.ResultAccessFindOne?.label || '';
-    if (!label) return;
-
     formSoftSkills[selectedScreen].updatedResult.forEach(data => {
       let score = data?.score as TrCustomResultScoreModel;
       payload.push({
@@ -166,32 +168,74 @@ export const useCalibrateForm = ({
         measurementType: data.measurementType,
       });
     });
+    return payload;
+  };
+
+  const onCreateVersion = () => {
+    let label = getResultAccessResponse.data?.ResultAccessFindOne?.label || '';
+    if (!label) return;
+
+    const payload: ResultCreateOneTrCustomArgs[] =
+      getResultCreateOneTrCustomArgs(label);
+
+    createResultVersion({
+      variables: {
+        args: payload,
+      },
+      onCompleted: data => {
+        if (data.ResultCreateManyTrCustom) {
+          onCloseHandler();
+        }
+      },
+      onError: error => {
+        console.log(error);
+        onCloseHandler();
+      },
+      refetchQueries: [
+        {
+          query: GetTestCardsDocument,
+          variables: {
+            stageCandidateId,
+          },
+        },
+      ],
+    });
+  };
+  const onUpdateStatus = () => {
+    const payload: ResultCreateOneTrCustomArgs[] =
+      getResultCreateOneTrCustomArgs('signed off');
+
     createResultVersion({
       variables: {
         args: payload,
       },
       onCompleted: () => {
-        onCloseHandler();
+        updateStatus({
+          variables: {
+            stageCandidateId: stageCandidateId,
+            status: StageCandidateStatus.SignedOff,
+          },
+          onCompleted: () => {
+            onCloseHandler();
+          },
+          onError: error => {
+            console.log(error);
+            onCloseHandler();
+          },
+        });
       },
       onError: error => {
         console.log(error);
         onCloseHandler();
       },
-    });
-  };
-  const onUpdateStatus = () => {
-    updateStatus({
-      variables: {
-        stageCandidateId: stageCandidateId,
-        status: StageCandidateStatus.SignedOff,
-      },
-      onCompleted: () => {
-        onCloseHandler();
-      },
-      onError: error => {
-        console.log(error);
-        onCloseHandler();
-      },
+      refetchQueries: [
+        {
+          query: GetTestCardsDocument,
+          variables: {
+            stageCandidateId,
+          },
+        },
+      ],
     });
   };
 
@@ -376,6 +420,7 @@ export const useCalibrateForm = ({
             isScreenCompleted:
               index + 1 < formattedFormResults.length ? true : false,
           };
+
           if (
             getResultAccessResponse.data?.ResultAccessFindOne?.status ===
             ResultAccessStatus.LockedForHigherLevel
@@ -386,10 +431,28 @@ export const useCalibrateForm = ({
         }
       );
       if (
+        screens.length > 1 &&
+        getResultAccessResponse.data?.ResultAccessFindOne?.status ===
+          ResultAccessStatus.Editable &&
+        screens[screens.length - 2].name === 'talent team decision'
+      ) {
+        screens.pop();
+        screens[screens.length - 1].name = null;
+        screens[screens.length - 1].isScreenCompleted = false;
+      }
+      if (
+        getResultAccessResponse.data?.ResultAccessFindOne?.status ===
+          ResultAccessStatus.LockedForHigherLevel &&
+        userType === 'company'
+      ) {
+        screens.pop();
+      }
+      if (
         getResultAccessResponse?.data?.ResultAccessFindOne &&
         getResultAccessResponse?.data?.ResultAccessFindOne.status ===
           ResultAccessStatus.SignedOff
       ) {
+        screens.pop();
         screens.pop();
       }
       if (formType === BasicScoreType.SoftSkill) {
@@ -398,7 +461,7 @@ export const useCalibrateForm = ({
         setFormSuccessProfile(screens);
       }
     },
-    [getResultAccessResponse?.data?.ResultAccessFindOne, getScore]
+    [getResultAccessResponse.data?.ResultAccessFindOne, getScore, userType]
   );
 
   useEffect(() => {

@@ -113,13 +113,6 @@ interface IUseRespondantForm {
   formOwnerId: number;
   formType: FormType;
 }
-interface IUseRespondantForm {
-  onGetRespondantFormPreviouslyCompleted?: () => void;
-  onSaveRespondantFormCompleted?: () => void;
-  associatedId: number;
-  formOwnerId: number;
-  formType: FormType;
-}
 
 interface ISelectOption {
   label: string;
@@ -245,6 +238,14 @@ const useRespondantForm = ({
         onSaveRespondantFormCompleted();
       }
     },
+    refetchQueries: [
+      {
+        query: GetTestCardsDocument,
+        variables: {
+          stageCandidateId: associatedId,
+        },
+      },
+    ],
     update(cache, { data }) {
       if (data) {
         const { respondantForm } = data;
