@@ -1,6 +1,7 @@
 import './TalentReviewForm.scss';
 import { FormType } from 'generated/graphql';
 import { FC, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Loader from '../../components/atoms/Loader/Loader';
 import TRFormContainer from '../../components/molecules/TRFormContainer/TRFormContainer';
 import useRespondantForm from '../../hooks/useRespondantForm';
@@ -21,7 +22,6 @@ interface ITalentReviewForm {
 const TalentReviewForm: FC<ITalentReviewForm> = ({
   ownerId,
   stageCandidateId,
-  stageId,
   isReadOnly,
   onCloseHandler,
 }) => {
@@ -31,13 +31,16 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
     successorFields: [],
     otherFields: [],
   });
+  const history = useHistory();
   const [
     getCompanyCandidateRequestQueryResponse,
     formFields,
     handleSaveCandidateInformation,
   ] = useRespondantForm({
     onGetRespondantFormPreviouslyCompleted: () => {},
-    onSaveRespondantFormCompleted: () => {},
+    onSaveRespondantFormCompleted: () => {
+      history.push(`/stages/${stageCandidateId}`);
+    },
     associatedId: parseInt(stageCandidateId),
     formOwnerId: parseInt(ownerId),
     formType: FormType.TrForm,
@@ -82,7 +85,7 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
             fields={formFields || []}
             onSubmit={handleSaveCandidateInformation}
             isReadOnly={isReadOnly}
-            stageId={stageId}
+            stageCandidateId={stageCandidateId}
             onCloseHandler={onCloseHandler}
           />
         </>

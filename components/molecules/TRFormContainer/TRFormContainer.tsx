@@ -3,7 +3,6 @@ import { FieldType, FormType } from 'generated/graphql';
 import _ from 'lodash';
 import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
 import FormBuilderField from '../../../components/molecules/FormBuilderField/FormBuilderField';
 import { useForm } from '../../../hooks/form';
 import { TFormFieldValue } from '../../../interfaces/form';
@@ -12,6 +11,7 @@ import {
   TRespondantFormField,
 } from '../../../interfaces/TalentReviewForm';
 import SquareButton from '../SquareButton/SquareButton';
+import SquareSubmitButton from '../SquareButton/SquareSubmitButton';
 
 interface ITRFormContainer {
   fieldLayout: TalentReviewFormField;
@@ -23,7 +23,7 @@ interface ITRFormContainer {
     fields: TRespondantFormField[]
   ) => void;
   isReadOnly: boolean;
-  stageId: string;
+  stageCandidateId?: string;
   onCloseHandler: () => void;
 }
 
@@ -32,12 +32,11 @@ const TRFormContainer: FC<ITRFormContainer> = ({
   fields,
   onSubmit,
   isReadOnly,
-  stageId,
+  stageCandidateId,
   onCloseHandler,
 }) => {
   const { t } = useTranslation();
   const requiredFieldMessage = `^${t('common.thisFieldIsRequired')}`;
-  const history = useHistory();
 
   const initialValues = useMemo(
     () =>
@@ -95,13 +94,12 @@ const TRFormContainer: FC<ITRFormContainer> = ({
     },
     onSubmit: values => {
       onSubmit(values, fields);
-      history.push(`/stages/${stageId}`);
     },
   });
 
   const formKey = 'tr';
   return (
-    <form onSubmit={handleSubmit} className="form-container">
+    <form className="form-container">
       <div className="levels">
         {fieldLayout.levelFields.map(field => (
           <div
@@ -228,9 +226,9 @@ const TRFormContainer: FC<ITRFormContainer> = ({
             Close
           </SquareButton>
         ) : (
-          <SquareButton type="submit">
+          <SquareSubmitButton onClick={handleSubmit}>
             {_.capitalize(t('common.next'))}
-          </SquareButton>
+          </SquareSubmitButton>
         )}
       </div>
     </form>

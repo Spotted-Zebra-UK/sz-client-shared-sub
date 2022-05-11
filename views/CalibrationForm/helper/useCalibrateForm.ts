@@ -181,8 +181,10 @@ export const useCalibrateForm = ({
       variables: {
         args: payload,
       },
-      onCompleted: () => {
-        onCloseHandler();
+      onCompleted: data => {
+        if (data.ResultCreateManyTrCustom) {
+          onCloseHandler();
+        }
       },
       onError: error => {
         console.log(error);
