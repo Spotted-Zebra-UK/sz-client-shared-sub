@@ -25,6 +25,7 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
   isReadOnly,
   onCloseHandler,
 }) => {
+  console.log(stageCandidateId, 'stageCandidateID');
   const [fieldLayout, setFieldLayout] = useState<TalentReviewFormField>({
     levelFields: [],
     roleFields: [],
@@ -39,6 +40,7 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
   ] = useRespondantForm({
     onGetRespondantFormPreviouslyCompleted: () => {},
     onSaveRespondantFormCompleted: () => {
+      console.log(stageCandidateId, 'stageCandidateId');
       history.push(`/stages/${stageCandidateId}`);
     },
     associatedId: parseInt(stageCandidateId),

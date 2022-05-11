@@ -4,7 +4,9 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getTargetUrl } from '../../../../helpers/getTargetURL';
 import IC_ARROW from '../../../../icons/ic_down-arrow_small.svg';
+// import IC_EMPLOYEE from '../../../../icons/ic_employee.svg';
 import IC_RECRUITER from '../../../../icons/ic_recruitment.svg';
+import IC_TALENT_REVIEW from '../../../../icons/ic_talent_review.svg';
 import { Application } from '../../../../interfaces/Applications';
 
 interface IModuleSelector {
@@ -108,7 +110,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
         }}
       >
         <div className="project-module-first-div">
-          <img src={IC_RECRUITER} alt="ic-recruter" className="icon" />
+          <img src={IC_TALENT_REVIEW} alt="ic-recruter" className="icon" />
           <div className="module-title-div">Talent Review</div>
         </div>
         {selectedModule === CmAllowedAreaType.TalentReview && (
