@@ -6,11 +6,13 @@ export const RESPONDANT_FORM_QUERY = gql`
     $associatedId: Int!
     $formOwnerId: Int!
     $formType: FormType!
+    $respondantId: Int
   ) {
     respondantForm: RespondantForm(
       associatedId: $associatedId
       formOwnerId: $formOwnerId
       formType: $formType
+      respondantId: $respondantId
     ) {
       isComplete
       submittedFormLogId

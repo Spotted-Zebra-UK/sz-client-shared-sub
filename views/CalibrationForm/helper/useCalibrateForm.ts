@@ -176,7 +176,6 @@ export const useCalibrateForm = ({
 
     const payload: ResultCreateOneTrCustomArgs[] =
       getResultCreateOneTrCustomArgs(label);
-
     createResultVersion({
       variables: {
         args: payload,
@@ -354,10 +353,10 @@ export const useCalibrateForm = ({
 
   // Formatting Form Result
   const getFormResult = useCallback(
-    (data: ResultModel[], formType: BasicScoreType) => {
+    (resultFields: ResultModel[], formType: BasicScoreType) => {
+      let data = resultFields.sort((a, b) => b.measurementId - a.measurementId);
       let formResultDictionary: { [key: string]: ResultModel[] } = {};
       const formattedFormResults: IFormResult[] = [];
-      // if (!getResultAccessResponse.data?.ResultAccessFindOne?.status) return;
       //setting Score
       let results = data.map(obj => {
         let { score } = obj;

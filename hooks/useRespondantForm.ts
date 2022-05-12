@@ -112,6 +112,7 @@ interface IUseRespondantForm {
   associatedId: number;
   formOwnerId: number;
   formType: FormType;
+  respondantId?: number;
 }
 
 interface ISelectOption {
@@ -125,6 +126,7 @@ const useRespondantForm = ({
   associatedId,
   formOwnerId,
   formType,
+  respondantId,
 }: IUseRespondantForm): [
   QueryResult<IRespondantFormQueryResponse, IRespondantFormQueryInput>,
   TRespondantFormField[] | undefined,
@@ -141,6 +143,7 @@ const useRespondantForm = ({
       associatedId,
       formOwnerId,
       formType,
+      respondantId,
     },
     onError: () => {},
     onCompleted: data => {
