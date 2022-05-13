@@ -1,6 +1,6 @@
 import './ModuleSelector.scss';
 import { CmAllowedAreaType, useCmAllowedAreaQuery } from 'generated/graphql';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, Fragment, useEffect, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getTargetUrl } from '../../../../helpers/getTargetURL';
 import IC_ARROW from '../../../../icons/ic_down-arrow_small.svg';
@@ -54,6 +54,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
   const showCmModule: { [key in string]: React.ReactElement } = {
     [CmAllowedAreaType.Hiring]: (
       <div
+        key={selectedModule}
         className={
           selectedModule === CmAllowedAreaType.Hiring
             ? 'module-div'
@@ -87,6 +88,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
     ),
     [CmAllowedAreaType.TalentReview]: (
       <div
+        key={selectedModule}
         className={
           selectedModule === CmAllowedAreaType.Hiring
             ? 'second-module-div'
@@ -124,7 +126,9 @@ const ModuleSelector: FC<IModuleSelector> = ({
     return (
       <div className="module-selector" ref={ref}>
         {showDropdown
-          ? modules.map((cm, i) => <>{showCmModule[cm]}</>)
+          ? modules.map((cm, i) => (
+              <Fragment key={cm}>{showCmModule[cm]}</Fragment>
+            ))
           : showCmModule[selectedModule]}
       </div>
     );
