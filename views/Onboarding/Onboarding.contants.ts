@@ -1,14 +1,14 @@
-import BrainIcon from '../../../src/assets/icons/ic_brain.svg';
-import CupIcon from '../../../src/assets/icons/ic_cup.svg';
-import ExternalIcon from '../../../src/assets/icons/ic_external.svg';
-import HatIcon from '../../../src/assets/icons/ic_hat.svg';
-import IdeaIcon from '../../../src/assets/icons/ic_idea.svg';
-import MessageIcon from '../../../src/assets/icons/ic_msg.svg';
-import NoteIcon from '../../../src/assets/icons/ic_note.svg';
-import PerformanceIcon from '../../../src/assets/icons/ic_performance.svg';
-import PotentialIcon from '../../../src/assets/icons/ic_potential.svg';
-import SettingsIcon from '../../../src/assets/icons/ic_settings.svg';
-import ValuesIcon from '../../../src/assets/icons/ic_values.svg';
+import BrainIcon from '../../icons/ic_brain.svg';
+import CupIcon from '../../icons/ic_cup.svg';
+import ExternalIcon from '../../icons/ic_external.svg';
+import HatIcon from '../../icons/ic_hat.svg';
+import IdeaIcon from '../../icons/ic_idea.svg';
+import MessageIcon from '../../icons/ic_msg.svg';
+import NoteIcon from '../../icons/ic_note.svg';
+import PerformanceIcon from '../../icons/ic_performance.svg';
+import PotentialIcon from '../../icons/ic_potential.svg';
+import SettingsIcon from '../../icons/ic_settings.svg';
+import ValuesIcon from '../../icons/ic_values.svg';
 
 export const firstPageContent = {
   title: 'Talent Review Introduction',

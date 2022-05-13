@@ -13,7 +13,8 @@ const OnboardingNavbar: FC<IOnboardingNavbar> = ({ pageNumber }) => {
       <UserSettings
         redirectTo="/stages"
         settings={{
-          TR_hasViewedOnboarding: true,
+          CM_lastVisitedModule: false,
+          TR_displayOnboarding: true,
         }}
       />
     );
