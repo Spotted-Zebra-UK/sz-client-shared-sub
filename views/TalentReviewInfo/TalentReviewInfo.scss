@@ -1,0 +1,72 @@
+.TalentReviewInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px 0 20px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 320px;
+  max-width: 840px;
+
+  .logo-img {
+    margin-bottom: 46px;
+  }
+
+  .intro {
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+  }
+
+  .reviewBody {
+    font-size: 18px;
+    line-height: 26px;
+    margin-top: 60px;
+  }
+  .listGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .reviewList {
+      margin-top: 42px;
+      font-size: 18px;
+      line-height: 26px;
+      display: flex;
+      align-items: center;
+
+      .iconContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.038);
+        border-radius: 50%;
+        height: 48px;
+        min-width: 48px;
+        box-sizing: border-box;
+
+        .icon {
+          height: 24px;
+          width: 24px;
+        }
+      }
+      span {
+        margin-left: 32px;
+      }
+    }
+  }
+
+  .btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 20px;
+  }
+
+  &__button {
+    width: 220px !important;
+  }
+}

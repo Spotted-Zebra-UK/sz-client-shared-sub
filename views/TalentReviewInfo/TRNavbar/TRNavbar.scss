@@ -1,0 +1,46 @@
+@import '../../../../../variables';
+
+.TRNavbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: $navbar-height;
+  align-items: center;
+  padding: 20px 20px 0 20px;
+  box-sizing: border-box;
+  max-width: $navbar-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 320px;
+  max-width: 960px;
+
+  &__pageCountContainer {
+    display: flex;
+    align-items: center;
+
+    &__pageCount {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 500;
+      background-color: rgba(0, 0, 0, 0.04);
+      height: 40px;
+      width: 40px;
+      margin-right: 8px;
+    }
+  }
+
+  &__skip {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.54);
+
+    &:hover {
+      text-decoration: underline;
+      color: #000;
+    }
+  }
+}
