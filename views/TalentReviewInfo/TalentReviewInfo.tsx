@@ -1,6 +1,6 @@
 import './TalentReviewInfo.scss';
 import { FC, useState } from 'react';
-import Container from '../../../../components/molecules/Container/Container';
+import Container from '../../components/molecules/Container/Container';
 import OnboardingContent1 from './onboardingContent1/onboardinContent1';
 import OnboardingContent2 from './onboardingContent1/onboardinContent2';
 import OnboardingContent3 from './onboardingContent1/onboardinContent3';
