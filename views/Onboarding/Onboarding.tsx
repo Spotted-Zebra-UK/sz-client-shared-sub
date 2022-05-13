@@ -52,7 +52,8 @@ const Onboarding: FC<IOnboarding> = () => {
       <UserSettings
         redirectTo="/stages"
         settings={{
-          TR_hasViewedOnboarding: true,
+          TR_displayOnboarding: true,
+          CM_lastVisitedModule: false,
         }}
       />
     ),

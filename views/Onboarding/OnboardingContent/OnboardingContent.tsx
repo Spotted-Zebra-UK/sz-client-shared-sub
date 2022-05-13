@@ -1,7 +1,7 @@
 import './OnboardingContent.scss';
 import React, { FC } from 'react';
-import EntainLogo from '../../../../src/assets/logos/lg_entain.png';
-import ContainedButton from '../../../libs/sz-client-shared-sub/components/molecules/ContainedButton/ContainedButton';
+import ContainedButton from '../../../components/molecules/ContainedButton/ContainedButton';
+import EntainLogo from '../../../icons/logos/lg_entain.png';
 import { Note } from '../Onboarding.types';
 import OnboardingNavbar from '../OnboardingNavbar/OnboardingNavbar';
 

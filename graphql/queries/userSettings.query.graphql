@@ -1,0 +1,9 @@
+query UserSettingsFindOne($id: Int, $userId: Int) {
+  UserSettingsFindOne(userId: $userId, id: $id) {
+    id
+    settings {
+      TR_displayOnboarding
+      CM_lastVisitedModule
+    }
+  }
+}

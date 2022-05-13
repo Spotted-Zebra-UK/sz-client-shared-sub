@@ -1,12 +1,12 @@
-import { FC } from 'react';
-import { useHistory } from 'react-router-dom';
 import {
   UserSettingsOptionsArgs,
   useUserQuery,
   useUserSettingsCreateMutation,
   useUserSettingsFindOneQuery,
   useUserSettingsUpdateMutation,
-} from '../../../generated/graphql';
+} from 'generated/graphql';
+import { FC } from 'react';
+import { useHistory } from 'react-router-dom';
 
 interface IUserSettings {
   settings: UserSettingsOptionsArgs;
