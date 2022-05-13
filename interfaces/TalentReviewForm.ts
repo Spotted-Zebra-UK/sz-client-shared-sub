@@ -55,6 +55,7 @@ export interface IRespondantFormQueryInput {
   associatedId: number;
   formOwnerId: number;
   formType: FormType;
+  respondantId?: number;
 }
 
 export interface IRespondantFormUpdateMutationResponse {

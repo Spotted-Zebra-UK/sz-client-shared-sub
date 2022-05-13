@@ -11,6 +11,7 @@ import Select, { TSelectOption } from '../../../components/atoms/Select/Select';
 import Textarea from '../../../components/atoms/Textarea/Textarea';
 import { TFieldSettingsModel } from '../../../enums/formType';
 import { TFormFieldValue } from '../../../interfaces/form';
+import FloatingLabelTextArea from '../../atoms/FloatingLabelTextArea/FloatingLabelTextArea';
 
 interface IFormBuilderField {
   id: string;
@@ -148,14 +149,14 @@ const FormBuilderField: FC<IFormBuilderField> = ({
     if (type === FieldType.LongTextField && formType === FormType.TrForm) {
       return (
         <>
-          <FloatingLabelInput
+          <FloatingLabelTextArea
             onChange={onChange}
             value={value as string}
             id={name}
             name={name}
-            label={label}
             hint={hint}
             isDisabled={isDisabled}
+            label={label}
           />
         </>
       );

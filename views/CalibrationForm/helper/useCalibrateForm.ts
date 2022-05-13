@@ -147,7 +147,7 @@ export const useCalibrateForm = ({
         label: label || '',
         score: {
           evaluation: score.evaluation,
-          score: score.score / 20 + 1.5,
+          score: score.score / 25 + 1.5,
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
@@ -162,7 +162,7 @@ export const useCalibrateForm = ({
         label: label || '',
         score: {
           evaluation: score.evaluation,
-          score: score.score / 20 + 1.5,
+          score: score.score / 25 + 1.5,
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
@@ -189,7 +189,7 @@ export const useCalibrateForm = ({
       },
       onError: error => {
         console.log(error);
-        onCloseHandler();
+        // onCloseHandler();
       },
       refetchQueries: [
         {
@@ -333,7 +333,7 @@ export const useCalibrateForm = ({
         getCalibrateFormQueryResponse.data &&
         getCalibrateFormQueryResponse.data.CalibrationConfigFindOne
       ) {
-        let step = 100 / (totalScore - 1);
+        let step = 75 / (totalScore - 1);
         let { gradeBands } =
           getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
         let index = score / step;
@@ -371,10 +371,10 @@ export const useCalibrateForm = ({
 
   // Formatting Form Result
   const getFormResult = useCallback(
-    (data: ResultModel[], formType: BasicScoreType) => {
+    (resultFields: ResultModel[], formType: BasicScoreType) => {
+      let data = resultFields.sort((a, b) => b.measurementId - a.measurementId);
       let formResultDictionary: { [key: string]: ResultModel[] } = {};
       const formattedFormResults: IFormResult[] = [];
-      // if (!getResultAccessResponse.data?.ResultAccessFindOne?.status) return;
       //setting Score
       let results = data.map(obj => {
         let { score } = obj;

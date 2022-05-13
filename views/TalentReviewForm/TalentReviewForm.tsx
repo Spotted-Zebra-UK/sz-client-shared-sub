@@ -16,6 +16,8 @@ interface ITalentReviewForm {
   stageCandidateId: string;
   stageId: string;
   isReadOnly: boolean;
+  respondantId?: number;
+
   onCloseHandler: () => void;
 }
 
@@ -24,7 +26,9 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
   stageCandidateId,
   isReadOnly,
   onCloseHandler,
+  respondantId,
 }) => {
+  console.log(stageCandidateId, 'stageCandidateID');
   const [fieldLayout, setFieldLayout] = useState<TalentReviewFormField>({
     levelFields: [],
     roleFields: [],
@@ -39,11 +43,13 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
   ] = useRespondantForm({
     onGetRespondantFormPreviouslyCompleted: () => {},
     onSaveRespondantFormCompleted: () => {
+      console.log(stageCandidateId, 'stageCandidateId');
       history.push(`/stages/${stageCandidateId}`);
     },
     associatedId: parseInt(stageCandidateId),
     formOwnerId: parseInt(ownerId),
     formType: FormType.TrForm,
+    respondantId,
   });
   useEffect(() => {
     if (formFields && Array.isArray(formFields)) {
