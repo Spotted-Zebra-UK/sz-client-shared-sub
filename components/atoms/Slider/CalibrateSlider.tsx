@@ -129,7 +129,7 @@ const Slider: FC<ISlider> = ({
         dots
         step={Math.ceil(100 / totalPoints)}
         min={0}
-        max={100}
+        max={75}
         railStyle={{
           backgroundColor: 'transparent',
           height: '2px',

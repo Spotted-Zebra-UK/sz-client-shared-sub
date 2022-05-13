@@ -75,7 +75,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
       </div>
     );
   }
-  console.log('Form Softskills', formSoftSkills, selectedScreen);
+  console.log('Form Softskills', totalScore);
   return (
     <div className="calibration">
       {getCalibrateFormQueryResponse.loading ||
@@ -205,7 +205,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                             index={key as number}
                             onChangeHandler={onChangeSoftSkill}
                             softsSkill={obj}
-                            totalScore={totalScore - 1}
+                            totalScore={totalScore}
                             initialData={originalScore.score || 0}
                             currentData={
                               formSoftSkills[selectedScreen] &&
@@ -238,7 +238,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                             index={index}
                             onChangeHandler={onChangeSuccessProfile}
                             softsSkill={{ name: 'Overall', id: obj.id }}
-                            totalScore={totalScore - 1}
+                            totalScore={totalScore}
                             initialData={originalScore.score || 0}
                             currentData={updatedScore.score || 0}
                             icon={PersonIconUrl}

@@ -147,7 +147,7 @@ export const useCalibrateForm = ({
         label: label || '',
         score: {
           evaluation: score.evaluation,
-          score: score.score / 20 + 1.5,
+          score: score.score / 25 + 1.5,
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
@@ -162,7 +162,7 @@ export const useCalibrateForm = ({
         label: label || '',
         score: {
           evaluation: score.evaluation,
-          score: score.score / 20 + 1.5,
+          score: score.score / 25 + 1.5,
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
@@ -177,6 +177,7 @@ export const useCalibrateForm = ({
 
     const payload: ResultCreateOneTrCustomArgs[] =
       getResultCreateOneTrCustomArgs(label);
+
     createResultVersion({
       variables: {
         args: payload,
@@ -188,7 +189,7 @@ export const useCalibrateForm = ({
       },
       onError: error => {
         console.log(error);
-        onCloseHandler();
+        // onCloseHandler();
       },
       refetchQueries: [
         {
@@ -332,7 +333,7 @@ export const useCalibrateForm = ({
         getCalibrateFormQueryResponse.data &&
         getCalibrateFormQueryResponse.data.CalibrationConfigFindOne
       ) {
-        let step = 100 / (totalScore - 1);
+        let step = 75 / (totalScore - 1);
         let { gradeBands } =
           getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
         let index = score / step;
