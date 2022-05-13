@@ -1,0 +1,172 @@
+@import '../../variables';
+
+.Onboard {
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 852px;
+  min-width: 320px;
+  margin-right: auto;
+  margin-left: auto;
+
+  &__Content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    &__Top {
+      margin-bottom: 40px;
+
+      &__Main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+
+        svg {
+          height: 40px;
+          width: 40px;
+        }
+
+        &__Title {
+          margin-top: 33px;
+          font-size: 24px;
+        }
+        &__Description {
+          font-size: 18px;
+          margin: 60px 0px 40px 0px;
+          line-height: 1.44;
+        }
+        &__NotesList {
+          width: 100%;
+        }
+      }
+    }
+
+    &__Bottom {
+      &__QuestionExample {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: 56px;
+        margin-top: 12px;
+
+        &__Text {
+          margin-left: 8px;
+          font-size: $p1-font-size;
+          font-weight: normal;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: normal;
+          letter-spacing: normal;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-device-width: 480px) {
+  .Onboard {
+    display: flex;
+
+    &__Content {
+      flex: 1;
+      justify-content: space-between;
+
+      &__Top {
+        margin-bottom: 10px;
+      }
+
+      &__Bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex: 1;
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-device-width: 480px) {
+  .Onboard {
+    height: calc(100vh - 144px);
+
+    &__Content {
+      justify-content: center;
+      height: 100%;
+
+      &__Top {
+        &__NotesList {
+          margin-top: 40px;
+        }
+      }
+    }
+  }
+}
+
+.logo {
+  width: 120px;
+  height: 33px;
+}
+
+.OnboardNote {
+  display: flex;
+  align-items: center;
+  margin-top: 18px;
+
+  &__Icon {
+    min-width: 48px;
+    max-width: 48px;
+    height: 48px;
+    background-color: rgba(0, 0, 0, 0.07);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+
+    svg {
+      color: $black;
+      height: 24px;
+      width: 24px;
+
+      path {
+        fill: $black;
+      }
+    }
+  }
+
+  &__Text {
+    margin-left: 19px;
+    font-size: $p1-font-size;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+  }
+}
+
+.OnboardNote--Important {
+  .OnboardNote__Icon {
+    background-color: transparentize($purple, 0.9);
+
+    svg {
+      color: $purple;
+
+      path {
+        fill: $purple;
+      }
+    }
+  }
+
+  .OnboardNote__Text {
+    font-weight: $medium-bold;
+  }
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
+}
