@@ -183,6 +183,8 @@ export const useCalibrateForm = ({
         args: payload,
       },
       onCompleted: data => {
+        window.location.reload();
+
         if (data.ResultCreateManyTrCustom) {
           onCloseHandler();
         }
@@ -211,6 +213,7 @@ export const useCalibrateForm = ({
         args: payload,
       },
       onCompleted: () => {
+        window.location.reload();
         updateStatus({
           variables: {
             stageCandidateId: stageCandidateId,
