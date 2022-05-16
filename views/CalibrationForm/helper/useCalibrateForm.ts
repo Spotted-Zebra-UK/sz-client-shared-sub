@@ -15,6 +15,7 @@ import {
   ResultModel,
   SoftSkillFindManyQuery,
   StageCandidateStatus,
+  TrCustomEvaluation,
   TrCustomGradeBandModel,
   TrCustomResultScoreModel,
   useCalibrationConfigFindOneQuery,
@@ -133,6 +134,19 @@ export const useCalibrateForm = ({
 
   const [createResultVersion] = useResultCreateManyTrCustomMutation();
   const [updateStatus] = useStageCandidateUpdateMutation();
+  const getScoreFromEvaluation = (evaluation: TrCustomEvaluation): number => {
+    // 1 <= 2.5 <= 4 <= 5.5 <= 7
+    if (evaluation === TrCustomEvaluation.StarTalent) {
+      return 6.25;
+    } else if (evaluation === TrCustomEvaluation.RisingTalent) {
+      return 4.75;
+    } else if (evaluation === TrCustomEvaluation.SolidContributor) {
+      return 3.25;
+    } else if (evaluation === TrCustomEvaluation.UnderperformingTalent) {
+      return 1.75;
+    }
+    return 1.75;
+  };
 
   const getResultCreateOneTrCustomArgs = (
     label: string
@@ -147,7 +161,7 @@ export const useCalibrateForm = ({
         label: label || '',
         score: {
           evaluation: score.evaluation,
-          score: score.score / 25 + 1.5,
+          score: getScoreFromEvaluation(score.evaluation),
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
@@ -162,7 +176,7 @@ export const useCalibrateForm = ({
         label: label || '',
         score: {
           evaluation: score.evaluation,
-          score: score.score / 25 + 1.5,
+          score: getScoreFromEvaluation(score.evaluation),
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
@@ -177,6 +191,7 @@ export const useCalibrateForm = ({
 
     const payload: ResultCreateOneTrCustomArgs[] =
       getResultCreateOneTrCustomArgs(label);
+    console.log(payload);
 
     createResultVersion({
       variables: {
@@ -203,7 +218,6 @@ export const useCalibrateForm = ({
       ],
     });
   };
-  // do you work here
   const onUpdateStatus = () => {
     const payload: ResultCreateOneTrCustomArgs[] =
       getResultCreateOneTrCustomArgs('signed off');
@@ -364,7 +378,7 @@ export const useCalibrateForm = ({
           grade => grade.evaluation === value
         );
         if (!currentGradeBand) return 0;
-        let step = 100 / (totalScore - 1);
+        let step = 75 / (totalScore - 1);
         let result = (currentGradeBand.position - 1) * step;
         return result;
       }
