@@ -75,7 +75,6 @@ const CalibrationForm: FC<ICalibrationForm> = ({
       </div>
     );
   }
-  console.log('Form Softskills', totalScore);
   return (
     <div className="calibration">
       {getCalibrateFormQueryResponse.loading ||
