@@ -184,7 +184,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                 formSuccessProfiles[selectedScreen] && (
                   <>
                     {getSoftSkillsQueryResponse.data.SoftSkillFindMany?.sort(
-                      (a, b) => b.id - a.id
+                      (a, b) => a.id - b.id
                     )?.map(
                       (
                         obj: {

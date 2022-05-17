@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import './FloatingLabelTextArea.scss';
-import { FC } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import FieldLabelWithHint from '../FieldLabelWithHint/FieldLabelWithHint';
 
 interface IFloatingLabelTextArea {
@@ -17,12 +17,28 @@ interface IFloatingLabelTextArea {
 
 const FloatingLabelTextArea: FC<IFloatingLabelTextArea> = props => {
   const { value, onChange, isDisabled, name, hint, label, ...rest } = props;
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const [text, setText] = useState('');
+  const [textAreaHeight, setTextAreaHeight] = useState('auto');
+  const [parentHeight, setParentHeight] = useState('auto');
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextAreaHeight('auto');
+    setParentHeight(`${textAreaRef.current!.scrollHeight}px`);
+    setText(event.target.value);
     onChange(event.target.value, name);
   };
+  useEffect(() => {
+    setParentHeight(`${textAreaRef.current!.scrollHeight}px`);
+    setTextAreaHeight(`${textAreaRef.current!.scrollHeight}px`);
+  }, [text]);
   return (
-    <div className="floating-label-container">
+    <div
+      className="floating-label-container"
+      style={{
+        minHeight: parentHeight,
+      }}
+    >
       <textarea
         id="input-text"
         className={`custom-input ${value && 'filled'}`}
@@ -31,6 +47,11 @@ const FloatingLabelTextArea: FC<IFloatingLabelTextArea> = props => {
         onBlur={handleChange}
         value={value}
         disabled={isDisabled || false}
+        ref={textAreaRef}
+        style={{
+          height: textAreaHeight,
+        }}
+        rows={1}
         {...rest}
       />
       <div className="label">

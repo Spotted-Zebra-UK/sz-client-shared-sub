@@ -191,32 +191,32 @@ export const useCalibrateForm = ({
 
     const payload: ResultCreateOneTrCustomArgs[] =
       getResultCreateOneTrCustomArgs(label);
-    console.log(payload);
+    console.log('payload', payload);
 
-    createResultVersion({
-      variables: {
-        args: payload,
-      },
-      onCompleted: data => {
-        window.location.reload();
+    // createResultVersion({
+    //   variables: {
+    //     args: payload,
+    //   },
+    //   onCompleted: data => {
+    //     window.location.reload();
 
-        if (data.ResultCreateManyTrCustom) {
-          onCloseHandler();
-        }
-      },
-      onError: error => {
-        console.log(error);
-        // onCloseHandler();
-      },
-      refetchQueries: [
-        {
-          query: GetTestCardsDocument,
-          variables: {
-            stageCandidateId,
-          },
-        },
-      ],
-    });
+    //     if (data.ResultCreateManyTrCustom) {
+    //       onCloseHandler();
+    //     }
+    //   },
+    //   onError: error => {
+    //     console.log(error);
+    //     // onCloseHandler();
+    //   },
+    //   refetchQueries: [
+    //     {
+    //       query: GetTestCardsDocument,
+    //       variables: {
+    //         stageCandidateId,
+    //       },
+    //     },
+    //   ],
+    // });
   };
   const onUpdateStatus = () => {
     const payload: ResultCreateOneTrCustomArgs[] =
@@ -390,7 +390,7 @@ export const useCalibrateForm = ({
   // Formatting Form Result
   const getFormResult = useCallback(
     (resultFields: ResultModel[], formType: BasicScoreType) => {
-      let data = resultFields.sort((a, b) => b.measurementId - a.measurementId);
+      let data = resultFields.sort((a, b) => a.measurementId - b.measurementId);
       let formResultDictionary: { [key: string]: ResultModel[] } = {};
       const formattedFormResults: IFormResult[] = [];
       //setting Score
@@ -471,7 +471,6 @@ export const useCalibrateForm = ({
           ResultAccessStatus.SignedOff
       ) {
         screens.pop();
-        screens.pop();
       }
       if (formType === BasicScoreType.SoftSkill) {
         setFormSoftSkills(screens);
@@ -530,9 +529,9 @@ export const useCalibrateForm = ({
     setFormSuccessProfile(updateFormSuccessProfile);
   };
   const icons: string[] = [
-    PotentialIcon,
-    PerformanceIcon,
     ValuesIcon,
+    PerformanceIcon,
+    PotentialIcon,
     PersonIconUrl,
   ];
 
