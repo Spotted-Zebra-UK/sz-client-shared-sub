@@ -193,30 +193,29 @@ export const useCalibrateForm = ({
       getResultCreateOneTrCustomArgs(label);
     console.log('payload', payload);
 
-    // createResultVersion({
-    //   variables: {
-    //     args: payload,
-    //   },
-    //   onCompleted: data => {
-    //     window.location.reload();
-
-    //     if (data.ResultCreateManyTrCustom) {
-    //       onCloseHandler();
-    //     }
-    //   },
-    //   onError: error => {
-    //     console.log(error);
-    //     // onCloseHandler();
-    //   },
-    //   refetchQueries: [
-    //     {
-    //       query: GetTestCardsDocument,
-    //       variables: {
-    //         stageCandidateId,
-    //       },
-    //     },
-    //   ],
-    // });
+    createResultVersion({
+      variables: {
+        args: payload,
+      },
+      onCompleted: data => {
+        if (data.ResultCreateManyTrCustom) {
+          window.location.reload();
+          onCloseHandler();
+        }
+      },
+      onError: error => {
+        console.log(error);
+        // onCloseHandler();
+      },
+      refetchQueries: [
+        {
+          query: GetTestCardsDocument,
+          variables: {
+            stageCandidateId,
+          },
+        },
+      ],
+    });
   };
   const onUpdateStatus = () => {
     const payload: ResultCreateOneTrCustomArgs[] =
@@ -227,13 +226,13 @@ export const useCalibrateForm = ({
         args: payload,
       },
       onCompleted: () => {
-        window.location.reload();
         updateStatus({
           variables: {
             stageCandidateId: stageCandidateId,
             status: StageCandidateStatus.SignedOff,
           },
           onCompleted: () => {
+            window.location.reload();
             onCloseHandler();
           },
           onError: error => {
