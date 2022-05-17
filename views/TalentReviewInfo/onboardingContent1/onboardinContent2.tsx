@@ -39,7 +39,8 @@ const OnboardingContent2: FC<IOnboardingContent2> = ({ getPageCount }) => {
             <IdeaIcon className="icon" />
           </div>
           <span>
-            To get a talent map to indicate possible successors to key roles
+            To develop a talent map that will indicate possible successors to
+            key roles
           </span>
         </div>
       </div>
