@@ -191,7 +191,6 @@ export const useCalibrateForm = ({
 
     const payload: ResultCreateOneTrCustomArgs[] =
       getResultCreateOneTrCustomArgs(label);
-    console.log('payload', payload);
 
     createResultVersion({
       variables: {
@@ -199,7 +198,7 @@ export const useCalibrateForm = ({
       },
       onCompleted: data => {
         if (data.ResultCreateManyTrCustom) {
-          window.location.reload();
+          if (userType === 'company') window.location.reload();
           onCloseHandler();
         }
       },
@@ -232,7 +231,7 @@ export const useCalibrateForm = ({
             status: StageCandidateStatus.SignedOff,
           },
           onCompleted: () => {
-            window.location.reload();
+            if (userType === 'company') window.location.reload();
             onCloseHandler();
           },
           onError: error => {
