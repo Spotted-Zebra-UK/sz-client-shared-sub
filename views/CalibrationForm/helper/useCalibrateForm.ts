@@ -3,7 +3,6 @@ import { LazyQueryResult, QueryResult } from '@apollo/client';
 import {
   BasicScoreType,
   CalibrationConfigFindOneQuery,
-  CmCandidateResultFindAndPaginateDocument,
   Exact,
   GetTestCardsDocument,
   GradeBandUnion,
@@ -135,21 +134,6 @@ export const useCalibrateForm = ({
 
   const [createResultVersion] = useResultCreateManyTrCustomMutation();
   const [updateStatus] = useStageCandidateUpdateMutation();
-  const signedOffVariables = localStorage.getItem('signedOffVariables');
-  const completedVariables = localStorage.getItem('completedVariables');
-  const refetchQueriesForCompany =
-    userType === 'company'
-      ? [
-          {
-            query: CmCandidateResultFindAndPaginateDocument,
-            variables: signedOffVariables && JSON.parse(signedOffVariables),
-          },
-          {
-            query: CmCandidateResultFindAndPaginateDocument,
-            variables: completedVariables && JSON.parse(completedVariables),
-          },
-        ]
-      : [];
   const getScoreFromEvaluation = (evaluation: TrCustomEvaluation): number => {
     // 1 <= 2.5 <= 4 <= 5.5 <= 7
     if (evaluation === TrCustomEvaluation.StarTalent) {
@@ -215,6 +199,7 @@ export const useCalibrateForm = ({
       },
       onCompleted: data => {
         if (data.ResultCreateManyTrCustom) {
+          window.location.reload();
           onCloseHandler();
         }
       },
@@ -223,7 +208,6 @@ export const useCalibrateForm = ({
         // onCloseHandler();
       },
       refetchQueries: [
-        ...refetchQueriesForCompany,
         {
           query: GetTestCardsDocument,
           variables: {
@@ -248,13 +232,13 @@ export const useCalibrateForm = ({
             status: StageCandidateStatus.SignedOff,
           },
           onCompleted: () => {
+            window.location.reload();
             onCloseHandler();
           },
           onError: error => {
             console.log(error);
             onCloseHandler();
           },
-          refetchQueries: refetchQueriesForCompany,
         });
       },
       onError: error => {
