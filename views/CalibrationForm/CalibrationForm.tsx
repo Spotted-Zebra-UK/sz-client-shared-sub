@@ -1,10 +1,12 @@
 import './CalibrationForm.scss';
 import { t } from 'i18next';
 import React, { FC } from 'react';
+import ReactTooltip from 'react-tooltip';
 import { TrCustomResultScoreModel } from '../../../../generated/graphql';
 import Loader from '../../components/atoms/Loader/Loader';
 import Notification from '../../components/atoms/Notification/Notification';
 import PersonIconUrl, { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
+import { ReactComponent as HintIcon } from '../../icons/ic_info.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
 import CalibrationAction from './CalibrationAction/CalibrationAction';
 import { useCalibrateForm } from './helper/useCalibrateForm';
@@ -55,6 +57,12 @@ const CalibrationForm: FC<ICalibrationForm> = ({
     projectId,
     userType,
   });
+  const queryTips = [
+    'This rating indicates that the individual is underperforming in their role.',
+    'This rating indicates that the individual is performing adequately in their role.',
+    'This rating indicates that the individual is performing well in their role, with the potential to be star talent.',
+    'This rating indicates that the individual is exceeding expectations in their role, and is one of our top performers.',
+  ];
   if (
     getResultAccessResponse.error ||
     getSoftSkillsQueryResponse.error ||
@@ -134,6 +142,14 @@ const CalibrationForm: FC<ICalibrationForm> = ({
             )}
 
             <div className="calibration__form">
+              .
+              <ReactTooltip
+                type="light"
+                className="tooltip-container"
+                effect="solid"
+                multiline={true}
+                place={'bottom'}
+              />
               <div className="calibration__form__header">
                 <div className="calibration__form__header__heading-top">
                   {''}
@@ -152,7 +168,12 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                           }}
                         >
                           {group.name}
-                          <sup> ?</sup>
+                          <sup
+                            style={{ cursor: 'pointer' }}
+                            data-tip={queryTips[index]}
+                          >
+                            {' ?'}
+                          </sup>
                         </div>
                         <div
                           style={{
@@ -177,7 +198,6 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                   ))}
                 </div>
               </div>
-
               {getSoftSkillsQueryResponse.data &&
                 formSoftSkills[selectedScreen] &&
                 formSuccessProfiles[selectedScreen] && (

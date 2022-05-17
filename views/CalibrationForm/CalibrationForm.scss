@@ -1,3 +1,25 @@
+.tooltip-container {
+  text-align: left;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+  color: #000;
+  font-size: 13px; /* Change the font size inside tooltip */
+  line-height: 1.4;
+  max-width: 150px;
+  opacity: 1 !important;
+  a:link,
+  a:visited {
+    background-color: #fff;
+    text-align: center;
+    display: inline-block;
+    color: blue;
+    text-decoration: underline;
+  }
+}
 .calibration {
   &__NotificationWrapper {
     padding: 20px;
