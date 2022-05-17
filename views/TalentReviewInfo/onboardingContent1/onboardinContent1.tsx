@@ -73,10 +73,9 @@ const OnboardingContent1: FC<IOnboardingContent1> = ({ getPageCount }) => {
     <div className="TRInfoContent">
       <p className="intro">Talent Review Introduction</p>
       <p className="reviewBody">
-        Welcome to the 2022 Entain Talent review process. This year we have
-        launched a systematic approach to the way in which we evaluate our
-        leaders at SLT, SLT-1 and SLT-2. We will be rating all leaders in
-        relation to 3 domains:
+        Welcome to the 2022 Talent Review process. This year, we have launched a
+        systematic approach to the way in which we evaluate our leaders in SLT,
+        SLT-1 and SLT-2. We will be rating all leaders in relation to 3 domains:
       </p>
       <div className="listGroup">
         <div className="reviewList">
