@@ -5,8 +5,9 @@ import ReactTooltip from 'react-tooltip';
 import { TrCustomResultScoreModel } from '../../../../generated/graphql';
 import Loader from '../../components/atoms/Loader/Loader';
 import Notification from '../../components/atoms/Notification/Notification';
-import PersonIconUrl, { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
-import { ReactComponent as HintIcon } from '../../icons/ic_info.svg';
+import PersonIconUrl, {
+  ReactComponent as PersonIcon,
+} from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
 import CalibrationAction from './CalibrationAction/CalibrationAction';
 import { useCalibrateForm } from './helper/useCalibrateForm';
