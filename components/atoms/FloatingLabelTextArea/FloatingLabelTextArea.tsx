@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import './FloatingLabelTextArea.scss';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import FieldLabelWithHint from '../FieldLabelWithHint/FieldLabelWithHint';
 
 interface IFloatingLabelTextArea {
@@ -17,40 +17,55 @@ interface IFloatingLabelTextArea {
 
 const FloatingLabelTextArea: FC<IFloatingLabelTextArea> = props => {
   const { value, onChange, isDisabled, name, hint, label, ...rest } = props;
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [text, setText] = useState('');
-  const [textAreaHeight, setTextAreaHeight] = useState('auto');
-  const [parentHeight, setParentHeight] = useState('auto');
 
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTextAreaHeight('auto');
-    setParentHeight(`${textAreaRef.current!.scrollHeight}px`);
-    setText(event.target.value);
-    onChange(event.target.value, name);
+  const handleChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
+    setText(event.currentTarget.value);
+    onChange(event.currentTarget.value, name);
+    const textarea = document.getElementById('textarea');
+    setHeight(textarea);
   };
   useEffect(() => {
-    setParentHeight(`${textAreaRef.current!.scrollHeight}px`);
-    setTextAreaHeight(`${textAreaRef.current!.scrollHeight}px`);
-  }, [text]);
+    const textarea = document.getElementById('textarea');
+    setHeight(textarea);
+  }, [value]);
+
+  function setHeight(elem: HTMLElement | null) {
+    if (!elem) return;
+    const style = getComputedStyle(elem, null);
+    const verticalBorders = Math.round(
+      parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth)
+    );
+    const maxHeight = parseFloat(style.maxHeight) || 300;
+
+    elem.style.height = 'auto';
+
+    const newHeight = elem.scrollHeight + verticalBorders;
+
+    elem.style.overflowY = newHeight > maxHeight ? 'auto' : 'hidden';
+    elem.style.height = Math.min(newHeight, maxHeight) + 'px';
+  }
+
   return (
-    <div
-      className="floating-label-container"
-      style={{
-        minHeight: parentHeight,
-      }}
-    >
+    <div className="floating-label-container">
+      {/* <textarea
+        id="textarea"
+        rows={1}
+        onInput={handleChange}
+        className={`custom-textarea ${
+          value && value.length > 0 ? 'filled' : ''
+        }`}
+      >
+        {value}
+      </textarea> */}
       <textarea
-        id="input-text"
-        className={`custom-input ${value && 'filled'}`}
-        name={name}
-        onChange={handleChange}
-        onBlur={handleChange}
+        id="textarea"
+        onInput={handleChange}
+        className={`custom-textarea ${
+          value && value.length > 0 ? 'filled' : ''
+        }`}
         value={value}
         disabled={isDisabled || false}
-        ref={textAreaRef}
-        style={{
-          height: textAreaHeight,
-        }}
         rows={1}
         {...rest}
       />
