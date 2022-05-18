@@ -3,6 +3,7 @@ import { FieldType, FormType } from 'generated/graphql';
 import _ from 'lodash';
 import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import ReactTooltip from 'react-tooltip';
 import FormBuilderField from '../../../components/molecules/FormBuilderField/FormBuilderField';
 import { useForm } from '../../../hooks/form';
 import { ReactComponent as HintIcon } from '../../../icons/ic_info.svg';
@@ -128,18 +129,31 @@ const TRFormContainer: FC<ITRFormContainer> = ({
         ))}
       </div>
       <div className="roles">
+        <ReactTooltip
+          type="light"
+          className="tooltip-container"
+          effect="solid"
+          multiline={true}
+          place={'bottom'}
+          id="q1"
+        />
+        {/* <ReactTooltip
+          type="light"
+          className="tooltip-container"
+          effect="solid"
+          multiline={true}
+          place={'bottom'}
+          id="q2"
+        /> */}
         <span className="roles__question" style={{ display: 'flex' }}>
           {' '}
-          {'Which role this individual could be successor in future?'}{' '}
-          <div className="tool_tip">
-            <div className="help-tip" style={{ marginBottom: 10 }}>
-              <HintIcon className="hint-icon" />
-              <p className="question-hint">
-                Which roles, within or outside your division, could this
-                individual be a good candidate for in future?
-              </p>
-            </div>
-          </div>
+          {'Which role this individual could be successor in future?'}
+          <HintIcon
+            className="hint-icon"
+            data-for="q1"
+            data-tip=" Which roles, within or outside your division, could this
+                individual be a good candidate for in future?"
+          />
         </span>
 
         <div className="roles__form">
@@ -173,15 +187,12 @@ const TRFormContainer: FC<ITRFormContainer> = ({
         <span className="roles__question" style={{ display: 'flex' }}>
           {' '}
           {'Who might be a successor to the role you are assessing?'}{' '}
-          <div className="tool_tip">
-            <div className="help-tip" style={{ marginBottom: 10 }}>
-              <HintIcon className="hint-icon" />
-              <p className="question-hint">
-                Is there someone who could step into this individual's position
-                should they leave or move into another role
-              </p>
-            </div>
-          </div>
+          <HintIcon
+            data-for="q1"
+            className="hint-icon"
+            data-tip=" Is there someone who could step into this individual's position
+            should they leave or move into another role?"
+          />
         </span>
 
         <div className="successors__form">

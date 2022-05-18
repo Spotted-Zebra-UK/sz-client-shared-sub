@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import './FloatingLabelTextArea.scss';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import FieldLabelWithHint from '../FieldLabelWithHint/FieldLabelWithHint';
 
 interface IFloatingLabelTextArea {
@@ -17,20 +17,17 @@ interface IFloatingLabelTextArea {
 
 const FloatingLabelTextArea: FC<IFloatingLabelTextArea> = props => {
   const { value, onChange, isDisabled, name, hint, label, ...rest } = props;
-  const [text, setText] = useState('');
-
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const handleChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
-    setText(event.currentTarget.value);
     onChange(event.currentTarget.value, name);
-    const textarea = document.getElementById('textarea');
-    setHeight(textarea);
+    setHeight();
   };
   useEffect(() => {
-    const textarea = document.getElementById('textarea');
-    setHeight(textarea);
+    setHeight();
   }, [value]);
 
-  function setHeight(elem: HTMLElement | null) {
+  function setHeight() {
+    let elem = textareaRef.current;
     if (!elem) return;
     const style = getComputedStyle(elem, null);
     const verticalBorders = Math.round(
@@ -41,29 +38,20 @@ const FloatingLabelTextArea: FC<IFloatingLabelTextArea> = props => {
     elem.style.height = 'auto';
 
     const newHeight = elem.scrollHeight + verticalBorders;
-
+    console.log('newHeight', newHeight);
     elem.style.overflowY = newHeight > maxHeight ? 'auto' : 'hidden';
     elem.style.height = Math.min(newHeight, maxHeight) + 'px';
   }
 
   return (
     <div className="floating-label-container">
-      {/* <textarea
-        id="textarea"
-        rows={1}
-        onInput={handleChange}
-        className={`custom-textarea ${
-          value && value.length > 0 ? 'filled' : ''
-        }`}
-      >
-        {value}
-      </textarea> */}
       <textarea
         id="textarea"
         onInput={handleChange}
         className={`custom-textarea ${
           value && value.length > 0 ? 'filled' : ''
         }`}
+        ref={textareaRef}
         value={value}
         disabled={isDisabled || false}
         rows={1}

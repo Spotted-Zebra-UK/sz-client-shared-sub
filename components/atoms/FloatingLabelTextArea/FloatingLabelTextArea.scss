@@ -28,7 +28,7 @@
 .custom-textarea {
   border-radius: 0;
   display: flex;
-  line-height: 1.5;
+  line-height: 1.5 !important;
   text-shadow: none;
 
   border: 0;
@@ -84,7 +84,7 @@ textarea {
   resize: none;
   width: 100%;
   min-height: 50px;
-  max-height: 200px;
+  // max-height: 200px;
   border-radius: 5px;
   padding: 5px;
 
@@ -94,9 +94,11 @@ textarea {
   &::-webkit-scrollbar-track {
     background-color: #f0f0f0;
     border-radius: 0 5px 5px 0;
+    cursor: pointer;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #588a68;
+    cursor: pointer;
+    background-color: grey;
     border-radius: 5px;
   }
 }
