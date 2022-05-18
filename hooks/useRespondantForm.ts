@@ -81,8 +81,9 @@ export const useGetStageCompanyRespondantFormEffect = (
 ) => {
   const getRespondantForm = useGetStageCompanyRespondantForm();
   const [isLoading, setIsLoading] = useState(true);
-  const [result, setResult] =
-    useState<ApolloQueryResult<IRespondantFormQueryResponse> | null>();
+  const [result, setResult] = useState<ApolloQueryResult<
+    IRespondantFormQueryResponse
+  > | null>();
 
   useEffect(() => {
     const candidateCompanyRequestCheckWrapper = async () => {
@@ -130,9 +131,11 @@ const useRespondantForm = ({
 }: IUseRespondantForm): [
   QueryResult<IRespondantFormQueryResponse, IRespondantFormQueryInput>,
   TRespondantFormField[] | undefined,
-  (formValues: {
-    [key in string]: TFormFieldValue;
-  }) => void,
+  (
+    formValues: {
+      [key in string]: TFormFieldValue;
+    }
+  ) => void,
   () => void
 ] => {
   const getRespondantFormQueryResponse = useQuery<
@@ -182,24 +185,20 @@ const useRespondantForm = ({
       let options: ISelectOption[] | undefined =
         curr.field.fieldType === FieldType.CompanyEmployeeSelectField
           ? curr.field.dynamicSelectOptions
-            ? (
-                JSON.parse(curr.field.dynamicSelectOptions) as {
-                  options: {
-                    employeeId: string;
-                    name: string;
-                  }[];
-                }
-              ).options.map(option => ({
+            ? (JSON.parse(curr.field.dynamicSelectOptions) as {
+                options: {
+                  employeeId: string;
+                  name: string;
+                }[];
+              }).options.map(option => ({
                 label: option.name,
                 value: option.employeeId,
               }))
             : undefined
           : curr.field.selectOptions
-          ? (
-              JSON.parse(curr.field.selectOptions) as {
-                options: string[];
-              }
-            ).options
+          ? (JSON.parse(curr.field.selectOptions) as {
+              options: string[];
+            }).options
               .filter(option => option && option.length > 0)
               .map(option => ({ label: option, value: option }))
           : undefined;
@@ -265,9 +264,11 @@ const useRespondantForm = ({
     },
   });
 
-  const handleSaveRespondantForm = (formValues: {
-    [key in string]: TFormFieldValue;
-  }) => {
+  const handleSaveRespondantForm = (
+    formValues: {
+      [key in string]: TFormFieldValue;
+    }
+  ) => {
     if (formFields) {
       saveRespondantForm({
         variables: {
