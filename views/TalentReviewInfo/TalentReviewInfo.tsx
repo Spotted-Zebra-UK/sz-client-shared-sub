@@ -8,8 +8,8 @@ import OnboardingContent3 from './onboardingContent1/onboardinContent3';
 import TRNavbar from './TRNavbar/TRNavbar';
 
 interface ITalentReviewInfo {
-  goToReviewPage: (value: boolean) => void;
-  companyImage: string;
+  goToReviewPage?: (value: boolean) => void;
+  companyImage?: string;
 }
 
 const TalentReviewInfo: FC<ITalentReviewInfo> = ({
