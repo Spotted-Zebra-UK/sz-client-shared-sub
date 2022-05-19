@@ -4,11 +4,13 @@ import _ from 'lodash';
 import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactTooltip from 'react-tooltip';
+import { MutationResult } from '@apollo/client';
 import FormBuilderField from '../../../components/molecules/FormBuilderField/FormBuilderField';
 import { useForm } from '../../../hooks/form';
 import { ReactComponent as HintIcon } from '../../../icons/ic_info.svg';
 import { TFormFieldValue } from '../../../interfaces/form';
 import {
+  IRespondantFormUpdateMutationResponse,
   TalentReviewFormField,
   TRespondantFormField,
 } from '../../../interfaces/TalentReviewForm';
@@ -27,6 +29,8 @@ interface ITRFormContainer {
   isReadOnly: boolean;
   stageCandidateId?: string;
   onCloseHandler: () => void;
+  handleSkipResponse?: () => void;
+  saveRespondantFormResponse?: MutationResult<IRespondantFormUpdateMutationResponse>;
 }
 
 const TRFormContainer: FC<ITRFormContainer> = ({
@@ -34,8 +38,8 @@ const TRFormContainer: FC<ITRFormContainer> = ({
   fields,
   onSubmit,
   isReadOnly,
-  stageCandidateId,
   onCloseHandler,
+  saveRespondantFormResponse,
 }) => {
   const { t } = useTranslation();
   const requiredFieldMessage = `^${t('common.thisFieldIsRequired')}`;
@@ -137,14 +141,7 @@ const TRFormContainer: FC<ITRFormContainer> = ({
           place={'bottom'}
           id="q1"
         />
-        {/* <ReactTooltip
-          type="light"
-          className="tooltip-container"
-          effect="solid"
-          multiline={true}
-          place={'bottom'}
-          id="q2"
-        /> */}
+
         <span className="roles__question" style={{ display: 'flex' }}>
           {' '}
           {'Which role this individual could be successor in future?'}
@@ -166,7 +163,9 @@ const TRFormContainer: FC<ITRFormContainer> = ({
             >
               <FormBuilderField
                 id={`${formKey}-${field.id}`}
-                placeholder={index % 2 === 0 ? 'Select Role' : 'Ready In'}
+                placeholder={
+                  index % 2 === 0 ? 'Select or enter a new role' : 'Ready In'
+                }
                 name={field.id.toString()}
                 type={field.type}
                 label={field.label}
@@ -260,8 +259,13 @@ const TRFormContainer: FC<ITRFormContainer> = ({
             Close
           </SquareButton>
         ) : (
-          <SquareSubmitButton onClick={handleSubmit}>
-            {_.capitalize(t('common.next'))}
+          <SquareSubmitButton
+            isDisabled={saveRespondantFormResponse?.loading}
+            onClick={handleSubmit}
+          >
+            {saveRespondantFormResponse?.loading
+              ? 'Submitting...'
+              : _.capitalize(t('common.next'))}
           </SquareSubmitButton>
         )}
       </div>

@@ -125,12 +125,18 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                   }`}
                 >
                   {selectedScreen + 1}/{formSoftSkills.length}{' '}
-                  {formSoftSkills[selectedScreen].name
-                    ? formSoftSkills[selectedScreen].name
-                    : ` Make ${
-                        getResultAccessResponse.data?.ResultAccessFindOne
-                          ?.label || ''
-                      }`}
+                  {formSoftSkills[selectedScreen].name ? (
+                    <span className="calibration__navigation__header-label">
+                      {formSoftSkills[selectedScreen].name}
+                    </span>
+                  ) : (
+                    ` Make ${(
+                      <span className="calibration__navigation__header-label">
+                        {getResultAccessResponse.data?.ResultAccessFindOne
+                          ?.label || ''}
+                      </span>
+                    )}`
+                  )}
                 </div>
                 <button
                   className="calibration__navigation__icon-button"
