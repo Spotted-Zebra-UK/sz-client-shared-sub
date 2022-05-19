@@ -5,9 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import { TrCustomResultScoreModel } from '../../../../generated/graphql';
 import Loader from '../../components/atoms/Loader/Loader';
 import Notification from '../../components/atoms/Notification/Notification';
-import PersonIconUrl, {
-  ReactComponent as PersonIcon,
-} from '../../icons/calibrate/ic_person.svg';
+import PersonIconUrl, { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
 import CalibrationAction from './CalibrationAction/CalibrationAction';
 import { useCalibrateForm } from './helper/useCalibrateForm';
@@ -123,12 +121,18 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                   }`}
                 >
                   {selectedScreen + 1}/{formSoftSkills.length}{' '}
-                  {formSoftSkills[selectedScreen].name
-                    ? formSoftSkills[selectedScreen].name
-                    : ` Make ${
-                        getResultAccessResponse.data?.ResultAccessFindOne
-                          ?.label || ''
-                      }`}
+                  {formSoftSkills[selectedScreen].name ? (
+                    <span className="calibration__navigation__header-label">
+                      {formSoftSkills[selectedScreen].name}
+                    </span>
+                  ) : (
+                    ` Make ${(
+                      <span className="calibration__navigation__header-label">
+                        {getResultAccessResponse.data?.ResultAccessFindOne
+                          ?.label || ''}
+                      </span>
+                    )}`
+                  )}
                 </div>
                 <button
                   className="calibration__navigation__icon-button"

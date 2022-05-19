@@ -9,6 +9,7 @@ import moment from 'moment';
 import { useEffect, useMemo, useState } from 'react';
 import {
   ApolloQueryResult,
+  MutationResult,
   QueryResult,
   useApolloClient,
   useMutation,
@@ -133,7 +134,8 @@ const useRespondantForm = ({
   (formValues: {
     [key in string]: TFormFieldValue;
   }) => void,
-  () => void
+  () => void,
+  MutationResult<IRespondantFormUpdateMutationResponse>
 ] => {
   const getRespondantFormQueryResponse = useQuery<
     IRespondantFormQueryResponse,
@@ -231,7 +233,7 @@ const useRespondantForm = ({
     [getRespondantFormQueryResponse.data]
   );
 
-  const [saveRespondantForm] = useMutation<
+  const [saveRespondantForm, saveRespondantFormResponse] = useMutation<
     IRespondantFormUpdateMutationResponse,
     IRespondantFormUpdateMutationInput
   >(RESPONDANT_FORM_UPDATE_MUTATION, {
@@ -321,6 +323,7 @@ const useRespondantForm = ({
     formFields,
     handleSaveRespondantForm,
     handleSkipRespondantForm,
+    saveRespondantFormResponse,
   ];
 };
 

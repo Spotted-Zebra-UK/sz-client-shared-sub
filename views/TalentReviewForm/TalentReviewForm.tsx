@@ -39,6 +39,8 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
     getCompanyCandidateRequestQueryResponse,
     formFields,
     handleSaveCandidateInformation,
+    handleSkipResponse,
+    saveRespondantFormResponse,
   ] = useRespondantForm({
     onGetRespondantFormPreviouslyCompleted: () => {},
     onSaveRespondantFormCompleted: () => {
@@ -91,6 +93,8 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
             isReadOnly={isReadOnly}
             stageCandidateId={stageCandidateId}
             onCloseHandler={onCloseHandler}
+            saveRespondantFormResponse={saveRespondantFormResponse}
+            handleSkipResponse={handleSkipResponse}
           />
         </>
       )}
