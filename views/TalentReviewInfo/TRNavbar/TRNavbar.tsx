@@ -3,12 +3,12 @@ import { FC } from 'react';
 
 interface ITRNavbar {
   pageCount: number;
-  goToReviewPage: (value: boolean) => void;
+  goToReviewPage?: (value: boolean) => void;
 }
 
 const TRNavbar: FC<ITRNavbar> = ({ pageCount, goToReviewPage }) => {
   const handleSkip = () => {
-    goToReviewPage(false);
+    if (goToReviewPage) goToReviewPage(false);
   };
 
   return (

@@ -7,12 +7,12 @@ import { ReactComponent as MailIcon } from './mail_black_24dp 1.svg';
 import { ReactComponent as TuneIcon } from './tune_black_24dp 1.svg';
 
 interface IOnboardingContent3 {
-  goToReviewPage: (value: boolean) => void;
+  goToReviewPage?: (value: boolean) => void;
 }
 
 const OnboardingContent3: FC<IOnboardingContent3> = ({ goToReviewPage }) => {
   const handleNextPage = () => {
-    goToReviewPage(false);
+    if (goToReviewPage) goToReviewPage(false);
   };
   return (
     <div>

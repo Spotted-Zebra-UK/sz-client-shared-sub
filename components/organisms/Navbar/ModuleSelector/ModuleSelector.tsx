@@ -25,11 +25,6 @@ const ModuleSelector: FC<IModuleSelector> = ({
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const history = useHistory();
-  const handleClick = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event.target as HTMLElement)) {
-      setShowDropdown(false);
-    }
-  };
 
   useEffect(() => {
     document.addEventListener('mousedown', e => handleClick(e));
@@ -37,6 +32,12 @@ const ModuleSelector: FC<IModuleSelector> = ({
       document.removeEventListener('mousedown', e => handleClick(e));
     };
   }, [showDropdown]);
+
+  const handleClick = (event: MouseEvent) => {
+    if (ref.current && !ref.current.contains(event.target as HTMLElement)) {
+      setShowDropdown(false);
+    }
+  };
 
   useCmAllowedAreaQuery({
     onCompleted: data => {
@@ -50,6 +51,12 @@ const ModuleSelector: FC<IModuleSelector> = ({
       }
     },
   });
+
+  const checkLengthOfModules = (modules: CmAllowedAreaType[]): boolean => {
+    if (modules.some(m => m === CmAllowedAreaType.CompanyEmployee)) {
+      return modules.length > 2;
+    } else return modules.length > 1;
+  };
 
   const showCmModule: { [key in string]: React.ReactElement } = {
     [CmAllowedAreaType.Hiring]: (
@@ -121,8 +128,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
       </div>
     ),
   };
-
-  if (selectedModule && modules.length > 1)
+  if (selectedModule && checkLengthOfModules(modules))
     return (
       <div className="module-selector" ref={ref}>
         {showDropdown

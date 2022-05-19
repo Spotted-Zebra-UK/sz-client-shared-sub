@@ -1,9 +1,3 @@
-import {
-  useUserQuery,
-  useUserSettingsCreateMutation,
-  useUserSettingsFindOneLazyQuery,
-  useUserSettingsUpdateMutation,
-} from 'generated/graphql';
 import { FC } from 'react';
 import ContainedButton from '../../../components/molecules/ContainedButton/ContainedButton';
 import { ReactComponent as PerformanceIcon } from './ic_performance.svg';
@@ -18,56 +12,6 @@ const OnboardingContent1: FC<IOnboardingContent1> = ({ getPageCount }) => {
   const handleNextPage = () => {
     getPageCount(2);
   };
-
-  const [userSettingsUpdate] = useUserSettingsUpdateMutation({
-    onError: () => {},
-  });
-
-  const [userSettingsCreate] = useUserSettingsCreateMutation({
-    onError: () => {},
-  });
-
-  const [userSettingQuery] = useUserSettingsFindOneLazyQuery({
-    onError: () => {},
-    onCompleted: data => {
-      if (data.UserSettingsFindOne?.id) {
-        userSettingsUpdate({
-          variables: {
-            id: data.UserSettingsFindOne?.id,
-            settings: {
-              TR_displayOnboarding: true,
-              CM_lastVisitedModule: null,
-            },
-          },
-        });
-      } else {
-        if (userResponse.data?.User) {
-          userSettingsCreate({
-            variables: {
-              userId: userResponse.data?.User.id,
-              settings: {
-                TR_displayOnboarding: true,
-                CM_lastVisitedModule: null,
-              },
-            },
-          });
-        }
-      }
-    },
-  });
-
-  const userResponse = useUserQuery({
-    onError: () => {},
-    onCompleted: data => {
-      if (data?.User) {
-        userSettingQuery({
-          variables: {
-            userId: data?.User.id,
-          },
-        });
-      }
-    },
-  });
 
   return (
     <div className="TRInfoContent">
