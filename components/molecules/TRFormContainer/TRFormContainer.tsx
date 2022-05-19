@@ -3,8 +3,10 @@ import { FieldType, FormType } from 'generated/graphql';
 import _ from 'lodash';
 import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import ReactTooltip from 'react-tooltip';
 import FormBuilderField from '../../../components/molecules/FormBuilderField/FormBuilderField';
 import { useForm } from '../../../hooks/form';
+import { ReactComponent as HintIcon } from '../../../icons/ic_info.svg';
 import { TFormFieldValue } from '../../../interfaces/form';
 import {
   TalentReviewFormField,
@@ -127,9 +129,33 @@ const TRFormContainer: FC<ITRFormContainer> = ({
         ))}
       </div>
       <div className="roles">
-        <p className="roles__question">
+        <ReactTooltip
+          type="light"
+          className="tooltip-container"
+          effect="solid"
+          multiline={true}
+          place={'bottom'}
+          id="q1"
+        />
+        {/* <ReactTooltip
+          type="light"
+          className="tooltip-container"
+          effect="solid"
+          multiline={true}
+          place={'bottom'}
+          id="q2"
+        /> */}
+        <span className="roles__question" style={{ display: 'flex' }}>
+          {' '}
           {'Which role this individual could be successor in future?'}
-        </p>
+          <HintIcon
+            className="hint-icon"
+            data-for="q1"
+            data-tip=" Which roles, within or outside your division, could this
+                individual be a good candidate for in future?"
+          />
+        </span>
+
         <div className="roles__form">
           {fieldLayout.roleFields.map((field, index) => (
             <div
@@ -158,9 +184,17 @@ const TRFormContainer: FC<ITRFormContainer> = ({
         </div>
       </div>
       <div className="roles">
-        <p className="roles__question">
-          {'Who might be a successor to the role you are assessing?'}
-        </p>
+        <span className="roles__question" style={{ display: 'flex' }}>
+          {' '}
+          {'Who might be a successor to the role you are assessing?'}{' '}
+          <HintIcon
+            data-for="q1"
+            className="hint-icon"
+            data-tip=" Is there someone who could step into this individual's position
+            should they leave or move into another role?"
+          />
+        </span>
+
         <div className="successors__form">
           {fieldLayout.successorFields.map((field, index) => (
             <div
@@ -174,7 +208,7 @@ const TRFormContainer: FC<ITRFormContainer> = ({
               key={field.id}
             >
               <FormBuilderField
-                placeholder={index % 2 === 0 ? 'Find By Email' : 'Ready In'}
+                placeholder={index % 2 === 0 ? 'Find By Name' : 'Ready In'}
                 id={`${formKey}-${field.id}`}
                 name={field.id.toString()}
                 type={field.type}

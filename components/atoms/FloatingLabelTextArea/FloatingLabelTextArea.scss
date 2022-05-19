@@ -25,10 +25,10 @@
     display: none;
   }
 }
-.custom-input {
+.custom-textarea {
   border-radius: 0;
   display: flex;
-  line-height: 25px;
+  line-height: 1.5 !important;
   text-shadow: none;
 
   border: 0;
@@ -38,7 +38,7 @@
   order: 2;
   border: 0;
   border-bottom: 2px solid #2b2b2b;
-  min-height: 16px;
+  height: auto;
   font-size: 18px;
   line-height: 16px;
   box-sizing: border-box;
@@ -77,4 +77,28 @@
     display: block;
   }
   transform: scale(0.8) translate3d(0, 5px, 0) !important;
+}
+textarea {
+  scrollbar-width: thin;
+  outline: none;
+  resize: none;
+  width: 100%;
+  min-height: 50px;
+  // max-height: 200px;
+  border-radius: 5px;
+  padding: 5px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+  }
+  &::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: grey;
+    border-radius: 5px;
+  }
 }

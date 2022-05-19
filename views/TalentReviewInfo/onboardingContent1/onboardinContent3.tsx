@@ -23,7 +23,7 @@ const OnboardingContent3: FC<IOnboardingContent3> = ({ goToReviewPage }) => {
             <CupIcon className="icon" />
           </div>
           <span>
-            This assessment will ask you to rate your direct report in relation
+            This assessment will ask you to rate your direct reports in relation
             to several behavioural statements.
           </span>
         </div>
@@ -32,9 +32,10 @@ const OnboardingContent3: FC<IOnboardingContent3> = ({ goToReviewPage }) => {
             <ExternalIcon className="icon" />
           </div>
           <span>
-            You will also be asked to provide free text comments to support your
-            perspective, and to indicate any role that you believe this
-            individual could be a successor for in the future.
+            You will be asked to indicate any role, within or outside your
+            division, that you believe this individual could be a good candidate
+            for in the future, and provide an estimated time frame for this
+            progression.
           </span>
         </div>
         <div className="reviewList">
@@ -42,10 +43,10 @@ const OnboardingContent3: FC<IOnboardingContent3> = ({ goToReviewPage }) => {
             <TuneIcon className="icon" />
           </div>
           <span>
-            Please think carefully about your ratings. We will be reviewing and
-            calibrating each individual, with a view to identifying the top 10%
-            of this population as true high potentials. So award the highest
-            ratings with care and consideration.
+            In addition, you will also be selecting the individuals who could be
+            a successor for the role you are assessing. Is there someone who
+            could step into this individual's position should they leave or move
+            into another role?
           </span>
         </div>
         <div className="reviewList">
@@ -53,10 +54,10 @@ const OnboardingContent3: FC<IOnboardingContent3> = ({ goToReviewPage }) => {
             <DescriptionIcon className="icon" />
           </div>
           <span>
-            Once you have completed the assessment, a report will generate for
-            this individual. It will display your overall talent rating for the
-            individual, as well as scores on the Values, Performance and
-            Potential domains.
+            Please think carefully about your ratings. We will be reviewing and
+            calibrating each individual in order to identify the top 10% of this
+            population as true high potentials. Award the highest ratings with
+            care and consideration.
           </span>
         </div>
         <div className="reviewList">
@@ -64,10 +65,9 @@ const OnboardingContent3: FC<IOnboardingContent3> = ({ goToReviewPage }) => {
             <MailIcon className="icon" />
           </div>
           <span>
-            You will be emailed this report and be able to access it via the SZ
-            portal. If you have more than one direct report, you will also be
-            provided with an aggregate report with data for your team at the end
-            of this process.
+            Once you have completed the assessment, you will be able to view the
+            calibration results on your Talent Review dashboard. You will be
+            giving feedback to your direct reports based on these results.
           </span>
         </div>
       </div>
