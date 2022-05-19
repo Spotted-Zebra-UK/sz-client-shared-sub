@@ -4,6 +4,7 @@ import React, { FC } from 'react';
 import { TrCustomResultScoreModel } from '../../../../generated/graphql';
 import Loader from '../../components/atoms/Loader/Loader';
 import Notification from '../../components/atoms/Notification/Notification';
+import { candidateEmail } from '../../constants/candidateEmail';
 import PersonIconUrl, { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
 import CalibrationAction from './CalibrationAction/CalibrationAction';
@@ -68,7 +69,10 @@ const CalibrationForm: FC<ICalibrationForm> = ({
             icon: 'Warning',
             color: 'Purple',
             message: t(
-              'stages.unfortunatelyThereHasBeenProblemProcessingOneOrMoreOfYourTests'
+              'stages.unfortunatelyThereHasBeenProblemProcessingOneOrMoreOfYourTests',
+              {
+                candidateEmail,
+              }
             ),
           }}
         />
