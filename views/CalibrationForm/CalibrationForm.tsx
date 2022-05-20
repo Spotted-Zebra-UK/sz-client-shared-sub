@@ -58,10 +58,10 @@ const CalibrationForm: FC<ICalibrationForm> = ({
     userType,
   });
   const queryTips = [
-    'This rating indicates that the individual is underperforming in their role.',
-    'This rating indicates that the individual is performing adequately in their role.',
+    'This rating indicates that the person is underperforming in the role and shows limited future potential.',
+    'This rating indicates that the person is performing adequately in their role and show signs of emerging potential.',
     'This rating indicates that the individual is performing well in their role, with the potential to be star talent.',
-    'This rating indicates that the individual is exceeding expectations in their role, and is one of our top performers.',
+    'This rating indicates that this person is exceeding expectations in their role and has strong potential to accelerate their career.',
   ];
   if (
     getResultAccessResponse.error ||
