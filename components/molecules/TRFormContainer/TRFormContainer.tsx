@@ -207,7 +207,9 @@ const TRFormContainer: FC<ITRFormContainer> = ({
               key={field.id}
             >
               <FormBuilderField
-                placeholder={index % 2 === 0 ? 'Find By Name' : 'Ready In'}
+                placeholder={
+                  index % 2 === 0 ? 'Select or enter a new person' : 'Ready In'
+                }
                 id={`${formKey}-${field.id}`}
                 name={field.id.toString()}
                 type={field.type}

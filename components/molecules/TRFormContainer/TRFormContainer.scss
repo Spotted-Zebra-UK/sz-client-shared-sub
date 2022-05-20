@@ -75,6 +75,7 @@
   }
 }
 .roles {
+  margin-top: 40px;
   &__question {
     margin-bottom: 10px;
     font-size: 15px;
@@ -126,5 +127,8 @@
     .form-label-with-hint {
       display: none;
     }
+  }
+  .others {
+    margin-top: 40px;
   }
 }
