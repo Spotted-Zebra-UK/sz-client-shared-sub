@@ -130,12 +130,14 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                       {formSoftSkills[selectedScreen].name}
                     </span>
                   ) : (
-                    ` Make ${(
-                      <span className="calibration__navigation__header-label">
-                        {getResultAccessResponse.data?.ResultAccessFindOne
-                          ?.label || ''}
-                      </span>
-                    )}`
+                    <span className="calibration__navigation__header-label">
+                      Make{' '}
+                      {getResultAccessResponse.data?.ResultAccessFindOne
+                        ?.label || ''}
+                    </span>
+                    // ` Make ${(
+
+                    // )}`
                   )}
                 </div>
                 <button
