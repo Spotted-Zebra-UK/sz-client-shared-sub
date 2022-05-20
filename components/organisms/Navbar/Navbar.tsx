@@ -52,7 +52,10 @@ const Navbar: FC<INavbar> = ({
               height: '24px',
               cursor: 'pointer',
             }}
-            onClick={() => history.push('/')}
+            onClick={() => {
+              localStorage.removeItem('filters');
+              history.push('/');
+            }}
           />
           <div className="second-div">
             <ModuleSelector
