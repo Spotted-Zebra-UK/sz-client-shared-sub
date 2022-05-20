@@ -26,7 +26,7 @@ const CalibrationAction: FC<ICalibrateInterface> = ({
           if (action === 'CREATE')
             return (
               <SquareButton key={key} onClick={onCreateVersion}>
-                {'Save & Apply'}
+                {'Save & Confirm'}
               </SquareButton>
             );
           else if (action === 'SIGN_OFF')

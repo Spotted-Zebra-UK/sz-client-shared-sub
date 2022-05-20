@@ -207,14 +207,17 @@ export const useCalibrateForm = ({
         console.log(error);
         // onCloseHandler();
       },
-      refetchQueries: [
-        {
-          query: GetTestCardsDocument,
-          variables: {
-            stageCandidateId,
-          },
-        },
-      ],
+      refetchQueries:
+        userType === 'candidate'
+          ? [
+              {
+                query: GetTestCardsDocument,
+                variables: {
+                  stageCandidateId,
+                },
+              },
+            ]
+          : [],
     });
   };
   const onUpdateStatus = () => {
@@ -246,14 +249,17 @@ export const useCalibrateForm = ({
         console.log(error);
         onCloseHandler();
       },
-      refetchQueries: [
-        {
-          query: GetTestCardsDocument,
-          variables: {
-            stageCandidateId,
-          },
-        },
-      ],
+      refetchQueries:
+        userType === 'candidate'
+          ? [
+              {
+                query: GetTestCardsDocument,
+                variables: {
+                  stageCandidateId,
+                },
+              },
+            ]
+          : [],
     });
   };
 

@@ -57,6 +57,9 @@
     &__icon-button {
       background-color: #fff;
     }
+    &__header-label {
+      text-transform: capitalize;
+    }
   }
   .AppBar {
     padding: 20px 20px 0;
