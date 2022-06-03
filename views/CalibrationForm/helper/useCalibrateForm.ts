@@ -47,6 +47,10 @@ interface IFormScreen {
   isScreenCompleted: boolean;
   // currentScore: TrCustomResultScoreModel;
 }
+export interface ICalibrateFieldIcon {
+  img: string;
+  tip: string;
+}
 interface IUseCalibrateForm {
   stageCandidateId: number;
   onCloseHandler: () => void;
@@ -96,7 +100,7 @@ export const useCalibrateForm = ({
   >,
   (value: number, index: number) => void,
   (value: number, index: number) => void,
-  string[],
+  ICalibrateFieldIcon[],
   number,
   number,
   IFormScreen[],
@@ -535,11 +539,23 @@ export const useCalibrateForm = ({
     ].score.evaluation = getCustomEvaluation(value);
     setFormSuccessProfile(updateFormSuccessProfile);
   };
-  const icons: string[] = [
-    ValuesIcon,
-    PerformanceIcon,
-    PotentialIcon,
-    PersonIconUrl,
+  const icons: ICalibrateFieldIcon[] = [
+    {
+      img: ValuesIcon,
+      tip: "This score relates to the individual's alignment with our values",
+    },
+    {
+      img: PerformanceIcon,
+      tip: "This score relates to the individual's level of performance in role",
+    },
+    {
+      img: PotentialIcon,
+      tip: "This score relates to the individual's level of potential to take on roles of increased complexity in the future",
+    },
+    {
+      img: PersonIconUrl,
+      tip: "This score should reflect your overall view of this individual's current performance and future potential",
+    },
   ];
 
   let colors: string[] = ['#00d3ad', '#10b7ff', '#b75bff', '#000'];

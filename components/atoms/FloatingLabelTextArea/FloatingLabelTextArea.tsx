@@ -38,7 +38,6 @@ const FloatingLabelTextArea: FC<IFloatingLabelTextArea> = props => {
     elem.style.height = 'auto';
 
     const newHeight = elem.scrollHeight + verticalBorders;
-    console.log('newHeight', newHeight);
     elem.style.overflowY = newHeight > maxHeight ? 'auto' : 'hidden';
     elem.style.height = Math.min(newHeight, maxHeight) + 'px';
   }

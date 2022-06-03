@@ -6,7 +6,7 @@ import { TrCustomResultScoreModel } from '../../../../generated/graphql';
 import Loader from '../../components/atoms/Loader/Loader';
 import Notification from '../../components/atoms/Notification/Notification';
 import { candidateEmail } from '../../constants/candidateEmail';
-import PersonIconUrl, { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
+import { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
 import CalibrationAction from './CalibrationAction/CalibrationAction';
 import { useCalibrateForm } from './helper/useCalibrateForm';
@@ -271,7 +271,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                             totalScore={totalScore}
                             initialData={originalScore.score || 0}
                             currentData={updatedScore.score || 0}
-                            icon={PersonIconUrl}
+                            icon={icons[3]}
                             showInitialField={true}
                             isScreenCompleted={
                               formSuccessProfiles[selectedScreen]

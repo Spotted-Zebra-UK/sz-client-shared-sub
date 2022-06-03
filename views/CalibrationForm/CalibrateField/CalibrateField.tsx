@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
+import ReactTooltip from 'react-tooltip';
 import CalibrateSlider from '../../../components/atoms/Slider/CalibrateSlider';
+import { ICalibrateFieldIcon } from '../helper/useCalibrateForm';
 
 interface ICalibrateField {
   index: number;
-  icon: string;
+  icon: ICalibrateFieldIcon;
   softsSkill: {
     __typename?: 'SoftSkill' | undefined;
     name: string;
@@ -34,8 +36,15 @@ const CalibrateField: FC<ICalibrateField> = ({
 }) => {
   return (
     <div className="calibration__form__item">
+      <ReactTooltip
+        type="light"
+        className="tooltip-container"
+        effect="solid"
+        multiline={true}
+        place={'bottom'}
+      />
       <div className="calibration__form__item__heading">
-        <img src={icon} alt="icon" />
+        <img data-tip={icon.tip} src={icon.img} alt="icon" />
         <span>{softsSkill.name}</span>
       </div>
 
