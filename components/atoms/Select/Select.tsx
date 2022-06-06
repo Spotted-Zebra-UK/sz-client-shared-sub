@@ -20,6 +20,7 @@ interface ISelect {
   searchable: boolean;
   createable: boolean;
   isDisabled?: boolean;
+  classNamePrefix?: string;
 }
 
 const Select: FC<ISelect> = ({
@@ -34,12 +35,12 @@ const Select: FC<ISelect> = ({
   searchable,
   createable,
   isDisabled = false,
+  classNamePrefix = 'Select',
 }) => {
   const handleChange = (
     newValue: OnChangeValue<TSelectOption, false>,
     actionMeta: ActionMeta<TSelectOption>
   ) => {
-    console.group('Value Changed');
     if (actionMeta.action === 'create-option' && newValue) {
       options.push({ value: newValue.value, label: newValue.label });
     }
@@ -61,7 +62,6 @@ const Select: FC<ISelect> = ({
     : null;
   const props = {
     className: 'Select',
-    classNamePrefix: 'Select',
     id,
     name,
     options: [{ value: '', label: '' }, ...options],
@@ -72,6 +72,7 @@ const Select: FC<ISelect> = ({
     menuPlacement,
     isSearchable: searchable,
     isDisabled,
+    classNamePrefix,
   };
   if (createable) {
     return <CreatableSelect {...props} />;
