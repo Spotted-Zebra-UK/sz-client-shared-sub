@@ -21,13 +21,13 @@
   display: flex;
   justify-content: center;
 }
-.Select__menu {
+.tr__menu {
   padding-right: 1px;
   ::-webkit-scrollbar {
     width: 10px;
     min-height: 10px;
   }
-  .Select__menu-list {
+  .tr__menu-list {
     max-height: 700px !important;
   }
   /* Track */
@@ -48,12 +48,12 @@
   }
 }
 .employee-input {
-  .Select__menu {
+  .tr__menu {
     width: 183% !important;
     max-height: 275px !important;
   }
 
-  .Select__menu-list {
+  .tr__menu-list {
     max-height: 275px !important;
   }
 }

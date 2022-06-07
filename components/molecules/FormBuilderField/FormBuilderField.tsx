@@ -27,6 +27,7 @@ interface IFormBuilderField {
   settings?: TFieldSettingsModel;
   formType?: FormType;
   isDisabled?: boolean;
+  classNamePrefix: string;
 }
 
 const FormBuilderField: FC<IFormBuilderField> = ({
@@ -46,6 +47,7 @@ const FormBuilderField: FC<IFormBuilderField> = ({
   },
   formType = FormType.CiForm,
   isDisabled = false,
+  classNamePrefix,
 }) => {
   const renderFormFieldElement = () => {
     if (type === FieldType.SingleSelectField) {
@@ -63,6 +65,7 @@ const FormBuilderField: FC<IFormBuilderField> = ({
             searchable={settings.searchable}
             createable={settings.allowFreeText}
             isDisabled={isDisabled}
+            classNamePrefix={classNamePrefix}
           />
         </>
       );
@@ -82,6 +85,7 @@ const FormBuilderField: FC<IFormBuilderField> = ({
             searchable={settings.searchable}
             createable={settings.allowFreeText}
             isDisabled={isDisabled}
+            classNamePrefix={classNamePrefix}
           />
         </>
       );

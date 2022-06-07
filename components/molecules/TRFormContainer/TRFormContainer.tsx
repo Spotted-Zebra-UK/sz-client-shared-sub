@@ -128,6 +128,7 @@ const TRFormContainer: FC<ITRFormContainer> = ({
               settings={field.settings}
               formType={FormType.TrForm}
               isDisabled={isReadOnly}
+              classNamePrefix={'tr'}
             />
           </div>
         ))}
@@ -177,6 +178,7 @@ const TRFormContainer: FC<ITRFormContainer> = ({
                 settings={field.settings}
                 formType={FormType.TrForm}
                 isDisabled={isReadOnly}
+                classNamePrefix={'tr'}
               />
             </div>
           ))}
@@ -222,6 +224,7 @@ const TRFormContainer: FC<ITRFormContainer> = ({
                 settings={field.settings}
                 formType={FormType.TrForm}
                 isDisabled={isReadOnly}
+                classNamePrefix={'tr'}
               />
             </div>
           ))}
@@ -251,6 +254,7 @@ const TRFormContainer: FC<ITRFormContainer> = ({
               settings={field.settings}
               formType={FormType.TrForm}
               isDisabled={isReadOnly}
+              classNamePrefix={'tr'}
             />
           </div>
         ))}
