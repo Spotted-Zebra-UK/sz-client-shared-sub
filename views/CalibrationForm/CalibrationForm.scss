@@ -42,23 +42,43 @@
     flex: 3;
     max-width: 330px;
   }
+  &__note {
+    display: flex;
+    margin-top: 30px;
+    &__space {
+      flex: 1;
+    }
+    &__text {
+      flex: 5;
+      padding-left: 20px;
+      line-height: 1.5;
+    }
+  }
   &__navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 755px;
-    margin: 20px auto 40px auto;
+    margin: 5px auto 10px auto;
     button:disabled {
       fill: rgba(0, 0, 0, 0.2);
     }
-    .completed {
-      color: rgba(0, 0, 0, 0.38);
+    // .completed {
+    //   color: rgba(0, 0, 0, 0.38);
+    // }
+    &__controls {
+      display: flex;
+      align-items: center;
     }
     &__icon-button {
       background-color: #fff;
+      margin: 0px 5px;
     }
     &__header-label {
       text-transform: capitalize;
+      font-size: 14px;
+      font-weight: 500;
+      margin-right: 10px;
     }
   }
   .AppBar {
@@ -181,4 +201,14 @@
       }
     }
   }
+}
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.16);
+  height: 1px;
+  position: absolute;
+  left: 0;
 }

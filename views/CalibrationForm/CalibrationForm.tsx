@@ -20,6 +20,7 @@ interface ICalibrationForm {
   doneFor: number;
   doneBy: number;
   projectId: number;
+  candidateName?: string;
 }
 
 const CalibrationForm: FC<ICalibrationForm> = ({
@@ -29,6 +30,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
   doneBy,
   doneFor,
   projectId,
+  candidateName,
 }) => {
   const [
     grades,
@@ -107,49 +109,54 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                 </div>
               </div>
             ) : (
-              <div className="calibration__navigation">
-                <button
-                  className="calibration__navigation__icon-button"
-                  onClick={() => {
-                    setSelectedScreen(prev => prev - 1);
-                  }}
-                  disabled={selectedScreen === 0}
-                >
-                  <LeftArrow />
-                </button>
-                <div
-                  className={`${
-                    formSoftSkills[selectedScreen].isScreenCompleted
-                      ? 'completed'
-                      : ''
-                  }`}
-                >
-                  {selectedScreen + 1}/{formSoftSkills.length}{' '}
-                  {formSoftSkills[selectedScreen].name ? (
-                    <span className="calibration__navigation__header-label">
-                      {formSoftSkills[selectedScreen].name}
-                    </span>
-                  ) : (
-                    <span className="calibration__navigation__header-label">
-                      Make{' '}
-                      {getResultAccessResponse.data?.ResultAccessFindOne
-                        ?.label || ''}
-                    </span>
-                    // ` Make ${(
-
-                    // )}`
-                  )}
+              <React.Fragment>
+                <div className="calibration__navigation">
+                  <div className="calibration__navigation__header-label">
+                    {candidateName}
+                  </div>
+                  <div className="calibration__navigation__controls">
+                    {formSoftSkills[selectedScreen].name ? (
+                      <span className="calibration__navigation__header-label">
+                        {formSoftSkills[selectedScreen].name}
+                      </span>
+                    ) : (
+                      <span className="calibration__navigation__header-label">
+                        Make{' '}
+                        {getResultAccessResponse.data?.ResultAccessFindOne
+                          ?.label || ''}
+                      </span>
+                    )}
+                    <button
+                      className="calibration__navigation__icon-button"
+                      onClick={() => {
+                        setSelectedScreen(prev => prev - 1);
+                      }}
+                      disabled={selectedScreen === 0}
+                    >
+                      <LeftArrow />
+                    </button>
+                    <div
+                      className={`${
+                        formSoftSkills[selectedScreen].isScreenCompleted
+                          ? 'completed'
+                          : ''
+                      }`}
+                    >
+                      {selectedScreen + 1}/{formSoftSkills.length}{' '}
+                    </div>
+                    <button
+                      className="calibration__navigation__icon-button"
+                      onClick={() => {
+                        setSelectedScreen(prev => prev + 1);
+                      }}
+                      disabled={selectedScreen === formSoftSkills.length - 1}
+                    >
+                      <RightArrow />
+                    </button>
+                  </div>
                 </div>
-                <button
-                  className="calibration__navigation__icon-button"
-                  onClick={() => {
-                    setSelectedScreen(prev => prev + 1);
-                  }}
-                  disabled={selectedScreen === formSoftSkills.length - 1}
-                >
-                  <RightArrow />
-                </button>
-              </div>
+                <hr />
+              </React.Fragment>
             )}
 
             <div className="calibration__form">
@@ -285,6 +292,19 @@ const CalibrationForm: FC<ICalibrationForm> = ({
                   </>
                 )}
             </div>
+            {getResultAccessResponse.data?.ResultAccessFindOne?.allowedActions?.findIndex(
+              action => action === 'CREATE' || action === 'SIGN_OFF'
+            ) !== -1 ? (
+              <div className="calibration__note">
+                <div className="calibration__note__space"></div>
+                <div className="calibration__note__text">
+                  The responses that you provided have generated these
+                  recommended ratings.  You can now adjust these, although the
+                  original rating will also be displayed
+                </div>
+              </div>
+            ) : null}
+
             {getCalibrateFormQueryResponse.data &&
               formSoftSkills[selectedScreen] &&
               formSuccessProfiles[selectedScreen] && (
