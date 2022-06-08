@@ -14,6 +14,7 @@ interface IFloatingLabelInput {
   id?: string;
   hint: string;
   label: string;
+  labelStyle?: object;
 }
 
 const FloatingLabelInput: FC<IFloatingLabelInput> = props => {
@@ -25,6 +26,7 @@ const FloatingLabelInput: FC<IFloatingLabelInput> = props => {
     name,
     hint,
     label,
+    labelStyle,
     ...rest
   } = props;
 
@@ -43,9 +45,10 @@ const FloatingLabelInput: FC<IFloatingLabelInput> = props => {
         type={type || 'text'}
         disabled={isDisabled || false}
         pattern=".*"
+        style={labelStyle}
         {...rest}
       />
-      <div className="label">
+      <div className="label" style={labelStyle}>
         {hint ? <FieldLabelWithHint hint={hint} label={label} /> : label}
       </div>
     </div>
