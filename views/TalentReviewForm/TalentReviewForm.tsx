@@ -12,9 +12,9 @@ import {
 import { ReactComponent as MicrophoneIcon } from './ic_microphone.svg';
 
 interface ITalentReviewForm {
-  ownerId: string;
-  stageCandidateId: string;
-  stageId: string;
+  ownerId: number;
+  stageCandidateId: number;
+  stageId: number;
   isReadOnly: boolean;
   respondantId?: number;
 
@@ -46,8 +46,8 @@ const TalentReviewForm: FC<ITalentReviewForm> = ({
     onSaveRespondantFormCompleted: () => {
       history.push(`/stages/${stageCandidateId}`);
     },
-    associatedId: parseInt(stageCandidateId),
-    formOwnerId: parseInt(ownerId),
+    associatedId: stageCandidateId,
+    formOwnerId: ownerId,
     formType: FormType.TrForm,
     respondantId,
   });
