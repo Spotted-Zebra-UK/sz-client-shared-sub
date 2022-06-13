@@ -2,8 +2,9 @@ import {
   FieldType,
   FormType,
   GetTestCardsDocument,
-  GetTestCardsQuery,
-  GetTestCardsQueryVariables,
+  StageCandidateFindOneDocument,
+  StageCandidateFindOneQuery,
+  StageCandidateFindOneQueryVariables,
 } from 'generated/graphql';
 import moment from 'moment';
 import { useEffect, useMemo, useState } from 'react';
@@ -43,19 +44,22 @@ export const useGetStageCompanyRespondantForm = () => {
     stageCandidateId: number,
     formType: FormType
   ): Promise<ApolloQueryResult<IRespondantFormQueryResponse> | null> => {
-    const stageTestCardsQueryResponse = await client.query<
-      GetTestCardsQuery,
-      GetTestCardsQueryVariables
+    const stageCandidateQueryResponse = await client.query<
+      StageCandidateFindOneQuery,
+      StageCandidateFindOneQueryVariables
     >({
-      query: GetTestCardsDocument,
+      query: StageCandidateFindOneDocument,
       variables: {
-        stageCandidateId,
+        id: stageCandidateId,
       },
     });
 
-    if (stageTestCardsQueryResponse.data) {
+    if (
+      stageCandidateQueryResponse.data &&
+      stageCandidateQueryResponse.data.StageCandidateFindOne?.companyId
+    ) {
       const stageCompanyId =
-        stageTestCardsQueryResponse.data.GetTestCards.companyId;
+        stageCandidateQueryResponse.data.StageCandidateFindOne?.companyId;
 
       return client.query<
         IRespondantFormQueryResponse,

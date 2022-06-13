@@ -1,0 +1,6 @@
+query StageCandidateFindOne($id: Int!) {
+  StageCandidateFindOne(id: $id) {
+    id
+    companyId
+  }
+}

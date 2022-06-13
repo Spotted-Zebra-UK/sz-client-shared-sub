@@ -15,7 +15,6 @@ query GetTestCards($stageCandidateId: Int!) {
     isPracticeProject
     projectModuleType
     displayInstructions
-    displayOnboarding
     stageCandidateId
     doneBy
     # directReportId
@@ -42,10 +41,6 @@ query GetTestCards($stageCandidateId: Int!) {
       formType
       associatedId
       status
-    }
-    calibrationCards {
-      status
-      isAllowed
     }
   }
 }
