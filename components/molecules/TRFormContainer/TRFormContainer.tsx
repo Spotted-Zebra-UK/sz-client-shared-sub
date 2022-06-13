@@ -27,7 +27,7 @@ interface ITRFormContainer {
     fields: TRespondantFormField[]
   ) => void;
   isReadOnly: boolean;
-  stageCandidateId?: string;
+  stageCandidateId?: number;
   onCloseHandler: () => void;
   handleSkipResponse?: () => void;
   saveRespondantFormResponse?: MutationResult<IRespondantFormUpdateMutationResponse>;
