@@ -6,6 +6,7 @@ import { TrCustomResultScoreModel } from '../../../../generated/graphql';
 import Loader from '../../components/atoms/Loader/Loader';
 import Notification from '../../components/atoms/Notification/Notification';
 import { candidateEmail } from '../../constants/candidateEmail';
+import { ReactComponent as AccountIcon } from '../../icons/calibrate/ic_account.svg';
 import { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
 import CalibrationAction from './CalibrationAction/CalibrationAction';
@@ -112,6 +113,7 @@ const CalibrationForm: FC<ICalibrationForm> = ({
               <React.Fragment>
                 <div className="calibration__navigation">
                   <div className="calibration__navigation__header-label">
+                    <AccountIcon className="calibration__navigation__icon" />
                     {candidateName}
                   </div>
                   <div className="calibration__navigation__controls">

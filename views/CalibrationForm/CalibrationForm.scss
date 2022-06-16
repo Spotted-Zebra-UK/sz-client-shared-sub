@@ -79,6 +79,15 @@
       font-size: 14px;
       font-weight: 500;
       margin-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+    &__icon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      margin-bottom: 4px;
+      margin-right: 5px;
     }
   }
   .AppBar {
