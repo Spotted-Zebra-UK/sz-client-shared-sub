@@ -162,7 +162,6 @@ const CalibrationForm: FC<ICalibrationForm> = ({
             )}
 
             <div className="calibration__form">
-              .
               <ReactTooltip
                 type="light"
                 className="tooltip-container"
