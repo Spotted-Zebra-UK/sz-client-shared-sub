@@ -18,6 +18,7 @@ interface ILoginFormErrors {
 interface ILoginForm {
   email?: string;
   onSubmit: (email: string, password: string) => void;
+  handleValueChange: (fieldName: string, value: string) => void;
 }
 
 const LoginForm: FunctionComponent<ILoginForm> = props => {
@@ -38,6 +39,7 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
   };
 
   const handleChange = (value: string, name: string) => {
+    props.handleValueChange(name, value);
     setValues(prevValues => ({ ...prevValues, [name]: value }));
     setErrors(prevErrors =>
       prevErrors ? { ...prevErrors, [name]: [] } : prevErrors

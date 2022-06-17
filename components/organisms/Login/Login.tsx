@@ -12,6 +12,7 @@ interface ILogin {
   onSignIn: (email: string, password: string) => void;
   email?: string;
   restorePasswordUrl?: string;
+  handleValueChange: (fieldName: string, value: string) => void;
 }
 
 const Login: FC<ILogin> = ({
@@ -19,6 +20,7 @@ const Login: FC<ILogin> = ({
   onSignIn,
   email,
   restorePasswordUrl,
+  handleValueChange,
 }) => {
   return (
     <div className="Login">
@@ -33,7 +35,11 @@ const Login: FC<ILogin> = ({
           ) : null}
         </div>
       </div>
-      <LoginForm email={email} onSubmit={onSignIn} />
+      <LoginForm
+        handleValueChange={handleValueChange}
+        email={email}
+        onSubmit={onSignIn}
+      />
       {restorePasswordUrl ? (
         <div className="Login__RedirectToRestorePassword">
           Forgot password?{' '}

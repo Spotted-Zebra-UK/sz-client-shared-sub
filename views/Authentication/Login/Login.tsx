@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import {
@@ -60,6 +60,16 @@ const Login: FC<ILogin> = ({
       history.push(authenticationRoutes.twoFactorAuthentication);
     },
   });
+
+  const handleValueChange = useCallback(
+    (fieldName: string, value: string) => {
+      setValues({
+        ...values,
+        [fieldName]: value,
+      });
+    },
+    [values]
+  );
 
   const [authenticate] = useAuthenticateMutation({
     onCompleted: data => {
@@ -154,7 +164,6 @@ const Login: FC<ILogin> = ({
   }, []);
 
   const handleLogin = (email: string, password: string) => {
-    setValues({ email, password });
     authenticate({
       variables: {
         email,
@@ -170,6 +179,7 @@ const Login: FC<ILogin> = ({
       loginNotification={loginNotification}
       onSignIn={handleLogin}
       restorePasswordUrl={authenticationRoutes.restorePassword}
+      handleValueChange={handleValueChange}
     />
   );
 };
