@@ -108,9 +108,6 @@ const Login: FC<ILogin> = ({
       },
       onError: props => {
         props.graphQLErrors.forEach(({ extensions }) => {
-          console.log('extensions', extensions);
-          debugger;
-
           if (extensions) {
             const { code, message } = extensions?.exception.response;
             if (code === Error.INVALID_CREDENTIALS) {
