@@ -1,6 +1,19 @@
-query StageCandidateFindOne($id: Int!) {
-  StageCandidateFindOne(id: $id) {
-    id
-    companyId
+query StageCandidateFindOne(
+  $candidateId: Int
+  $id: Int
+  $stageId: Int
+  $stageResultId: Int
+  $status: StageCandidateStatus
+  $subId: String
+) {
+  StageCandidateFindOne(
+    candidateId: $candidateId
+    id: $id
+    stageId: $stageId
+    stageResultId: $stageResultId
+    status: $status
+    subId: $subId
+  ) {
+    ...SmStageCandidateModel
   }
 }
