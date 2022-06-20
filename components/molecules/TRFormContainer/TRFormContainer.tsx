@@ -30,7 +30,9 @@ interface ITRFormContainer {
   stageCandidateId?: number;
   onCloseHandler: () => void;
   handleSkipResponse?: () => void;
-  saveRespondantFormResponse?: MutationResult<IRespondantFormUpdateMutationResponse>;
+  saveRespondantFormResponse?: MutationResult<
+    IRespondantFormUpdateMutationResponse
+  >;
 }
 
 const TRFormContainer: FC<ITRFormContainer> = ({

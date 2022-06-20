@@ -170,7 +170,7 @@ export const useCalibrateForm = ({
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
-        manuallyAdjustedBy: user.data?.User.id,
+        manuallyAdjustedBy: !user || !user.data ? 0 : user.data.User?.id,
       });
     });
     formSuccessProfiles[selectedScreen].updatedResult.forEach(data => {
@@ -186,7 +186,7 @@ export const useCalibrateForm = ({
         },
         measurementId: data.measurementId,
         measurementType: data.measurementType,
-        manuallyAdjustedBy: user.data?.User.id,
+        manuallyAdjustedBy: !user || !user.data ? 0 : user.data.User?.id,
       });
     });
     return payload;
@@ -196,8 +196,9 @@ export const useCalibrateForm = ({
     let label = getResultAccessResponse.data?.ResultAccessFindOne?.label || '';
     if (!label) return;
 
-    const payload: ResultCreateOneTrCustomArgs[] =
-      getResultCreateOneTrCustomArgs(label);
+    const payload: ResultCreateOneTrCustomArgs[] = getResultCreateOneTrCustomArgs(
+      label
+    );
 
     createResultVersion({
       variables: {
@@ -227,8 +228,9 @@ export const useCalibrateForm = ({
     });
   };
   const onUpdateStatus = () => {
-    const payload: ResultCreateOneTrCustomArgs[] =
-      getResultCreateOneTrCustomArgs('signed off');
+    const payload: ResultCreateOneTrCustomArgs[] = getResultCreateOneTrCustomArgs(
+      'signed off'
+    );
 
     createResultVersion({
       variables: {
@@ -268,27 +270,35 @@ export const useCalibrateForm = ({
     });
   };
 
-  const [getSoftSkills, getSoftSkillsQueryResponse] =
-    useSoftSkillFindManyLazyQuery({
-      fetchPolicy: 'network-only',
-    });
+  const [
+    getSoftSkills,
+    getSoftSkillsQueryResponse,
+  ] = useSoftSkillFindManyLazyQuery({
+    fetchPolicy: 'network-only',
+  });
 
-  const [getResultsSoftSkills, getResultsSoftSkillsResponse] =
-    useResultFindManyLazyQuery({
-      fetchPolicy: 'network-only',
-    });
-  const [getResultsSuccessProfile, getResultsSuccessProfileResponse] =
-    useResultFindManyLazyQuery({
-      fetchPolicy: 'network-only',
-    });
+  const [
+    getResultsSoftSkills,
+    getResultsSoftSkillsResponse,
+  ] = useResultFindManyLazyQuery({
+    fetchPolicy: 'network-only',
+  });
+  const [
+    getResultsSuccessProfile,
+    getResultsSuccessProfileResponse,
+  ] = useResultFindManyLazyQuery({
+    fetchPolicy: 'network-only',
+  });
 
-  const [getResultAccess, getResultAccessResponse] =
-    useResultAccessFindOneLazyQuery({
-      fetchPolicy: 'network-only',
-      variables: {
-        stageCandidateId: stageCandidateId,
-      },
-    });
+  const [
+    getResultAccess,
+    getResultAccessResponse,
+  ] = useResultAccessFindOneLazyQuery({
+    fetchPolicy: 'network-only',
+    variables: {
+      stageCandidateId: stageCandidateId,
+    },
+  });
 
   // Formatting GradeBands
   const formatGradeBands = (gradeBands: GradeBandUnion[]) => {
@@ -363,8 +373,9 @@ export const useCalibrateForm = ({
         getCalibrateFormQueryResponse.data.CalibrationConfigFindOne
       ) {
         let step = 75 / (totalScore - 1);
-        let { gradeBands } =
-          getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
+        let {
+          gradeBands,
+        } = getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
         let index = score / step;
 
         let result = (gradeBands![index] as TrCustomGradeBandModel) || '';
@@ -407,7 +418,7 @@ export const useCalibrateForm = ({
       //setting Score
       let results = data.map(obj => {
         let { score } = obj;
-        let castedScore = score as unknown as TrCustomGradeBandModel;
+        let castedScore = (score as unknown) as TrCustomGradeBandModel;
         return {
           ...obj,
           score: {
@@ -522,18 +533,21 @@ export const useCalibrateForm = ({
 
   const onChangeSoftSkill = (value: number, index: number) => {
     let updateFormSoftSkills = JSON.parse(JSON.stringify(formSoftSkills));
-    updateFormSoftSkills[selectedScreen].updatedResult[index].score.score =
-      value;
-    updateFormSoftSkills[selectedScreen].updatedResult[index].score.evaluation =
-      getCustomEvaluation(value);
+    updateFormSoftSkills[selectedScreen].updatedResult[
+      index
+    ].score.score = value;
+    updateFormSoftSkills[selectedScreen].updatedResult[
+      index
+    ].score.evaluation = getCustomEvaluation(value);
     setFormSoftSkills(updateFormSoftSkills);
   };
   const onChangeSuccessProfile = (value: number, index: number) => {
     let updateFormSuccessProfile = JSON.parse(
       JSON.stringify(formSuccessProfiles)
     );
-    updateFormSuccessProfile[selectedScreen].updatedResult[index].score.score =
-      value;
+    updateFormSuccessProfile[selectedScreen].updatedResult[
+      index
+    ].score.score = value;
     updateFormSuccessProfile[selectedScreen].updatedResult[
       index
     ].score.evaluation = getCustomEvaluation(value);
@@ -546,15 +560,18 @@ export const useCalibrateForm = ({
     },
     {
       img: PerformanceIcon,
-      tip: "This score relates to the individual's level of performance in role",
+      tip:
+        "This score relates to the individual's level of performance in role",
     },
     {
       img: PotentialIcon,
-      tip: "This score relates to the individual's level of potential to take on roles of increased complexity in the future",
+      tip:
+        "This score relates to the individual's level of potential to take on roles of increased complexity in the future",
     },
     {
       img: PersonIconUrl,
-      tip: "This score should reflect your overall view of this individual's current performance and future potential",
+      tip:
+        "This score should reflect your overall view of this individual's current performance and future potential",
     },
   ];
 

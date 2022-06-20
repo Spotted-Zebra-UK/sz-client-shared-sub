@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import {
@@ -32,11 +32,6 @@ interface ILogin {
   clientType?: string;
 }
 
-interface ILoginFormValues {
-  email: string;
-  password: string;
-}
-
 const Login: FC<ILogin> = ({
   authPrepopulatedValues = {},
   authRedirectUrl,
@@ -50,100 +45,13 @@ const Login: FC<ILogin> = ({
   const mfaCookie: string[] = JSON.parse(
     localStorage.getItem(MFA_COOKIE) || '[]'
   );
-  const [values, setValues] = useState<ILoginFormValues>({
-    email: '',
-    password: '',
-  });
   const [mfaAccessToken] = useMfaAccessTokenMutation({
     onCompleted(data) {
       localStorage.setItem(MFA_AUTH_TOKEN, data.mfaAccessToken.mfaAccessToken);
       history.push(authenticationRoutes.twoFactorAuthentication);
     },
   });
-
-  const [authenticate] = useAuthenticateMutation({
-    onCompleted: data => {
-      /**
-       * User should be redirected to provided url after
-       * successful login.
-       */
-      if (clientType !== 'company') {
-        localStorage.setItem(
-          AUTH_TOKEN_STORAGE_KEY,
-          data.authenticate.accessToken
-        );
-        localStorage.setItem(
-          REFRESH_TOKEN_STORAGE_KEY,
-          data.authenticate.refreshToken
-        );
-        history.push(authRedirectUrl);
-      } else {
-        if (mfaCookie.length > 0) {
-          localStorage.setItem(
-            AUTH_TOKEN_STORAGE_KEY,
-            data.authenticate.accessToken
-          );
-          localStorage.setItem(
-            REFRESH_TOKEN_STORAGE_KEY,
-            data.authenticate.refreshToken
-          );
-          history.push(authRedirectUrl);
-        } else {
-          if (values.email && values.password) {
-            mfaAccessToken({
-              variables: {
-                email: values.email,
-                password: values.password,
-              },
-            });
-          }
-        }
-      }
-    },
-    onError: props => {
-      props.graphQLErrors.forEach(({ extensions }) => {
-        if (extensions) {
-          const { code, message } = extensions?.exception.response;
-          if (code === Error.INVALID_CREDENTIALS) {
-            /**
-             * If invalid credentials provided, notification should be visible.
-             */
-            addAuthNotification(AuthViews.LOGIN, {
-              icon: 'Warning',
-              color: 'Purple',
-              message: t('authentication.login.yourEmailOrPasswordDoNotMatch'),
-            });
-          }
-          if (code === Error.EXCEEDED_NUMBER_OF_ATTEMPTS) {
-            const substr = message.substr(
-              message.search('secondsLeft') + 13,
-              message.length
-            );
-            const secondsLeft = Math.ceil(+substr);
-
-            addAuthNotification(AuthViews.LOGIN, {
-              icon: 'Warning',
-              color: 'Purple',
-              message: t(
-                'authentication.login.dueToMultipleFailedLoginAttempts',
-                { secondsLeft }
-              ),
-            });
-          }
-          if (code === Error.MFA_REQUIRED) {
-            if (values.email && values.password) {
-              mfaAccessToken({
-                variables: {
-                  email: values.email,
-                  password: values.password,
-                },
-              });
-            }
-          }
-        }
-      });
-    },
-  });
+  const [authenticate] = useAuthenticateMutation({});
 
   useEffect(() => {
     document.body.style.backgroundColor = 'white';
@@ -154,16 +62,97 @@ const Login: FC<ILogin> = ({
   }, []);
 
   const handleLogin = (email: string, password: string) => {
-    setValues({ email, password });
     authenticate({
       variables: {
         email,
         password,
         mfaCookie,
       },
+      onCompleted: data => {
+        /**
+         * User should be redirected to provided url after
+         * successful login.
+         */
+        if (clientType !== 'company') {
+          localStorage.setItem(
+            AUTH_TOKEN_STORAGE_KEY,
+            data.authenticate.accessToken
+          );
+          localStorage.setItem(
+            REFRESH_TOKEN_STORAGE_KEY,
+            data.authenticate.refreshToken
+          );
+          history.push(authRedirectUrl);
+        } else {
+          if (mfaCookie.length > 0) {
+            localStorage.setItem(
+              AUTH_TOKEN_STORAGE_KEY,
+              data.authenticate.accessToken
+            );
+            localStorage.setItem(
+              REFRESH_TOKEN_STORAGE_KEY,
+              data.authenticate.refreshToken
+            );
+            history.push(authRedirectUrl);
+          } else {
+            if (email && password) {
+              mfaAccessToken({
+                variables: {
+                  email: email,
+                  password: password,
+                },
+              });
+            }
+          }
+        }
+      },
+      onError: props => {
+        props.graphQLErrors.forEach(({ extensions }) => {
+          if (extensions) {
+            const { code, message } = extensions?.exception.response;
+            if (code === Error.INVALID_CREDENTIALS) {
+              /**
+               * If invalid credentials provided, notification should be visible.
+               */
+              addAuthNotification(AuthViews.LOGIN, {
+                icon: 'Warning',
+                color: 'Purple',
+                message: t(
+                  'authentication.login.yourEmailOrPasswordDoNotMatch'
+                ),
+              });
+            }
+            if (code === Error.EXCEEDED_NUMBER_OF_ATTEMPTS) {
+              const substr = message.substr(
+                message.search('secondsLeft') + 13,
+                message.length
+              );
+              const secondsLeft = Math.ceil(+substr);
+
+              addAuthNotification(AuthViews.LOGIN, {
+                icon: 'Warning',
+                color: 'Purple',
+                message: t(
+                  'authentication.login.dueToMultipleFailedLoginAttempts',
+                  { secondsLeft }
+                ),
+              });
+            }
+            if (code === Error.MFA_REQUIRED) {
+              if (email && password) {
+                mfaAccessToken({
+                  variables: {
+                    email: email,
+                    password: password,
+                  },
+                });
+              }
+            }
+          }
+        });
+      },
     });
   };
-
   return (
     <LoginPresentational
       email={authPrepopulatedValues.email}
