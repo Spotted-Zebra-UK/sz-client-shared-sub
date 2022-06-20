@@ -1,13 +1,12 @@
 import './ModuleSelector.scss';
 import { CmAllowedAreaType, useCmAllowedAreaQuery } from 'generated/graphql';
-import React, { FC, Fragment, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getTargetUrl } from '../../../../helpers/getTargetURL';
-import IC_ARROW from '../../../../icons/ic_down-arrow_small.svg';
 // import IC_EMPLOYEE from '../../../../icons/ic_employee.svg';
-import IC_RECRUITER from '../../../../icons/ic_recruitment.svg';
-import IC_TALENT_REVIEW from '../../../../icons/ic_talent_review.svg';
 import { Application } from '../../../../interfaces/Applications';
+import ModuleSelectorDropdown from './ModuleSelectorDropdown/ModuleSelectorDropdown';
+import ModuleSelectorItem from './ModuleSelectorItem/ModuleSelectorItem';
 
 interface IModuleSelector {
   selectedModule?: CmAllowedAreaType;
@@ -39,6 +38,16 @@ const ModuleSelector: FC<IModuleSelector> = ({
     }
   };
 
+  const dropdownItemClicked = (module: CmAllowedAreaType) => {
+    if (fromCompany) {
+      if (changeSelectedModule) changeSelectedModule(module);
+      if (!location.pathname.includes('projects')) history.push('/projects');
+    } else {
+      window.open(`${getTargetUrl(Application.COMPANY)}/projects`, '_self');
+    }
+    setShowDropdown(false);
+  };
+
   useCmAllowedAreaQuery({
     onCompleted: data => {
       const cmModuleAccess = data.CmAllowedArea;
@@ -60,82 +69,47 @@ const ModuleSelector: FC<IModuleSelector> = ({
 
   const showCmModule: { [key in string]: React.ReactElement } = {
     [CmAllowedAreaType.Hiring]: (
-      <div
+      <ModuleSelectorItem
         key={selectedModule}
-        className={
-          selectedModule === CmAllowedAreaType.Hiring
-            ? 'module-div'
-            : 'second-module-div'
-        }
-        onClick={e => {
-          if (selectedModule === CmAllowedAreaType.TalentReview) {
-            if (fromCompany) {
-              if (changeSelectedModule)
-                changeSelectedModule(CmAllowedAreaType.Hiring);
-              if (!location.pathname.includes('projects'))
-                history.push('/projects');
-            } else {
-              window.open(
-                `${getTargetUrl(Application.COMPANY)}/projects`,
-                '_self'
-              );
-            }
-          }
+        module={CmAllowedAreaType.Hiring}
+        onClick={() => {
           setShowDropdown(showDropdown => !showDropdown);
         }}
-      >
-        <div className="project-module-first-div">
-          <img src={IC_RECRUITER} alt="ic-recruter" className="icon" />
-          <div className="module-title-div">Recruitment</div>
-        </div>
-        {selectedModule === CmAllowedAreaType.Hiring && (
-          <img src={IC_ARROW} alt="ic-recruter" className="icon-arrow" />
-        )}
-      </div>
+        selectedItem
+      />
     ),
     [CmAllowedAreaType.TalentReview]: (
-      <div
+      <ModuleSelectorItem
         key={selectedModule}
-        className={
-          selectedModule === CmAllowedAreaType.Hiring
-            ? 'second-module-div'
-            : 'module-div'
-        }
-        onClick={e => {
-          if (selectedModule === CmAllowedAreaType.Hiring) {
-            if (fromCompany) {
-              if (changeSelectedModule)
-                changeSelectedModule(CmAllowedAreaType.TalentReview);
-              if (!location.pathname.includes('projects'))
-                history.push('/projects');
-            } else {
-              window.open(
-                `${getTargetUrl(Application.COMPANY)}/projects`,
-                '_self'
-              );
-            }
-          }
+        module={CmAllowedAreaType.TalentReview}
+        onClick={() => {
           setShowDropdown(showDropdown => !showDropdown);
         }}
-      >
-        <div className="project-module-first-div">
-          <img src={IC_TALENT_REVIEW} alt="ic-recruter" className="icon" />
-          <div className="module-title-div">Talent Review</div>
-        </div>
-        {selectedModule === CmAllowedAreaType.TalentReview && (
-          <img src={IC_ARROW} alt="ic-recruter" className="icon-arrow" />
-        )}
-      </div>
+        selectedItem
+      />
+    ),
+    [CmAllowedAreaType.CompanyEmployee]: (
+      <ModuleSelectorItem
+        key={selectedModule}
+        module={CmAllowedAreaType.CompanyEmployee}
+        onClick={() => {
+          setShowDropdown(showDropdown => !showDropdown);
+        }}
+        selectedItem
+      />
     ),
   };
   if (selectedModule && checkLengthOfModules(modules))
     return (
       <div className="module-selector" ref={ref}>
-        {showDropdown
-          ? modules.map((cm, i) => (
-              <Fragment key={cm}>{showCmModule[cm]}</Fragment>
-            ))
-          : showCmModule[selectedModule]}
+        {showCmModule[selectedModule]}
+
+        {showDropdown && (
+          <ModuleSelectorDropdown
+            modules={modules.filter(m => m !== selectedModule)}
+            onDropdownItemClick={dropdownItemClicked}
+          />
+        )}
       </div>
     );
   return null;
