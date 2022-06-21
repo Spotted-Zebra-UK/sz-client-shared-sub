@@ -41,7 +41,13 @@ const ModuleSelector: FC<IModuleSelector> = ({
   const dropdownItemClicked = (module: CmAllowedAreaType) => {
     if (fromCompany) {
       if (changeSelectedModule) changeSelectedModule(module);
-      if (!location.pathname.includes('projects')) history.push('/projects');
+
+      if (module === CmAllowedAreaType.CompanyEmployee) {
+        if (!location.pathname.includes('employees'))
+          history.push('/employees');
+      } else {
+        if (!location.pathname.includes('projects')) history.push('/projects');
+      }
     } else {
       window.open(`${getTargetUrl(Application.COMPANY)}/projects`, '_self');
     }
