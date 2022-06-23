@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import TwoFactorAuthentication from '../../../views/Authentication/TwoFactorAuthentication/TwoFactorAuthentication';
 import { TNotification } from '../../../interfaces/notification';
 import { AuthViews } from '../../../views/Authentication/Authentication.constants';
 import CreatePassword from '../../../views/Authentication/CreatePassword/CreatePassword';
@@ -8,6 +7,7 @@ import DirectInvitation from '../../../views/Authentication/DirectInvitation/Dir
 import Login from '../../../views/Authentication/Login/Login';
 import RestorePassword from '../../../views/Authentication/RestorePassword/RestorePassword';
 import SignUpWrapper from '../../../views/Authentication/SignUp/SignUpWrapper/SignUpWrapper';
+import TwoFactorAuthentication from '../../../views/Authentication/TwoFactorAuthentication/TwoFactorAuthentication';
 import { authenticationRoutes } from '../authNavigation.constants';
 
 interface IAuthSwitch {
@@ -76,6 +76,7 @@ const AuthSwitch: FC<IAuthSwitch> = ({
       </Route>
       <Route path={authenticationRoutes.restorePassword}>
         <RestorePassword
+          clientType={clientType}
           restorePasswordNotification={
             authNotifications[AuthViews.RESTORE_PASSWORD]
           }
