@@ -1,0 +1,31 @@
+fragment SmStageCandidateModel on SmStageCandidateModel {
+  id
+  companyId
+  lastDateOfCandidateAction
+  stage {
+    id
+    name
+    projectId
+  }
+  status
+  stageResult {
+    scores {
+      id
+      score {
+        zScore
+        percentile
+        stenScore
+        grade
+      }
+    }
+    totalScore {
+      id
+      score {
+        zScore
+        percentile
+        stenScore
+        grade
+      }
+    }
+  }
+}

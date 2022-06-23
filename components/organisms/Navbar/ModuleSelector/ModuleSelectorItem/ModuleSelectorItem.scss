@@ -1,0 +1,38 @@
+.selected_module_item_container {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  align-items: center;
+  width: max-content;
+  height: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.module_item_container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.module_item_sub_container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-arrow {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.module-title-div {
+  font-size: 14px;
+  color: #1f1f1f;
+}
