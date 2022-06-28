@@ -73,38 +73,50 @@ const Login: FC<ILogin> = ({
          * User should be redirected to provided url after
          * successful login.
          */
-        if (clientType !== 'company') {
-          localStorage.setItem(
-            AUTH_TOKEN_STORAGE_KEY,
-            data.authenticate.accessToken
-          );
-          localStorage.setItem(
-            REFRESH_TOKEN_STORAGE_KEY,
-            data.authenticate.refreshToken
-          );
-          history.push(authRedirectUrl);
-        } else {
-          if (mfaCookie.length > 0) {
-            localStorage.setItem(
-              AUTH_TOKEN_STORAGE_KEY,
-              data.authenticate.accessToken
-            );
-            localStorage.setItem(
-              REFRESH_TOKEN_STORAGE_KEY,
-              data.authenticate.refreshToken
-            );
-            history.push(authRedirectUrl);
-          } else {
-            if (email && password) {
-              mfaAccessToken({
-                variables: {
-                  email: email,
-                  password: password,
-                },
-              });
-            }
-          }
-        }
+        localStorage.setItem(
+          AUTH_TOKEN_STORAGE_KEY,
+          data.authenticate.accessToken
+        );
+        localStorage.setItem(
+          REFRESH_TOKEN_STORAGE_KEY,
+          data.authenticate.refreshToken
+        );
+        history.push(authRedirectUrl);
+
+        // TODO:Logic needs to be reviewed.
+
+        // if (clientType !== 'company') {
+        //   localStorage.setItem(
+        //     AUTH_TOKEN_STORAGE_KEY,
+        //     data.authenticate.accessToken
+        //   );
+        //   localStorage.setItem(
+        //     REFRESH_TOKEN_STORAGE_KEY,
+        //     data.authenticate.refreshToken
+        //   );
+        //   history.push(authRedirectUrl);
+        // } else {
+        //   if (mfaCookie.length > 0) {
+        //     localStorage.setItem(
+        //       AUTH_TOKEN_STORAGE_KEY,
+        //       data.authenticate.accessToken
+        //     );
+        //     localStorage.setItem(
+        //       REFRESH_TOKEN_STORAGE_KEY,
+        //       data.authenticate.refreshToken
+        //     );
+        //     history.push(authRedirectUrl);
+        //   } else {
+        //     if (email && password) {
+        //       mfaAccessToken({
+        //         variables: {
+        //           email: email,
+        //           password: password,
+        //         },
+        //       });
+        //     }
+        //   }
+        // }
       },
       onError: props => {
         props.graphQLErrors.forEach(({ extensions }) => {
