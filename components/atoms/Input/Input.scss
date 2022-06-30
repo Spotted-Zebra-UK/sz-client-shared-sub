@@ -11,6 +11,10 @@
   background-color: transparent;
   border-radius: 0;
 
+  &.error {
+    border-bottom: 2px solid $purple;
+  }
+
   &:disabled {
     background-color: transparent;
   }
