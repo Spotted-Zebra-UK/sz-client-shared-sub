@@ -58,7 +58,6 @@ const ModuleSelector: FC<IModuleSelector> = ({
     onCompleted: data => {
       const cmModuleAccess = data.CmAllowedArea;
       if (cmModuleAccess?.defaultArea) {
-        console.log('cm module access', cmModuleAccess.allowed);
         setModules(cmModuleAccess?.allowed as CmAllowedAreaType[]);
         if (!selectedModule && cmModuleAccess?.defaultArea) {
           if (changeSelectedModule)
@@ -104,7 +103,6 @@ const ModuleSelector: FC<IModuleSelector> = ({
       />
     ),
   };
-  console.log('check length', checkLengthOfModules(modules));
   if (selectedModule && checkLengthOfModules(modules))
     return (
       <div className="module-selector" ref={ref}>
