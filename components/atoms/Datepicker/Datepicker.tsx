@@ -2,7 +2,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './Datepicker.scss';
 import { isArray } from 'lodash';
 import moment from 'moment';
-import React, { FC, forwardRef, RefObject } from 'react';
+import { FC, forwardRef, RefObject } from 'react';
 import DatePicker from 'react-datepicker';
 import { DATE_FORMAT_DATE } from '../../../constants/dateFormats';
 
@@ -11,7 +11,7 @@ interface IDatepicker {
   name: string;
   onChange: (value: string, name: string) => void;
   placeholder?: string;
-  // For value is used YYYY-MM-DD fomat.
+  // For value is used YYYY-MM-DD format.
   value: string;
   isDisabled?: boolean;
   id?: string;
@@ -75,6 +75,7 @@ const Datepicker: FC<IDatepicker> = ({
         customInput={<CustomInput />}
         showYearDropdown
         dropdownMode="select"
+        isClearable
       />
     </div>
   );
