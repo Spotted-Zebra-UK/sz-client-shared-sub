@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import {
   Redirect,
   Route,
@@ -28,19 +28,17 @@ const PrivateRoute: FunctionComponent<IPrivateRoute> = ({
   return (
     <Route
       {...rest}
-      render={
-        props =>
-          accessToken && allowed ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: redirectUrl,
-                state: { from: props.location },
-              }}
-            />
-          )
-        // eslint-disable-next-line react/jsx-curly-newline
+      render={props =>
+        accessToken && allowed ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: redirectUrl,
+              state: { from: props.location },
+            }}
+          />
+        )
       }
     />
   );
