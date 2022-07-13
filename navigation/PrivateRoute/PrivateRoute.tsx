@@ -10,6 +10,7 @@ import { AUTH_TOKEN_STORAGE_KEY } from '../../constants/authentication';
 interface IPrivateRoute extends RouteProps {
   component: FunctionComponent<RouteComponentProps>;
   redirectUrl?: string;
+  allowed?: boolean;
 }
 
 export interface IPrivateRouteRedirectLocationState {
@@ -19,15 +20,17 @@ export interface IPrivateRouteRedirectLocationState {
 const PrivateRoute: FunctionComponent<IPrivateRoute> = ({
   component: Component,
   redirectUrl = '/auth',
+  allowed = true,
   ...rest
 }) => {
   const accessToken = localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
+
   return (
     <Route
       {...rest}
       render={
         props =>
-          accessToken ? (
+          accessToken && allowed ? (
             <Component {...props} />
           ) : (
             <Redirect
