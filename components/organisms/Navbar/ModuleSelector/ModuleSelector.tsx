@@ -1,9 +1,8 @@
 import './ModuleSelector.scss';
 import { CmAllowedAreaType, useCmAllowedAreaQuery } from 'generated/graphql';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getTargetUrl } from '../../../../helpers/getTargetURL';
-// import IC_EMPLOYEE from '../../../../icons/ic_employee.svg';
 import { Application } from '../../../../interfaces/Applications';
 import ModuleSelectorDropdown from './ModuleSelectorDropdown/ModuleSelectorDropdown';
 import ModuleSelectorItem from './ModuleSelectorItem/ModuleSelectorItem';
@@ -71,7 +70,7 @@ const ModuleSelector: FC<IModuleSelector> = ({
     return modules.length > 1;
   };
 
-  const showCmModule: { [key in string]: React.ReactElement } = {
+  const showCmModule: { [key in string]: ReactElement } = {
     [CmAllowedAreaType.Hiring]: (
       <ModuleSelectorItem
         key={selectedModule}
