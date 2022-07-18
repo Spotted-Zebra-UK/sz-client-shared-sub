@@ -1,6 +1,5 @@
 query CalibrationConfigFindOne($projectId: Int!) {
   CalibrationConfigFindOne(projectId: $projectId) {
-    id
     successProfileId
     softSkillIds
     successProfileId
