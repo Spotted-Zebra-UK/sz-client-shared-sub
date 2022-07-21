@@ -1,5 +1,6 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import './Datepicker.scss';
+import IC_CALENDAR from 'icons/iconsSVG/ic_calendar_new.svg';
 import { isArray } from 'lodash';
 import moment from 'moment';
 import { FC, forwardRef, RefObject } from 'react';
@@ -49,6 +50,9 @@ const Datepicker: FC<IDatepicker> = ({
         }
       >
         {props.value || placeholder}
+        {!props.value && (
+          <img src={IC_CALENDAR} className="ic-calendar" alt="calendar-icon" />
+        )}
       </button>
     );
   });
