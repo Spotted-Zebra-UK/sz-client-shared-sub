@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { LazyQueryResult, QueryResult } from '@apollo/client';
 import {
   BasicScoreType,
-  CalibrationConfigFindOneQuery,
+  CalibrationConfigGenerateOneQuery,
   Exact,
   GetTestCardsDocument,
   GradeBandUnion,
@@ -18,7 +18,7 @@ import {
   TrCustomEvaluation,
   TrCustomGradeBandModel,
   TrCustomResultScoreModel,
-  useCalibrationConfigFindOneQuery,
+  useCalibrationConfigGenerateOneQuery,
   useResultAccessFindOneLazyQuery,
   useResultCreateManyTrCustomMutation,
   useResultFindManyLazyQuery,
@@ -105,7 +105,7 @@ export const useCalibrateForm = ({
   number,
   IFormScreen[],
   QueryResult<
-    CalibrationConfigFindOneQuery,
+    CalibrationConfigGenerateOneQuery,
     Exact<{
       projectId: number;
     }>
@@ -318,7 +318,7 @@ export const useCalibrateForm = ({
     setGrades(newGrades);
   };
 
-  const getCalibrateFormQueryResponse = useCalibrationConfigFindOneQuery({
+  const getCalibrateFormQueryResponse = useCalibrationConfigGenerateOneQuery({
     fetchPolicy: 'network-only',
     variables: {
       projectId,
@@ -326,7 +326,9 @@ export const useCalibrateForm = ({
     onError: () => {},
     onCompleted: data => {
       getSoftSkills({
-        variables: { ids: data.CalibrationConfigFindOne?.softSkillIds || [] },
+        variables: {
+          ids: data.CalibrationConfigGenerateOne?.softSkillIds || [],
+        },
       });
       getResultsSoftSkills({
         variables: {
@@ -334,7 +336,7 @@ export const useCalibrateForm = ({
           doneFor,
           projectId,
           measurementType: ResultMeasurementType.SoftSkill,
-          measurementIds: data?.CalibrationConfigFindOne?.softSkillIds,
+          measurementIds: data?.CalibrationConfigGenerateOne?.softSkillIds,
           onlyLatestVersionPerLabel: true,
         },
       });
@@ -345,7 +347,7 @@ export const useCalibrateForm = ({
           projectId,
           measurementType: ResultMeasurementType.SuccessProfile,
           measurementIds: [
-            data?.CalibrationConfigFindOne?.successProfileId || 0,
+            data?.CalibrationConfigGenerateOne?.successProfileId || 0,
           ],
           onlyLatestVersionPerLabel: true,
         },
@@ -358,7 +360,7 @@ export const useCalibrateForm = ({
 
       // Formatting gradebands
       formatGradeBands(
-        (data.CalibrationConfigFindOne
+        (data.CalibrationConfigGenerateOne
           ?.gradeBands as TrCustomGradeBandModel[]) || []
       );
     },
@@ -370,12 +372,12 @@ export const useCalibrateForm = ({
     (score: number) => {
       if (
         getCalibrateFormQueryResponse.data &&
-        getCalibrateFormQueryResponse.data.CalibrationConfigFindOne
+        getCalibrateFormQueryResponse.data.CalibrationConfigGenerateOne
       ) {
         let step = 75 / (totalScore - 1);
         let {
           gradeBands,
-        } = getCalibrateFormQueryResponse.data.CalibrationConfigFindOne;
+        } = getCalibrateFormQueryResponse.data.CalibrationConfigGenerateOne;
         let index = score / step;
 
         let result = (gradeBands![index] as TrCustomGradeBandModel) || '';
@@ -392,10 +394,10 @@ export const useCalibrateForm = ({
       if (!value) return 0;
       if (
         getCalibrateFormQueryResponse.data &&
-        getCalibrateFormQueryResponse.data.CalibrationConfigFindOne
+        getCalibrateFormQueryResponse.data.CalibrationConfigGenerateOne
       ) {
         let gradeBands = getCalibrateFormQueryResponse.data
-          .CalibrationConfigFindOne.gradeBands as TrCustomGradeBandModel[];
+          .CalibrationConfigGenerateOne.gradeBands as TrCustomGradeBandModel[];
         let currentGradeBand = gradeBands?.find(
           grade => grade.evaluation === value
         );
