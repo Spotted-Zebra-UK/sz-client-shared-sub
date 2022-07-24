@@ -6,6 +6,7 @@ interface IFormField {
   fieldName: string;
   label?: string;
   isLabelVisible?: boolean;
+  isLabelErrorVisible?: boolean;
 }
 
 const FormField: FunctionComponent<IFormField> = ({
@@ -14,6 +15,7 @@ const FormField: FunctionComponent<IFormField> = ({
   label,
   fieldName,
   isLabelVisible = true,
+  isLabelErrorVisible = true,
 }) => {
   return (
     <div className={`FormField FormField--${fieldName}`}>
@@ -31,7 +33,7 @@ const FormField: FunctionComponent<IFormField> = ({
         )}
 
         {children}
-        <div className="FormField__Error">{error}</div>
+        {isLabelErrorVisible && <div className="FormField__Error">{error}</div>}
       </label>
     </div>
   );
