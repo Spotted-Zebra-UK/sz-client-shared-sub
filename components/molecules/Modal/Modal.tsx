@@ -6,6 +6,7 @@ import ReactModal from 'react-modal';
 interface IModal {
   onClose: () => void;
   className?: string;
+  children: JSX.Element;
 }
 
 const Modal: FC<IModal> = ({ children, onClose, className }) => {
