@@ -6,6 +6,7 @@ import ReactModal from 'react-modal';
 interface IModal {
   onClose: () => void;
   className?: string;
+  children: React.ReactNode;
 }
 
 const Modal: FC<IModal> = ({ children, onClose, className }) => {
@@ -35,7 +36,7 @@ const Modal: FC<IModal> = ({ children, onClose, className }) => {
       overlayClassName="ModalOverlay"
       shouldCloseOnOverlayClick
     >
-      {children}
+      <>{children}</>
     </ReactModal>
   );
 };
