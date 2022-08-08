@@ -1,0 +1,80 @@
+mutation Authenticate(
+  $email: String!
+  $password: String!
+  $clientType: ClientType
+  $mfaCookie: [String!]
+) {
+  authenticate(
+    email: $email
+    password: $password
+    mfaCookie: $mfaCookie
+    clientType: $clientType
+  ) {
+    accessToken
+    refreshToken
+  }
+}
+
+mutation RegisterAccount(
+  $firstName: String!
+  $lastName: String!
+  $email: String!
+  $password: String!
+  $invitationToken: String
+  $language: Language!
+  $companyId: Float
+  $projectId: Float
+) {
+  registerAccount(
+    firstName: $firstName
+    lastName: $lastName
+    email: $email
+    password: $password
+    invitationToken: $invitationToken
+    language: $language
+    companyId: $companyId
+    projectId: $projectId
+  ) {
+    accessToken
+    refreshToken
+  }
+}
+
+mutation Deauthenticate($accessToken: String!) {
+  deauthenticate(accessToken: $accessToken)
+}
+
+mutation RequestPasswordRecovery(
+  $email: String!
+  $clientDomainType: ClientDomainType!
+) {
+  requestPasswordRecovery(email: $email, clientDomainType: $clientDomainType)
+}
+
+mutation UpdateIdentityPassword(
+  $recoveryToken: String!
+  $newPassword: String!
+) {
+  updateIdentityPassword(
+    recoveryToken: $recoveryToken
+    newPassword: $newPassword
+  )
+}
+
+mutation MfaAccessToken($email: String!, $password: String!) {
+  mfaAccessToken(email: $email, password: $password) {
+    mfaAccessToken
+  }
+}
+
+mutation MfaAuthenticate($mfaAccessToken: String!, $mfaCode: Float!) {
+  mfaAuthenticate(mfaAccessToken: $mfaAccessToken, mfaCode: $mfaCode) {
+    accessToken
+    refreshToken
+    mfaCookie
+  }
+}
+
+mutation RequestMfaCode($mfaAccessToken: String!) {
+  requestMfaCode(mfaAccessToken: $mfaAccessToken)
+}

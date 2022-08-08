@@ -1,0 +1,15 @@
+query CalibrationConfigGenerateOne($projectId: Int!) {
+  CalibrationConfigGenerateOne(projectId: $projectId) {
+    successProfileId
+    softSkillIds
+    successProfileId
+    gradeBands {
+      __typename
+      ... on TrCustomGradeBandModel {
+        position
+        evaluation
+        displayText
+      }
+    }
+  }
+}

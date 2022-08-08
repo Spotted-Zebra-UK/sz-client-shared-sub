@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import {
   Redirect,
   Route,
@@ -10,6 +10,7 @@ import { AUTH_TOKEN_STORAGE_KEY } from '../../constants/authentication';
 interface IPrivateRoute extends RouteProps {
   component: FunctionComponent<RouteComponentProps>;
   redirectUrl?: string;
+  allowed?: boolean;
 }
 
 export interface IPrivateRouteRedirectLocationState {
@@ -19,25 +20,25 @@ export interface IPrivateRouteRedirectLocationState {
 const PrivateRoute: FunctionComponent<IPrivateRoute> = ({
   component: Component,
   redirectUrl = '/auth',
+  allowed = true,
   ...rest
 }) => {
   const accessToken = localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
+
   return (
     <Route
       {...rest}
-      render={
-        props =>
-          accessToken ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: redirectUrl,
-                state: { from: props.location },
-              }}
-            />
-          )
-        // eslint-disable-next-line react/jsx-curly-newline
+      render={props =>
+        accessToken && allowed ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: redirectUrl,
+              state: { from: props.location },
+            }}
+          />
+        )
       }
     />
   );

@@ -1,6 +1,7 @@
 @import '../../../variables';
 
 .FormField {
+  width: inherit;
   &__Label {
     &__Text {
       min-height: 16px;

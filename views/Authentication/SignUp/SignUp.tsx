@@ -1,30 +1,21 @@
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { getLanguageFromShortName } from '../../../../../constants/languages';
+import { useRegisterAccountMutation } from '../../../../../generated/graphql';
 import SignUpPresentational from '../../../components/organisms/SignUp/SignUp';
 import {
   AUTH_TOKEN_STORAGE_KEY,
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
-import { REGISTER_ACCOUNT } from '../../../graphql/authentication';
-import {
-  IRegisterAccountInput,
-  IRegisterAccountResponse,
-} from '../../../interfaces/authentication';
-import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { ISignUpWrapper } from './SignUpWrapper/SignUpWrapper';
 
-interface ISignUp {
-  authPrepopulatedValues?: {
-    email?: string;
-    fullName?: string;
-  };
-  authRedirectUrl: string;
-  directInvitationToken: string | undefined;
-  signUpNotification?: TNotification | undefined;
-  addAuthNotification: (view: AuthViews, notification: TNotification) => void;
+interface ISignUp extends ISignUpWrapper {
+  companyId?: number;
+  projectId?: number;
 }
 
 const SignUp: FC<ISignUp> = ({
@@ -33,12 +24,13 @@ const SignUp: FC<ISignUp> = ({
   directInvitationToken,
   signUpNotification,
   addAuthNotification,
+  companyId,
+  projectId,
 }) => {
+  const { i18n, t } = useTranslation();
   const history = useHistory();
-  const [registerAccount] = useMutation<
-    IRegisterAccountResponse,
-    IRegisterAccountInput
-  >(REGISTER_ACCOUNT, {
+
+  const [registerAccount] = useRegisterAccountMutation({
     onCompleted(data) {
       /**
        * User should be redirected to provided url after
@@ -67,7 +59,9 @@ const SignUp: FC<ISignUp> = ({
             addAuthNotification(AuthViews.LOGIN, {
               icon: 'Idea',
               color: 'Purple',
-              message: 'Your account has already been created',
+              message: t(
+                'authentication.signUp.yourAccountHasAlreadyBeenCreated'
+              ),
             });
             history.push(authenticationRoutes.login);
           }
@@ -76,8 +70,7 @@ const SignUp: FC<ISignUp> = ({
             addAuthNotification(AuthViews.SIGN_UP, {
               icon: 'Idea',
               color: 'Purple',
-              message:
-                'Your password must have at least 1 uppercase letter, 1 lowercase letter, 1 number or special character and be at least 8 characters long.',
+              message: t('common.yourPasswordMustHave'),
             });
           }
         }
@@ -99,6 +92,9 @@ const SignUp: FC<ISignUp> = ({
         email,
         password,
         invitationToken: directInvitationToken,
+        language: getLanguageFromShortName(i18n.language),
+        companyId,
+        projectId,
       },
     });
   };

@@ -1,0 +1,224 @@
+.tooltip-container {
+  text-align: left;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+  color: #000;
+  font-size: 13px; /* Change the font size inside tooltip */
+  line-height: 1.4;
+  max-width: 150px;
+  opacity: 1 !important;
+  a:link,
+  a:visited {
+    background-color: #fff;
+    text-align: center;
+    display: inline-block;
+    color: blue;
+    text-decoration: underline;
+  }
+}
+.calibration {
+  &__NotificationWrapper {
+    padding: 20px;
+
+    .Notification {
+      margin: auto;
+      max-width: 350px;
+    }
+  }
+  width: 770px;
+  margin: auto;
+  .flex-1 {
+    flex: 1;
+  }
+  .flex-2 {
+    flex: 2;
+    max-width: 220px;
+  }
+  .flex-3 {
+    flex: 3;
+    max-width: 330px;
+  }
+  &__note {
+    display: flex;
+    margin-top: 30px;
+    &__space {
+      flex: 1;
+    }
+    &__text {
+      flex: 5;
+      padding-left: 20px;
+      line-height: 1.5;
+    }
+  }
+  &__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 755px;
+    margin: 5px auto 10px auto;
+    button:disabled {
+      fill: rgba(0, 0, 0, 0.2);
+    }
+    // .completed {
+    //   color: rgba(0, 0, 0, 0.38);
+    // }
+    &__controls {
+      display: flex;
+      align-items: center;
+    }
+    &__icon-button {
+      background-color: #fff;
+      margin: 0px 5px;
+    }
+    &__header-label {
+      text-transform: capitalize;
+      font-size: 14px;
+      font-weight: 500;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+    &__icon {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      margin-bottom: 1px;
+      margin-right: 5px;
+    }
+  }
+  .AppBar {
+    padding: 20px 20px 0;
+    max-width: 960px;
+    min-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  &__action {
+    display: flex;
+    justify-content: center;
+    margin: 30px auto;
+    gap: 20px;
+  }
+  &__LoaderWrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+  }
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    gap: 30px;
+    &__icon {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+    &__heading {
+      font-size: 24px;
+      line-height: 1.33;
+      letter-spacing: normal;
+      text-align: center;
+      color: #000;
+    }
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    padding: 0px auto;
+    grid-gap: 20px;
+    gap: 20px;
+    margin-left: auto;
+    margin-top: 45px;
+    width: 778px;
+    margin-right: auto;
+    &__header {
+      display: flex;
+      position: relative;
+      margin-bottom: 85px;
+      &__heading-top {
+        flex: 1;
+      }
+      &__form-top {
+        position: absolute;
+        flex: 3 3;
+        min-width: 620px;
+        display: flex;
+        text-align: center;
+        grid-gap: 10px;
+        gap: 10px;
+        max-width: 700px;
+        flex-grow: 1;
+        right: 1%;
+        .header-label {
+          border-bottom: 2px solid transparent;
+          display: block;
+          min-height: 50px;
+          background-color: #fff;
+          opacity: 1 !important;
+          padding-bottom: 10px;
+          color: #000;
+          font-size: 15px;
+          line-height: 1.2;
+        }
+        .border-grey {
+          border-bottom-color: rgba(0, 0, 0, 0.38);
+        }
+        .border-purple {
+          border-bottom-color: #b75bff;
+        }
+        .border-green {
+          border-bottom-color: #00d3ad;
+        }
+        .border-blue {
+          border-bottom-color: #10b7ff;
+        }
+      }
+    }
+
+    &__item {
+      display: flex;
+      margin: 2px 0;
+      &__heading {
+        flex: 1;
+        align-items: center;
+        gap: 10px;
+        justify-content: flex-start;
+        display: flex;
+        span {
+          font-size: 14px;
+          font-weight: 500px;
+        }
+      }
+      &__range-selector {
+        flex: 5;
+        position: relative;
+        height: 50px;
+        padding-left: 37px;
+      }
+      &:last-child {
+        margin-top: 30px;
+      }
+    }
+  }
+}
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.16);
+  height: 1px;
+  position: absolute;
+  left: 0;
+}

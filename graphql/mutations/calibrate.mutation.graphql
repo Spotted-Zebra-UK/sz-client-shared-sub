@@ -1,0 +1,26 @@
+query ResultAccessFindOne($stageCandidateId: Int!) {
+  ResultAccessFindOne(stageCandidateId: $stageCandidateId) {
+    label
+    status
+    allowedActions
+  }
+}
+
+mutation ResultCreateManyTrCustom($args: [ResultCreateOneTrCustomArgs!]!) {
+  ResultCreateManyTrCustom(args: $args) {
+    id
+    version # The new version number is automatically added once you save
+    previousVersionId # will point to the result for the same SoftSkill, doneBy, doneFor and projectId with the version of this saved result minus 1
+    label
+    # etc...
+  }
+}
+mutation StageCandidateUpdate(
+  $stageCandidateId: Int!
+  $status: StageCandidateStatus!
+) {
+  StageCandidateUpdate(id: $stageCandidateId, status: $status) {
+    id
+    status
+  }
+}

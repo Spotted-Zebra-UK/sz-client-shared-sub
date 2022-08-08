@@ -1,0 +1,39 @@
+query ResultFindMany(
+  $doneBy: Int!
+  $doneFor: Int!
+  $projectId: Int!
+  $measurementIds: [Int!]
+  $measurementType: ResultMeasurementType
+  $onlyLatestVersionPerLabel: Boolean
+) {
+  ResultFindMany(
+    doneBy: $doneBy
+    doneFor: $doneFor
+    projectId: $projectId
+    measurementIds: $measurementIds
+    measurementType: $measurementType
+    onlyLatestVersionPerLabel: $onlyLatestVersionPerLabel
+  ) {
+    id
+    version
+    score {
+      __typename
+      ... on TrCustomResultScoreModel {
+        # This will be used for Entain
+        score
+        evaluation
+      }
+      ... on StatisticalResultScoreModel {
+        zScore
+        percentile
+        stenScore
+        grade
+      }
+    }
+    previousVersionId
+    label
+    measurementId
+    measurementType
+    # etc...
+  }
+}

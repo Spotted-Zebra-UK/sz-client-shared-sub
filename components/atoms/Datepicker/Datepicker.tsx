@@ -2,16 +2,17 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './Datepicker.scss';
 import { isArray } from 'lodash';
 import moment from 'moment';
-import React, { FC, forwardRef, RefObject } from 'react';
+import { FC, forwardRef, RefObject } from 'react';
 import DatePicker from 'react-datepicker';
 import { DATE_FORMAT_DATE } from '../../../constants/dateFormats';
+import IC_CALENDAR from '../../../icons/ic_calendar_new.svg';
 
 interface IDatepicker {
   className?: string;
   name: string;
   onChange: (value: string, name: string) => void;
   placeholder?: string;
-  // For value is used YYYY-MM-DD fomat.
+  // For value is used YYYY-MM-DD format.
   value: string;
   isDisabled?: boolean;
   id?: string;
@@ -49,6 +50,9 @@ const Datepicker: FC<IDatepicker> = ({
         }
       >
         {props.value || placeholder}
+        {!props.value && (
+          <img src={IC_CALENDAR} className="ic-calendar" alt="calendar-icon" />
+        )}
       </button>
     );
   });
@@ -75,6 +79,7 @@ const Datepicker: FC<IDatepicker> = ({
         customInput={<CustomInput />}
         showYearDropdown
         dropdownMode="select"
+        isClearable
       />
     </div>
   );

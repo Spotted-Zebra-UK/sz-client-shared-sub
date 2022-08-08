@@ -1,0 +1,49 @@
+@import '../../../variables';
+
+.LogoutButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    path {
+      fill: rgba(0, 0, 0, 0.54);
+    }
+  }
+}
+
+.LogoutButton.IconButton {
+  padding: 0;
+}
+
+.profile-menu {
+  &-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+    cursor: pointer;
+  }
+  &-item:hover {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+  }
+}
+.profile-menu {
+  &-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+    cursor: pointer;
+  }
+  &-item:hover {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+  }
+}
+
+.icon-exit {
+  width: 20px;
+  height: 20px;
+}

@@ -1,14 +1,10 @@
 import './DirectInvitation.scss';
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Redirect, useLocation } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useGetInvitationStatusQuery } from '../../../../../generated/graphql';
 import Loader from '../../../components/atoms/Loader/Loader';
-import { GET_INVITATION_STATUS_QUERY } from '../../../graphql/directInvitation';
 import { parseInvitationToken } from '../../../helpers/invitations';
-import {
-  IGetInvitationStatusQueryInput,
-  IGetInvitationStatusQueryResponse,
-} from '../../../interfaces/invitation';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
@@ -25,12 +21,10 @@ const DirectInvitation: FC<IDirectInvitation> = ({
   setAuthPrepopulatedValues,
   setDirectInvitationToken,
 }) => {
+  const { t } = useTranslation();
   const location = useLocation();
   const invitationData = parseInvitationToken(location.search);
-  const getInvitationStatusQueryResponse = useQuery<
-    IGetInvitationStatusQueryResponse,
-    IGetInvitationStatusQueryInput
-  >(GET_INVITATION_STATUS_QUERY, {
+  const getInvitationStatusQueryResponse = useGetInvitationStatusQuery({
     variables: {
       invitationToken: invitationData?.token || '',
     },
@@ -71,7 +65,9 @@ const DirectInvitation: FC<IDirectInvitation> = ({
       addAuthNotification(AuthViews.LOGIN, {
         icon: 'Idea',
         color: 'Green',
-        message: 'Your account has already been created',
+        message: t(
+          'authentication.directInvitation.yourAccountHasAlreadyBeenCreated'
+        ),
       });
       return <Redirect to={authenticationRoutes.login} />;
     }
@@ -88,8 +84,9 @@ const DirectInvitation: FC<IDirectInvitation> = ({
     addAuthNotification(AuthViews.SIGN_UP, {
       color: 'Blue',
       icon: 'Claps',
-      message:
-        'Thank you for accepting the invitation, please create your account below',
+      message: t(
+        'authentication.directInvitation.thankYouForAcceptingTheInvitation'
+      ),
     });
     return <Redirect to={authenticationRoutes.signUp} />;
   }

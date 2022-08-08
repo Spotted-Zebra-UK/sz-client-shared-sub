@@ -9,6 +9,7 @@ import { AuthViews } from './Authentication.constants';
 
 interface IAuthentication {
   defaultRedirectUrl?: string;
+  clientType?: string;
 }
 
 interface IAuthPrepouplatedValues {
@@ -23,10 +24,12 @@ const initializeAuthNotifications: {
   [AuthViews.SIGN_UP]: undefined,
   [AuthViews.CREATE_PASSWORD]: undefined,
   [AuthViews.RESTORE_PASSWORD]: undefined,
+  [AuthViews.TWO_FACTOR_AUTHENTICATION]: undefined,
 };
 
 const Authentication: FC<IAuthentication> = ({
   defaultRedirectUrl = authenticationRoutes.defaultAuthRedirectUrl,
+  clientType,
 }) => {
   const { state } = useLocation<
     IPrivateRouteRedirectLocationState | undefined
@@ -91,6 +94,7 @@ const Authentication: FC<IAuthentication> = ({
       addAuthNotification={handleAddAuthNotification}
       clearAuthViewNotifications={handleClearAuthViewNotifications}
       setDirectInvitationToken={handleSetDirectInvitationToken}
+      clientType={clientType}
     />
   );
 };

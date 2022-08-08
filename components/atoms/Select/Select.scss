@@ -1,6 +1,11 @@
 @import '../../../variables';
 
-.Select {
+.Select,
+.tr {
+  // &--is-disabled {
+  //   background-color: green !important;
+  // }
+
   &__control {
     border: 0 !important;
     border-bottom: $form-input-border-bottom !important;
@@ -11,6 +16,14 @@
     &:focus {
       outline: none !important;
     }
+    &--is-disabled {
+      background-color: #fff !important;
+      .Select__indicator {
+        svg {
+          display: none;
+        }
+      }
+    }
   }
 
   &__value-container {
@@ -19,6 +32,9 @@
 
   &__indicator-separator {
     display: none !important;
+  }
+  &__single-value--is-disabled {
+    color: #000 !important;
   }
 
   &__placeholder {
@@ -30,7 +46,6 @@
   &__indicator {
     svg {
       width: 17px;
-
       path {
         fill: $black;
       }

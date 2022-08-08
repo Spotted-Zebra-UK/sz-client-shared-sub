@@ -1,10 +1,22 @@
 import { gql } from '@apollo/client';
 
 export const AUTHENTICATE_MUTATION = gql`
-  mutation AuthenticateMutation($email: String!, $password: String!) {
-    authenticate(email: $email, password: $password) {
+  mutation AuthenticateMutation(
+    $email: String!
+    $password: String!
+    $mfaCookie: [String!]
+  ) {
+    authenticate(email: $email, password: $password, mfaCookie: $mfaCookie) {
       accessToken
       refreshToken
+    }
+  }
+`;
+
+export const GET_COMPANY_ID_BY_PROJECT = gql`
+  query CompanyIdByProject($id: Float!) {
+    getCompanyId(id: $id) {
+      companyId
     }
   }
 `;
@@ -15,6 +27,7 @@ export const REGISTER_ACCOUNT = gql`
     $lastName: String!
     $email: String!
     $password: String!
+    $companyId: Float!
     $invitationToken: String
   ) {
     registerAccount(
@@ -22,6 +35,7 @@ export const REGISTER_ACCOUNT = gql`
       lastName: $lastName
       email: $email
       password: $password
+      companyId: $companyId
       invitationToken: $invitationToken
     ) {
       accessToken
@@ -51,5 +65,34 @@ export const UPDATE_IDENTITY_PASSWORD_MUTATION = gql`
       recoveryToken: $recoveryToken
       newPassword: $newPassword
     )
+  }
+`;
+
+/**
+ *  ** Two factor authentication **
+ * Refer to the Miro board for more information on queries below
+ * https://miro.com/app/board/o9J_lsJDN6o=/
+ */
+export const MFA_ACCESS_TOKEN = gql`
+  mutation MfaAccessToken($email: String!, $password: String!) {
+    mfaAccessToken(email: $email, password: $password) {
+      mfaAccessToken
+    }
+  }
+`;
+
+export const MFA_AUTHENTICATE = gql`
+  mutation MfaAuthenticate($mfaAccessToken: String!, $mfaCode: Float!) {
+    mfaAuthenticate(mfaAccessToken: $mfaAccessToken, mfaCode: $mfaCode) {
+      accessToken
+      refreshToken
+      mfaCookie
+    }
+  }
+`;
+
+export const MFA_REQUEST_CODE = gql`
+  mutation RequestMfaCode($mfaAccessToken: String!) {
+    requestMfaCode(mfaAccessToken: $mfaAccessToken)
   }
 `;

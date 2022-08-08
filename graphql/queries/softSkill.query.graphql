@@ -1,0 +1,10 @@
+query SoftSkills {
+  SoftSkills {
+    ...SoftSkill
+  }
+}
+query SoftSkillFindMany($isArchived: Boolean, $ids: [Int!]) {
+  SoftSkillFindMany(isArchived: $isArchived, ids: $ids) {
+    ...SoftSkill
+  }
+}

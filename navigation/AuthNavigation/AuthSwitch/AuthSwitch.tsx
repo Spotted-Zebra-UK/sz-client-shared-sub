@@ -6,7 +6,8 @@ import CreatePassword from '../../../views/Authentication/CreatePassword/CreateP
 import DirectInvitation from '../../../views/Authentication/DirectInvitation/DirectInvitation';
 import Login from '../../../views/Authentication/Login/Login';
 import RestorePassword from '../../../views/Authentication/RestorePassword/RestorePassword';
-import SignUp from '../../../views/Authentication/SignUp/SignUp';
+import SignUpWrapper from '../../../views/Authentication/SignUp/SignUpWrapper/SignUpWrapper';
+import TwoFactorAuthentication from '../../../views/Authentication/TwoFactorAuthentication/TwoFactorAuthentication';
 import { authenticationRoutes } from '../authNavigation.constants';
 
 interface IAuthSwitch {
@@ -21,6 +22,7 @@ interface IAuthSwitch {
   clearAuthViewNotifications: (view: AuthViews) => void;
   setAuthPrepopulatedValues: (fullName: string, email: string) => void;
   setDirectInvitationToken: (token: string | undefined) => void;
+  clientType?: string;
 }
 
 const AuthSwitch: FC<IAuthSwitch> = ({
@@ -32,6 +34,7 @@ const AuthSwitch: FC<IAuthSwitch> = ({
   clearAuthViewNotifications,
   setAuthPrepopulatedValues,
   setDirectInvitationToken,
+  clientType,
 }) => {
   return (
     <Switch>
@@ -44,6 +47,7 @@ const AuthSwitch: FC<IAuthSwitch> = ({
       </Route>
       <Route path={authenticationRoutes.login}>
         <Login
+          clientType={clientType}
           authPrepopulatedValues={authPrepopulatedValues}
           authRedirectUrl={authRedirectUrl}
           loginNotification={authNotifications[AuthViews.LOGIN]}
@@ -51,8 +55,18 @@ const AuthSwitch: FC<IAuthSwitch> = ({
           clearAuthViewNotifications={clearAuthViewNotifications}
         />
       </Route>
+      <Route path={authenticationRoutes.twoFactorAuthentication}>
+        <TwoFactorAuthentication
+          authRedirectUrl={authRedirectUrl}
+          loginNotification={
+            authNotifications[AuthViews.TWO_FACTOR_AUTHENTICATION]
+          }
+          addAuthNotification={addAuthNotification}
+          clearAuthViewNotifications={clearAuthViewNotifications}
+        />
+      </Route>
       <Route path={authenticationRoutes.signUp}>
-        <SignUp
+        <SignUpWrapper
           authPrepopulatedValues={authPrepopulatedValues}
           authRedirectUrl={authRedirectUrl}
           signUpNotification={authNotifications[AuthViews.SIGN_UP]}
@@ -62,6 +76,7 @@ const AuthSwitch: FC<IAuthSwitch> = ({
       </Route>
       <Route path={authenticationRoutes.restorePassword}>
         <RestorePassword
+          clientType={clientType}
           restorePasswordNotification={
             authNotifications[AuthViews.RESTORE_PASSWORD]
           }

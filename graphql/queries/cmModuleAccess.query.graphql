@@ -1,0 +1,6 @@
+query CmAllowedArea {
+  CmAllowedArea {
+    allowed
+    defaultArea
+  }
+}

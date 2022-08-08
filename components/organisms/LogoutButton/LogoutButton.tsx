@@ -23,6 +23,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
       onCompleted: () => {
         localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
         localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
+        localStorage.removeItem('filters');
         history.push(authenticationRoutes.login);
         window.location.reload();
       },
