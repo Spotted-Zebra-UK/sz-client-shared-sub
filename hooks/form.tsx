@@ -28,7 +28,12 @@ export const useForm = ({
   TFormValues,
   TFormErrors | undefined,
   (newValue: TFormFieldValue, name: string) => void,
-  () => void
+  (
+    event:
+      | React.FormEvent<HTMLFormElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | undefined
+  ) => void
 ] => {
   const [values, setValues] = useState<TFormValues>(options.initialValues);
   const [errors, setErrors] = useState<TFormErrors | undefined>();
@@ -50,8 +55,13 @@ export const useForm = ({
     }
   };
 
-  const handleSubmit = () => {
-    // event.preventDefault();
+  const handleSubmit = (
+    event:
+      | React.FormEvent<HTMLFormElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | undefined
+  ) => {
+    event?.preventDefault();
     const newErrors = validateForm();
     if (!newErrors) {
       onSubmit(values);

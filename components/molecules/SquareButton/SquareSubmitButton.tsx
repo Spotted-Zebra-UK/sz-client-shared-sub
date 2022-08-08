@@ -3,7 +3,9 @@ import { FC } from 'react';
 import { TColor } from '../../../interfaces/colors';
 
 export interface ISquareButton {
-  onClick?: () => void;
+  onClick?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined
+  ) => void;
   id?: string;
   className?: string;
   color?: TColor;
