@@ -1,7 +1,11 @@
 import './Gauge.scss';
 import 'react-circular-progressbar/dist/styles.css';
 import React, { FC } from 'react';
-import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
+import {
+  buildStyles,
+  CircularProgressbar,
+  CircularProgressbarWithChildren,
+} from 'react-circular-progressbar';
 
 interface IGauge {
   score?: number;
@@ -9,6 +13,7 @@ interface IGauge {
   pathColor?: string;
   showGradientPath?: boolean;
   className?: string;
+  childCircularComponent?: JSX.Element;
 }
 
 const Gauge: FC<IGauge> = ({
@@ -17,6 +22,7 @@ const Gauge: FC<IGauge> = ({
   pathColor,
   showGradientPath = true,
   className,
+  childCircularComponent,
 }) => {
   const styles = buildStyles({
     rotation: 1 / 2 + 1 / 8,
@@ -42,13 +48,26 @@ const Gauge: FC<IGauge> = ({
           </defs>
         </svg>
       ) : null}
-      <CircularProgressbar
-        value={score || 0}
-        text={`${grade}`}
-        circleRatio={0.75}
-        strokeWidth={4}
-        styles={styles}
-      />
+      {childCircularComponent ? (
+        <CircularProgressbarWithChildren
+          value={score || 0}
+          circleRatio={0.75}
+          strokeWidth={4}
+          styles={styles}
+        >
+          {childCircularComponent}
+        </CircularProgressbarWithChildren>
+      ) : (
+        <CircularProgressbar
+          value={score || 0}
+          text={`${grade}`}
+          circleRatio={0.75}
+          strokeWidth={4}
+          styles={styles}
+        >
+          {childCircularComponent}
+        </CircularProgressbar>
+      )}
     </div>
   );
 };

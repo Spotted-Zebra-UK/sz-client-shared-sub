@@ -13,10 +13,13 @@ const PageContainer: FC<IPageContainer> = ({
   footer,
   className,
 }) => {
+  const Header = () => <div>{header}</div>;
   return (
     <div className={`PageContainer${className ? ` ${className}` : ''}`}>
       {header ? (
-        <header className="PageContainer__Header">{header}</header>
+        <div className="PageContainer__Header">
+          <Header />
+        </div>
       ) : null}
       <div className="PageContainer__Content">{children}</div>
       {footer ? (
