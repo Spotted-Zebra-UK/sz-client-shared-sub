@@ -1,0 +1,8 @@
+fragment UserRole on UserRole {
+  id
+  userId
+  companyRole {
+    ...CompanyRole
+  }
+  externalId
+}

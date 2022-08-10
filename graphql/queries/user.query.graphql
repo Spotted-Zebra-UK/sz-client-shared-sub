@@ -1,0 +1,65 @@
+query User(
+  $firstName: String
+  $lastName: String
+  $email: String
+  $id: Int
+  $subId: String
+) {
+  User(
+    firstName: $firstName
+    lastName: $lastName
+    email: $email
+    id: $id
+    subId: $subId
+  ) {
+    ...User
+  }
+}
+
+query Users(
+  $firstName: String
+  $lastName: String
+  $email: String
+  $subIds: [String!]
+  $ids: [Int!]
+) {
+  Users(
+    firstName: $firstName
+    lastName: $lastName
+    email: $email
+    subIds: $subIds
+    ids: $ids
+  ) {
+    ...User
+  }
+}
+
+query UserFreeTextSearchPaginate($freetext: String!, $take: Int, $skip: Int) {
+  Users: UserFreeTextSearchPaginate(
+    freetext: $freetext
+    skip: $skip
+    take: $take
+  ) {
+    data {
+      id
+      subId
+      firstName
+      lastName
+      email
+    }
+    pageInfo {
+      currentPage
+      itemsOnPage
+      itemsTotal
+      pageTotal
+      skip
+      take
+    }
+  }
+}
+
+query me {
+  me {
+    ...User
+  }
+}

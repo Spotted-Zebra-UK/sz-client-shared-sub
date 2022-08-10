@@ -1,0 +1,14 @@
+fragment User on User {
+  id
+  subId
+  firstName
+  lastName
+  email
+  avatarUrl
+  externalId
+  twoFactorEnabled
+  language
+  roles {
+    ...UserRole
+  }
+}

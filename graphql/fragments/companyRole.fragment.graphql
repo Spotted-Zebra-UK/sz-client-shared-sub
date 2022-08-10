@@ -1,0 +1,8 @@
+fragment CompanyRole on CompanyRole {
+  companyId
+  twoFactorEnabled
+  role {
+    ...Role
+  }
+  id
+}
