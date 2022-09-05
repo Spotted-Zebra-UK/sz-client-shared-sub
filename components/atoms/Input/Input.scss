@@ -3,7 +3,7 @@
 .Input {
   border: 0;
   border-bottom: 2px solid $black;
-  font-size: $p1-font-size;
+  font-size: $p2-font-size;
   height: 36px;
   line-height: $medium-line-height;
   box-sizing: border-box;
@@ -20,7 +20,7 @@
   }
 
   &::placeholder {
-    font-size: $p1-font-size;
+    font-size: $p2-font-size;
     line-height: $medium-line-height;
     color: rgba($black, 0.56);
   }
