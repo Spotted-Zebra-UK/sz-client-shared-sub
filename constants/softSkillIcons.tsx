@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/indent */
 import { FunctionComponent, SVGProps } from 'react';
 import { SoftSkillType } from '../enums/successProfile.enum';
+import { ReactComponent as DiamondIcon } from '../icons/Diamond.svg';
 import { ReactComponent as SoftSkillDifferentiatorIcon } from '../icons/Hot.svg';
 import { ReactComponent as SoftSkillCoreIcon } from '../icons/Puzzle.svg';
 import { ReactComponent as AdeptsToChangeIcon } from '../icons/softSkills/AdaptsToChange.svg';
@@ -37,6 +38,7 @@ import { ReactComponent as WeArePassionateIcon } from '../icons/softSkills/WeAre
 import { ReactComponent as WeAreSupportiveAndCaringIcon } from '../icons/softSkills/WeAreSupportiveAndCaring.svg';
 import { ReactComponent as WeHaveFunIcon } from '../icons/softSkills/WeHaveFun.svg';
 import { ReactComponent as WeWinTogetherIcon } from '../icons/softSkills/WeWinTogether.svg';
+import { ReactComponent as SpeedometerIcon } from '../icons/Speedometer.svg';
 import { ReactComponent as SoftSkillDiversityIcon } from '../icons/Star.svg';
 
 export const SoftSkillIcons: {
@@ -103,6 +105,26 @@ export const SoftSkillIcons: {
   117: ProducesGreatWorkIcon, // Delivers great client outcomes
   118: InfluencesOthersIcon,
   119: ChangeAgilityIcon,
+  189: DiamondIcon, // We care
+  190: DiamondIcon, // We love what we do
+  191: DiamondIcon, // We are innovative and fast moving
+  192: DiamondIcon, // We make every pound count
+  193: DiamondIcon, // We do what we say
+  198: DiamondIcon, // We take ownership
+  195: SpeedometerIcon, // Brand and guest obsession
+  196: SpeedometerIcon, // Entrepreneurial spirit
+  202: SpeedometerIcon, // Executional brilliance
+  197: SpeedometerIcon, // Financial savvy
+  199: SpeedometerIcon, // Change agility
+  200: SpeedometerIcon, // Team obsession
+  201: SpeedometerIcon, // Credible expertise
+  157: SpeedometerIcon, // People Agility
+  158: SpeedometerIcon, // Mental Agility
+  159: SpeedometerIcon, // Change Agility
+  161: SpeedometerIcon, // Results Agility
+  162: SpeedometerIcon, // Self-awareness
+  163: SpeedometerIcon, // Communication
+  164: SpeedometerIcon, // Motivation
 };
 
 const SSDefaultIcon = AdeptsToChangeIcon;
