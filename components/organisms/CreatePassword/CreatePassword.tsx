@@ -24,7 +24,7 @@ const CreatePassword: FC<ICreatePassword> = ({
         <Logo className="CreatePassword__Top__Logo" />
         <div className="CreatePassword__Top__TitleWrapper">
           <BubblesBackground className="CreatePassword__Top__Title">
-            <p className="CreatePassword__Top__Title__Row">Create</p>
+            <p className="CreatePassword__Top__Title__Row">Reset</p>
             <p className="CreatePassword__Top__Title__Row">password</p>
           </BubblesBackground>
           {notification ? <Notification notification={notification} /> : null}
