@@ -84,7 +84,11 @@ const SignUp: FC<ISignUp> = ({
     password: string,
     isPrivacyPolicyChecked: boolean
   ) => {
-    const [firstName, lastName] = fullName.split(' ', 2);
+    // trim prevent wrong separation on multiple spaces
+    const [firstName, lastName] = fullName
+      .replace(/\s+/g, ' ')
+      .trim()
+      .split(' ', 2);
     registerAccount({
       variables: {
         firstName,
