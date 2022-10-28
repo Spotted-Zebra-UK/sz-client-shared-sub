@@ -1,5 +1,6 @@
 query GetTestCards($stageCandidateId: Int!) {
   GetTestCards(stageCandidateId: $stageCandidateId) {
+    hasPractice
     projectId
     projectName
     stageId
