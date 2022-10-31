@@ -1,6 +1,5 @@
 query GetTestCards($stageCandidateId: Int!) {
   GetTestCards(stageCandidateId: $stageCandidateId) {
-    hasPractice
     projectId
     projectName
     stageId
@@ -28,6 +27,7 @@ query GetTestCards($stageCandidateId: Int!) {
       stageId
     }
     cards {
+      hasPractice
       testId
       testCandidateId
       testType
