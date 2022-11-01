@@ -1,6 +1,8 @@
 fragment SmStageCandidateModel on SmStageCandidateModel {
   id
   companyId
+  doneFor
+  doneBy
   lastDateOfCandidateAction
   stage {
     id
