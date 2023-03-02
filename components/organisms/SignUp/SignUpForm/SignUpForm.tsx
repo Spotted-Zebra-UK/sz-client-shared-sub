@@ -1,6 +1,6 @@
 import './SignUpForm.scss';
-import _ from 'lodash';
 import React, { FC, useState } from 'react';
+import { capitalize } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import FormField from '../../../../components/atoms/FormField/FormField';
 import Input from '../../../../components/atoms/Input/Input';
@@ -10,6 +10,7 @@ import { passwordValidationRegex } from '../../../../constants/validation';
 import validate from '../../../../helpers/validate';
 import { TFormFieldValue } from '../../../../interfaces/form';
 import PrivacyPolicyCheckboxField from './PrivacyPolicyCheckboxField/PrivacyPolicyCheckboxField';
+import { formatFullName } from '../../../../helpers/fullName';
 
 interface ISignUpFormValues {
   fullName: string;
@@ -54,7 +55,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
             'authentication.signUp.firstNameAndLastNameMustBeProvided'
           )}`,
           tokenizer: (value: string) => {
-            return value.split(/\s+/g);
+            return formatFullName(value).split(/\s+/g);
           },
         },
       },
@@ -93,7 +94,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
       setErrors(newErrors);
     } else {
       props.onSignUp(
-        values.fullName,
+        formatFullName(values.fullName),
         values.email,
         values.password,
         values.isPrivacyPolicyChecked
@@ -122,13 +123,13 @@ const SignUpForm: FC<ISignUpForm> = props => {
         <FormField
           error={errors && errors.email && errors.email.join(' ')}
           fieldName="email"
-          label={_.capitalize(t('common.email'))}
+          label={capitalize(t('common.email'))}
           isLabelVisible={!!values.email}
         >
           <Input
             name="email"
             onChange={handleChange}
-            placeholder={_.capitalize(t('common.email'))}
+            placeholder={capitalize(t('common.email'))}
             value={values.email}
             isDisabled={!!props.email}
           />
@@ -142,7 +143,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
           <PasswordInput
             name="password"
             onChange={handleChange}
-            placeholder={_.capitalize(t('common.password'))}
+            placeholder={capitalize(t('common.password'))}
             value={values.password}
           />
         </FormField>
