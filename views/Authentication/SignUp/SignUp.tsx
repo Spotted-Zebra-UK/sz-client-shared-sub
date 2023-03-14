@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { getLanguageFromShortName } from '../../../../../constants/languages';
@@ -23,9 +23,9 @@ const SignUp: FC<ISignUp> = ({
   authRedirectUrl,
   directInvitationToken,
   signUpNotification,
-  addAuthNotification,
   companyId,
   projectId,
+  addAuthNotification,
 }) => {
   const { i18n, t } = useTranslation();
   const history = useHistory();
@@ -78,17 +78,13 @@ const SignUp: FC<ISignUp> = ({
     },
   });
 
-  const handleSignUp = (
-    fullName: string,
-    email: string,
-    password: string,
-    isPrivacyPolicyChecked: boolean
-  ) => {
+  const handleSignUp = (fullName: string, email: string, password: string) => {
     // trim prevent wrong separation on multiple spaces
     const [firstName, lastName] = fullName
       .replace(/\s+/g, ' ')
       .trim()
       .split(' ', 2);
+
     registerAccount({
       variables: {
         firstName,
