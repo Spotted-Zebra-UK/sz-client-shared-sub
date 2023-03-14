@@ -23,9 +23,9 @@ const SignUp: FC<ISignUp> = ({
   authRedirectUrl,
   directInvitationToken,
   signUpNotification,
-  addAuthNotification,
   companyId,
   projectId,
+  addAuthNotification,
 }) => {
   const { i18n, t } = useTranslation();
   const history = useHistory();
@@ -78,13 +78,13 @@ const SignUp: FC<ISignUp> = ({
     },
   });
 
-  const handleSignUp = (
-    fullName: string,
-    email: string,
-    password: string,
-    isPrivacyPolicyChecked: boolean
-  ) => {
-    const [firstName, lastName] = fullName.split(' ', 2);
+  const handleSignUp = (fullName: string, email: string, password: string) => {
+    // trim prevent wrong separation on multiple spaces
+    const [firstName, lastName] = fullName
+      .replace(/\s+/g, ' ')
+      .trim()
+      .split(' ', 2);
+
     registerAccount({
       variables: {
         firstName,
