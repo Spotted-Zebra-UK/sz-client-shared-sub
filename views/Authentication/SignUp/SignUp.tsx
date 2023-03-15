@@ -12,6 +12,7 @@ import Error from '../../../enums/error';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
 import { ISignUpWrapper } from './SignUpWrapper/SignUpWrapper';
+import { formatFullName } from '../../../helpers/fullName';
 
 interface ISignUp extends ISignUpWrapper {
   companyId?: number;
@@ -80,10 +81,7 @@ const SignUp: FC<ISignUp> = ({
 
   const handleSignUp = (fullName: string, email: string, password: string) => {
     // trim prevent wrong separation on multiple spaces
-    const [firstName, lastName] = fullName
-      .replace(/\s+/g, ' ')
-      .trim()
-      .split(' ', 2);
+    const [firstName, lastName] = formatFullName(fullName).split(' ', 2);
 
     registerAccount({
       variables: {
