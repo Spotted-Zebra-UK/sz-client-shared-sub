@@ -1,3 +1,3 @@
 export const formatFullName = (fullName: string) => {
-  return fullName.replaceAll('  ', ' ').trim();
+  return fullName.replace(/\s+/g, ' ').trim();
 };
