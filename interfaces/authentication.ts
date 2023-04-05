@@ -80,7 +80,7 @@ export interface IMfaAccessTokenResponse {
 
 export interface IMfaAuthenticateInput {
   mfaAccessToken: string;
-  mfaCode: number;
+  mfaCode: string;
 }
 
 export interface IMfaAuthenticateResponse {

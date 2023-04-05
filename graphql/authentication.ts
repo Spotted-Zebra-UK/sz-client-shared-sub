@@ -82,7 +82,7 @@ export const MFA_ACCESS_TOKEN = gql`
 `;
 
 export const MFA_AUTHENTICATE = gql`
-  mutation MfaAuthenticate($mfaAccessToken: String!, $mfaCode: Float!) {
+  mutation MfaAuthenticate($mfaAccessToken: String!, $mfaCode: String!) {
     mfaAuthenticate(mfaAccessToken: $mfaAccessToken, mfaCode: $mfaCode) {
       accessToken
       refreshToken

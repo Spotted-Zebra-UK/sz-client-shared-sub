@@ -10,7 +10,7 @@ import Button from '../../atoms/Button/Button';
 
 interface ITwoFactorAuthentication {
   loginNotification?: TNotification | null;
-  onSubmit: (mfaCode: number) => void;
+  onSubmit: (mfaCode: string) => void;
   requestMfaCode: () => void;
 }
 
