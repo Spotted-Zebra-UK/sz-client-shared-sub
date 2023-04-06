@@ -67,7 +67,7 @@ mutation MfaAccessToken($email: String!, $password: String!) {
   }
 }
 
-mutation MfaAuthenticate($mfaAccessToken: String!, $mfaCode: Float!) {
+mutation MfaAuthenticate($mfaAccessToken: String!, $mfaCode: String!) {
   mfaAuthenticate(mfaAccessToken: $mfaAccessToken, mfaCode: $mfaCode) {
     accessToken
     refreshToken

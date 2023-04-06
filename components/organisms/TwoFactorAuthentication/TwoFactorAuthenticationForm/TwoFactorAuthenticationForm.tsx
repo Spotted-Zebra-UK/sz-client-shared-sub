@@ -6,11 +6,11 @@ import Input from '../../../atoms/Input/Input';
 import SquareButton from '../../../molecules/SquareButton/SquareButton';
 
 interface ITwoFactorAuthenticationFormValues {
-  mfaCode: number;
+  mfaCode: string;
 }
 
 interface ITwoFactorAuthenticationForm {
-  onSubmit: (mfaCode: number) => void;
+  onSubmit: (mfaCode: string) => void;
 }
 
 const TwoFactorAuthenticationForm: FunctionComponent<ITwoFactorAuthenticationForm> = props => {
@@ -19,7 +19,7 @@ const TwoFactorAuthenticationForm: FunctionComponent<ITwoFactorAuthenticationFor
   const [error, setError] = useState<string>('');
 
   const handleChange = (value: string) => {
-    setValues({ mfaCode: +value });
+    setValues({ mfaCode: value });
     setError('');
   };
 
