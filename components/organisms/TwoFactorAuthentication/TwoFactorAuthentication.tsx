@@ -10,7 +10,7 @@ import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm/TwoFactor
 
 interface ITwoFactorAuthentication {
   loginNotification?: TNotification | null;
-  onSubmit: (mfaCode: number) => void;
+  onSubmit: (mfaCode: string) => void;
   requestMfaCode: () => void;
 }
 
