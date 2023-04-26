@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Bubble should render correctly by default 1`] = `
-<div
-  className="Bubble"
-/>
-`;
