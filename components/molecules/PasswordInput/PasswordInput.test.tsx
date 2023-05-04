@@ -1,6 +1,4 @@
 import { mount, shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
-import React from 'react';
 import { ReactComponent as EyeIcon } from '../../../icons/Eye.svg';
 import { ReactComponent as EyeSolidIcon } from '../../../icons/EyeSolid.svg';
 import { TTextFromFieldValue } from '../../../interfaces/form';

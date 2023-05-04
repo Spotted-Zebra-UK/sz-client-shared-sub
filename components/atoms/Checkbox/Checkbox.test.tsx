@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import React from 'react';
 import { TCheckboxFormFieldValue } from '../../../interfaces/form';
 import Checkbox from './Checkbox';
 

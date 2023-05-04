@@ -1,7 +1,6 @@
 /* eslint-disable global-require */
 import { mount } from 'enzyme';
 import { GraphQLError } from 'graphql';
-import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter, Redirect } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';

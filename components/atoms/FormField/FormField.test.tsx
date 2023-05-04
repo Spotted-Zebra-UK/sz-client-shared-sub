@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import React from 'react';
 import { TTextFromFieldValue } from '../../../interfaces/form';
 import Input from '../Input/Input';
 import FormField from './FormField';

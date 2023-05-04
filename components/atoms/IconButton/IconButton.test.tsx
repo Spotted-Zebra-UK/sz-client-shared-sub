@@ -1,5 +1,4 @@
 import { mount } from 'enzyme';
-import React from 'react';
 import { ReactComponent as Icon } from '../../../icons/Eye.svg';
 import IconButton from './IconButton';
 

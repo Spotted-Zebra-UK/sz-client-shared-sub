@@ -1,7 +1,6 @@
 /* eslint-disable global-require */
 import { mount } from 'enzyme';
 import { GraphQLError } from 'graphql';
-import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
@@ -13,10 +12,7 @@ import {
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
-import {
-  AUTHENTICATE_MUTATION,
-  REGISTER_ACCOUNT,
-} from '../../../graphql/authentication';
+import { REGISTER_ACCOUNT } from '../../../graphql/authentication';
 import { IRegisterAccountResponse } from '../../../interfaces/authentication';
 import { TNotification } from '../../../interfaces/notification';
 import { AuthViews } from '../Authentication.constants';

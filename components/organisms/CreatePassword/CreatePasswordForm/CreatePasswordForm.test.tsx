@@ -1,6 +1,4 @@
 import { shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
-import React from 'react';
 import FormField from '../../../atoms/FormField/FormField';
 import PasswordInput from '../../../molecules/PasswordInput/PasswordInput';
 import CreatePasswordForm from './CreatePasswordForm';

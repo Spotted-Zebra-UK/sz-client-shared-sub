@@ -1,17 +1,12 @@
 /* eslint-disable global-require */
 import { mount } from 'enzyme';
 import { GraphQLError } from 'graphql';
-import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import Error from '../../../enums/error';
-import {
-  REQUEST_PASSWORD_RECOVERY_MUTATION,
-  UPDATE_IDENTITY_PASSWORD_MUTATION,
-} from '../../../graphql/authentication';
+import { REQUEST_PASSWORD_RECOVERY_MUTATION } from '../../../graphql/authentication';
 import { TNotification } from '../../../interfaces/notification';
-import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
 import RestorePassword from './RestorePassword';
 

@@ -1,6 +1,5 @@
 import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import React from 'react';
 import { ReactComponent as CheckboxCheckedIcon } from '../../../icons/CheckboxChecked.svg';
 import { ReactComponent as CheckboxEmptyIcon } from '../../../icons/CheckboxEmpty.svg';
 import { TCheckboxFormFieldValue } from '../../../interfaces/form';
