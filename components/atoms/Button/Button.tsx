@@ -13,6 +13,7 @@ const Button: FunctionComponent<IButton> = ({
   id,
   className,
   isDisabled,
+  ...rest
 }) => {
   const handleClick = () => {
     if (onClick) {
@@ -31,6 +32,7 @@ const Button: FunctionComponent<IButton> = ({
       onClick={handleClick}
       id={id}
       disabled={isDisabled}
+      {...rest}
     >
       {children}
     </button>
