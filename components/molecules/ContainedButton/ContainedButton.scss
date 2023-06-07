@@ -11,6 +11,9 @@
   background-color: $green;
   height: 56px;
   width: 251px;
+  &:focus {
+    outline: 2px solid black;
+  }
 }
 
 .ContainedButton:active {
