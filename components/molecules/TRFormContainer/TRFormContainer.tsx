@@ -5,6 +5,7 @@ import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactTooltip from 'react-tooltip';
 import { MutationResult } from '@apollo/client';
+import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
 import FormBuilderField from '../../../components/molecules/FormBuilderField/FormBuilderField';
 import { useForm } from '../../../hooks/form';
 import { ReactComponent as HintIcon } from '../../../icons/ic_info.svg';
@@ -14,8 +15,6 @@ import {
   TalentReviewFormField,
   TRespondantFormField,
 } from '../../../interfaces/TalentReviewForm';
-import SquareButton from '../SquareButton/SquareButton';
-import SquareSubmitButton from '../SquareButton/SquareSubmitButton';
 
 interface ITRFormContainer {
   fieldLayout: TalentReviewFormField;
@@ -30,9 +29,7 @@ interface ITRFormContainer {
   stageCandidateId?: number;
   onCloseHandler: () => void;
   handleSkipResponse?: () => void;
-  saveRespondantFormResponse?: MutationResult<
-    IRespondantFormUpdateMutationResponse
-  >;
+  saveRespondantFormResponse?: MutationResult<IRespondantFormUpdateMutationResponse>;
 }
 
 const TRFormContainer: FC<ITRFormContainer> = ({
@@ -263,18 +260,19 @@ const TRFormContainer: FC<ITRFormContainer> = ({
       </div>
       <div className="actions">
         {isReadOnly ? (
-          <SquareButton color="White" onClick={onCloseHandler}>
+          <Button variant="secondary" onClick={onCloseHandler}>
             Close
-          </SquareButton>
+          </Button>
         ) : (
-          <SquareSubmitButton
-            isDisabled={saveRespondantFormResponse?.loading}
+          <Button
+            disabled={saveRespondantFormResponse?.loading}
             onClick={handleSubmit}
+            type="submit"
           >
             {saveRespondantFormResponse?.loading
               ? 'Submitting...'
               : _.capitalize(t('common.next'))}
-          </SquareSubmitButton>
+          </Button>
         )}
       </div>
     </form>

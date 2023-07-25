@@ -1,10 +1,10 @@
 import './LoginForm.scss';
 import React, { FunctionComponent, useState } from 'react';
+import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
 import validate from '../../../../helpers/validate';
 import FormField from '../../../atoms/FormField/FormField';
 import Input from '../../../atoms/Input/Input';
 import PasswordInput from '../../../molecules/PasswordInput/PasswordInput';
-import SquareButton from '../../../molecules/SquareButton/SquareButton';
 
 interface ILoginFormValues {
   email: string;
@@ -83,7 +83,9 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
           />
         </FormField>
       </div>
-      <SquareButton type="submit">Sign in</SquareButton>
+      <Button type="submit" className="LoginForm__SubmitButton">
+        Sign in
+      </Button>
     </form>
   );
 };

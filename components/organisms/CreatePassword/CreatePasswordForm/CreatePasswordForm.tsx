@@ -1,11 +1,11 @@
 import './CreatePasswordForm.scss';
 import React, { FC, useState } from 'react';
+import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
 import { passwordValidationRegex } from '../../../../constants/validation';
 import validate from '../../../../helpers/validate';
 import { TFormFieldValue } from '../../../../interfaces/form';
 import FormField from '../../../atoms/FormField/FormField';
 import PasswordInput from '../../../molecules/PasswordInput/PasswordInput';
-import SquareButton from '../../../molecules/SquareButton/SquareButton';
 
 interface ICreatePasswordFormValues {
   password: string;
@@ -72,7 +72,9 @@ const CreatePasswordForm: FC<ICreatePasswordFormForm> = props => {
           />
         </FormField>
       </div>
-      <SquareButton type="submit">Confirm</SquareButton>
+      <Button type="submit" className="CreatePasswordForm__SubmitButton">
+        Confirm
+      </Button>
     </form>
   );
 };

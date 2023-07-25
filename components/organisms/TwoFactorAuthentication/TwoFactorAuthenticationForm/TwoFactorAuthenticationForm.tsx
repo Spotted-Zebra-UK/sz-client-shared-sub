@@ -1,9 +1,9 @@
 import './TwoFactorAuthenticationForm.scss';
 import React, { FunctionComponent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
 import FormField from '../../../atoms/FormField/FormField';
 import Input from '../../../atoms/Input/Input';
-import SquareButton from '../../../molecules/SquareButton/SquareButton';
 
 interface ITwoFactorAuthenticationFormValues {
   mfaCode: string;
@@ -50,9 +50,12 @@ const TwoFactorAuthenticationForm: FunctionComponent<ITwoFactorAuthenticationFor
             />
           </FormField>
         </div>
-        <SquareButton type="submit">
+        <Button
+          type="submit"
+          className="TwoFactorAuthenticationForm__SubmitButton"
+        >
           {t('authentication.twoFactorAuthentication.submit')}
-        </SquareButton>
+        </Button>
       </form>
     );
   };

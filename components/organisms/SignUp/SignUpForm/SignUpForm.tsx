@@ -1,16 +1,16 @@
 import './SignUpForm.scss';
-import React, { FC, useState } from 'react';
 import { capitalize } from 'lodash';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
 import FormField from '../../../../components/atoms/FormField/FormField';
 import Input from '../../../../components/atoms/Input/Input';
 import PasswordInput from '../../../../components/molecules/PasswordInput/PasswordInput';
-import SquareButton from '../../../../components/molecules/SquareButton/SquareButton';
 import { passwordValidationRegex } from '../../../../constants/validation';
+import { formatFullName } from '../../../../helpers/fullName';
 import validate from '../../../../helpers/validate';
 import { TFormFieldValue } from '../../../../interfaces/form';
 import PrivacyPolicyCheckboxField from './PrivacyPolicyCheckboxField/PrivacyPolicyCheckboxField';
-import { formatFullName } from '../../../../helpers/fullName';
 
 interface ISignUpFormValues {
   fullName: string;
@@ -156,9 +156,9 @@ const SignUpForm: FC<ISignUpForm> = props => {
           id="SignUpIsPrivacyPolicyChecked"
           error={errors?.isPrivacyPolicyChecked?.join(' ')}
         />
-        <SquareButton type="submit">
+        <Button type="submit" className="SignUpForm__SubmitButton">
           {t('authentication.signUp.createAccount')}
-        </SquareButton>
+        </Button>
       </div>
     </form>
   );

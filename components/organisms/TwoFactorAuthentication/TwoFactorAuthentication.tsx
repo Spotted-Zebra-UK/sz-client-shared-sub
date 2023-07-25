@@ -1,10 +1,10 @@
 import './TwoFactorAuthentication.scss';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
 import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
 import { TNotification } from '../../../interfaces/notification';
 import BubblesBackground from '../../atoms/BubblesBackground/BubblesBackground';
-import Button from '../../atoms/Button/Button';
 import Notification from '../../atoms/Notification/Notification';
 import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm/TwoFactorAuthenticationForm';
 
