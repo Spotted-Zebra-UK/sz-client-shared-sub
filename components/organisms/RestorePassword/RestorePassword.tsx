@@ -1,6 +1,6 @@
 import './RestorePassword.scss';
 import { FC } from 'react';
-import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
+import { NavLink } from '@spotted-zebra-uk/sz-ui-shared.ui.navigational-link';
 import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
 import { TNotification } from '../../../interfaces/notification';
 import BubblesBackground from '../../atoms/BubblesBackground/BubblesBackground';
@@ -31,7 +31,10 @@ const RestorePassword: FC<IRestorePassword> = ({
       </div>
       <RestorePasswordForm onSubmit={onRestorePassword} />
       <div className="RestorePassword__RedirectToLogin">
-        Already have an account? <Link to={loginRedirectUrl}>Sign in</Link>
+        Already have an account?{' '}
+        <NavLink to={loginRedirectUrl} className="RestorePassword__Link">
+          Sign in
+        </NavLink>
       </div>
     </div>
   );

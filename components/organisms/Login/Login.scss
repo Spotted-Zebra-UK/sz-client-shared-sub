@@ -1,4 +1,5 @@
 @import '../../../variables';
+@import '@spotted-zebra-uk/sz-theme.theme/index.module.scss';
 
 .Login {
   min-width: 300px;
@@ -59,6 +60,15 @@
   &__RedirectToRestorePassword {
     margin-bottom: 20px;
     text-align: center;
+    @include desktop-body-font;
+  }
+
+  .Login__Link {
+    padding: 0;
+
+    div {
+      @include desktop-body-font;
+    }
   }
 }
 
