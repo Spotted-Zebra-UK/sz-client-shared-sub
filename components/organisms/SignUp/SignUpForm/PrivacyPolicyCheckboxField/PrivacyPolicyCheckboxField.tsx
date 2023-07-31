@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
 import CheckboxFormField from '../../../../../components/molecules/CheckboxFormField/CheckboxFormField';
 
 interface IPrivacyPolicyCheckboxField {
@@ -16,14 +17,12 @@ const PrivacyPolicyCheckboxField: FC<IPrivacyPolicyCheckboxField> = props => {
     return (
       <span className="SignUpForm__PrivacyPolicyCheckboxLabel">
         {t('authentication.signUp.iHaveReadThe')}{' '}
-        <a
-          className="SignUpForm__PrivacyPolicyCheckboxLabel__Link"
-          href="https://www.spottedzebra.co.uk/privacy/privacy"
+        <Link
+          to="https://www.spottedzebra.co.uk/privacy/privacy"
           target="_blank"
-          rel="noopener noreferrer"
         >
           {t('authentication.signUp.privacyNotice')}
-        </a>
+        </Link>
         {t('authentication.signUp.iAmAnAdult')}
       </span>
     );

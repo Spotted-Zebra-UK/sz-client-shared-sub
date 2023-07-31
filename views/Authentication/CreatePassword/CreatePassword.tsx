@@ -1,5 +1,5 @@
 import './CreatePassword.scss';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useUpdateIdentityPasswordMutation } from '../../../../../generated/graphql';
