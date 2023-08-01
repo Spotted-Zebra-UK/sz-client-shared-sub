@@ -1,6 +1,6 @@
 import './Login.scss';
 import { FC } from 'react';
-import { NavLink } from '@spotted-zebra-uk/sz-ui-shared.ui.navigational-link';
+import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
 import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
 import { TNotification } from '../../../interfaces/notification';
 import BubblesBackground from '../../atoms/BubblesBackground/BubblesBackground';
@@ -37,9 +37,9 @@ const Login: FC<ILogin> = ({
       {restorePasswordUrl ? (
         <div className="Login__RedirectToRestorePassword">
           Forgot password?{' '}
-          <NavLink className="Login__Link" to={restorePasswordUrl}>
+          <Link className="Login__Link" to={restorePasswordUrl} target="_self">
             Reset here
-          </NavLink>
+          </Link>
         </div>
       ) : null}
     </div>

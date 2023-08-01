@@ -1,6 +1,6 @@
 import './CreatePassword.scss';
 import { FC } from 'react';
-import { NavLink } from '@spotted-zebra-uk/sz-ui-shared.ui.navigational-link';
+import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
 import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
 import { TNotification } from '../../../interfaces/notification';
 import BubblesBackground from '../../atoms/BubblesBackground/BubblesBackground';
@@ -33,9 +33,13 @@ const CreatePassword: FC<ICreatePassword> = ({
       <CreatePasswordForm onSubmit={onCreatePassword} />
       <div className="CreatePassword__RedirectToLogin">
         Already have an account?{' '}
-        <NavLink className="CreatePassword__Link" to={loginRedirectUrl}>
+        <Link
+          className="CreatePassword__Link"
+          to={loginRedirectUrl}
+          target="_self"
+        >
           Sign in
-        </NavLink>
+        </Link>
       </div>
     </div>
   );

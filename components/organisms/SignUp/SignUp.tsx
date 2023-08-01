@@ -2,7 +2,7 @@ import './SignUp.scss';
 import _ from 'lodash';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from '@spotted-zebra-uk/sz-ui-shared.ui.navigational-link';
+import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
 import BubblesBackground from '../../../components/atoms/BubblesBackground/BubblesBackground';
 import Notification from '../../../components/atoms/Notification/Notification';
 import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
@@ -59,9 +59,9 @@ const SignUpPresentational: FC<ISignUp> = ({
       {loginRedirectUrl ? (
         <div className="SignUp__RedirectToLogin">
           {t('authentication.signUp.alreadyHaveAccount')}{' '}
-          <NavLink to={loginRedirectUrl} className="SignUp__Link">
+          <Link to={loginRedirectUrl} className="SignUp__Link" target="_self">
             {t('common.signIn')}
-          </NavLink>
+          </Link>
         </div>
       ) : null}
     </div>
