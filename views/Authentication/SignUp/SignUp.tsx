@@ -9,10 +9,10 @@ import {
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
+import { formatFullName } from '../../../helpers/fullName';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
 import { ISignUpWrapper } from './SignUpWrapper/SignUpWrapper';
-import { formatFullName } from '../../../helpers/fullName';
 
 interface ISignUp extends ISignUpWrapper {
   companyId?: number;
@@ -51,30 +51,36 @@ const SignUp: FC<ISignUp> = ({
     },
     onError: ({ graphQLErrors }) => {
       graphQLErrors.forEach(({ extensions }) => {
-        if (extensions) {
-          const { code } = extensions.exception.response;
-          /**
-           * If account with provided email already exists, app should be redirected to login view and notification should be visible.
-           */
-          if (code === Error.EXISTING_ACCOUNT) {
-            addAuthNotification(AuthViews.LOGIN, {
-              icon: 'Idea',
-              color: 'Purple',
-              message: t(
-                'authentication.signUp.yourAccountHasAlreadyBeenCreated'
-              ),
-            });
-            history.push(authenticationRoutes.login);
-          }
-          if (code === Error.PASSWORD_TOO_WEAK) {
-            // TODO: Maybe move the message to be a standalone note on screen when trying to create/change a password
-            addAuthNotification(AuthViews.SIGN_UP, {
-              icon: 'Idea',
-              color: 'Purple',
-              message: t('common.yourPasswordMustHave'),
-            });
-          }
+        const code = extensions?.exception?.response?.code;
+        /**
+         * If account with provided email already exists, app should be redirected to login view and notification should be visible.
+         */
+        if (code === Error.EXISTING_ACCOUNT) {
+          addAuthNotification(AuthViews.LOGIN, {
+            icon: 'Idea',
+            color: 'Purple',
+            message: t(
+              'authentication.signUp.yourAccountHasAlreadyBeenCreated'
+            ),
+          });
+          return history.push(authenticationRoutes.login);
         }
+        if (code === Error.PASSWORD_TOO_WEAK) {
+          // TODO: Maybe move the message to be a standalone note on screen when trying to create/change a password
+          return addAuthNotification(AuthViews.SIGN_UP, {
+            icon: 'Idea',
+            color: 'Purple',
+            message: t('common.yourPasswordMustHave'),
+          });
+        }
+
+        return addAuthNotification(AuthViews.SIGN_UP, {
+          icon: 'Idea',
+          color: 'Purple',
+          message: t('authentication.signUp.badUserInputErrorMessage', {
+            email: 'support@spottedzebra.co.uk',
+          }),
+        });
       });
     },
   });
