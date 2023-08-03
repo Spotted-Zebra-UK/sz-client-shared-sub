@@ -32,11 +32,7 @@ const RestorePassword: FC<IRestorePassword> = ({
       <RestorePasswordForm onSubmit={onRestorePassword} />
       <div className="RestorePassword__RedirectToLogin">
         Already have an account?{' '}
-        <Link
-          to={loginRedirectUrl}
-          className="RestorePassword__Link"
-          target="_self"
-        >
+        <Link to={loginRedirectUrl} className="RestorePassword__Link">
           Sign in
         </Link>
       </div>

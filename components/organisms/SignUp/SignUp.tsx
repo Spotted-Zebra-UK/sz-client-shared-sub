@@ -59,7 +59,7 @@ const SignUpPresentational: FC<ISignUp> = ({
       {loginRedirectUrl ? (
         <div className="SignUp__RedirectToLogin">
           {t('authentication.signUp.alreadyHaveAccount')}{' '}
-          <Link to={loginRedirectUrl} className="SignUp__Link" target="_self">
+          <Link to={loginRedirectUrl} className="SignUp__Link">
             {t('common.signIn')}
           </Link>
         </div>
