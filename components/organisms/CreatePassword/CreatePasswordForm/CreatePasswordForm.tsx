@@ -1,11 +1,12 @@
 import './CreatePasswordForm.scss';
+import capitalize from 'lodash/capitalize';
+import isEmpty from 'lodash/isEmpty';
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
+import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-input-field';
 import { passwordValidationRegex } from '../../../../constants/validation';
 import validate from '../../../../helpers/validate';
-import { TFormFieldValue } from '../../../../interfaces/form';
-import FormField from '../../../atoms/FormField/FormField';
-import PasswordInput from '../../../molecules/PasswordInput/PasswordInput';
 
 interface ICreatePasswordFormValues {
   password: string;
@@ -20,6 +21,7 @@ interface ICreatePasswordFormForm {
 }
 
 const CreatePasswordForm: FC<ICreatePasswordFormForm> = props => {
+  const { t } = useTranslation();
   const [values, setValues] = useState<ICreatePasswordFormValues>({
     password: '',
   });
@@ -31,6 +33,7 @@ const CreatePasswordForm: FC<ICreatePasswordFormForm> = props => {
         format: {
           pattern: passwordValidationRegex,
           flags: 'i',
+          // TODO: Fix localization [EN-1930]
           message:
             '^Password must have at least 1 uppercase letter, 1 lowercase letter, 1 number or special character and be at least 8 characters long.',
         },
@@ -38,7 +41,7 @@ const CreatePasswordForm: FC<ICreatePasswordFormForm> = props => {
     });
   };
 
-  const handleChange = (value: TFormFieldValue, name: string) => {
+  const handleChange = (value: string, name: string) => {
     setValues(prevValues => ({ ...prevValues, [name]: value }));
     setErrors(prevErrors =>
       prevErrors ? { ...prevErrors, [name]: [] } : prevErrors
@@ -54,23 +57,21 @@ const CreatePasswordForm: FC<ICreatePasswordFormForm> = props => {
       props.onSubmit(values.password);
     }
   };
-
+  // TODO: Fix localization [EN-1930]
   return (
     <form className="CreatePasswordForm" onSubmit={handleSubmit}>
       <div className="CreatePasswordForm__Fields">
-        <FormField
-          error={errors && errors.password && errors.password.join(' ')}
-          fieldName="password"
-          label="Password"
-          isLabelVisible={!!values.password}
-        >
-          <PasswordInput
-            name="password"
-            onChange={handleChange}
-            placeholder="Password"
-            value={values.password}
-          />
-        </FormField>
+        <TextInputField
+          id="password"
+          label={t('authentication.signUp.createPassword')}
+          value={values.password}
+          placeholder={capitalize(t('common.password'))}
+          onChange={handleChange}
+          ariaLabel={t('authentication.signUp.createPassword')}
+          hasError={!isEmpty(errors?.password)}
+          bottomText={errors?.password?.join(' ')}
+          type="password"
+        />
       </div>
       <Button type="submit" className="CreatePasswordForm__SubmitButton">
         Confirm

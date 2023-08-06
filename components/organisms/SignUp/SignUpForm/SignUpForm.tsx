@@ -1,15 +1,13 @@
 import './SignUpForm.scss';
-import { capitalize } from 'lodash';
+import capitalize from 'lodash/capitalize';
+import isEmpty from 'lodash/isEmpty';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
-import FormField from '../../../../components/atoms/FormField/FormField';
-import Input from '../../../../components/atoms/Input/Input';
-import PasswordInput from '../../../../components/molecules/PasswordInput/PasswordInput';
+import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-input-field';
 import { passwordValidationRegex } from '../../../../constants/validation';
 import { formatFullName } from '../../../../helpers/fullName';
 import validate from '../../../../helpers/validate';
-import { TFormFieldValue } from '../../../../interfaces/form';
 import PrivacyPolicyCheckboxField from './PrivacyPolicyCheckboxField/PrivacyPolicyCheckboxField';
 
 interface ISignUpFormValues {
@@ -80,10 +78,20 @@ const SignUpForm: FC<ISignUpForm> = props => {
     });
   };
 
-  const handleChange = (value: TFormFieldValue, name: string) => {
+  const handleChange = (value: string, name: string) => {
     setValues(prevValues => ({ ...prevValues, [name]: value }));
     setErrors(prevErrors =>
       prevErrors ? { ...prevErrors, [name]: [] } : prevErrors
+    );
+  };
+
+  const handleChangePrivacyPolicyCheck = () => {
+    setValues(prevValues => ({
+      ...prevValues,
+      isPrivacyPolicyChecked: !prevValues.isPrivacyPolicyChecked,
+    }));
+    setErrors(prevErrors =>
+      prevErrors ? { ...prevErrors, isPrivacyPolicyChecked: [] } : prevErrors
     );
   };
 
@@ -106,52 +114,44 @@ const SignUpForm: FC<ISignUpForm> = props => {
     <form className="SignUpForm" onSubmit={handleSubmit}>
       <div className="SignUpForm__Fields">
         {!props.fullName ? (
-          <FormField
-            error={errors && errors.fullName && errors.fullName.join(' ')}
-            fieldName="fullName"
+          <TextInputField
+            id="fullName"
             label={t('authentication.signUp.fullName')}
-            isLabelVisible={!!values.fullName}
-          >
-            <Input
-              name="fullName"
-              onChange={handleChange}
-              placeholder={t('authentication.signUp.fullName')}
-              value={values.fullName}
-            />
-          </FormField>
+            value={values.fullName}
+            placeholder={t('authentication.signUp.fullName')}
+            onChange={handleChange}
+            ariaLabel={t('authentication.signUp.fullName')}
+            hasError={!isEmpty(errors?.fullName)}
+            bottomText={errors?.fullName?.join(' ')}
+          />
         ) : null}
-        <FormField
-          error={errors && errors.email && errors.email.join(' ')}
-          fieldName="email"
+        <TextInputField
+          id="email"
           label={capitalize(t('common.email'))}
-          isLabelVisible={!!values.email}
-        >
-          <Input
-            name="email"
-            onChange={handleChange}
-            placeholder={capitalize(t('common.email'))}
-            value={values.email}
-            isDisabled={!!props.email}
-          />
-        </FormField>
-        <FormField
-          error={errors && errors.password && errors.password.join(' ')}
-          fieldName="password"
+          value={values.email}
+          placeholder={capitalize(t('common.email'))}
+          onChange={handleChange}
+          ariaLabel={t('common.email')}
+          hasError={!isEmpty(errors?.email)}
+          bottomText={errors?.email?.join(' ')}
+          type="email"
+        />
+        <TextInputField
+          id="password"
           label={t('authentication.signUp.createPassword')}
-          isLabelVisible={!!values.password}
-        >
-          <PasswordInput
-            name="password"
-            onChange={handleChange}
-            placeholder={capitalize(t('common.password'))}
-            value={values.password}
-          />
-        </FormField>
+          value={values.password}
+          placeholder={capitalize(t('common.password'))}
+          onChange={handleChange}
+          ariaLabel={t('authentication.signUp.createPassword')}
+          hasError={!isEmpty(errors?.password)}
+          bottomText={errors?.password?.join(' ')}
+          type="password"
+        />
       </div>
       <div className="SignUpForm__Bottom">
         <PrivacyPolicyCheckboxField
           value={values.isPrivacyPolicyChecked}
-          onChange={handleChange}
+          onChange={handleChangePrivacyPolicyCheck}
           name="isPrivacyPolicyChecked"
           id="SignUpIsPrivacyPolicyChecked"
           error={errors?.isPrivacyPolicyChecked?.join(' ')}

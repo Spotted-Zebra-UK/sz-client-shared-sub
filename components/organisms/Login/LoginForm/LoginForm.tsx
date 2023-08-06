@@ -1,10 +1,11 @@
 import './LoginForm.scss';
+import capitalize from 'lodash/capitalize';
+import isEmpty from 'lodash/isEmpty';
 import React, { FunctionComponent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
+import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-input-field';
 import validate from '../../../../helpers/validate';
-import FormField from '../../../atoms/FormField/FormField';
-import Input from '../../../atoms/Input/Input';
-import PasswordInput from '../../../molecules/PasswordInput/PasswordInput';
 
 interface ILoginFormValues {
   email: string;
@@ -21,6 +22,7 @@ interface ILoginForm {
 }
 
 const LoginForm: FunctionComponent<ILoginForm> = props => {
+  const { t } = useTranslation();
   const [values, setValues] = useState<ILoginFormValues>({
     email: props.email || '',
     password: '',
@@ -31,6 +33,7 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
     return validate(values, {
       email: {
         email: {
+          // TODO: Fix localization [EN-1930]
           message: '^Not a valid email',
         },
       },
@@ -57,32 +60,28 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>
       <div className="LoginForm__Fields">
-        <FormField
-          error={errors && errors.email && errors.email.join(' ')}
-          fieldName="email"
-          label="Email"
-          isLabelVisible={!!values.email}
-        >
-          <Input
-            name="email"
-            onChange={handleChange}
-            placeholder="Email"
-            value={values.email}
-          />
-        </FormField>
-        <FormField
-          fieldName="password"
-          label="Password"
-          isLabelVisible={!!values.password}
-        >
-          <PasswordInput
-            name="password"
-            onChange={handleChange}
-            placeholder="Password"
-            value={values.password}
-          />
-        </FormField>
+        <TextInputField
+          id="email"
+          label={capitalize(t('common.email'))}
+          value={values.email}
+          placeholder={capitalize(t('common.email'))}
+          onChange={handleChange}
+          ariaLabel={t('common.email')}
+          hasError={!isEmpty(errors?.email)}
+          bottomText={errors?.email?.join(' ')}
+          type="email"
+        />
+        <TextInputField
+          id="password"
+          label={capitalize(t('common.password'))}
+          value={values.password}
+          placeholder={capitalize(t('common.password'))}
+          onChange={handleChange}
+          ariaLabel={capitalize(t('common.password'))}
+          type="password"
+        />
       </div>
+      {/* TODO: Fix localization [EN-1930] */}
       <Button type="submit" className="LoginForm__SubmitButton">
         Sign in
       </Button>

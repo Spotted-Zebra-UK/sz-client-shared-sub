@@ -18,6 +18,7 @@ const CreatePassword: FC<ICreatePassword> = ({
   notification,
   onCreatePassword,
 }) => {
+  // TODO: Fix localization [EN-1930]
   return (
     <div className="CreatePassword">
       <div className="CreatePassword__Top">

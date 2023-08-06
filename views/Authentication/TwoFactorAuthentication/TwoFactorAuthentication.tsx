@@ -57,10 +57,12 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
     onError: ({ graphQLErrors }) => {
       graphQLErrors.forEach(({ extensions }) => {
         if (extensions) {
-          const { code, message } = extensions.exception.response;
+          const code = extensions?.exception?.response?.code;
+          const message = extensions?.exception?.response?.message;
 
           if (code === Error.INVALID_MFA_CODE) {
-            addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
+            // TODO: Fix localization [EN-1930]
+            return addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
               icon: 'Warning',
               color: 'Purple',
               message: 'Invalid 6 digit code.',
@@ -68,12 +70,13 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
           }
 
           if (code === Error.EXPIRED_MFA_TOKEN) {
+            // TODO: Fix localization [EN-1930]
             addAuthNotification(AuthViews.LOGIN, {
               icon: 'Warning',
               color: 'Purple',
               message: 'Session expired. Please re-enter your credentials',
             });
-            history.push(authenticationRoutes.login);
+            return history.push(authenticationRoutes.login);
           }
 
           if (code === Error.EXCEEDED_NUMBER_OF_ATTEMPTS) {
@@ -82,18 +85,33 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
               message.length
             );
             const secondsLeft = Math.ceil(+substr);
-
-            addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
+            // TODO: Fix localization [EN-1930]
+            return addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
               icon: 'Warning',
               color: 'Purple',
               message: `Due to multiple failed login attempts, please wait ${secondsLeft} seconds before trying again `,
             });
           }
+
+          return addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
+            icon: 'Warning',
+            color: 'Purple',
+            message: 'Ops, some issue happened. Please try again.',
+          });
         }
       });
     },
   });
-  const [requestMfaCode] = useRequestMfaCodeMutation();
+  const [requestMfaCode] = useRequestMfaCodeMutation({
+    // TODO: Fix localization [EN-1930] And add proper error handling.
+    onError: () => {
+      return addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
+        icon: 'Warning',
+        color: 'Purple',
+        message: 'Ops, some issue happened. Please try again.',
+      });
+    },
+  });
 
   useEffect(() => {
     return () => {
