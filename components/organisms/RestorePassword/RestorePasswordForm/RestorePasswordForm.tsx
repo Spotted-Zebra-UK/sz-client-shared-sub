@@ -1,9 +1,11 @@
 import './RestorePasswordForm.scss';
+import { capitalize } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
+import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-input-field';
 import validate from '../../../../helpers/validate';
-import FormField from '../../../atoms/FormField/FormField';
-import Input from '../../../atoms/Input/Input';
 
 interface IRestorePasswordFormValues {
   email: string;
@@ -18,6 +20,7 @@ interface IRestorePasswordFormForm {
 }
 
 const RestorePasswordForm: FC<IRestorePasswordFormForm> = props => {
+  const { t } = useTranslation();
   const [values, setValues] = useState<IRestorePasswordFormValues>({
     email: '',
   });
@@ -29,6 +32,7 @@ const RestorePasswordForm: FC<IRestorePasswordFormForm> = props => {
     return validate(values, {
       email: {
         email: {
+          // TODO: Fix localization [EN-1930]
           message: '^Not a valid email',
         },
       },
@@ -55,20 +59,19 @@ const RestorePasswordForm: FC<IRestorePasswordFormForm> = props => {
   return (
     <form className="RestorePasswordForm" onSubmit={handleSubmit}>
       <div className="RestorePasswordForm__Fields">
-        <FormField
-          error={errors && errors.email && errors.email.join(' ')}
-          fieldName="email"
-          label="Email"
-          isLabelVisible={!!values.email}
-        >
-          <Input
-            name="email"
-            onChange={handleChange}
-            placeholder="Email"
-            value={values.email}
-          />
-        </FormField>
+        <TextInputField
+          id="email"
+          label={capitalize(t('common.email'))}
+          value={values.email}
+          placeholder={capitalize(t('common.email'))}
+          onChange={handleChange}
+          ariaLabel={t('common.email')}
+          hasError={!isEmpty(errors?.email)}
+          bottomText={errors?.email?.join(' ')}
+          type="email"
+        />
       </div>
+      {/* TODO: Fix localization [EN-1930] */}
       <Button type="submit" className="RestorePasswordForm__SubmitButton">
         Reset password
       </Button>

@@ -18,6 +18,7 @@ const RestorePassword: FC<IRestorePassword> = ({
   onRestorePassword,
   loginRedirectUrl,
 }) => {
+  // TODO: Fix localization [EN-1930]
   return (
     <div className="RestorePassword">
       <div className="RestorePassword__Top">

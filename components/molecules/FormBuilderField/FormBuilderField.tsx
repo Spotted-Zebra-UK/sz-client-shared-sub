@@ -1,11 +1,10 @@
 import './FormBuilderField.scss';
 import { FieldType, FormType } from 'generated/graphql';
 import { FC, memo } from 'react';
+import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-input-field';
 import Datepicker from '../../../components/atoms/Datepicker/Datepicker';
 import FieldLabelWithHint from '../../../components/atoms/FieldLabelWithHint/FieldLabelWithHint';
-import FloatingLabelInput from '../../../components/atoms/FloatingLabelInput/FloatingLabelInput';
 import FormField from '../../../components/atoms/FormField/FormField';
-import Input from '../../../components/atoms/Input/Input';
 import Multiselect from '../../../components/atoms/Multiselect/Multiselect';
 import Select, { TSelectOption } from '../../../components/atoms/Select/Select';
 import Textarea from '../../../components/atoms/Textarea/Textarea';
@@ -91,35 +90,23 @@ const FormBuilderField: FC<IFormBuilderField> = ({
       );
     }
 
-    if (type === FieldType.ShortTextField && formType !== FormType.TrForm) {
+    if (type === FieldType.ShortTextField) {
       return (
-        <>
-          <FieldLabelWithHint hint={hint} label={label} />
-          <Input
-            onChange={onChange}
-            value={value as string}
-            id={name}
-            name={name}
-            isDisabled={isDisabled}
-          />
-        </>
+        <TextInputField
+          id={name}
+          name={name}
+          label={label}
+          ariaLabel={label}
+          value={value as string}
+          disabled={isDisabled}
+          onChange={onChange}
+          bottomText={error}
+          hasError={Boolean(error)}
+          placeholder={label}
+        />
       );
     }
-    if (type === FieldType.ShortTextField && formType === FormType.TrForm) {
-      return (
-        <>
-          <FloatingLabelInput
-            onChange={onChange}
-            value={value as string}
-            id={name}
-            name={name}
-            label={label}
-            hint={hint}
-            isDisabled={isDisabled}
-          />
-        </>
-      );
-    }
+
     if (type === FieldType.DateField) {
       return (
         <>
@@ -181,6 +168,10 @@ const FormBuilderField: FC<IFormBuilderField> = ({
       );
     }
   };
+
+  if (type === FieldType.ShortTextField) {
+    return <>{renderFormFieldElement()}</>;
+  }
 
   return (
     <>
