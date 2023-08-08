@@ -1,8 +1,8 @@
 import './ProfileMenu.scss';
 import React, { FC } from 'react';
 import { User } from '../../../../../generated/graphql';
-import Avatar from '../../atoms/Avatar/Avatar';
 import LogoutWithTextButton from '../LogoutWithTextButton/LogoutWithTextButton';
+import { Avatar } from '@spotted-zebra-uk/sz-ui-shared.ui.avatar';
 
 interface IProfileMenu {
   user: User;
@@ -14,15 +14,11 @@ const ProfileMenu: FC<IProfileMenu> = ({ user }) => {
       <div className="profile-name-container">
         <Avatar
           user={{
+            firstName: user.firstName,
+            lastName: user.lastName,
             imageUrl: user.avatarUrl as string,
-            name: {
-              firstName: user.firstName,
-              lastName: user.lastName,
-            },
-            grade: 'D',
           }}
-          className="Avatar--Small"
-          rounded={true}
+          isInteractive={false}
         />
 
         <label className="profile-name-label">
