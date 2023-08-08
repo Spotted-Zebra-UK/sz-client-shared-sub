@@ -1,7 +1,7 @@
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "@spotted-zebra-uk/sz-ui-shared.ui.link";
-import { Checkbox } from "@spotted-zebra-uk/sz-ui-shared.widgets.checkbox";
+import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
+import { Checkbox } from '@spotted-zebra-uk/sz-ui-shared.widgets.checkbox';
 
 interface IPrivacyPolicyCheckboxField {
   value: boolean;
@@ -21,14 +21,14 @@ const PrivacyPolicyCheckboxField: FC<IPrivacyPolicyCheckboxField> = ({
   const renderPrivacyPolicyCheckboxLabel = () => {
     return (
       <span className="SignUpForm__PrivacyPolicyCheckboxLabel">
-        {t("authentication.signUp.iHaveReadThe")}
+        {t('authentication.signUp.iHaveReadThe')}
         <Link
           to="https://www.spottedzebra.co.uk/privacy/privacy"
           target="_blank"
         >
-          {t("authentication.signUp.privacyNotice")}
+          {t('authentication.signUp.privacyNotice')}
         </Link>
-        {t("authentication.signUp.iAmAnAdult")}
+        {t('authentication.signUp.iAmAnAdult')}
       </span>
     );
   };
