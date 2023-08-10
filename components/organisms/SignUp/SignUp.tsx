@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
-import BubblesBackground from '../../../components/atoms/BubblesBackground/BubblesBackground';
 import Notification from '../../../components/atoms/Notification/Notification';
 import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
 import { TNotification } from '../../../interfaces/notification';
@@ -39,18 +38,18 @@ const SignUpPresentational: FC<ISignUp> = ({
         <Logo className="SignUp__Top__Logo" />
         <div className="SignUp__Top__TitleWrapper">
           {fullName ? (
-            <BubblesBackground className="SignUp__Top__Title">
+            <div className="SignUp__Top__Title">
               <p className="SignUp__Top__Title__Row">
-                {_.capitalize(t('common.welcome'))}
+                {_.capitalize(t('authentication.signUp.createAccount'))}
               </p>
               <p className="SignUp__Top__Title__Row">{fullName}!</p>
-            </BubblesBackground>
+            </div>
           ) : (
-            <BubblesBackground className="SignUp__Top__Title">
+            <div className="SignUp__Top__Title">
               <p className="SignUp__Top__Title__Row">
-                {_.capitalize(t('common.welcome'))}
+                {_.capitalize(t('authentication.signUp.createAccount'))}
               </p>
-            </BubblesBackground>
+            </div>
           )}
           {notification ? <Notification notification={notification} /> : null}
         </div>
