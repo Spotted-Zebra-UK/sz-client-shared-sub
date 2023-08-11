@@ -113,18 +113,17 @@ const SignUpForm: FC<ISignUpForm> = props => {
   return (
     <form className="SignUpForm" onSubmit={handleSubmit}>
       <div className="SignUpForm__Fields">
-        {!props.fullName ? (
-          <TextInputField
-            id="fullName"
-            label={t('authentication.signUp.fullName')}
-            value={values.fullName}
-            placeholder={t('authentication.signUp.fullName')}
-            onChange={handleChange}
-            ariaLabel={t('authentication.signUp.fullName')}
-            hasError={!isEmpty(errors?.fullName)}
-            bottomText={errors?.fullName?.join(' ')}
-          />
-        ) : null}
+        <TextInputField
+          id="fullName"
+          label={t('authentication.signUp.fullName')}
+          value={values.fullName}
+          placeholder={t('authentication.signUp.fullName')}
+          onChange={handleChange}
+          ariaLabel={t('authentication.signUp.fullName')}
+          hasError={!isEmpty(errors?.fullName)}
+          bottomText={errors?.fullName?.join(' ')}
+          disabled={!!props.fullName?.length}
+        />
         <TextInputField
           id="email"
           label={capitalize(t('common.email'))}
@@ -134,6 +133,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
           ariaLabel={t('common.email')}
           hasError={!isEmpty(errors?.email)}
           bottomText={errors?.email?.join(' ')}
+          disabled={!!props.email?.length}
           type="email"
         />
         <TextInputField

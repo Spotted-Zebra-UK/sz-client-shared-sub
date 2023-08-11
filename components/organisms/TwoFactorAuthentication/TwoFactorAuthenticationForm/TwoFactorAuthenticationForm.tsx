@@ -28,10 +28,10 @@ const TwoFactorAuthenticationForm: FunctionComponent<ITwoFactorAuthenticationFor
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      if (values && values.mfaCode) {
+      if (values && values.mfaCode && values.mfaCode.length === 6) {
         props.onSubmit(values.mfaCode);
       } else {
-        setError(t('authentication.twoFactorAuthentication.insert6DigitCode'));
+        setError(t('authentication.twoFactorAuthentication.invalidFormat'));
       }
     };
 
@@ -51,6 +51,7 @@ const TwoFactorAuthenticationForm: FunctionComponent<ITwoFactorAuthenticationFor
         </div>
         <Button
           type="submit"
+          fullWidth
           className="TwoFactorAuthenticationForm__SubmitButton"
         >
           {t('authentication.twoFactorAuthentication.submit')}

@@ -1,5 +1,10 @@
 import React, { FC, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import {
+  TNotification,
+  useNotification,
+} from '@spotted-zebra-uk/sz-ui-shared.ui.notification';
 import {
   useMfaAuthenticateMutation,
   useRequestMfaCodeMutation,
@@ -12,7 +17,7 @@ import {
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
-import { TNotification } from '../../../interfaces/notification';
+import { TNotification as INotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
 
@@ -20,8 +25,8 @@ interface ITwoFactorAuthentication {
   // Url where user will be redirected after successful login.
   authRedirectUrl: string;
   // Notification is visible if this prop is provided.
-  loginNotification?: TNotification | undefined;
-  addAuthNotification: (view: AuthViews, notification: TNotification) => void;
+  loginNotification?: INotification | undefined;
+  addAuthNotification: (view: AuthViews, notification: INotification) => void;
   clearAuthViewNotifications: (view: AuthViews) => void;
 }
 
@@ -32,6 +37,8 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
   clearAuthViewNotifications,
 }) => {
   const history = useHistory();
+  const { t } = useTranslation();
+  const { handleMsgType } = useNotification();
   const mfaAccessToken = localStorage.getItem(MFA_AUTH_TOKEN);
   const [mfaAuthenticate] = useMfaAuthenticateMutation({
     onCompleted(data) {
@@ -61,20 +68,20 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
           const message = extensions?.exception?.response?.message;
 
           if (code === Error.INVALID_MFA_CODE) {
-            // TODO: Fix localization [EN-1930]
-            return addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
-              icon: 'Warning',
-              color: 'Purple',
-              message: 'Invalid 6 digit code.',
+            return handleMsgType({
+              type: TNotification.error,
+              message: `${t(
+                'authentication.twoFactorAuthentication.providedInvalidCode'
+              )}`,
             });
           }
 
           if (code === Error.EXPIRED_MFA_TOKEN) {
-            // TODO: Fix localization [EN-1930]
-            addAuthNotification(AuthViews.LOGIN, {
-              icon: 'Warning',
-              color: 'Purple',
-              message: 'Session expired. Please re-enter your credentials',
+            handleMsgType({
+              type: TNotification.error,
+              message: `${t(
+                'authentication.twoFactorAuthentication.sessionExpired'
+              )}`,
             });
             return history.push(authenticationRoutes.login);
           }
@@ -85,18 +92,20 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
               message.length
             );
             const secondsLeft = Math.ceil(+substr);
-            // TODO: Fix localization [EN-1930]
-            return addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
-              icon: 'Warning',
-              color: 'Purple',
-              message: `Due to multiple failed login attempts, please wait ${secondsLeft} seconds before trying again `,
+            return handleMsgType({
+              type: TNotification.error,
+              message: t(
+                'authentication.login.dueToMultipleFailedLoginAttempts',
+                { secondsLeft }
+              ),
             });
           }
 
-          return addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
-            icon: 'Warning',
-            color: 'Purple',
-            message: 'Ops, some issue happened. Please try again.',
+          return handleMsgType({
+            type: TNotification.error,
+            message: `${t(
+              'authentication.twoFactorAuthentication.generalError'
+            )}`,
           });
         }
       });
@@ -105,10 +114,9 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
   const [requestMfaCode] = useRequestMfaCodeMutation({
     // TODO: Fix localization [EN-1930] And add proper error handling.
     onError: () => {
-      return addAuthNotification(AuthViews.TWO_FACTOR_AUTHENTICATION, {
-        icon: 'Warning',
-        color: 'Purple',
-        message: 'Ops, some issue happened. Please try again.',
+      return handleMsgType({
+        type: TNotification.error,
+        message: `${t('authentication.twoFactorAuthentication.generalError')}`,
       });
     },
   });
@@ -140,7 +148,6 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
 
   return (
     <TwoFactorAuthenticationPresentational
-      loginNotification={loginNotification}
       onSubmit={handleSubmit}
       requestMfaCode={handleRequestMfaCode}
     />

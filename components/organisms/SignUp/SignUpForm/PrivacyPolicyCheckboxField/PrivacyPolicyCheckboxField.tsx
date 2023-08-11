@@ -15,6 +15,7 @@ const PrivacyPolicyCheckboxField: FC<IPrivacyPolicyCheckboxField> = ({
   value,
   name,
   onChange,
+  error,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -43,7 +44,9 @@ const PrivacyPolicyCheckboxField: FC<IPrivacyPolicyCheckboxField> = ({
         label={renderPrivacyPolicyCheckboxLabel()}
         checked={value}
         onChange={handleChange}
+        hasError={!!error?.length}
         {...props}
+        bottomText={error}
       />
     </div>
   );

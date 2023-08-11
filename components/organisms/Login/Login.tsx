@@ -1,9 +1,9 @@
 import './Login.scss';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
-import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
+import { ReactComponent as Logo } from '../../../icons/spottedzebra_new_logo.svg';
 import { TNotification } from '../../../interfaces/notification';
-import BubblesBackground from '../../atoms/BubblesBackground/BubblesBackground';
 import Notification from '../../atoms/Notification/Notification';
 import LoginForm from './LoginForm/LoginForm';
 
@@ -20,14 +20,15 @@ const Login: FC<ILogin> = ({
   email,
   restorePasswordUrl,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="Login">
       <div className="Login__Top">
         <Logo className="Login__Top__Logo" />
         <div className="Login__Top__TitleWrapper">
-          <BubblesBackground className="Login__Top__Title">
-            <p className="Login__Top__Title__Row">Welcome</p>
-          </BubblesBackground>
+          <p className="Login__Top__Title__Row">
+            {t('authentication.login.signIn')}
+          </p>
           {loginNotification ? (
             <Notification notification={loginNotification} />
           ) : null}

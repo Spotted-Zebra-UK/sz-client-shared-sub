@@ -1,7 +1,11 @@
 import './CreatePassword.scss';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import {
+  TNotification as INotification,
+  useNotification,
+} from '@spotted-zebra-uk/sz-ui-shared.ui.notification';
 import { useUpdateIdentityPasswordMutation } from '../../../../../generated/graphql';
 import CreatePasswordPresentational from '../../../components/organisms/CreatePassword/CreatePassword';
 import Error from '../../../enums/error';
@@ -20,15 +24,16 @@ const CreatePassword: FC<ICreatePassword> = ({
   addAuthNotification,
 }) => {
   const { t } = useTranslation();
+  const { handleMsgType } = useNotification();
+
   const history = useHistory();
   const location = useLocation();
   const parsedRecoveryTokenData = parseRecoveryToken(location.search);
 
   const [resetPassword] = useUpdateIdentityPasswordMutation({
     onCompleted: () => {
-      addAuthNotification(AuthViews.LOGIN, {
-        icon: 'Claps',
-        color: 'Blue',
+      handleMsgType({
+        type: INotification.error,
         message: t(
           'authentication.createPassword.yourPasswordWasSuccessFullyChanged'
         ),
@@ -38,18 +43,9 @@ const CreatePassword: FC<ICreatePassword> = ({
     onError: ({ graphQLErrors }) => {
       graphQLErrors.forEach(({ message }) => {
         if (message === Error.RECOVERY_TOKEN_EXPIRED_OR_INVALID) {
-          addAuthNotification(AuthViews.CREATE_PASSWORD, {
-            icon: 'Claps',
-            color: 'Purple',
-            message: (
-              <span className="CreatePassword__ErrorNotificationMessage">
-                {t('authentication.createPassword.recoveryLinkIsInvalid')}{' '}
-                <Link to={authenticationRoutes.restorePassword}>
-                  {t('common.here')}
-                </Link>
-                .
-              </span>
-            ),
+          handleMsgType({
+            type: INotification.error,
+            message: t('authentication.createPassword.recoveryLinkIsInvalid'),
           });
         }
       });
