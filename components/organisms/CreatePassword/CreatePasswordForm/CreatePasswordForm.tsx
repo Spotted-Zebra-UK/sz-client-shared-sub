@@ -73,7 +73,11 @@ const CreatePasswordForm: FC<ICreatePasswordFormForm> = props => {
           type="password"
         />
       </div>
-      <Button type="submit" className="CreatePasswordForm__SubmitButton">
+      <Button
+        type="submit"
+        fullWidth
+        className="CreatePasswordForm__SubmitButton"
+      >
         Confirm
       </Button>
     </form>

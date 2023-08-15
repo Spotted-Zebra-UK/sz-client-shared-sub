@@ -2,6 +2,10 @@ import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import {
+  TNotification,
+  useNotification,
+} from '@spotted-zebra-uk/sz-ui-shared.ui.notification';
+import {
   useAuthenticateMutation,
   useMfaAccessTokenMutation,
 } from '../../../../../generated/graphql';
@@ -13,7 +17,7 @@ import {
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
-import { TNotification } from '../../../interfaces/notification';
+import { TNotification as INotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
 
@@ -26,8 +30,8 @@ interface ILogin {
   // Url where user will be redirected after successful login.
   authRedirectUrl: string;
   // Notification is visible if this prop is provided.
-  loginNotification?: TNotification | undefined;
-  addAuthNotification: (view: AuthViews, notification: TNotification) => void;
+  loginNotification?: INotification | undefined;
+  addAuthNotification: (view: AuthViews, notification: INotification) => void;
   clearAuthViewNotifications: (view: AuthViews) => void;
   clientType?: string;
 }
@@ -40,6 +44,8 @@ const Login: FC<ILogin> = ({
   clearAuthViewNotifications,
   clientType,
 }) => {
+  const { handleMsgType } = useNotification();
+
   const { t } = useTranslation();
   const history = useHistory();
   const mfaCookie: string[] = JSON.parse(
@@ -126,12 +132,11 @@ const Login: FC<ILogin> = ({
               /**
                * If invalid credentials provided, notification should be visible.
                */
-              addAuthNotification(AuthViews.LOGIN, {
-                icon: 'Warning',
-                color: 'Purple',
-                message: t(
+              handleMsgType({
+                type: TNotification.error,
+                message: `${t(
                   'authentication.login.yourEmailOrPasswordDoNotMatch'
-                ),
+                )}`,
               });
             }
             if (code === Error.EXCEEDED_NUMBER_OF_ATTEMPTS) {
@@ -140,10 +145,8 @@ const Login: FC<ILogin> = ({
                 message.length
               );
               const secondsLeft = Math.ceil(+substr);
-
-              addAuthNotification(AuthViews.LOGIN, {
-                icon: 'Warning',
-                color: 'Purple',
+              handleMsgType({
+                type: TNotification.error,
                 message: t(
                   'authentication.login.dueToMultipleFailedLoginAttempts',
                   { secondsLeft }
@@ -168,7 +171,6 @@ const Login: FC<ILogin> = ({
   return (
     <LoginPresentational
       email={authPrepopulatedValues.email}
-      loginNotification={loginNotification}
       onSignIn={handleLogin}
       restorePasswordUrl={authenticationRoutes.restorePassword}
     />

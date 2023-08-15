@@ -14,6 +14,7 @@ interface ILoginFormValues {
 
 interface ILoginFormErrors {
   email: string[];
+  password: string;
 }
 
 interface ILoginForm {
@@ -34,7 +35,13 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
       email: {
         email: {
           // TODO: Fix localization [EN-1930]
-          message: '^Not a valid email',
+          message: `^${t('common.notValidEmail')}`,
+        },
+      },
+      password: {
+        presence: {
+          allowEmpty: false,
+          message: `^${t('common.emptyPassword')}`,
         },
       },
     });
@@ -77,6 +84,8 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
           value={values.password}
           placeholder={capitalize(t('common.password'))}
           onChange={handleChange}
+          hasError={!isEmpty(errors?.password)}
+          bottomText={errors?.password}
           ariaLabel={capitalize(t('common.password'))}
           type="password"
         />

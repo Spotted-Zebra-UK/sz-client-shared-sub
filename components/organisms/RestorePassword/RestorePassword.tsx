@@ -1,10 +1,9 @@
 import './RestorePassword.scss';
+import { t } from 'i18next';
 import { FC } from 'react';
 import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
-import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
+import { ReactComponent as Logo } from '../../../icons/spottedzebra_new_logo.svg';
 import { TNotification } from '../../../interfaces/notification';
-import BubblesBackground from '../../atoms/BubblesBackground/BubblesBackground';
-import Notification from '../../atoms/Notification/Notification';
 import RestorePasswordForm from './RestorePasswordForm/RestorePasswordForm';
 
 interface IRestorePassword {
@@ -14,27 +13,24 @@ interface IRestorePassword {
 }
 
 const RestorePassword: FC<IRestorePassword> = ({
-  notification,
   onRestorePassword,
   loginRedirectUrl,
 }) => {
-  // TODO: Fix localization [EN-1930]
   return (
     <div className="RestorePassword">
       <div className="RestorePassword__Top">
         <Logo className="RestorePassword__Top__Logo" />
         <div className="RestorePassword__Top__TitleWrapper">
-          <BubblesBackground className="RestorePassword__Top__Title">
-            <p className="RestorePassword__Top__Title__Row">Restore password</p>
-          </BubblesBackground>
-          {notification ? <Notification notification={notification} /> : null}
+          <p className="RestorePassword__Top__Title__Row">
+            {t('authentication.restorePassword.resetPassword')}
+          </p>
         </div>
       </div>
       <RestorePasswordForm onSubmit={onRestorePassword} />
       <div className="RestorePassword__RedirectToLogin">
-        Already have an account?{' '}
+        {t('authentication.restorePassword.alreadyHaveAccount')}
         <Link to={loginRedirectUrl} className="RestorePassword__Link">
-          Sign in
+          {t('authentication.login.signIn')}
         </Link>
       </div>
     </div>
