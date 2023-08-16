@@ -156,7 +156,7 @@ const SignUpForm: FC<ISignUpForm> = props => {
           id="SignUpIsPrivacyPolicyChecked"
           error={errors?.isPrivacyPolicyChecked?.join(' ')}
         />
-        <Button type="submit" className="SignUpForm__SubmitButton">
+        <Button type="submit" className="SignUpForm__SubmitButton" fullWidth>
           {t('authentication.signUp.createAccount')}
         </Button>
       </div>

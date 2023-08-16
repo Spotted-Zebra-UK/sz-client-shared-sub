@@ -1,6 +1,7 @@
 import './TwoFactorAuthentication.scss';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
 import { ReactComponent as Logo } from '../../../icons/spottedzebra_new_logo.svg';
 import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm/TwoFactorAuthenticationForm';
 
@@ -38,12 +39,12 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
       </div>
       <TwoFactorAuthenticationForm onSubmit={onSubmit} />
       <div className="TwoFactorAuthentication__RequestCode">
-        <div
+        <Button
           className="TwoFactorAuthentication__RequestCode__Button"
           onClick={requestMfaCode}
         >
-          {t('authentication.twoFactorAuthentication.requestACode')}
-        </div>
+          {t('authentication.twoFactorAuthentication.requestANewCode')}
+        </Button>
       </div>
     </div>
   );

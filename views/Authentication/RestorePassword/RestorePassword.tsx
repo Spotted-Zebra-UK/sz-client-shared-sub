@@ -31,7 +31,7 @@ const RestorePassword: FC<IRestorePassword> = ({
   const [requestPasswordRecovery] = useRequestPasswordRecoveryMutation({
     onCompleted: () => {
       handleMsgType({
-        type: INotification.error,
+        type: INotification.success,
         message: t(
           'authentication.restorePassword.weWillAttemptToSendAPasswordResetLinkToYourEmail'
         ),

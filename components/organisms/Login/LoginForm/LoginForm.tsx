@@ -91,7 +91,7 @@ const LoginForm: FunctionComponent<ILoginForm> = props => {
         />
       </div>
       {/* TODO: Fix localization [EN-1930] */}
-      <Button type="submit" className="LoginForm__SubmitButton">
+      <Button type="submit" className="LoginForm__SubmitButton" fullWidth>
         Sign in
       </Button>
     </form>
