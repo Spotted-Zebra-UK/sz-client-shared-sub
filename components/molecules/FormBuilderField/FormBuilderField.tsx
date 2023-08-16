@@ -2,12 +2,13 @@ import './FormBuilderField.scss';
 import { FieldType, FormType } from 'generated/graphql';
 import { FC, memo } from 'react';
 import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-input-field';
+import { MultiselectFormField } from '@spotted-zebra-uk/sz-ui-shared.widgets.multiselect-form-field';
+import { TMultiselectOption } from '@spotted-zebra-uk/sz-ui-shared.ui.multiselect';
+import { TextArea } from '@spotted-zebra-uk/sz-ui-shared.ui.text-area';
 import Datepicker from '../../../components/atoms/Datepicker/Datepicker';
 import FieldLabelWithHint from '../../../components/atoms/FieldLabelWithHint/FieldLabelWithHint';
 import FormField from '../../../components/atoms/FormField/FormField';
-import Multiselect from '../../../components/atoms/Multiselect/Multiselect';
 import Select, { TSelectOption } from '../../../components/atoms/Select/Select';
-import Textarea from '../../../components/atoms/Textarea/Textarea';
 import { TFieldSettingsModel } from '../../../enums/formType';
 import { TFormFieldValue } from '../../../interfaces/form';
 import FloatingLabelTextArea from '../../atoms/FloatingLabelTextArea/FloatingLabelTextArea';
@@ -123,18 +124,26 @@ const FormBuilderField: FC<IFormBuilderField> = ({
     }
 
     if (type === FieldType.MultipleSelectField) {
-      return (
-        <>
-          <FieldLabelWithHint hint={hint} label={label} />
+      const selectedOptions: TMultiselectOption[] = (value as string[]).map(
+        val => {
+          return { value: val, label: val };
+        }
+      );
 
-          <Multiselect
-            onChange={onChange}
-            value={value as string[]}
-            id={name}
-            name={name}
-            options={options || []}
-          />
-        </>
+      return (
+        <MultiselectFormField
+          options={options || []}
+          label={label}
+          placeholder={label}
+          id={name}
+          value={selectedOptions}
+          onChange={(value: TMultiselectOption<string>[]) => {
+            onChange(
+              value.map(option => option.value!),
+              name
+            );
+          }}
+        />
       );
     }
     if (type === FieldType.LongTextField && formType === FormType.TrForm) {
@@ -156,20 +165,25 @@ const FormBuilderField: FC<IFormBuilderField> = ({
     if (type === FieldType.LongTextField && formType !== FormType.TrForm) {
       return (
         <>
-          <FieldLabelWithHint hint={hint} label={label} />
-          <Textarea
+          <TextArea
+            id={name}
+            title={label}
             onChange={onChange}
             value={value as string}
-            id={name}
             name={name}
-            isDisabled={isDisabled}
+            disabled={isDisabled}
+            aria-label={label}
           />
         </>
       );
     }
   };
 
-  if (type === FieldType.ShortTextField) {
+  if (
+    type === FieldType.ShortTextField ||
+    type === FieldType.MultipleSelectField ||
+    (type === FieldType.LongTextField && formType !== FormType.TrForm)
+  ) {
     return <>{renderFormFieldElement()}</>;
   }
 

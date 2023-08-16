@@ -56,6 +56,7 @@ const Navbar: FC<INavbar> = ({
               localStorage.removeItem('filters');
               history.push('/');
             }}
+            aria-hidden
           />
           <div className="second-div">
             <ModuleSelector
