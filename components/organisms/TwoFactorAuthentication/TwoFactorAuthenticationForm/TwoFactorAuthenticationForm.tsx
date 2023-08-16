@@ -47,6 +47,7 @@ const TwoFactorAuthenticationForm: FunctionComponent<ITwoFactorAuthenticationFor
             ariaLabel={t('authentication.twoFactorAuthentication.code')}
             hasError={!isEmpty(error)}
             bottomText={error}
+            autoComplete="off"
           />
         </div>
         <Button
