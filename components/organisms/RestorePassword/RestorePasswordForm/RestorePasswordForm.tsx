@@ -72,7 +72,11 @@ const RestorePasswordForm: FC<IRestorePasswordFormForm> = props => {
         />
       </div>
       {/* TODO: Fix localization [EN-1930] */}
-      <Button type="submit" className="RestorePasswordForm__SubmitButton">
+      <Button
+        type="submit"
+        className="RestorePasswordForm__SubmitButton"
+        fullWidth
+      >
         Reset password
       </Button>
     </form>

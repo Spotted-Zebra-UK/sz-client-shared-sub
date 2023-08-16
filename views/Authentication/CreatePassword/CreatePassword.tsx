@@ -33,7 +33,7 @@ const CreatePassword: FC<ICreatePassword> = ({
   const [resetPassword] = useUpdateIdentityPasswordMutation({
     onCompleted: () => {
       handleMsgType({
-        type: INotification.error,
+        type: INotification.success,
         message: t(
           'authentication.createPassword.yourPasswordWasSuccessFullyChanged'
         ),
