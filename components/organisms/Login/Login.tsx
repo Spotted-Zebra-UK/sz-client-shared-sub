@@ -37,9 +37,8 @@ const Login: FC<ILogin> = ({
       <LoginForm email={email} onSubmit={onSignIn} />
       {restorePasswordUrl ? (
         <div className="Login__RedirectToRestorePassword">
-          {t('authentication.restorePassword.resetPassword')}?{' '}
           <Link className="Login__Link" to={restorePasswordUrl}>
-            {t('authentication.login.resetHere')}
+            {t('authentication.restorePassword.resetPassword')}
           </Link>
         </div>
       ) : null}
