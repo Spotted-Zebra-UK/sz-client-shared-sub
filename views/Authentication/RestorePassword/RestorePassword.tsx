@@ -13,6 +13,7 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
 
 interface IRestorePassword {
   restorePasswordNotification?: TNotification;
@@ -70,11 +71,16 @@ const RestorePassword: FC<IRestorePassword> = ({
   };
 
   return (
-    <RestorePasswordPresentational
-      notification={restorePasswordNotification}
-      onRestorePassword={handleRestorePassword}
-      loginRedirectUrl={authenticationRoutes.login}
-    />
+    <>
+      <HelmetAndPageAnnouncer
+        pageTitle={t('authentication.restorePassword.title')}
+      />
+      <RestorePasswordPresentational
+        notification={restorePasswordNotification}
+        onRestorePassword={handleRestorePassword}
+        loginRedirectUrl={authenticationRoutes.login}
+      />
+    </>
   );
 };
 

@@ -20,6 +20,7 @@ import Error from '../../../enums/error';
 import { TNotification as INotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
 
 interface ILogin {
   // Prepopulates input fields in login form.
@@ -169,11 +170,14 @@ const Login: FC<ILogin> = ({
     });
   };
   return (
-    <LoginPresentational
-      email={authPrepopulatedValues.email}
-      onSignIn={handleLogin}
-      restorePasswordUrl={authenticationRoutes.restorePassword}
-    />
+    <>
+      <HelmetAndPageAnnouncer pageTitle={t('authentication.login.title')} />
+      <LoginPresentational
+        email={authPrepopulatedValues.email}
+        onSignIn={handleLogin}
+        restorePasswordUrl={authenticationRoutes.restorePassword}
+      />
+    </>
   );
 };
 

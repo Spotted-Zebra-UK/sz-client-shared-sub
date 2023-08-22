@@ -20,6 +20,7 @@ import Error from '../../../enums/error';
 import { TNotification as INotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
 
 interface ITwoFactorAuthentication {
   // Url where user will be redirected after successful login.
@@ -147,10 +148,15 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
   };
 
   return (
-    <TwoFactorAuthenticationPresentational
-      onSubmit={handleSubmit}
-      requestMfaCode={handleRequestMfaCode}
-    />
+    <>
+      <HelmetAndPageAnnouncer
+        pageTitle={t('authentication.twoFactorAuthentication.title')}
+      />
+      <TwoFactorAuthenticationPresentational
+        onSubmit={handleSubmit}
+        requestMfaCode={handleRequestMfaCode}
+      />
+    </>
   );
 };
 
