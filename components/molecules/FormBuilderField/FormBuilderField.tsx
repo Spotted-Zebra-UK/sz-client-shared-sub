@@ -1,6 +1,6 @@
 import './FormBuilderField.scss';
 import { FieldType, FormType } from 'generated/graphql';
-import { FC, memo } from 'react';
+import { FC, memo, useState } from 'react';
 import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-input-field';
 import { MultiselectFormField } from '@spotted-zebra-uk/sz-ui-shared.widgets.multiselect-form-field';
 import { TMultiselectOption } from '@spotted-zebra-uk/sz-ui-shared.ui.multiselect';
@@ -8,10 +8,11 @@ import { TextArea } from '@spotted-zebra-uk/sz-ui-shared.ui.text-area';
 import Datepicker from '../../../components/atoms/Datepicker/Datepicker';
 import FieldLabelWithHint from '../../../components/atoms/FieldLabelWithHint/FieldLabelWithHint';
 import FormField from '../../../components/atoms/FormField/FormField';
-import Select, { TSelectOption } from '../../../components/atoms/Select/Select';
 import { TFieldSettingsModel } from '../../../enums/formType';
 import { TFormFieldValue } from '../../../interfaces/form';
 import FloatingLabelTextArea from '../../atoms/FloatingLabelTextArea/FloatingLabelTextArea';
+import { SelectFormField } from '@spotted-zebra-uk/sz-ui-shared.widgets.select-form-field';
+import { TSelectOption } from '@spotted-zebra-uk/sz-ui-shared.ui.select';
 
 interface IFormBuilderField {
   id: string;
@@ -27,7 +28,8 @@ interface IFormBuilderField {
   settings?: TFieldSettingsModel;
   formType?: FormType;
   isDisabled?: boolean;
-  classNamePrefix: string;
+  autoComplete?: string;
+  className: string;
 }
 
 const FormBuilderField: FC<IFormBuilderField> = ({
@@ -47,47 +49,37 @@ const FormBuilderField: FC<IFormBuilderField> = ({
   },
   formType = FormType.CiForm,
   isDisabled = false,
-  classNamePrefix,
+  autoComplete,
+  className,
 }) => {
+  // To keep track of selected options in order to fix problems with
+  // focus. Since we need to map TMultiselectOption to TFormFieldValue,
+  // that mapping breaks focus on selected elements.
+  const [selectedOptions, setSelectedOptions] =
+    useState<TMultiselectOption[]>();
+
   const renderFormFieldElement = () => {
-    if (type === FieldType.SingleSelectField) {
-      return (
-        <>
-          <FieldLabelWithHint hint={hint} label={label} />
+    if (
+      type === FieldType.SingleSelectField ||
+      type === FieldType.CompanyEmployeeSelectField
+    ) {
+      const valueString = value as string;
 
-          <Select
-            onChange={onChange}
-            value={value as string}
-            id={id}
-            name={name}
-            options={options || []}
-            placeholder={placeholder}
-            searchable={settings.searchable}
-            createable={settings.allowFreeText}
-            isDisabled={isDisabled}
-            classNamePrefix={classNamePrefix}
-          />
-        </>
-      );
-    }
-    if (type === FieldType.CompanyEmployeeSelectField) {
       return (
-        <>
-          <FieldLabelWithHint hint={hint} label={label} />
-
-          <Select
-            onChange={onChange}
-            value={value as string}
-            id={id}
-            name={name}
-            options={options || []}
-            placeholder={placeholder}
-            searchable={settings.searchable}
-            createable={settings.allowFreeText}
-            isDisabled={isDisabled}
-            classNamePrefix={classNamePrefix}
-          />
-        </>
+        <SelectFormField
+          label={label}
+          placeholder={label}
+          onChange={(value: TSelectOption<string>) => {
+            onChange(value.value, name);
+          }}
+          value={{ value: valueString, label: valueString }}
+          id={id}
+          name={name}
+          options={options || []}
+          isSearchable={settings.searchable}
+          isDisabled={isDisabled}
+          className={className}
+        />
       );
     }
 
@@ -104,6 +96,7 @@ const FormBuilderField: FC<IFormBuilderField> = ({
           bottomText={error}
           hasError={Boolean(error)}
           placeholder={label}
+          autoComplete={autoComplete}
         />
       );
     }
@@ -124,12 +117,6 @@ const FormBuilderField: FC<IFormBuilderField> = ({
     }
 
     if (type === FieldType.MultipleSelectField) {
-      const selectedOptions: TMultiselectOption[] = (value as string[]).map(
-        val => {
-          return { value: val, label: val };
-        }
-      );
-
       return (
         <MultiselectFormField
           options={options || []}
@@ -138,6 +125,7 @@ const FormBuilderField: FC<IFormBuilderField> = ({
           id={name}
           value={selectedOptions}
           onChange={(value: TMultiselectOption<string>[]) => {
+            setSelectedOptions(value);
             onChange(
               value.map(option => option.value!),
               name
@@ -173,6 +161,7 @@ const FormBuilderField: FC<IFormBuilderField> = ({
             name={name}
             disabled={isDisabled}
             aria-label={label}
+            autoComplete={autoComplete}
           />
         </>
       );
@@ -182,7 +171,9 @@ const FormBuilderField: FC<IFormBuilderField> = ({
   if (
     type === FieldType.ShortTextField ||
     type === FieldType.MultipleSelectField ||
-    (type === FieldType.LongTextField && formType !== FormType.TrForm)
+    (type === FieldType.LongTextField && formType !== FormType.TrForm) ||
+    type === FieldType.SingleSelectField ||
+    type === FieldType.CompanyEmployeeSelectField
   ) {
     return <>{renderFormFieldElement()}</>;
   }
