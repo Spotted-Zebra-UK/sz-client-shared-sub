@@ -1,9 +1,9 @@
 import './TwoFactorAuthenticationForm.scss';
+import isEmpty from 'lodash/isEmpty';
 import React, { FunctionComponent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import FormField from '../../../atoms/FormField/FormField';
-import Input from '../../../atoms/Input/Input';
-import SquareButton from '../../../molecules/SquareButton/SquareButton';
+import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
+import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-input-field';
 
 interface ITwoFactorAuthenticationFormValues {
   mfaCode: string;
@@ -16,7 +16,9 @@ interface ITwoFactorAuthenticationForm {
 const TwoFactorAuthenticationForm: FunctionComponent<ITwoFactorAuthenticationForm> =
   props => {
     const { t } = useTranslation();
-    const [values, setValues] = useState<ITwoFactorAuthenticationFormValues>();
+    const [values, setValues] = useState<ITwoFactorAuthenticationFormValues>({
+      mfaCode: '',
+    });
     const [error, setError] = useState<string>('');
 
     const handleChange = (value: string) => {
@@ -26,33 +28,35 @@ const TwoFactorAuthenticationForm: FunctionComponent<ITwoFactorAuthenticationFor
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      if (values && values.mfaCode) {
+      if (values && values.mfaCode && values.mfaCode.length === 6) {
         props.onSubmit(values.mfaCode);
       } else {
-        setError(t('authentication.twoFactorAuthentication.insert6DigitCode'));
+        setError(t('authentication.twoFactorAuthentication.invalidFormat'));
       }
     };
 
     return (
       <form className="TwoFactorAuthenticationForm" onSubmit={handleSubmit}>
         <div className="TwoFactorAuthenticationForm__Fields">
-          <FormField
-            error={error}
-            fieldName="mfaCode"
-            label="mfaCode"
-            isLabelVisible={!!values?.mfaCode}
-          >
-            <Input
-              name="mfaCode"
-              onChange={handleChange}
-              placeholder={t('authentication.twoFactorAuthentication.code')}
-              value={values?.mfaCode ? values.mfaCode.toString() : ''}
-            />
-          </FormField>
+          <TextInputField
+            id="mfaCode"
+            label={t('authentication.twoFactorAuthentication.code')}
+            value={values.mfaCode}
+            placeholder={t('authentication.twoFactorAuthentication.code')}
+            onChange={handleChange}
+            ariaLabel={t('authentication.twoFactorAuthentication.code')}
+            hasError={!isEmpty(error)}
+            bottomText={error}
+            autoComplete="off"
+          />
         </div>
-        <SquareButton type="submit">
+        <Button
+          type="submit"
+          fullWidth
+          className="TwoFactorAuthenticationForm__SubmitButton"
+        >
           {t('authentication.twoFactorAuthentication.submit')}
-        </SquareButton>
+        </Button>
       </form>
     );
   };

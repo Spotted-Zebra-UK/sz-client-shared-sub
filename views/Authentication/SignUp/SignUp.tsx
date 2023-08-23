@@ -1,6 +1,10 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import {
+  TNotification,
+  useNotification,
+} from '@spotted-zebra-uk/sz-ui-shared.ui.notification';
 import { getLanguageFromShortName } from '../../../../../constants/languages';
 import { useRegisterAccountMutation } from '../../../../../generated/graphql';
 import SignUpPresentational from '../../../components/organisms/SignUp/SignUp';
@@ -11,8 +15,8 @@ import {
 import Error from '../../../enums/error';
 import { formatFullName } from '../../../helpers/fullName';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
-import { AuthViews } from '../Authentication.constants';
 import { ISignUpWrapper } from './SignUpWrapper/SignUpWrapper';
+import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
 
 interface ISignUp extends ISignUpWrapper {
   companyId?: number;
@@ -23,13 +27,12 @@ const SignUp: FC<ISignUp> = ({
   authPrepopulatedValues = {},
   authRedirectUrl,
   directInvitationToken,
-  signUpNotification,
   companyId,
   projectId,
-  addAuthNotification,
 }) => {
   const { i18n, t } = useTranslation();
   const history = useHistory();
+  const { handleMsgType } = useNotification();
 
   const [registerAccount] = useRegisterAccountMutation({
     onCompleted(data) {
@@ -56,30 +59,25 @@ const SignUp: FC<ISignUp> = ({
          * If account with provided email already exists, app should be redirected to login view and notification should be visible.
          */
         if (code === Error.EXISTING_ACCOUNT) {
-          addAuthNotification(AuthViews.LOGIN, {
-            icon: 'Idea',
-            color: 'Purple',
-            message: t(
+          handleMsgType({
+            type: TNotification.error,
+            message: `${t(
               'authentication.signUp.yourAccountHasAlreadyBeenCreated'
-            ),
+            )}`,
           });
           return history.push(authenticationRoutes.login);
         }
         if (code === Error.PASSWORD_TOO_WEAK) {
           // TODO: Maybe move the message to be a standalone note on screen when trying to create/change a password
-          return addAuthNotification(AuthViews.SIGN_UP, {
-            icon: 'Idea',
-            color: 'Purple',
-            message: t('common.yourPasswordMustHave'),
+          return handleMsgType({
+            type: TNotification.error,
+            message: `${t('common.yourPasswordMustHave')}`,
           });
         }
 
-        return addAuthNotification(AuthViews.SIGN_UP, {
-          icon: 'Idea',
-          color: 'Purple',
-          message: t('authentication.signUp.badUserInputErrorMessage', {
-            email: 'support@spottedzebra.co.uk',
-          }),
+        return handleMsgType({
+          type: TNotification.error,
+          message: `${t('authentication.signUp.accountCreationError')}`,
         });
       });
     },
@@ -104,13 +102,15 @@ const SignUp: FC<ISignUp> = ({
   };
 
   return (
-    <SignUpPresentational
-      fullName={authPrepopulatedValues.fullName}
-      email={authPrepopulatedValues.email}
-      onSignUp={handleSignUp}
-      notification={signUpNotification}
-      loginRedirectUrl={authenticationRoutes.login}
-    />
+    <>
+      <HelmetAndPageAnnouncer pageTitle={t('authentication.signUp.title')} />
+      <SignUpPresentational
+        fullName={authPrepopulatedValues.fullName}
+        email={authPrepopulatedValues.email}
+        onSignUp={handleSignUp}
+        loginRedirectUrl={authenticationRoutes.login}
+      />
+    </>
   );
 };
 

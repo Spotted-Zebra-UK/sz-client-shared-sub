@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import CheckboxFormField from '../../../../../components/molecules/CheckboxFormField/CheckboxFormField';
+import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
+import { Checkbox } from '@spotted-zebra-uk/sz-ui-shared.widgets.checkbox';
 
 interface IPrivacyPolicyCheckboxField {
   value: boolean;
@@ -10,27 +11,44 @@ interface IPrivacyPolicyCheckboxField {
   error?: string;
 }
 
-const PrivacyPolicyCheckboxField: FC<IPrivacyPolicyCheckboxField> = props => {
+const PrivacyPolicyCheckboxField: FC<IPrivacyPolicyCheckboxField> = ({
+  value,
+  name,
+  onChange,
+  error,
+  ...props
+}) => {
   const { t } = useTranslation();
   const renderPrivacyPolicyCheckboxLabel = () => {
     return (
       <span className="SignUpForm__PrivacyPolicyCheckboxLabel">
-        {t('authentication.signUp.iHaveReadThe')}{' '}
-        <a
-          className="SignUpForm__PrivacyPolicyCheckboxLabel__Link"
-          href="https://www.spottedzebra.co.uk/privacy/privacy"
+        {t('authentication.signUp.iHaveReadThe')}
+        <Link
+          to="https://www.spottedzebra.co.uk/privacy/privacy"
           target="_blank"
-          rel="noopener noreferrer"
         >
           {t('authentication.signUp.privacyNotice')}
-        </a>
+        </Link>
         {t('authentication.signUp.iAmAnAdult')}
       </span>
     );
   };
 
+  const handleChange = () => {
+    onChange(!value, name);
+  };
+
   return (
-    <CheckboxFormField label={renderPrivacyPolicyCheckboxLabel()} {...props} />
+    <div className="CheckboxFormField">
+      <Checkbox
+        label={renderPrivacyPolicyCheckboxLabel()}
+        checked={value}
+        onChange={handleChange}
+        hasError={!!error?.length}
+        {...props}
+        bottomText={error}
+      />
+    </div>
   );
 };
 

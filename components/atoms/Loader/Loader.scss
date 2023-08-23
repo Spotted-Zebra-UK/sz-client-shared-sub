@@ -1,6 +1,7 @@
 @import '../../../variables';
 @import '../../../mixins';
 @import '../../../theme';
+@import '@spotted-zebra-uk/sz-theme.theme/index.module.scss';
 
 .Loader {
   @include loader-size(18px);
@@ -41,9 +42,7 @@
   &--Primary {
     .Loader__Animation {
       > div {
-        @include themify($themes) {
-          background-color: themed('primaryContainedBackgroundColor');
-        }
+        background-color: $color-interactive;
       }
     }
   }
@@ -51,9 +50,7 @@
   &--Secondary {
     .Loader__Animation {
       > div {
-        @include themify($themes) {
-          background-color: themed('secondaryContainedBackgroundColor');
-        }
+        background-color: $color-interactive;
       }
     }
   }
@@ -61,9 +58,7 @@
   &--Tertiary {
     .Loader__Animation {
       > div {
-        @include themify($themes) {
-          background-color: themed('tertiaryContainedBackgroundColor');
-        }
+        background-color: $color-interactive;
       }
     }
   }

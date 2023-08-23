@@ -1,21 +1,16 @@
 import './TwoFactorAuthentication.scss';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
-import { TNotification } from '../../../interfaces/notification';
-import BubblesBackground from '../../atoms/BubblesBackground/BubblesBackground';
-import Button from '../../atoms/Button/Button';
-import Notification from '../../atoms/Notification/Notification';
+import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
+import { ReactComponent as Logo } from '../../../icons/spottedzebra_new_logo.svg';
 import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm/TwoFactorAuthenticationForm';
 
 interface ITwoFactorAuthentication {
-  loginNotification?: TNotification | null;
   onSubmit: (mfaCode: string) => void;
   requestMfaCode: () => void;
 }
 
 const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
-  loginNotification,
   onSubmit,
   requestMfaCode,
 }) => {
@@ -25,18 +20,20 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
       <div className="TwoFactorAuthentication__Top">
         <Logo className="TwoFactorAuthentication__Top__Logo" />
         <div className="TwoFactorAuthentication__Top__TitleWrapper">
-          <BubblesBackground className="TwoFactorAuthentication__Top__Title">
-            <p className="TwoFactorAuthentication__Top__Title__Row">
-              {t('common.welcome')}
-            </p>
-          </BubblesBackground>
-          {loginNotification ? (
-            <Notification notification={loginNotification} />
-          ) : null}
+          <p className="TwoFactorAuthentication__Top__Title__Row">
+            {t(
+              'authentication.twoFactorAuthentication.twoFactorAuthentication'
+            )}
+          </p>
         </div>
         <div className="TwoFactorAuthentication__Top__Heading">
           <p className="TwoFactorAuthentication__Top__Heading__Row">
             {t('authentication.twoFactorAuthentication.6DigitCodeInstruction')}
+          </p>
+          <p className="TwoFactorAuthentication__Top__Heading__Row">
+            {t(
+              'authentication.twoFactorAuthentication.pleaseInputTheCodeBelow'
+            )}
           </p>
         </div>
       </div>
@@ -46,7 +43,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
           className="TwoFactorAuthentication__RequestCode__Button"
           onClick={requestMfaCode}
         >
-          {t('authentication.twoFactorAuthentication.requestACode')}
+          {t('authentication.twoFactorAuthentication.requestANewCode')}
         </Button>
       </div>
     </div>

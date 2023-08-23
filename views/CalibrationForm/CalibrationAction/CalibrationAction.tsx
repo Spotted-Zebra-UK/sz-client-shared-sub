@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
+import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
 import { ResultAccessAllowedActions } from '../../../../../generated/graphql';
-import SquareButton from '../../../components/molecules/SquareButton/SquareButton';
 
 interface ICalibrateInterface {
   onCreateVersion: () => void;
@@ -25,27 +25,27 @@ const CalibrationAction: FC<ICalibrateInterface> = ({
         actions?.map((action, key) => {
           if (action === 'CREATE')
             return (
-              <SquareButton key={key} onClick={onCreateVersion}>
+              <Button key={key} onClick={onCreateVersion}>
                 {'Save & Confirm'}
-              </SquareButton>
+              </Button>
             );
           else if (action === 'SIGN_OFF')
             return (
-              <SquareButton key={key} onClick={onUpdateStatus}>
+              <Button key={key} onClick={onUpdateStatus}>
                 {`Confirm ${currentUser}`}
-              </SquareButton>
+              </Button>
             );
           else
             return (
-              <SquareButton key={key} color="White">
+              <Button key={key} color="White">
                 {"I'll Make decision later"}
-              </SquareButton>
+              </Button>
             );
         })
       ) : (
-        <SquareButton color="White" onClick={onCloseHandler}>
+        <Button color="White" onClick={onCloseHandler}>
           {'Close'}
-        </SquareButton>
+        </Button>
       )}
     </React.Fragment>
   );
