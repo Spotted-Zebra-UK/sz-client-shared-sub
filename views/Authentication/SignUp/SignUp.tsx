@@ -16,6 +16,7 @@ import Error from '../../../enums/error';
 import { formatFullName } from '../../../helpers/fullName';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { ISignUpWrapper } from './SignUpWrapper/SignUpWrapper';
+import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
 
 interface ISignUp extends ISignUpWrapper {
   companyId?: number;
@@ -101,12 +102,15 @@ const SignUp: FC<ISignUp> = ({
   };
 
   return (
-    <SignUpPresentational
-      fullName={authPrepopulatedValues.fullName}
-      email={authPrepopulatedValues.email}
-      onSignUp={handleSignUp}
-      loginRedirectUrl={authenticationRoutes.login}
-    />
+    <>
+      <HelmetAndPageAnnouncer pageTitle={t('authentication.signUp.title')} />
+      <SignUpPresentational
+        fullName={authPrepopulatedValues.fullName}
+        email={authPrepopulatedValues.email}
+        onSignUp={handleSignUp}
+        loginRedirectUrl={authenticationRoutes.login}
+      />
+    </>
   );
 };
 
