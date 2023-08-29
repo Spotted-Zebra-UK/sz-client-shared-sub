@@ -34,7 +34,7 @@ const CreatePassword: FC<ICreatePassword> = ({
     onCompleted: () => {
       handleMsgType({
         type: INotification.success,
-        message: t(
+        title: t(
           'authentication.createPassword.yourPasswordWasSuccessFullyChanged'
         ),
       });
@@ -45,6 +45,7 @@ const CreatePassword: FC<ICreatePassword> = ({
         if (message === Error.RECOVERY_TOKEN_EXPIRED_OR_INVALID) {
           handleMsgType({
             type: INotification.error,
+            title: t('authentication.createPassword.expiredRecoveryLink'),
             message: t('authentication.createPassword.recoveryLinkIsInvalid'),
           });
         }

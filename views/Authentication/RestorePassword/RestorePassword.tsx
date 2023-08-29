@@ -33,6 +33,7 @@ const RestorePassword: FC<IRestorePassword> = ({
     onCompleted: () => {
       handleMsgType({
         type: INotification.success,
+        title: t('authentication.restorePassword.success'),
         message: t(
           'authentication.restorePassword.weWillAttemptToSendAPasswordResetLinkToYourEmail'
         ),
@@ -44,6 +45,7 @@ const RestorePassword: FC<IRestorePassword> = ({
         if (code === Error.INVALID_CREDENTIALS) {
           handleMsgType({
             type: INotification.error,
+            title: t('authentication.restorePassword.failed'),
             message: t(
               'authentication.restorePassword.weWillAttemptToSendAPasswordResetLinkToYourEmail'
             ),
@@ -53,6 +55,7 @@ const RestorePassword: FC<IRestorePassword> = ({
           // TODO: Maybe move the message to be a standalone note on screen when trying to create/change a password
           handleMsgType({
             type: INotification.error,
+            title: t('authentication.restorePassword.failed'),
             message: t('common.yourPasswordMustHave'),
           });
         }
