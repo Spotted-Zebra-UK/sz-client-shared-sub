@@ -61,6 +61,7 @@ const SignUp: FC<ISignUp> = ({
         if (code === Error.EXISTING_ACCOUNT) {
           handleMsgType({
             type: TNotification.error,
+            title: t('authentication.signUp.failed'),
             message: `${t(
               'authentication.signUp.yourAccountHasAlreadyBeenCreated'
             )}`,
@@ -71,12 +72,14 @@ const SignUp: FC<ISignUp> = ({
           // TODO: Maybe move the message to be a standalone note on screen when trying to create/change a password
           return handleMsgType({
             type: TNotification.error,
+            title: t('authentication.signUp.failed'),
             message: `${t('common.yourPasswordMustHave')}`,
           });
         }
 
         return handleMsgType({
           type: TNotification.error,
+          title: t('authentication.signUp.failed'),
           message: `${t('authentication.signUp.accountCreationError')}`,
         });
       });

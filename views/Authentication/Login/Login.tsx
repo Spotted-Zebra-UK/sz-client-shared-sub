@@ -135,6 +135,7 @@ const Login: FC<ILogin> = ({
                */
               handleMsgType({
                 type: TNotification.error,
+                title: t('authentication.login.failed'),
                 message: `${t(
                   'authentication.login.yourEmailOrPasswordDoNotMatch'
                 )}`,
@@ -148,6 +149,7 @@ const Login: FC<ILogin> = ({
               const secondsLeft = Math.ceil(+substr);
               handleMsgType({
                 type: TNotification.error,
+                title: t('authentication.login.failed'),
                 message: t(
                   'authentication.login.dueToMultipleFailedLoginAttempts',
                   { secondsLeft }

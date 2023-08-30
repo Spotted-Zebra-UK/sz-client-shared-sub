@@ -71,7 +71,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
           if (code === Error.INVALID_MFA_CODE) {
             return handleMsgType({
               type: TNotification.error,
-              message: `${t(
+              title: `${t(
                 'authentication.twoFactorAuthentication.providedInvalidCode'
               )}`,
             });
@@ -80,7 +80,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
           if (code === Error.EXPIRED_MFA_TOKEN) {
             handleMsgType({
               type: TNotification.error,
-              message: `${t(
+              title: `${t(
                 'authentication.twoFactorAuthentication.sessionExpired'
               )}`,
             });
@@ -95,7 +95,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
             const secondsLeft = Math.ceil(+substr);
             return handleMsgType({
               type: TNotification.error,
-              message: t(
+              title: t(
                 'authentication.login.dueToMultipleFailedLoginAttempts',
                 { secondsLeft }
               ),
@@ -104,7 +104,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
 
           return handleMsgType({
             type: TNotification.error,
-            message: `${t(
+            title: `${t(
               'authentication.twoFactorAuthentication.generalError'
             )}`,
           });
