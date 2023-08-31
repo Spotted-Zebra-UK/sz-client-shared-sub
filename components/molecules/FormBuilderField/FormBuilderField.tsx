@@ -5,8 +5,7 @@ import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-inpu
 import { MultiselectFormField } from '@spotted-zebra-uk/sz-ui-shared.widgets.multiselect-form-field';
 import { TMultiselectOption } from '@spotted-zebra-uk/sz-ui-shared.ui.multiselect';
 import { TextArea } from '@spotted-zebra-uk/sz-ui-shared.ui.text-area';
-import Datepicker from '../../../components/atoms/Datepicker/Datepicker';
-import FieldLabelWithHint from '../../../components/atoms/FieldLabelWithHint/FieldLabelWithHint';
+import { Datepicker } from '@spotted-zebra-uk/sz-ui-shared.widgets.datepicker';
 import FormField from '../../../components/atoms/FormField/FormField';
 import { TFieldSettingsModel } from '../../../enums/formType';
 import { TFormFieldValue } from '../../../interfaces/form';
@@ -104,13 +103,17 @@ const FormBuilderField: FC<IFormBuilderField> = ({
     if (type === FieldType.DateField) {
       return (
         <>
-          <FieldLabelWithHint hint={hint} label={label} />
           <Datepicker
-            onChange={onChange}
-            value={value as string}
+            onDateChange={(value: string) => {
+              onChange(value, name);
+            }}
+            date={value as string}
             id={name}
             name={name}
             isDisabled={isDisabled}
+            placeholder={label}
+            label={label}
+            hasError={Boolean(error)}
           />
         </>
       );
@@ -173,7 +176,8 @@ const FormBuilderField: FC<IFormBuilderField> = ({
     type === FieldType.MultipleSelectField ||
     (type === FieldType.LongTextField && formType !== FormType.TrForm) ||
     type === FieldType.SingleSelectField ||
-    type === FieldType.CompanyEmployeeSelectField
+    type === FieldType.CompanyEmployeeSelectField ||
+    type === FieldType.DateField
   ) {
     return <>{renderFormFieldElement()}</>;
   }
