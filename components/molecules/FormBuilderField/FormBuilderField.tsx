@@ -76,7 +76,7 @@ const FormBuilderField: FC<IFormBuilderField> = ({
           id={id}
           name={name}
           options={options || []}
-          isSearchable={settings.searchable}
+          isSearchable={settings?.searchable}
           isDisabled={isDisabled}
           className={className}
         />
