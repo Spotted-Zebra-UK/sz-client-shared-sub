@@ -1,17 +1,17 @@
 import './FormBuilderField.scss';
 import { FieldType, FormType } from 'generated/graphql';
 import { FC, memo, useState } from 'react';
-import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-input-field';
-import { MultiselectFormField } from '@spotted-zebra-uk/sz-ui-shared.widgets.multiselect-form-field';
 import { TMultiselectOption } from '@spotted-zebra-uk/sz-ui-shared.ui.multiselect';
+import { TSelectOption } from '@spotted-zebra-uk/sz-ui-shared.ui.select';
 import { TextArea } from '@spotted-zebra-uk/sz-ui-shared.ui.text-area';
 import { Datepicker } from '@spotted-zebra-uk/sz-ui-shared.widgets.datepicker';
+import { MultiselectFormField } from '@spotted-zebra-uk/sz-ui-shared.widgets.multiselect-form-field';
+import { SelectFormField } from '@spotted-zebra-uk/sz-ui-shared.widgets.select-form-field';
+import { TextInputField } from '@spotted-zebra-uk/sz-ui-shared.widgets.text-input-field';
 import FormField from '../../../components/atoms/FormField/FormField';
 import { TFieldSettingsModel } from '../../../enums/formType';
 import { TFormFieldValue } from '../../../interfaces/form';
 import FloatingLabelTextArea from '../../atoms/FloatingLabelTextArea/FloatingLabelTextArea';
-import { SelectFormField } from '@spotted-zebra-uk/sz-ui-shared.widgets.select-form-field';
-import { TSelectOption } from '@spotted-zebra-uk/sz-ui-shared.ui.select';
 
 interface IFormBuilderField {
   id: string;
@@ -44,7 +44,7 @@ const FormBuilderField: FC<IFormBuilderField> = ({
   hint = '',
   settings = {
     allowFreeText: true,
-    searchable: false,
+    searchable: true,
   },
   formType = FormType.CiForm,
   isDisabled = false,
