@@ -51,11 +51,22 @@ const FormBuilderField: FC<IFormBuilderField> = ({
   autoComplete,
   className,
 }) => {
+  const getMultiSelectInitialValues = () => {
+    if (type === FieldType.MultipleSelectField && options) {
+      const values = value as string[];
+
+      return options.filter(option => values.includes(option.value));
+    }
+
+    return [];
+  };
+
   // To keep track of selected options in order to fix problems with
   // focus. Since we need to map TMultiselectOption to TFormFieldValue,
   // that mapping breaks focus on selected elements.
-  const [selectedOptions, setSelectedOptions] =
-    useState<TMultiselectOption[]>();
+  const [selectedOptions, setSelectedOptions] = useState<TMultiselectOption[]>(
+    getMultiSelectInitialValues()
+  );
 
   const renderFormFieldElement = () => {
     if (
