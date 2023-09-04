@@ -89,6 +89,8 @@ const FormBuilderField: FC<IFormBuilderField> = ({
           isSearchable={settings?.searchable}
           isDisabled={isDisabled}
           className={className}
+          hasError={!!error}
+          bottomText={error}
         />
       );
     }
@@ -125,6 +127,7 @@ const FormBuilderField: FC<IFormBuilderField> = ({
             placeholder={label}
             label={label}
             hasError={Boolean(error)}
+            bottomText={error}
           />
         </>
       );
@@ -145,6 +148,8 @@ const FormBuilderField: FC<IFormBuilderField> = ({
               name
             );
           }}
+          hasError={!!error}
+          bottomText={error}
         />
       );
     }
@@ -176,6 +181,8 @@ const FormBuilderField: FC<IFormBuilderField> = ({
             disabled={isDisabled}
             aria-label={label}
             autoComplete={autoComplete}
+            hasError={!!error}
+            errorText={error}
           />
         </>
       );

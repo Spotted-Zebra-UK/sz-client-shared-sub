@@ -1,0 +1,10 @@
+@import '@spotted-zebra-uk/sz-theme.theme/index.module.scss';
+
+//TODO - remove when datepicker is updated
+.datepicker__button_error {
+    border-bottom: 1px solid $color-red-front !important;
+
+    .placeholder {
+        color: $color-red-front !important;
+    }
+}
