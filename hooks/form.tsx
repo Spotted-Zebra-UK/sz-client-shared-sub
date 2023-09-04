@@ -50,8 +50,9 @@ export const useForm = ({
     setValues(prevValues => ({ ...prevValues, [name]: newValue }));
 
     if (errors && errors[name]) {
-      const newErrors = { ...errors, [name]: '' };
-      setErrors(() => newErrors);
+      setErrors(prevErrors => {
+        return { ...prevErrors, [name]: '' };
+      });
     }
   };
 
