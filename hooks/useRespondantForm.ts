@@ -288,7 +288,7 @@ const useRespondantForm = ({
 
               if (field.type === FieldType.MultipleSelectField) {
                 return {
-                  response: JSON.stringify(fieldAnswerValue) as string,
+                  response: JSON.stringify(typeof fieldAnswerValue === 'string' ? [fieldAnswerValue] : fieldAnswerValue) as string,
                   fieldId: +field.id,
                 };
               }
