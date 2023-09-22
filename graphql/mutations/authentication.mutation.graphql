@@ -61,8 +61,16 @@ mutation UpdateIdentityPassword(
   )
 }
 
-mutation MfaAccessToken($email: String!, $password: String!) {
-  mfaAccessToken(email: $email, password: $password) {
+mutation MfaAccessToken(
+  $email: String!
+  $password: String!
+  $clientDomainType: ClientDomainType!
+) {
+  mfaAccessToken(
+    email: $email
+    password: $password
+    clientDomainType: $clientDomainType
+  ) {
     mfaAccessToken
   }
 }
