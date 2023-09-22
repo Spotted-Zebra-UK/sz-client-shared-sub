@@ -89,6 +89,6 @@ mutation RequestMfaCode(
 ) {
   requestMfaCode(
     mfaAccessToken: $mfaAccessToken
-    clientDomainType: clientDomainType
+    clientDomainType: $clientDomainType
   )
 }
