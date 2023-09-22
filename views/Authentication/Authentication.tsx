@@ -34,18 +34,18 @@ const Authentication: FC<IAuthentication> = ({
   const { state } = useLocation<
     IPrivateRouteRedirectLocationState | undefined
   >();
+
   const authRedirectUrl = useRef(
     state?.from && state.from.pathname
       ? `${state.from.pathname}${state.from.search || ''}`
       : defaultRedirectUrl
   );
 
-  const [authPrepopulatedValues, setAuthPrepopulatedValues] = useState<
-    IAuthPrepouplatedValues
-  >({
-    fullName: '',
-    email: '',
-  });
+  const [authPrepopulatedValues, setAuthPrepopulatedValues] =
+    useState<IAuthPrepouplatedValues>({
+      fullName: '',
+      email: '',
+    });
   const [authNotifications, setAuthNotifications] = useState(
     initializeAuthNotifications
   );

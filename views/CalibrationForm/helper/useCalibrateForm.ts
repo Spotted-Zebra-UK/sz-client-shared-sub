@@ -403,7 +403,18 @@ export const useCalibrateForm = ({
   // Formatting Form Result
   const getFormResult = useCallback(
     (resultFields: ResultModel[], formType: BasicScoreType) => {
-      let data = resultFields.sort((a, b) => a.measurementId - b.measurementId);
+      const resultHierarchy: {
+        [K in string]: number;
+      } = {
+        original: 1,
+        'manager decision': 2,
+        'hr decision': 3,
+        'signed off': 4,
+      };
+      let data = resultFields.sort(
+        (a, b) =>
+          resultHierarchy[a.label || ''] - resultHierarchy[b.label || '']
+      );
       let formResultDictionary: { [key: string]: ResultModel[] } = {};
       const formattedFormResults: IFormResult[] = [];
       //setting Score

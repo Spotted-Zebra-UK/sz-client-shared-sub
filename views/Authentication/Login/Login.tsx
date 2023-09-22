@@ -27,7 +27,7 @@ interface ILogin {
   // Url where user will be redirected after successful login.
   authRedirectUrl: string;
   // Notification is visible if this prop is provided.
-  loginNotification?: TNotification | undefined;
+  loginNotification?: TNotification;
   addAuthNotification: (view: AuthViews, notification: TNotification) => void;
   clearAuthViewNotifications: (view: AuthViews) => void;
   clientType?: string;
@@ -39,7 +39,6 @@ const Login: FC<ILogin> = ({
   loginNotification,
   addAuthNotification,
   clearAuthViewNotifications,
-  clientType,
 }) => {
   const { t } = useTranslation();
   const history = useHistory();
@@ -83,41 +82,6 @@ const Login: FC<ILogin> = ({
           data.authenticate.refreshToken
         );
         history.push(authRedirectUrl);
-
-        // TODO:Logic needs to be reviewed.
-
-        // if (clientType !== 'company') {
-        //   localStorage.setItem(
-        //     AUTH_TOKEN_STORAGE_KEY,
-        //     data.authenticate.accessToken
-        //   );
-        //   localStorage.setItem(
-        //     REFRESH_TOKEN_STORAGE_KEY,
-        //     data.authenticate.refreshToken
-        //   );
-        //   history.push(authRedirectUrl);
-        // } else {
-        //   if (mfaCookie.length > 0) {
-        //     localStorage.setItem(
-        //       AUTH_TOKEN_STORAGE_KEY,
-        //       data.authenticate.accessToken
-        //     );
-        //     localStorage.setItem(
-        //       REFRESH_TOKEN_STORAGE_KEY,
-        //       data.authenticate.refreshToken
-        //     );
-        //     history.push(authRedirectUrl);
-        //   } else {
-        //     if (email && password) {
-        //       mfaAccessToken({
-        //         variables: {
-        //           email: email,
-        //           password: password,
-        //         },
-        //       });
-        //     }
-        //   }
-        // }
       },
       onError: props => {
         props.graphQLErrors.forEach(({ extensions }) => {

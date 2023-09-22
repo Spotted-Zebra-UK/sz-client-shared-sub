@@ -102,7 +102,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSubmit = (mfaCode: number) => {
+  const handleSubmit = (mfaCode: string) => {
     if (!mfaAccessToken) history.push(authenticationRoutes.login);
     mfaAuthenticate({
       variables: {
