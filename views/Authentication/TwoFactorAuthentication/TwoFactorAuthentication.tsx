@@ -107,7 +107,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
     mfaAuthenticate({
       variables: {
         mfaAccessToken: mfaAccessToken ? mfaAccessToken : '',
-        mfaCode,
+        mfaCode: mfaCode.toString(),
       },
     });
   };

@@ -83,6 +83,12 @@ mutation MfaAuthenticate($mfaAccessToken: String!, $mfaCode: Float!) {
   }
 }
 
-mutation RequestMfaCode($mfaAccessToken: String!) {
-  requestMfaCode(mfaAccessToken: $mfaAccessToken)
+mutation RequestMfaCode(
+  $mfaAccessToken: String!
+  $clientDomainType: ClientDomainType!
+) {
+  requestMfaCode(
+    mfaAccessToken: $mfaAccessToken
+    clientDomainType: clientDomainType
+  )
 }
