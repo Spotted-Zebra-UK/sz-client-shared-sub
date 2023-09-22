@@ -1,14 +1,12 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  ClientDomainType,
-  useRequestPasswordRecoveryMutation,
-} from '../../../../../generated/graphql';
+import { useRequestPasswordRecoveryMutation } from '../../../../../generated/graphql';
 import RestorePasswordPresentational from '../../../components/organisms/RestorePassword/RestorePassword';
 import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { getClientDomainType } from '../../../helpers/getClientDomainType';
 
 interface IRestorePassword {
   restorePasswordNotification?: TNotification;
@@ -55,14 +53,8 @@ const RestorePassword: FC<IRestorePassword> = ({
       });
     },
   });
-  const getClientDomainType = (): ClientDomainType => {
-    if (clientType === 'candidate') return ClientDomainType.CandidateAppDomain;
-    else if (clientType === 'company') return ClientDomainType.CompanyAppDomain;
-    else if (clientType === 'admin') return ClientDomainType.AdminAppDomain;
-    else return ClientDomainType.CandidateAppDomain;
-  };
   const handleRestorePassword = (email: string) => {
-    const clientDomainType = getClientDomainType();
+    const clientDomainType = getClientDomainType(clientType);
     requestPasswordRecovery({ variables: { email, clientDomainType } });
   };
 

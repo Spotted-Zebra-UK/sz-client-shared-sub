@@ -2,7 +2,6 @@ import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import {
-  ClientDomainType,
   useAuthenticateMutation,
   useMfaAccessTokenMutation,
 } from '../../../../../generated/graphql';
@@ -17,6 +16,7 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { getClientDomainType } from '../../../helpers/getClientDomainType';
 
 interface ILogin {
   // Prepopulates input fields in login form.
@@ -39,6 +39,7 @@ const Login: FC<ILogin> = ({
   loginNotification,
   addAuthNotification,
   clearAuthViewNotifications,
+  clientType,
 }) => {
   const { t } = useTranslation();
   const history = useHistory();
@@ -121,7 +122,7 @@ const Login: FC<ILogin> = ({
                   variables: {
                     email: email,
                     password: password,
-                    clientDomainType: ClientDomainType.CompanyAppDomain,
+                    clientDomainType: getClientDomainType(clientType),
                   },
                 });
               }
