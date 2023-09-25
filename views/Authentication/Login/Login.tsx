@@ -16,6 +16,7 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { getClientDomainType } from '../../../helpers/getClientDomainType';
 
 interface ILogin {
   // Prepopulates input fields in login form.
@@ -38,6 +39,7 @@ const Login: FC<ILogin> = ({
   loginNotification,
   addAuthNotification,
   clearAuthViewNotifications,
+  clientType,
 }) => {
   const { t } = useTranslation();
   const history = useHistory();
@@ -120,6 +122,7 @@ const Login: FC<ILogin> = ({
                   variables: {
                     email: email,
                     password: password,
+                    clientDomainType: getClientDomainType(clientType),
                   },
                 });
               }

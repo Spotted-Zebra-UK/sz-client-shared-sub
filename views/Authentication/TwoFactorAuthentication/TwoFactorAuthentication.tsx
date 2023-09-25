@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   useMfaAuthenticateMutation,
@@ -12,6 +12,7 @@ import {
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
+import { getClientDomainType } from '../../../helpers/getClientDomainType';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
@@ -23,6 +24,7 @@ interface ITwoFactorAuthentication {
   loginNotification?: TNotification | undefined;
   addAuthNotification: (view: AuthViews, notification: TNotification) => void;
   clearAuthViewNotifications: (view: AuthViews) => void;
+  clientType?: string;
 }
 
 const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
@@ -30,6 +32,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
   loginNotification,
   addAuthNotification,
   clearAuthViewNotifications,
+  clientType,
 }) => {
   const history = useHistory();
   const mfaAccessToken = localStorage.getItem(MFA_AUTH_TOKEN);
@@ -116,6 +119,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
     requestMfaCode({
       variables: {
         mfaAccessToken: mfaAccessToken ? mfaAccessToken : '',
+        clientDomainType: getClientDomainType(clientType),
       },
     });
   };
