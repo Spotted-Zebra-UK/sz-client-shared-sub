@@ -15,6 +15,7 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { getClientDomainType } from '../../../helpers/getClientDomainType';
 
 interface ITwoFactorAuthentication {
   // Url where user will be redirected after successful login.
@@ -23,6 +24,7 @@ interface ITwoFactorAuthentication {
   loginNotification?: TNotification | undefined;
   addAuthNotification: (view: AuthViews, notification: TNotification) => void;
   clearAuthViewNotifications: (view: AuthViews) => void;
+  clientType?: string;
 }
 
 const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
@@ -30,6 +32,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
   loginNotification,
   addAuthNotification,
   clearAuthViewNotifications,
+  clientType,
 }) => {
   const history = useHistory();
   const mfaAccessToken = localStorage.getItem(MFA_AUTH_TOKEN);
@@ -116,6 +119,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
     requestMfaCode({
       variables: {
         mfaAccessToken: mfaAccessToken ? mfaAccessToken : '',
+        clientDomainType: getClientDomainType(clientType),
       },
     });
   };
