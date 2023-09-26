@@ -16,7 +16,12 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+<<<<<<< Updated upstream
 import { getClientDomainType } from '../../../helpers/getClientDomainType';
+=======
+import { Loader } from '@spotted-zebra-uk/sz-ui-shared.ui.loader';
+import { useAuthAppRedirect } from '../../../hooks/useAuthAppRedirect';
+>>>>>>> Stashed changes
 
 interface ILogin {
   // Prepopulates input fields in login form.
@@ -53,6 +58,8 @@ const Login: FC<ILogin> = ({
     },
   });
   const [authenticate] = useAuthenticateMutation({});
+
+  const loading = useAuthAppRedirect();
 
   useEffect(() => {
     document.body.style.backgroundColor = 'white';
@@ -133,12 +140,18 @@ const Login: FC<ILogin> = ({
     });
   };
   return (
-    <LoginPresentational
-      email={authPrepopulatedValues.email}
-      loginNotification={loginNotification}
-      onSignIn={handleLogin}
-      restorePasswordUrl={authenticationRoutes.restorePassword}
-    />
+    <>
+      {loading ? (
+        <Loader variant="bubbles" isPageLoader />
+      ) : (
+        <LoginPresentational
+          email={authPrepopulatedValues.email}
+          loginNotification={loginNotification}
+          onSignIn={handleLogin}
+          restorePasswordUrl={authenticationRoutes.restorePassword}
+        />
+      )}
+    </>
   );
 };
 
