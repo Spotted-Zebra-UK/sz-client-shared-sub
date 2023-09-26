@@ -1,3 +1,4 @@
+import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
 import React, { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
@@ -17,10 +18,10 @@ import {
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import Error from '../../../enums/error';
+import { getClientDomainType } from '../../../helpers/getClientDomainType';
 import { TNotification as INotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
-import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
 
 interface ITwoFactorAuthentication {
   // Url where user will be redirected after successful login.
@@ -29,6 +30,7 @@ interface ITwoFactorAuthentication {
   loginNotification?: INotification | undefined;
   addAuthNotification: (view: AuthViews, notification: INotification) => void;
   clearAuthViewNotifications: (view: AuthViews) => void;
+  clientType?: string;
 }
 
 const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
@@ -36,6 +38,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
   loginNotification,
   addAuthNotification,
   clearAuthViewNotifications,
+  clientType,
 }) => {
   const history = useHistory();
   const { t } = useTranslation();
@@ -143,6 +146,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
     requestMfaCode({
       variables: {
         mfaAccessToken: mfaAccessToken ? mfaAccessToken : '',
+        clientDomainType: getClientDomainType(clientType),
       },
     });
   };
