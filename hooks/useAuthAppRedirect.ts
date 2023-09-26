@@ -33,6 +33,7 @@ export const useAuthAppRedirect = (
     } else {
       console.error('Authentication App url is not set');
     }
+    //eslint-disable-next-line
   }, []);
 
   const getAuthAppEndpoint = () => {
