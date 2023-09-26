@@ -16,12 +16,9 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
-<<<<<<< Updated upstream
 import { getClientDomainType } from '../../../helpers/getClientDomainType';
-=======
 import { Loader } from '@spotted-zebra-uk/sz-ui-shared.ui.loader';
 import { useAuthAppRedirect } from '../../../hooks/useAuthAppRedirect';
->>>>>>> Stashed changes
 
 interface ILogin {
   // Prepopulates input fields in login form.
