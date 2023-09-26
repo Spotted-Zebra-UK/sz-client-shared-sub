@@ -58,6 +58,7 @@ const AuthSwitch: FC<IAuthSwitch> = ({
       <Route path={authenticationRoutes.twoFactorAuthentication}>
         <TwoFactorAuthentication
           authRedirectUrl={authRedirectUrl}
+          clientType={clientType}
           loginNotification={
             authNotifications[AuthViews.TWO_FACTOR_AUTHENTICATION]
           }
