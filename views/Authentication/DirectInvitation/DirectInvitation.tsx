@@ -9,6 +9,10 @@ import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
 import InvitationExpiredView from './InvitationExpiredView/InvitationExpiredView';
+import {
+  AUTH_APP_ROUTES,
+  useAuthAppRedirect,
+} from '../../../hooks/useAuthAppRedirect';
 
 interface IDirectInvitation {
   addAuthNotification: (view: AuthViews, notification: TNotification) => void;
@@ -24,6 +28,11 @@ const DirectInvitation: FC<IDirectInvitation> = ({
   const { t } = useTranslation();
   const location = useLocation();
   const invitationData = parseInvitationToken(location.search);
+
+  const loading = useAuthAppRedirect(AUTH_APP_ROUTES.SIGNUP, {
+    'direct-inv': invitationData?.token || '',
+  });
+
   const getInvitationStatusQueryResponse = useGetInvitationStatusQuery({
     variables: {
       invitationToken: invitationData?.token || '',
@@ -31,7 +40,7 @@ const DirectInvitation: FC<IDirectInvitation> = ({
     onError: () => {},
   });
 
-  if (getInvitationStatusQueryResponse.loading) {
+  if (getInvitationStatusQueryResponse.loading || loading) {
     return (
       <div className="DirectInvitation__LoaderWrapper">
         <Loader />
@@ -40,10 +49,8 @@ const DirectInvitation: FC<IDirectInvitation> = ({
   }
 
   if (getInvitationStatusQueryResponse.data) {
-    const {
-      isCompleted,
-      isExpired,
-    } = getInvitationStatusQueryResponse.data.getInvitationStatus;
+    const { isCompleted, isExpired } =
+      getInvitationStatusQueryResponse.data.getInvitationStatus;
     if (isExpired) {
       // If invitation is expired and user should be notified.
       return (

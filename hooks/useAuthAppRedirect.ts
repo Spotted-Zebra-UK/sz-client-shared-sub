@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 export enum AUTH_APP_ROUTES {
   RESET_PASSWORD = 'reset-password',
   SET_NEW_PASSWORD = 'set-new-password',
-  DIRECT_INVITE = 'inv',
+  SIGNUP = 'sign-up',
 }
 
 type QueryParamsProps = {
@@ -17,7 +17,8 @@ export const useAuthAppRedirect = (
 ): boolean => {
   const { i18n } = useTranslation();
 
-  const isAuthRedirectEnabled = process.env.REACT_APP_AUTH_REDIRECT_ENABLED === 'true';
+  const isAuthRedirectEnabled =
+    process.env.REACT_APP_AUTH_REDIRECT_ENABLED === 'true';
 
   useEffect(() => {
     if (isAuthRedirectEnabled && process.env.REACT_APP_AUTH_URL) {
@@ -25,7 +26,7 @@ export const useAuthAppRedirect = (
         process.env.REACT_APP_AUTH_URL + getAuthAppEndpoint()
       );
 
-      url.searchParams.append('redirect_app', "company");
+      url.searchParams.append('redirect_app', 'company');
       if (queryParams) {
         Object.keys(queryParams).forEach(key => {
           url.searchParams.append(key, queryParams[key]);
@@ -39,7 +40,7 @@ export const useAuthAppRedirect = (
   }, []);
 
   const getAuthAppEndpoint = () => {
-    return i18n.language + '/' + (endpoint ?? '');
+    return '/' + i18n.language + '/' + (endpoint ?? '');
   };
 
   //Needed to know if we should show Loader component until redirect happens
