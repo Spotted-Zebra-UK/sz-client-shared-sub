@@ -7,6 +7,11 @@ import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
 import { getClientDomainType } from '../../../helpers/getClientDomainType';
+import {
+  AUTH_APP_ROUTES,
+  useAuthAppRedirect,
+} from '../../../hooks/useAuthAppRedirect';
+import { Loader } from '@spotted-zebra-uk/sz-ui-shared.ui.loader';
 
 interface IRestorePassword {
   restorePasswordNotification?: TNotification;
@@ -20,6 +25,9 @@ const RestorePassword: FC<IRestorePassword> = ({
   clientType,
 }) => {
   const { t } = useTranslation();
+
+  const loading = useAuthAppRedirect(AUTH_APP_ROUTES.RESET_PASSWORD);
+
   const [requestPasswordRecovery] = useRequestPasswordRecoveryMutation({
     onCompleted: () => {
       addAuthNotification(AuthViews.RESTORE_PASSWORD, {
@@ -59,11 +67,17 @@ const RestorePassword: FC<IRestorePassword> = ({
   };
 
   return (
-    <RestorePasswordPresentational
-      notification={restorePasswordNotification}
-      onRestorePassword={handleRestorePassword}
-      loginRedirectUrl={authenticationRoutes.login}
-    />
+    <>
+      {loading ? (
+        <Loader variant="bubbles" isPageLoader />
+      ) : (
+        <RestorePasswordPresentational
+          notification={restorePasswordNotification}
+          onRestorePassword={handleRestorePassword}
+          loginRedirectUrl={authenticationRoutes.login}
+        />
+      )}
+    </>
   );
 };
 
