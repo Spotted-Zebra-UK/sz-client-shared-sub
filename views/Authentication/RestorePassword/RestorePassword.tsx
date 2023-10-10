@@ -6,6 +6,7 @@ import {
 } from '@spotted-zebra-uk/sz-ui-shared.ui.notification';
 import {
   ClientDomainType,
+  Language,
   useRequestPasswordRecoveryMutation,
 } from '../../../../../generated/graphql';
 import RestorePasswordPresentational from '../../../components/organisms/RestorePassword/RestorePassword';
@@ -26,7 +27,7 @@ const RestorePassword: FC<IRestorePassword> = ({
   addAuthNotification,
   clientType,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { handleMsgType } = useNotification();
 
   const [requestPasswordRecovery] = useRequestPasswordRecoveryMutation({
@@ -68,9 +69,35 @@ const RestorePassword: FC<IRestorePassword> = ({
     else if (clientType === 'admin') return ClientDomainType.AdminAppDomain;
     else return ClientDomainType.CandidateAppDomain;
   };
+  /**
+   * Can add more languages if required
+   */
+  const i18ToLanguage = (language: string) => {
+    switch (language) {
+      case 'de':
+        return Language.German;
+      case 'es':
+        return Language.SpanishCastilian;
+      case 'in':
+        return Language.Indonesian;
+      case 'fr':
+        return Language.French;
+      case 'tr':
+        return Language.Turkish;
+      default:
+        return null;
+    }
+  };
+
   const handleRestorePassword = (email: string) => {
     const clientDomainType = getClientDomainType();
-    requestPasswordRecovery({ variables: { email, clientDomainType } });
+    requestPasswordRecovery({
+      variables: {
+        email,
+        clientDomainType,
+        language: i18ToLanguage(i18n.language),
+      },
+    });
   };
 
   return (

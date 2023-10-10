@@ -1,5 +1,5 @@
 import './CreatePassword.scss';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 import {
@@ -23,12 +23,17 @@ const CreatePassword: FC<ICreatePassword> = ({
   createPasswordNotification,
   addAuthNotification,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { handleMsgType } = useNotification();
 
   const history = useHistory();
   const location = useLocation();
   const parsedRecoveryTokenData = parseRecoveryToken(location.search);
+
+  useEffect(() => {
+    if (parsedRecoveryTokenData?.language)
+      i18n.changeLanguage(parsedRecoveryTokenData?.language);
+  }, [i18n,parsedRecoveryTokenData?.language]);
 
   const [resetPassword] = useUpdateIdentityPasswordMutation({
     onCompleted: () => {

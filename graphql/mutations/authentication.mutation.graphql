@@ -47,8 +47,13 @@ mutation Deauthenticate($accessToken: String!) {
 mutation RequestPasswordRecovery(
   $email: String!
   $clientDomainType: ClientDomainType!
+  $language: Language
 ) {
-  requestPasswordRecovery(email: $email, clientDomainType: $clientDomainType)
+  requestPasswordRecovery(
+    email: $email
+    clientDomainType: $clientDomainType
+    language: $language
+  )
 }
 
 mutation UpdateIdentityPassword(
