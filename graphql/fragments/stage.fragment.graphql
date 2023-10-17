@@ -13,10 +13,7 @@ fragment SmStageCandidateModel on SmStageCandidateModel {
   }
   stageCandidateProjectJobRoles {
     reports {
-      subType
-      blob {
-        url
-      }
+      ...SmStageCandidateProjectJobRoleReport
     }
     projectJobRole {
       ...ProjectJobRole
