@@ -8,6 +8,20 @@ fragment SmStageCandidateModel on SmStageCandidateModel {
     name
     projectId
   }
+  doneForUser {
+    ...User
+  }
+  stageCandidateProjectJobRoles {
+    reports {
+      subType
+      blob {
+        url
+      }
+    }
+    projectJobRole {
+      ...ProjectJobRole
+    }
+  }
   status
   stageResult {
     scores {
