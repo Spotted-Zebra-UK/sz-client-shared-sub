@@ -26,7 +26,7 @@ export const useAuthAppRedirect = (
         process.env.REACT_APP_AUTH_URL + getAuthAppEndpoint()
       );
 
-      url.searchParams.append('redirect_app', 'company');
+      url.searchParams.append('redirect_app', 'candidate');
       if (queryParams) {
         Object.keys(queryParams).forEach(key => {
           url.searchParams.append(key, queryParams[key]);
