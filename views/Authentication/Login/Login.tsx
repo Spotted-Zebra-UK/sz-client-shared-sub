@@ -1,5 +1,5 @@
 import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
-import { FC, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import {
@@ -22,6 +22,8 @@ import { getClientDomainType } from '../../../helpers/getClientDomainType';
 import { TNotification as INotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { Loader } from '@spotted-zebra-uk/sz-ui-shared.ui.loader';
+import { useAuthAppRedirect } from '../../../hooks/useAuthAppRedirect';
 
 interface ILogin {
   // Prepopulates input fields in login form.
@@ -60,6 +62,8 @@ const Login: FC<ILogin> = ({
     },
   });
   const [authenticate] = useAuthenticateMutation({});
+
+  const loading = useAuthAppRedirect();
 
   useEffect(() => {
     document.body.style.backgroundColor = 'white';
@@ -175,12 +179,18 @@ const Login: FC<ILogin> = ({
   };
   return (
     <>
-      <HelmetAndPageAnnouncer pageTitle={t('authentication.login.title')} />
-      <LoginPresentational
-        email={authPrepopulatedValues.email}
-        onSignIn={handleLogin}
-        restorePasswordUrl={authenticationRoutes.restorePassword}
-      />
+      {loading ? (
+        <Loader variant="bubbles" isPageLoader />
+      ) : (
+        <>
+          <HelmetAndPageAnnouncer pageTitle={t('authentication.login.title')} />
+          <LoginPresentational
+            email={authPrepopulatedValues.email}
+            onSignIn={handleLogin}
+            restorePasswordUrl={authenticationRoutes.restorePassword}
+          />
+        </>
+      )}
     </>
   );
 };
