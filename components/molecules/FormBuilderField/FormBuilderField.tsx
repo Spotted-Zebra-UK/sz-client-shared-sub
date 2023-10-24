@@ -1,4 +1,3 @@
-import './FormBuilderField.scss';
 import { FieldType, FormType } from 'generated/graphql';
 import { FC, memo, useState } from 'react';
 import { TMultiselectOption } from '@spotted-zebra-uk/sz-ui-shared.ui.multiselect';
@@ -124,7 +123,7 @@ const FormBuilderField: FC<IFormBuilderField> = ({
             id={name}
             name={name}
             isDisabled={isDisabled}
-            placeholder={label}
+            customPlaceholder={label}
             label={label}
             hasError={Boolean(error)}
             bottomText={error}
