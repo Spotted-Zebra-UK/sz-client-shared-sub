@@ -7,6 +7,20 @@ export enum AUTH_APP_ROUTES {
   SIGNUP = 'sign-up',
 }
 
+export const getIndirectInviteParams = (authUrl: string) => {
+  const queryParams: {
+    [key: string]: string;
+  } = { 'indirect-inv': 'true' };
+
+  //authUrl can be an entire url, so we need to split and take only query params part
+  const urlSplit = authUrl.split('?');
+  const paramsString = urlSplit.length === 2 ? urlSplit[1] : authUrl;
+  const urlParams = new URLSearchParams(paramsString);
+  urlParams.forEach((value, key) => (queryParams[key] = value));
+
+  return queryParams;
+};
+
 type QueryParamsProps = {
   [key: string]: string;
 };
