@@ -31,9 +31,10 @@ const CreatePassword: FC<ICreatePassword> = ({
   const parsedRecoveryTokenData = parseRecoveryToken(location.search);
 
   useEffect(() => {
-    if (parsedRecoveryTokenData?.language)
-      i18n.changeLanguage(parsedRecoveryTokenData?.language);
-  }, [i18n,parsedRecoveryTokenData?.language]);
+    if (parsedRecoveryTokenData?.language) {
+      i18n.changeLanguage(parsedRecoveryTokenData.language);
+    }
+  }, [i18n, parsedRecoveryTokenData]);
 
   const [resetPassword] = useUpdateIdentityPasswordMutation({
     onCompleted: () => {

@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import {
   TNotification as INotification,
   useNotification,
 } from '@spotted-zebra-uk/sz-ui-shared.ui.notification';
+import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
+import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { languageLocalizationShortNames } from '../../../../../constants/languages';
 import {
   ClientDomainType,
-  Language,
   useRequestPasswordRecoveryMutation,
 } from '../../../../../generated/graphql';
 import RestorePasswordPresentational from '../../../components/organisms/RestorePassword/RestorePassword';
@@ -14,7 +15,6 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
-import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
 
 interface IRestorePassword {
   restorePasswordNotification?: TNotification;
@@ -69,25 +69,6 @@ const RestorePassword: FC<IRestorePassword> = ({
     else if (clientType === 'admin') return ClientDomainType.AdminAppDomain;
     else return ClientDomainType.CandidateAppDomain;
   };
-  /**
-   * Can add more languages if required
-   */
-  const i18ToLanguage = (language: string) => {
-    switch (language) {
-      case 'de':
-        return Language.German;
-      case 'es':
-        return Language.SpanishCastilian;
-      case 'in':
-        return Language.Indonesian;
-      case 'fr':
-        return Language.French;
-      case 'tr':
-        return Language.Turkish;
-      default:
-        return null;
-    }
-  };
 
   const handleRestorePassword = (email: string) => {
     const clientDomainType = getClientDomainType();
@@ -95,7 +76,7 @@ const RestorePassword: FC<IRestorePassword> = ({
       variables: {
         email,
         clientDomainType,
-        language: i18ToLanguage(i18n.language),
+        language: languageLocalizationShortNames[i18n.language],
       },
     });
   };
