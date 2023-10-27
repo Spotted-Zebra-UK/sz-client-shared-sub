@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import {
   TNotification as INotification,
   useNotification,
 } from '@spotted-zebra-uk/sz-ui-shared.ui.notification';
+import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
+import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { languageLocalizationShortNames } from '../../../../../constants/languages';
 import {
   ClientDomainType,
   useRequestPasswordRecoveryMutation,
@@ -13,7 +15,6 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
-import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
 
 interface IRestorePassword {
   restorePasswordNotification?: TNotification;
@@ -26,7 +27,7 @@ const RestorePassword: FC<IRestorePassword> = ({
   addAuthNotification,
   clientType,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { handleMsgType } = useNotification();
 
   const [requestPasswordRecovery] = useRequestPasswordRecoveryMutation({
@@ -68,9 +69,16 @@ const RestorePassword: FC<IRestorePassword> = ({
     else if (clientType === 'admin') return ClientDomainType.AdminAppDomain;
     else return ClientDomainType.CandidateAppDomain;
   };
+
   const handleRestorePassword = (email: string) => {
     const clientDomainType = getClientDomainType();
-    requestPasswordRecovery({ variables: { email, clientDomainType } });
+    requestPasswordRecovery({
+      variables: {
+        email,
+        clientDomainType,
+        language: languageLocalizationShortNames[i18n.language],
+      },
+    });
   };
 
   return (

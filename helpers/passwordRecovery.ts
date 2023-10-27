@@ -8,10 +8,11 @@ interface IParsedResponseToken {
 
 export const parseRecoveryToken = (
   urlSearch: string
-): { email: string; token: string } | undefined => {
+): { email: string; token: string; language: string } | undefined => {
   const queryParams = new URLSearchParams(urlSearch);
   const recoveryToken = queryParams.get('token');
-  if (!recoveryToken) {
+  const language = queryParams.get('language');
+  if (!recoveryToken || !language) {
     return undefined;
   }
 
@@ -24,5 +25,6 @@ export const parseRecoveryToken = (
   return {
     email: parsedToken.email,
     token: recoveryToken,
+    language,
   };
 };
