@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
+  ClientDomainType,
   useMfaAuthenticateMutation,
   useRequestMfaCodeMutation,
 } from '../../../../../generated/graphql';
@@ -116,6 +117,7 @@ const TwoFactorAuthentication: FC<ITwoFactorAuthentication> = ({
     requestMfaCode({
       variables: {
         mfaAccessToken: mfaAccessToken ? mfaAccessToken : '',
+        clientDomainType: ClientDomainType.PdfAppDomain,
       },
     });
   };
