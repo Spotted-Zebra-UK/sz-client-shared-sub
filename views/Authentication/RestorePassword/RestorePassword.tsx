@@ -15,7 +15,6 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
-import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
 import {
   AUTH_APP_ROUTES,
   useAuthAppRedirect,
