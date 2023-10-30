@@ -15,6 +15,12 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import { HelmetAndPageAnnouncer } from 'components/organisms/HelmetAndPageAnnouncer/HelmetAndPageAnnouncer';
+import {
+  AUTH_APP_ROUTES,
+  useAuthAppRedirect,
+} from '../../../hooks/useAuthAppRedirect';
+import { Loader } from '@spotted-zebra-uk/sz-ui-shared.ui.loader';
 
 interface IRestorePassword {
   restorePasswordNotification?: TNotification;
@@ -29,6 +35,8 @@ const RestorePassword: FC<IRestorePassword> = ({
 }) => {
   const { t, i18n } = useTranslation();
   const { handleMsgType } = useNotification();
+
+  const loading = useAuthAppRedirect(AUTH_APP_ROUTES.RESET_PASSWORD);
 
   const [requestPasswordRecovery] = useRequestPasswordRecoveryMutation({
     onCompleted: () => {
@@ -83,14 +91,20 @@ const RestorePassword: FC<IRestorePassword> = ({
 
   return (
     <>
-      <HelmetAndPageAnnouncer
-        pageTitle={t('authentication.restorePassword.title')}
-      />
-      <RestorePasswordPresentational
-        notification={restorePasswordNotification}
-        onRestorePassword={handleRestorePassword}
-        loginRedirectUrl={authenticationRoutes.login}
-      />
+      {loading ? (
+        <Loader variant="bubbles" isPageLoader />
+      ) : (
+        <>
+          <HelmetAndPageAnnouncer
+            pageTitle={t('authentication.restorePassword.title')}
+          />
+          <RestorePasswordPresentational
+            notification={restorePasswordNotification}
+            onRestorePassword={handleRestorePassword}
+            loginRedirectUrl={authenticationRoutes.login}
+          />
+        </>
+      )}
     </>
   );
 };

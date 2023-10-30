@@ -4,6 +4,12 @@ import { findProjectIdIndirectInvitationUrl } from '../../../../helpers/invitati
 import { TNotification } from '../../../../interfaces/notification';
 import { AuthViews } from '../../Authentication.constants';
 import SignUp from '../SignUp';
+import {
+  AUTH_APP_ROUTES,
+  getIndirectInviteParams,
+  useAuthAppRedirect,
+} from '../../../../hooks/useAuthAppRedirect';
+import { Loader } from '@spotted-zebra-uk/sz-ui-shared.ui.loader';
 
 export interface ISignUpWrapper {
   authPrepopulatedValues?: {
@@ -23,6 +29,11 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
   signUpNotification,
   addAuthNotification,
 }) => {
+  const loading = useAuthAppRedirect(
+    AUTH_APP_ROUTES.SIGNUP,
+    getIndirectInviteParams(authRedirectUrl)
+  );
+
   const [companyId, setCompanyId] = useState<number>();
   const [projectId, setProjectId] = useState<number>();
   const [getCompanyId] = useCompanyIdByProjectLazyQuery({
@@ -35,9 +46,8 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
   });
 
   useEffect(() => {
-    const { projectId, companyId } = findProjectIdIndirectInvitationUrl(
-      authRedirectUrl
-    );
+    const { projectId, companyId } =
+      findProjectIdIndirectInvitationUrl(authRedirectUrl);
     if (projectId) {
       setProjectId(projectId);
       getCompanyId({ variables: { id: projectId } });
@@ -49,15 +59,21 @@ const SignUpWrapper: FC<ISignUpWrapper> = ({
   }, []);
 
   return (
-    <SignUp
-      authPrepopulatedValues={authPrepopulatedValues}
-      authRedirectUrl={authRedirectUrl}
-      directInvitationToken={directInvitationToken}
-      signUpNotification={signUpNotification}
-      addAuthNotification={addAuthNotification}
-      companyId={companyId}
-      projectId={projectId}
-    />
+    <>
+      {loading ? (
+        <Loader variant="bubbles" isPageLoader />
+      ) : (
+        <SignUp
+          authPrepopulatedValues={authPrepopulatedValues}
+          authRedirectUrl={authRedirectUrl}
+          directInvitationToken={directInvitationToken}
+          signUpNotification={signUpNotification}
+          addAuthNotification={addAuthNotification}
+          companyId={companyId}
+          projectId={projectId}
+        />
+      )}
+    </>
   );
 };
 

@@ -13,6 +13,11 @@ import { parseRecoveryToken } from '../../../helpers/passwordRecovery';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import {
+  AUTH_APP_ROUTES,
+  useAuthAppRedirect,
+} from '../../../hooks/useAuthAppRedirect';
+import { Loader } from '@spotted-zebra-uk/sz-ui-shared.ui.loader';
 
 interface ICreatePassword {
   createPasswordNotification?: TNotification;
@@ -35,6 +40,10 @@ const CreatePassword: FC<ICreatePassword> = ({
       i18n.changeLanguage(parsedRecoveryTokenData.language);
     }
   }, [i18n, parsedRecoveryTokenData]);
+  
+  const loading = useAuthAppRedirect(AUTH_APP_ROUTES.SET_NEW_PASSWORD, {
+    token: parsedRecoveryTokenData?.token || '',
+  });
 
   const [resetPassword] = useUpdateIdentityPasswordMutation({
     onCompleted: () => {
@@ -71,11 +80,17 @@ const CreatePassword: FC<ICreatePassword> = ({
   };
 
   return (
-    <CreatePasswordPresentational
-      notification={createPasswordNotification}
-      onCreatePassword={handleCreatePassword}
-      loginRedirectUrl={authenticationRoutes.login}
-    />
+    <>
+      {loading ? (
+        <Loader variant="bubbles" isPageLoader />
+      ) : (
+        <CreatePasswordPresentational
+          notification={createPasswordNotification}
+          onCreatePassword={handleCreatePassword}
+          loginRedirectUrl={authenticationRoutes.login}
+        />
+      )}
+    </>
   );
 };
 
