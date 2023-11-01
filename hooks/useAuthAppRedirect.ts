@@ -25,7 +25,8 @@ export const getIndirectInviteParams = (authUrl: string) => {
 
 export const useAuthAppRedirect = (
   endpoint?: string,
-  queryParams?: QueryParamsProps
+  queryParams?: QueryParamsProps,
+  language?: string
 ): boolean => {
   const { i18n } = useTranslation();
 
@@ -35,7 +36,7 @@ export const useAuthAppRedirect = (
   useEffect(() => {
     if (isAuthRedirectEnabled && process.env.REACT_APP_AUTH_URL) {
       const url = new URL(
-        process.env.REACT_APP_AUTH_URL + getAuthAppEndpoint()
+        process.env.REACT_APP_AUTH_URL + getAuthAppEndpoint(language)
       );
 
       url.searchParams.append('redirect_app', 'candidate');
@@ -51,8 +52,8 @@ export const useAuthAppRedirect = (
     //eslint-disable-next-line
   }, []);
 
-  const getAuthAppEndpoint = () => {
-    return '/' + i18n.language + '/' + (endpoint ?? '');
+  const getAuthAppEndpoint = (language: string | undefined) => {
+    return '/' + (language ?? i18n.language) + '/' + (endpoint ?? '');
   };
 
   //Needed to know if we should show Loader component until redirect happens

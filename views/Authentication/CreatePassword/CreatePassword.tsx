@@ -40,10 +40,14 @@ const CreatePassword: FC<ICreatePassword> = ({
       i18n.changeLanguage(parsedRecoveryTokenData.language);
     }
   }, [i18n, parsedRecoveryTokenData]);
-  
-  const loading = useAuthAppRedirect(AUTH_APP_ROUTES.SET_NEW_PASSWORD, {
-    token: parsedRecoveryTokenData?.token || '',
-  });
+
+  const loading = useAuthAppRedirect(
+    AUTH_APP_ROUTES.SET_NEW_PASSWORD,
+    {
+      token: parsedRecoveryTokenData?.token || '',
+    },
+    parsedRecoveryTokenData?.language
+  );
 
   const [resetPassword] = useUpdateIdentityPasswordMutation({
     onCompleted: () => {
