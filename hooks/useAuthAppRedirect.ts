@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { AUTH_TOKEN_STORAGE_KEY } from '../constants/authentication';
 
 export enum AUTH_APP_ROUTES {
   RESET_PASSWORD = 'reset-password',
@@ -44,6 +45,13 @@ export const useAuthAppRedirect = (
         Object.keys(queryParams).forEach(key => {
           url.searchParams.append(key, queryParams[key]);
         });
+      }
+
+      const authToken = localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
+      // If auth_token exists in localStorage it is valid, so pass it to
+      // authentication app so it can be reused when using indirect-inv auto accept.
+      if (authToken) {
+        url.searchParams.append(AUTH_TOKEN_STORAGE_KEY, authToken);
       }
       window.location.replace(url);
     } else {
