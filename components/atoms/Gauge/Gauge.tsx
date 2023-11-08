@@ -14,6 +14,7 @@ interface IGauge {
   showGradientPath?: boolean;
   className?: string;
   childCircularComponent?: JSX.Element;
+  showScore?: boolean;
 }
 
 const Gauge: FC<IGauge> = ({
@@ -23,6 +24,7 @@ const Gauge: FC<IGauge> = ({
   showGradientPath = true,
   className,
   childCircularComponent,
+  showScore
 }) => {
   const styles = buildStyles({
     rotation: 1 / 2 + 1 / 8,
@@ -60,7 +62,7 @@ const Gauge: FC<IGauge> = ({
       ) : (
         <CircularProgressbar
           value={score || 0}
-          text={`${grade}`}
+          text={showScore ? score?.toString(): grade}
           circleRatio={0.75}
           strokeWidth={4}
           styles={styles}
