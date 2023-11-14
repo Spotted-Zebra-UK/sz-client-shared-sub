@@ -9,6 +9,11 @@ import Error from '../../../enums/error';
 import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
+import {
+  useAuthAppRedirect,
+  AUTH_APP_ROUTES,
+} from '../../../hooks/useAuthAppRedirect';
+import { Loader } from '@spotted-zebra-uk/sz-ui-shared.ui.loader';
 
 interface IRestorePassword {
   restorePasswordNotification?: TNotification;
@@ -22,6 +27,8 @@ const RestorePassword: FC<IRestorePassword> = ({
   clientType,
 }) => {
   const { t } = useTranslation();
+  const loading = useAuthAppRedirect(AUTH_APP_ROUTES.RESET_PASSWORD);
+
   const [requestPasswordRecovery] = useRequestPasswordRecoveryMutation({
     onCompleted: () => {
       addAuthNotification(AuthViews.RESTORE_PASSWORD, {
@@ -67,11 +74,17 @@ const RestorePassword: FC<IRestorePassword> = ({
   };
 
   return (
-    <RestorePasswordPresentational
-      notification={restorePasswordNotification}
-      onRestorePassword={handleRestorePassword}
-      loginRedirectUrl={authenticationRoutes.login}
-    />
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <RestorePasswordPresentational
+          notification={restorePasswordNotification}
+          onRestorePassword={handleRestorePassword}
+          loginRedirectUrl={authenticationRoutes.login}
+        />
+      )}
+    </>
   );
 };
 
