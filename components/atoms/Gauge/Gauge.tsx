@@ -15,6 +15,7 @@ interface IGauge {
   className?: string;
   childCircularComponent?: JSX.Element;
   showScore?: boolean;
+  centerTextColor?: string;
 }
 
 const Gauge: FC<IGauge> = ({
@@ -25,13 +26,14 @@ const Gauge: FC<IGauge> = ({
   className,
   childCircularComponent,
   showScore,
+  centerTextColor,
 }) => {
   const styles = buildStyles({
     rotation: 1 / 2 + 1 / 8,
     strokeLinecap: 'butt',
     trailColor: '#eee',
     textSize: 40,
-    textColor: '#006fbf',
+    textColor: centerTextColor || 'black',
     pathColor,
   });
   return (

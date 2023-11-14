@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/indent */
 import React, { FC, ReactElement } from 'react';
 import _ from 'lodash';
-import { ReactComponent as DefWaveSImage } from '../../../icons/convergence/waveS-PDF.svg';
-import { ReactComponent as DefWaveLImage } from '../../../icons/convergence/waveL-PDF.svg';
-import { ReactComponent as DefWaveMImage } from '../../../icons/convergence/waveM-PDF.svg';
-import { ReactComponent as DefWaveXLImage } from '../../../icons/convergence/waveXXL-PDF.svg';
+import { ReactComponent as DefWaveSImageGradient } from '../../../icons/convergence-gradient/waveS-PDF.svg';
+import { ReactComponent as DefWaveLImageGradient } from '../../../icons/convergence-gradient/waveL-PDF.svg';
+import { ReactComponent as DefWaveMImageGradient } from '../../../icons/convergence-gradient/waveM-PDF.svg';
+import { ReactComponent as DefWaveXLImageGradient } from '../../../icons/convergence-gradient/waveXXL-PDF.svg';
+import { ReactComponent as DefWaveSImageSingleColor } from '../../../icons/convergence-single-color/waveS-PDF.svg';
+import { ReactComponent as DefWaveLImageSingleColor } from '../../../icons/convergence-single-color/waveL-PDF.svg';
+import { ReactComponent as DefWaveMImageSingleColor } from '../../../icons/convergence-single-color/waveM-PDF.svg';
+import { ReactComponent as DefWaveXLImageSingleColor } from '../../../icons/convergence-single-color/waveXXL-PDF.svg';
 import './ConvergenceDynamic.scss';
+import { ReportSubType } from '../../../../../enums/reportRender.enum';
 
 interface IConvergenceDynamic {
   className?: string;
@@ -34,6 +39,7 @@ interface IConvergenceDynamic {
       }
     >;
   };
+  reportSubType?: string;
 }
 
 const ConvergenceDynamic: FC<IConvergenceDynamic> = ({
@@ -42,11 +48,28 @@ const ConvergenceDynamic: FC<IConvergenceDynamic> = ({
   renderCenter,
   renderBoxesContent,
   waves,
+  reportSubType,
 }) => {
-  const WaveSImage = waves ? waves.WaveSImage : DefWaveSImage;
-  const WaveMImage = waves ? waves.WaveMImage : DefWaveMImage;
-  const WaveLImage = waves ? waves.WaveLImage : DefWaveLImage;
-  const WaveXLImage = waves ? waves.WaveXLImage : DefWaveXLImage;
+  const WaveSImage = waves
+    ? waves.WaveSImage
+    : reportSubType === ReportSubType.STAGE_RESULTS_CANDIDATE
+    ? DefWaveSImageSingleColor
+    : DefWaveSImageGradient;
+  const WaveMImage = waves
+    ? waves.WaveMImage
+    : reportSubType === ReportSubType.STAGE_RESULTS_CANDIDATE
+    ? DefWaveMImageSingleColor
+    : DefWaveMImageGradient;
+  const WaveLImage = waves
+    ? waves.WaveLImage
+    : reportSubType === ReportSubType.STAGE_RESULTS_CANDIDATE
+    ? DefWaveLImageSingleColor
+    : DefWaveLImageGradient;
+  const WaveXLImage = waves
+    ? waves.WaveXLImage
+    : reportSubType === ReportSubType.STAGE_RESULTS_CANDIDATE
+    ? DefWaveXLImageSingleColor
+    : DefWaveXLImageGradient;
 
   const renderWavesRow = (numberOfWavesInRow: number, rowId: string) => {
     if (numberOfWavesInRow === 1) {
