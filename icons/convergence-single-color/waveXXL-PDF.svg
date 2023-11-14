@@ -2,9 +2,9 @@
   <path opacity="0.1" d="M74 210C39.5303 210 25.2121 10 4 10" stroke="url(#paint0_linear)" stroke-width="20"/>
   <defs>
     <linearGradient id="paint0_linear" x1="4" y1="210" x2="74" y2="210" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#00D3AD"/>
-      <stop offset="0.380206" stop-color="#10B7FF"/>
-      <stop offset="1" stop-color="#A736FF"/>
+      <stop stop-color="#0974C1"/>
+      <stop offset="0.380206" stop-color="#0974C1"/>
+      <stop offset="1" stop-color="#0974C1"/>
     </linearGradient>
   </defs>
 </svg>

@@ -15,6 +15,7 @@ interface IGauge {
   className?: string;
   childCircularComponent?: JSX.Element;
   showScore?: boolean;
+  centerTextColor?: string;
 }
 
 const Gauge: FC<IGauge> = ({
@@ -24,14 +25,15 @@ const Gauge: FC<IGauge> = ({
   showGradientPath = true,
   className,
   childCircularComponent,
-  showScore
+  showScore,
+  centerTextColor,
 }) => {
   const styles = buildStyles({
     rotation: 1 / 2 + 1 / 8,
     strokeLinecap: 'butt',
     trailColor: '#eee',
     textSize: 40,
-    textColor: 'black',
+    textColor: centerTextColor || 'black',
     pathColor,
   });
   return (
@@ -62,7 +64,7 @@ const Gauge: FC<IGauge> = ({
       ) : (
         <CircularProgressbar
           value={score || 0}
-          text={showScore ? score?.toString(): grade}
+          text={showScore ? score?.toString() : grade}
           circleRatio={0.75}
           strokeWidth={4}
           styles={styles}
