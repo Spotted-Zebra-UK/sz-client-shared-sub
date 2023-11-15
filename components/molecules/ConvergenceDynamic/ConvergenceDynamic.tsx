@@ -10,7 +10,6 @@ import { ReactComponent as DefWaveLImageSingleColor } from '../../../icons/conve
 import { ReactComponent as DefWaveMImageSingleColor } from '../../../icons/convergence-single-color/waveM-PDF.svg';
 import { ReactComponent as DefWaveXLImageSingleColor } from '../../../icons/convergence-single-color/waveXXL-PDF.svg';
 import './ConvergenceDynamic.scss';
-import { ReportSubType } from '../../../../../enums/reportRender.enum';
 
 interface IConvergenceDynamic {
   className?: string;
@@ -39,7 +38,7 @@ interface IConvergenceDynamic {
       }
     >;
   };
-  reportSubType?: string;
+  showSingleColorWaves?: boolean;
 }
 
 const ConvergenceDynamic: FC<IConvergenceDynamic> = ({
@@ -48,26 +47,26 @@ const ConvergenceDynamic: FC<IConvergenceDynamic> = ({
   renderCenter,
   renderBoxesContent,
   waves,
-  reportSubType,
+  showSingleColorWaves,
 }) => {
   const WaveSImage = waves
     ? waves.WaveSImage
-    : reportSubType === ReportSubType.STAGE_RESULTS_CANDIDATE
+    : showSingleColorWaves
     ? DefWaveSImageSingleColor
     : DefWaveSImageGradient;
   const WaveMImage = waves
     ? waves.WaveMImage
-    : reportSubType === ReportSubType.STAGE_RESULTS_CANDIDATE
+    : showSingleColorWaves
     ? DefWaveMImageSingleColor
     : DefWaveMImageGradient;
   const WaveLImage = waves
     ? waves.WaveLImage
-    : reportSubType === ReportSubType.STAGE_RESULTS_CANDIDATE
+    : showSingleColorWaves
     ? DefWaveLImageSingleColor
     : DefWaveLImageGradient;
   const WaveXLImage = waves
     ? waves.WaveXLImage
-    : reportSubType === ReportSubType.STAGE_RESULTS_CANDIDATE
+    : showSingleColorWaves
     ? DefWaveXLImageSingleColor
     : DefWaveXLImageGradient;
 
