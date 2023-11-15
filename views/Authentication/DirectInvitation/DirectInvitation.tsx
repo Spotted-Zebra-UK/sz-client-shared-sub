@@ -9,6 +9,10 @@ import { TNotification } from '../../../interfaces/notification';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import { AuthViews } from '../Authentication.constants';
 import InvitationExpiredView from './InvitationExpiredView/InvitationExpiredView';
+import {
+  useAuthAppRedirect,
+  AUTH_APP_ROUTES,
+} from '../../../hooks/useAuthAppRedirect';
 
 interface IDirectInvitation {
   addAuthNotification: (view: AuthViews, notification: TNotification) => void;
@@ -31,7 +35,11 @@ const DirectInvitation: FC<IDirectInvitation> = ({
     onError: () => {},
   });
 
-  if (getInvitationStatusQueryResponse.loading) {
+  const loading = useAuthAppRedirect(AUTH_APP_ROUTES.SIGNUP, {
+    'direct-inv': invitationData?.token || '',
+  });
+
+  if (getInvitationStatusQueryResponse.loading || loading) {
     return (
       <div className="DirectInvitation__LoaderWrapper">
         <Loader />
