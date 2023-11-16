@@ -56,12 +56,12 @@ const SignUpPresentational: FC<ISignUp> = ({
         </div>
       </div>
       <SignUpForm fullName={fullName} email={email} onSignUp={onSignUp} />
-      {loginRedirectUrl ? (
+      {/* {loginRedirectUrl ? (
         <div className="SignUp__RedirectToLogin">
           {t('authentication.signUp.alreadyHaveAccount')}{' '}
           <Link to={loginRedirectUrl}>{t('common.signIn')}</Link>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

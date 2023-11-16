@@ -13,9 +13,10 @@ export interface IEditor {
   className?: string;
   toolbarOptions?: QuillOptionsStatic | undefined;
   ToolbarComponent?: React.ForwardRefExoticComponent<
-    { onUndo?: () => void; onRedo?: () => void } & React.RefAttributes<
-      HTMLDivElement
-    >
+    {
+      onUndo?: () => void;
+      onRedo?: () => void;
+    } & React.RefAttributes<HTMLDivElement>
   >;
 }
 
@@ -77,7 +78,7 @@ const Editor: FC<IEditor> = ({
         toolbarOptions || defaultOptions
       );
       const parsedValue: Delta = JSON.parse(value || '{}');
-      editor.current.setContents(parsedValue);
+      // editor.current.setContents(parsedValue);
       editor.current.on('text-change', handleChange);
       editor.current.on('selection-change', handleChangeSelection);
     }

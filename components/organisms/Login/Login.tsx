@@ -37,12 +37,12 @@ const Login: FC<ILogin> = ({
       {restorePasswordUrl ? (
         <div className="Login__RedirectToRestorePassword">
           Forgot password?{' '}
-          <Link
+          {/* <Link
             className="Login__RedirectToRestorePassword__Link"
             to={restorePasswordUrl}
           >
             Reset here
-          </Link>
+          </Link> */}
         </div>
       ) : null}
     </div>

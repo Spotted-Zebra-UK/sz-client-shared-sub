@@ -7,25 +7,16 @@ interface ICandidateReportHeaderDesktop {
   position: string;
 }
 
-const CandidateReportHeaderDesktop: FC<ICandidateReportHeaderDesktop> = props => {
-  const { position } = props;
-
-  return (
-    <header className="CandidateReportHeaderDesktop Wrapper">
-      <div className="CandidateReportHeaderDesktop__Container">
-        <div className="CandidateReportHeaderDesktop__Container__Navigation">
-          <Link to="/stages">
-            <img
-              src={`${process.env.PUBLIC_URL}/CandidateReportHeader/arrowLeft.svg`}
-              alt="ArrowLeft.svg"
-            />
-            <h6>{position}</h6>
-          </Link>
+const CandidateReportHeaderDesktop: FC<ICandidateReportHeaderDesktop> =
+  props => {
+    return (
+      <header className="CandidateReportHeaderDesktop Wrapper">
+        <div className="CandidateReportHeaderDesktop__Container">
+          <div className="CandidateReportHeaderDesktop__Container__Navigation"></div>
+          <LogoutButton />
         </div>
-        <LogoutButton />
-      </div>
-    </header>
-  );
-};
+      </header>
+    );
+  };
 
 export default CandidateReportHeaderDesktop;
