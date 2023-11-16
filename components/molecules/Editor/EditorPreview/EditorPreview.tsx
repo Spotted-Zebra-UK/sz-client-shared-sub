@@ -1,7 +1,8 @@
 import './EditorPreview.scss';
-import Quill from 'quill';
-import Delta from 'quill-delta';
-import React, { FC, useEffect, useRef } from 'react';
+// import Quill from 'quill';
+// import Delta from 'quill-delta';
+// import React, { FC, useEffect, useRef } from 'react';
+import { FC } from 'react';
 
 interface IEditorPreview {
   id: string;
@@ -10,26 +11,26 @@ interface IEditorPreview {
 }
 
 const EditorPreview: FC<IEditorPreview> = ({ value, id, className }) => {
-  const editorWrapperRef = useRef<HTMLDivElement>(null);
-  const editor = useRef<Quill>();
+  // const editorWrapperRef = useRef<HTMLDivElement>(null);
+  // const editor = useRef<Quill>();
 
-  useEffect(() => {
-    if (editorWrapperRef.current) {
-      editor.current = new Quill(editorWrapperRef.current, {
-        modules: {
-          toolbar: false,
-        },
-        readOnly: true,
-        theme: 'snow',
-      });
-      const parsedValue: Delta = JSON.parse(value);
-      editor.current.setContents(parsedValue);
-    }
-  });
+  // useEffect(() => {
+  //   if (editorWrapperRef.current) {
+  //     editor.current = new Quill(editorWrapperRef.current, {
+  //       modules: {
+  //         toolbar: false,
+  //       },
+  //       readOnly: true,
+  //       theme: 'snow',
+  //     });
+  //     const parsedValue: Delta = JSON.parse(value);
+  //     editor.current.setContents(parsedValue);
+  //   }
+  // });
 
   return (
     <div className={`Editor__Preview${className ? ` ${className}` : ''}`}>
-      <div ref={editorWrapperRef} id={id} />
+      {/* <div ref={editorWrapperRef} id={id} /> */}
     </div>
   );
 };
