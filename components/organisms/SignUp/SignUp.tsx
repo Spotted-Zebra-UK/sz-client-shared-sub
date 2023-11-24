@@ -2,6 +2,7 @@ import './SignUp.scss';
 import _ from 'lodash';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+//TODO - YL-182
 // import { Link } from 'react-router-dom';
 import BubblesBackground from '../../../components/atoms/BubblesBackground/BubblesBackground';
 import Notification from '../../../components/atoms/Notification/Notification';

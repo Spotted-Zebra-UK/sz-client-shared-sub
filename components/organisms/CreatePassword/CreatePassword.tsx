@@ -1,5 +1,6 @@
 import './CreatePassword.scss';
 import React, { FC } from 'react';
+//TODO - YL-182
 // import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../icons/SpottedZebraLogo.svg';
 import { TNotification } from '../../../interfaces/notification';

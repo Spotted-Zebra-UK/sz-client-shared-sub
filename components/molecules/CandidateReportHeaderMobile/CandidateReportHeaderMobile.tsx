@@ -1,5 +1,6 @@
 import './CandidateReportHeaderMobile.scss';
 import React, { FC } from 'react';
+//TODO - YL-182
 // import { Link } from 'react-router-dom';
 import LogoutButton from '../../organisms/LogoutButton/LogoutButton';
 
