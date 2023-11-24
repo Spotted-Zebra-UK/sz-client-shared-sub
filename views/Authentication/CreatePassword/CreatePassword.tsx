@@ -1,7 +1,7 @@
 import './CreatePassword.scss';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useUpdateIdentityPasswordMutation } from '../../../../../generated/graphql';
 import CreatePasswordPresentational from '../../../components/organisms/CreatePassword/CreatePassword';
 import Error from '../../../enums/error';
@@ -44,9 +44,9 @@ const CreatePassword: FC<ICreatePassword> = ({
             message: (
               <span className="CreatePassword__ErrorNotificationMessage">
                 {t('authentication.createPassword.recoveryLinkIsInvalid')}{' '}
-                <Link to={authenticationRoutes.restorePassword}>
+                {/* <Link to={authenticationRoutes.restorePassword}>
                   {t('common.here')}
-                </Link>
+                </Link> */}
                 .
               </span>
             ),
