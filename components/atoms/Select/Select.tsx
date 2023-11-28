@@ -73,6 +73,7 @@ const Select: FC<ISelect> = ({
     isSearchable: searchable,
     isDisabled,
     classNamePrefix,
+    ariaDisabled: isDisabled,
   };
   if (createable) {
     return <CreatableSelect {...props} />;

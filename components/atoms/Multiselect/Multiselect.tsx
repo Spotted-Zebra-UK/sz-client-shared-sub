@@ -10,6 +10,7 @@ interface IMultiselect {
   options: TSelectOption[];
   placeholder?: string;
   onChange: (value: string[], name: string) => void;
+  ariaDisabled?: boolean;
 }
 
 const Multiselect: FC<IMultiselect> = ({
@@ -19,6 +20,7 @@ const Multiselect: FC<IMultiselect> = ({
   id,
   placeholder = '',
   value,
+  ariaDisabled = false,
 }) => {
   const handleChange = (value: OnChangeValue<TSelectOption, true>) => {
     const values: string[] = value.map(valueItem => valueItem.value);
@@ -56,6 +58,7 @@ const Multiselect: FC<IMultiselect> = ({
       onChange={handleChange}
       value={selectedValues}
       maxMenuHeight={150}
+      ariaDisabled={ariaDisabled}
     />
   );
 };
