@@ -1,13 +1,5 @@
 @import '../../../variables';
 
-.react-datepicker-wrapper {
-  width: 100%;
-}
-
-.react-datepicker__close-icon {
-  padding-right: 6px;
-}
-
 .Datepicker {
   &__Button {
     border: 0;
@@ -30,4 +22,13 @@
     margin-top: 5px;
     margin-bottom: 5px;
   }
+
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+  
+  .react-datepicker__close-icon {
+    padding-right: 6px;
+  }
+  
 }
