@@ -53,9 +53,9 @@ const CreatePassword: FC<ICreatePassword> = ({
             message: (
               <span className="CreatePassword__ErrorNotificationMessage">
                 {t('authentication.createPassword.recoveryLinkIsInvalid')}{' '}
-                <Link to={authenticationRoutes.restorePassword}>
+                {/* <Link to={authenticationRoutes.restorePassword}>
                   {t('common.here')}
-                </Link>
+                </Link> */}
                 .
               </span>
             ),
