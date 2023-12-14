@@ -56,7 +56,15 @@ const Login: FC<ILogin> = ({
   });
   const [authenticate] = useAuthenticateMutation({});
 
-  const loading = useAuthAppRedirect();
+  const loading = useAuthAppRedirect(
+    undefined,
+    //Send redirect_path to enable redirect to specific page after sign-in
+    authRedirectUrl && authRedirectUrl !== '/'
+      ? {
+          redirect_path: authRedirectUrl,
+        }
+      : undefined
+  );
 
   useEffect(() => {
     document.body.style.backgroundColor = 'white';
