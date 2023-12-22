@@ -1,15 +1,15 @@
+import { useCompanyIdByProjectLazyQuery } from 'generated/graphql';
+import { findProjectIdIndirectInvitationUrl } from 'helpers/invitations';
 import { FC, useEffect, useState } from 'react';
-import { useCompanyIdByProjectLazyQuery } from '../../../../../../generated/graphql';
-import { findProjectIdIndirectInvitationUrl } from '../../../../helpers/invitations';
-import { TNotification } from '../../../../interfaces/notification';
-import { AuthViews } from '../../Authentication.constants';
-import SignUp from '../SignUp';
+import { Loader } from '@spotted-zebra-uk/sz-ui-shared.ui.loader';
 import {
   AUTH_APP_ROUTES,
   getIndirectInviteParams,
   useAuthAppRedirect,
 } from '../../../../hooks/useAuthAppRedirect';
-import { Loader } from '@spotted-zebra-uk/sz-ui-shared.ui.loader';
+import { TNotification } from '../../../../interfaces/notification';
+import { AuthViews } from '../../Authentication.constants';
+import SignUp from '../SignUp';
 
 export interface ISignUpWrapper {
   authPrepopulatedValues?: {
