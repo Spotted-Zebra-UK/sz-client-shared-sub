@@ -1,9 +1,9 @@
 import './Notification.scss';
-import React, { FC } from 'react';
-import { ReactComponent as ClapsIcon } from '../../../icons/Claps.svg';
-import { ReactComponent as IdeaIcon } from '../../../icons/Idea.svg';
-import { ReactComponent as MailIcon } from '../../../icons/Mail.svg';
-import { ReactComponent as WarningIcon } from '../../../icons/Warning.svg';
+import { ReactComponent as ClapsIcon } from 'assets/icons/claps_notification.svg';
+import { ReactComponent as IdeaIcon } from 'assets/icons/Idea.svg';
+import { ReactComponent as MailIcon } from 'assets/icons/Mail.svg';
+import { ReactComponent as WarningIcon } from 'assets/icons/Warning.svg';
+import { FC } from 'react';
 import { TNotification } from '../../../interfaces/notification';
 
 export interface INotification {

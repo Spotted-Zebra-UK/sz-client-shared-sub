@@ -1,4 +1,5 @@
 import './LogoutButton.scss';
+import { ReactComponent as ExitIcon } from 'assets/icons/Exit.svg';
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
@@ -7,7 +8,6 @@ import {
   REFRESH_TOKEN_STORAGE_KEY,
 } from '../../../constants/authentication';
 import { DEAUTHENTICATE_MUTATION } from '../../../graphql/authentication';
-import { ReactComponent as ExitIcon } from '../../../icons/Exit.svg';
 import { IDeauthenticateInput } from '../../../interfaces/authentication';
 import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import IconButton from '../../atoms/IconButton/IconButton';

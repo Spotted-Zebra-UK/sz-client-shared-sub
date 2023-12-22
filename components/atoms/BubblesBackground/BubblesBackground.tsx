@@ -1,11 +1,11 @@
 import './BubblesBackground.scss';
-import React, { FunctionComponent } from 'react';
-import { ReactComponent as Bubbles0 } from '../../../icons/bubbles/Bubbles-0.svg';
-import { ReactComponent as Bubbles1 } from '../../../icons/bubbles/Bubbles-1.svg';
-import { ReactComponent as Bubbles2 } from '../../../icons/bubbles/Bubbles-2.svg';
-import { ReactComponent as Bubbles3 } from '../../../icons/bubbles/Bubbles-3.svg';
-import { ReactComponent as LeftBubblesIcon1 } from '../../../icons/CandidateInformationBubblesLeft.svg';
-import { ReactComponent as RightBubblesIcon1 } from '../../../icons/CandidateInformationBubblesRight.svg';
+import { ReactComponent as Bubbles0 } from 'assets/icons/bubbles/Bubbles-0.svg';
+import { ReactComponent as Bubbles1 } from 'assets/icons/bubbles/Bubbles-1.svg';
+import { ReactComponent as Bubbles2 } from 'assets/icons/bubbles/Bubbles-2.svg';
+import { ReactComponent as Bubbles3 } from 'assets/icons/bubbles/Bubbles-3.svg';
+import { ReactComponent as LeftBubblesIcon1 } from 'assets/icons/CandidateInformationBubblesLeft.svg';
+import { ReactComponent as RightBubblesIcon1 } from 'assets/icons/CandidateInformationBubblesRight.svg';
+import { FunctionComponent } from 'react';
 
 interface IBubblesBackground {
   className?: string;

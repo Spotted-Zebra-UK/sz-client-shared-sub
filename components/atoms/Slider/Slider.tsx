@@ -1,9 +1,9 @@
 import 'rc-slider/assets/index.css';
 import './Slider.scss';
+import { ReactComponent as DragmeIcon } from 'assets/icons/Dragme.svg';
 import range from 'lodash/range';
 import RCSlider, { Handle } from 'rc-slider';
 import { FC, useMemo } from 'react';
-import { ReactComponent as DragmeIcon } from '../../../libs/sz-client-shared-sub/icons/Dragme.svg';
 import {
   baseHandleStyle,
   DEFAULT_HANDLE_ICON_SIZE,

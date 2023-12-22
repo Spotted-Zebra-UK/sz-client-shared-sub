@@ -1,6 +1,6 @@
 import './FieldLabelWithHint.scss';
+import { ReactComponent as HintIcon } from 'assets/icons/ic_info.svg';
 import { FC } from 'react';
-import { ReactComponent as HintIcon } from './ic_info.svg';
 
 interface IFieldLabelWithHint {
   label: string;

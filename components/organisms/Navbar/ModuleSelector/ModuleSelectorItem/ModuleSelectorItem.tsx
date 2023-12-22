@@ -1,10 +1,10 @@
 import './ModuleSelectorItem.scss';
-import React, { FC } from 'react';
-import { CmAllowedAreaType } from '../../../../../../../generated/graphql';
-import IC_ARROW from '../../../../../icons/ic_down-arrow_small.svg';
-import IC_EMPLOYEE from '../../../../../icons/ic_employee.svg';
-import IC_RECRUITER from '../../../../../icons/ic_recruitment.svg';
-import IC_TALENT_REVIEW from '../../../../../icons/ic_talent_review.svg';
+import IC_ARROW from 'assets/icons/ic_down-arrow_small.svg';
+import IC_EMPLOYEE from 'assets/icons/ic_employee.svg';
+import IC_RECRUITER from 'assets/icons/ic_recruitment.svg';
+import IC_TALENT_REVIEW from 'assets/icons/ic_talent_review.svg';
+import { CmAllowedAreaType } from 'generated/graphql';
+import { FC } from 'react';
 
 interface IModuleSelectorItem {
   module: CmAllowedAreaType;

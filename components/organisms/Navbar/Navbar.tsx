@@ -1,9 +1,9 @@
 import './Navbar.scss';
+import IC_MENU from 'assets/icons/hamburger_menu.svg';
+import { ReactComponent as Logo } from 'assets/logos/SpottedZebraLogo.svg';
 import { CmAllowedAreaType, User, useUserQuery } from 'generated/graphql';
-import { ReactComponent as Logo } from 'libs/sz-client-shared-sub/icons/SpottedZebraLogo.svg';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import IC_MENU from '../../../icons/hamburger_menu.svg';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import ModuleSelector from './ModuleSelector/ModuleSelector';
 
