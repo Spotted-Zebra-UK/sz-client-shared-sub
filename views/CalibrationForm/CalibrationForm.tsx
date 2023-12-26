@@ -1,18 +1,18 @@
 import './CalibrationForm.scss';
+import { ReactComponent as AccountIcon } from 'assets/icons/calibrate/ic_account.svg';
+import { ReactComponent as PersonIcon } from 'assets/icons/calibrate/ic_person.svg';
+import { ReactComponent as LeftArrow } from 'assets/icons/left_arrow.svg';
+import { ReactComponent as RightArrow } from 'assets/icons/right_arrow.svg';
+import { TrCustomResultScoreModel } from 'generated/graphql';
 import { t } from 'i18next';
 import React, { FC } from 'react';
 import ReactTooltip from 'react-tooltip';
-import { TrCustomResultScoreModel } from '../../../../generated/graphql';
 import Loader from '../../components/atoms/Loader/Loader';
 import Notification from '../../components/atoms/Notification/Notification';
 import { candidateEmail } from '../../constants/candidateEmail';
-import { ReactComponent as AccountIcon } from '../../icons/calibrate/ic_account.svg';
-import { ReactComponent as PersonIcon } from '../../icons/calibrate/ic_person.svg';
 import CalibrateField from './CalibrateField/CalibrateField';
 import CalibrationAction from './CalibrationAction/CalibrationAction';
 import { useCalibrateForm } from './helper/useCalibrateForm';
-import { ReactComponent as LeftArrow } from './left_arrow.svg';
-import { ReactComponent as RightArrow } from './right_arrow.svg';
 
 interface ICalibrationForm {
   stageCandidateId: number;

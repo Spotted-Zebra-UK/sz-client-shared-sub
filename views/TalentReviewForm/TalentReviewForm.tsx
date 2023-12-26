@@ -1,4 +1,5 @@
 import './TalentReviewForm.scss';
+import { ReactComponent as MicrophoneIcon } from 'assets/icons/ic_microphone_tr.svg';
 import { FormType } from 'generated/graphql';
 import { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -9,7 +10,6 @@ import {
   TalentReviewFormField,
   TRespondantFormField,
 } from '../../interfaces/TalentReviewForm';
-import { ReactComponent as MicrophoneIcon } from './ic_microphone.svg';
 
 interface ITalentReviewForm {
   ownerId: number;

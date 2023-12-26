@@ -1,18 +1,18 @@
 import './DirectInvitation.scss';
-import React, { FC } from 'react';
+import { useGetInvitationStatusQuery } from 'generated/graphql';
+import { parseInvitationToken } from 'helpers/invitations';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Redirect, useLocation } from 'react-router-dom';
-import { useGetInvitationStatusQuery } from '../../../../../generated/graphql';
 import Loader from '../../../components/atoms/Loader/Loader';
-import { parseInvitationToken } from '../../../helpers/invitations';
-import { TNotification } from '../../../interfaces/notification';
-import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
-import { AuthViews } from '../Authentication.constants';
-import InvitationExpiredView from './InvitationExpiredView/InvitationExpiredView';
 import {
   AUTH_APP_ROUTES,
   useAuthAppRedirect,
 } from '../../../hooks/useAuthAppRedirect';
+import { TNotification } from '../../../interfaces/notification';
+import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
+import { AuthViews } from '../Authentication.constants';
+import InvitationExpiredView from './InvitationExpiredView/InvitationExpiredView';
 
 interface IDirectInvitation {
   addAuthNotification: (view: AuthViews, notification: TNotification) => void;

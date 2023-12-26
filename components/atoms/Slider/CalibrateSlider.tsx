@@ -1,9 +1,9 @@
 import 'rc-slider/assets/index.css';
 import './CalibrateSlider.scss';
+import { ReactComponent as DragmeIcon } from 'assets/icons/Dragme.svg';
+import { ReactComponent as CompleteIcon } from 'assets/icons/ic_completed.svg';
 import RCSlider, { Handle } from 'rc-slider';
 import { FC, useMemo } from 'react';
-import { ReactComponent as DragmeIcon } from '../../../icons/Dragme.svg';
-import { ReactComponent as CompleteIcon } from './ic_completed.svg';
 import {
   baseHandleStyle,
   DEFAULT_HANDLE_ICON_SIZE,

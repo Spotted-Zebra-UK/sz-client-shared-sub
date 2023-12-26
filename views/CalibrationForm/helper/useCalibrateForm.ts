@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { LazyQueryResult, QueryResult } from '@apollo/client';
+import PerformanceIcon from 'assets/icons/calibrate/ic_performance.svg';
+import PersonIconUrl from 'assets/icons/calibrate/ic_person.svg';
+import PotentialIcon from 'assets/icons/calibrate/ic_potential.svg';
+import ValuesIcon from 'assets/icons/calibrate/ic_values.svg';
 import {
   BasicScoreType,
   CalibrationConfigGenerateOneQuery,
@@ -25,11 +27,9 @@ import {
   useSoftSkillFindManyLazyQuery,
   useStageCandidateUpdateMutation,
   useUserQuery,
-} from '../../../../../generated/graphql';
-import PerformanceIcon from '../../../icons/calibrate/ic_performance.svg';
-import PersonIconUrl from '../../../icons/calibrate/ic_person.svg';
-import PotentialIcon from '../../../icons/calibrate/ic_potential.svg';
-import ValuesIcon from '../../../icons/calibrate/ic_values.svg';
+} from 'generated/graphql';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { LazyQueryResult, QueryResult } from '@apollo/client';
 
 interface IGrade {
   name: string;

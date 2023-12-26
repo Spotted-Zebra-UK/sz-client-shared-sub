@@ -1,7 +1,7 @@
 import './CheckboxFormField.scss';
+import { ReactComponent as CheckboxCheckedIcon } from 'assets/icons/CheckboxChecked.svg';
+import { ReactComponent as CheckboxEmptyIcon } from 'assets/icons/CheckboxEmpty.svg';
 import React, { FC } from 'react';
-import { ReactComponent as CheckboxCheckedIcon } from '../../../icons/CheckboxChecked.svg';
-import { ReactComponent as CheckboxEmptyIcon } from '../../../icons/CheckboxEmpty.svg';
 import { TCheckboxFormFieldValue } from '../../../interfaces/form';
 import Checkbox from '../../atoms/Checkbox/Checkbox';
 

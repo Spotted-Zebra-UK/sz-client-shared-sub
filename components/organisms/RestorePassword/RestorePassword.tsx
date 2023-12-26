@@ -1,8 +1,8 @@
 import './RestorePassword.scss';
+import { ReactComponent as Logo } from 'assets/icons/spottedzebra_new_logo.svg';
 import { t } from 'i18next';
 import { FC } from 'react';
 import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
-import { ReactComponent as Logo } from '../../../icons/spottedzebra_new_logo.svg';
 import { TNotification } from '../../../interfaces/notification';
 import RestorePasswordForm from './RestorePasswordForm/RestorePasswordForm';
 

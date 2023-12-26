@@ -1,4 +1,5 @@
 import './TRFormContainer.scss';
+import { ReactComponent as HintIcon } from 'assets/icons/ic_info.svg';
 import { FieldType, FormType } from 'generated/graphql';
 import _ from 'lodash';
 import { FC, useMemo } from 'react';
@@ -8,7 +9,6 @@ import { MutationResult } from '@apollo/client';
 import { Button } from '@spotted-zebra-uk/sz-ui-shared.ui.button';
 import FormBuilderField from '../../../components/molecules/FormBuilderField/FormBuilderField';
 import { useForm } from '../../../hooks/form';
-import { ReactComponent as HintIcon } from '../../../icons/ic_info.svg';
 import { TFormFieldValue } from '../../../interfaces/form';
 import {
   IRespondantFormUpdateMutationResponse,

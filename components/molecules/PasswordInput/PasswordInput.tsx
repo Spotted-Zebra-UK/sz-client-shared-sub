@@ -1,7 +1,7 @@
 import './PasswordInput.scss';
+import { ReactComponent as EyeIcon } from 'assets/icons/Eye.svg';
+import { ReactComponent as EyeSolidIcon } from 'assets/icons/EyeSolid.svg';
 import React, { FC, useState } from 'react';
-import { ReactComponent as EyeIcon } from '../../../icons/Eye.svg';
-import { ReactComponent as EyeSolidIcon } from '../../../icons/EyeSolid.svg';
 import Button from '../../atoms/Button/Button';
 
 interface IPasswordInput {

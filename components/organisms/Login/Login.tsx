@@ -1,8 +1,8 @@
 import './Login.scss';
+import { ReactComponent as Logo } from 'assets/icons/spottedzebra_new_logo.svg';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from '@spotted-zebra-uk/sz-ui-shared.ui.link';
-import { ReactComponent as Logo } from '../../../icons/spottedzebra_new_logo.svg';
 import { TNotification } from '../../../interfaces/notification';
 import Notification from '../../atoms/Notification/Notification';
 import LoginForm from './LoginForm/LoginForm';
