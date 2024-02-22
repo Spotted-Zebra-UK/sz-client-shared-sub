@@ -18,9 +18,15 @@ mutation ResultCreateManyTrCustom($args: [ResultCreateOneTrCustomArgs!]!) {
 mutation StageCandidateUpdate(
   $stageCandidateId: Int!
   $status: StageCandidateStatus!
+  $hasPledgedAnticheating: Boolean
 ) {
-  StageCandidateUpdate(id: $stageCandidateId, status: $status) {
+  StageCandidateUpdate(
+    id: $stageCandidateId
+    status: $status
+    hasPledgedAnticheating: $hasPledgedAnticheating
+  ) {
     id
     status
+    hasPledgedAnticheating
   }
 }
