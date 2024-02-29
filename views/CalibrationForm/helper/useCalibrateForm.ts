@@ -6,7 +6,7 @@ import {
   BasicScoreType,
   CalibrationConfigGenerateOneQuery,
   Exact,
-  GetTestCardsDocument,
+  GetStageActionsDocument,
   GradeBandUnion,
   InputMaybe,
   ResultAccessFindOneQuery,
@@ -216,7 +216,7 @@ export const useCalibrateForm = ({
         userType === 'candidate'
           ? [
               {
-                query: GetTestCardsDocument,
+                query: GetStageActionsDocument,
                 variables: {
                   stageCandidateId,
                 },
@@ -257,7 +257,7 @@ export const useCalibrateForm = ({
         userType === 'candidate'
           ? [
               {
-                query: GetTestCardsDocument,
+                query: GetStageActionsDocument,
                 variables: {
                   stageCandidateId,
                 },
