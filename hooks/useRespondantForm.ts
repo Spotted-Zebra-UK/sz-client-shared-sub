@@ -1,7 +1,6 @@
 import {
   FieldType,
   FormType,
-  GetTestCardsDocument,
   StageCandidateFindOneDocument,
   StageCandidateFindOneQuery,
   StageCandidateFindOneQueryVariables,
@@ -246,14 +245,6 @@ const useRespondantForm = ({
         onSaveRespondantFormCompleted();
       }
     },
-    refetchQueries: [
-      {
-        query: GetTestCardsDocument,
-        variables: {
-          stageCandidateId: associatedId,
-        },
-      },
-    ],
     update(cache, { data }) {
       if (data) {
         const { respondantForm } = data;
