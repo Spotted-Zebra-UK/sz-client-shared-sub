@@ -4,7 +4,6 @@ import {
   BasicScoreType,
   CalibrationConfigGenerateOneQuery,
   Exact,
-  GetTestCardsDocument,
   GradeBandUnion,
   InputMaybe,
   ResultAccessFindOneQuery,
@@ -214,17 +213,6 @@ export const useCalibrateForm = ({
         console.log(error);
         // onCloseHandler();
       },
-      refetchQueries:
-        userType === 'candidate'
-          ? [
-              {
-                query: GetTestCardsDocument,
-                variables: {
-                  stageCandidateId,
-                },
-              },
-            ]
-          : [],
     });
   };
   const onUpdateStatus = () => {
@@ -256,17 +244,6 @@ export const useCalibrateForm = ({
         console.log(error);
         onCloseHandler();
       },
-      refetchQueries:
-        userType === 'candidate'
-          ? [
-              {
-                query: GetTestCardsDocument,
-                variables: {
-                  stageCandidateId,
-                },
-              },
-            ]
-          : [],
     });
   };
 
