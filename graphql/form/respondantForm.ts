@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 // TODO: Refactor, use generated query instead of this.
 export const RESPONDANT_FORM_QUERY = gql`
@@ -7,12 +7,14 @@ export const RESPONDANT_FORM_QUERY = gql`
     $formOwnerId: Int!
     $formType: FormType!
     $respondantId: Int
+    $projectId: Int
   ) {
     respondantForm: RespondantForm(
       associatedId: $associatedId
       formOwnerId: $formOwnerId
       formType: $formType
       respondantId: $respondantId
+      projectId: $projectId
     ) {
       isComplete
       submittedFormLogId
