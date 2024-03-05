@@ -9,8 +9,8 @@ import {
 import { DEAUTHENTICATE_MUTATION } from '../../../graphql/authentication';
 import IC_EXIT from '../../../icons/ic_logout.svg';
 import { IDeauthenticateInput } from '../../../interfaces/authentication';
-import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import IconButton from '../../atoms/IconButton/IconButton';
+import { AUTH_LOGIN_ROUTE } from 'constants/authentication';
 
 interface ILogoutButton {}
 
@@ -32,7 +32,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
           localStorage.removeItem('filters');
           window.open(`${redirectFrom}`, '_self');
         } else {
-          history.push(authenticationRoutes.login);
+          history.push(AUTH_LOGIN_ROUTE);
           window.location.reload();
         }
       },
