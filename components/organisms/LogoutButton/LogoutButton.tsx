@@ -9,8 +9,8 @@ import {
 } from '../../../constants/authentication';
 import { DEAUTHENTICATE_MUTATION } from '../../../graphql/authentication';
 import { IDeauthenticateInput } from '../../../interfaces/authentication';
-import { authenticationRoutes } from '../../../navigation/AuthNavigation/authNavigation.constants';
 import IconButton from '../../atoms/IconButton/IconButton';
+import { AUTH_LOGIN_ROUTE } from '../../../../../constants/authentication';
 
 interface ILogoutButton {}
 
@@ -24,7 +24,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
         localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
         localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
         localStorage.removeItem('filters');
-        history.push(authenticationRoutes.login);
+        history.push(AUTH_LOGIN_ROUTE);
         window.location.reload();
       },
       onError: () => {},
