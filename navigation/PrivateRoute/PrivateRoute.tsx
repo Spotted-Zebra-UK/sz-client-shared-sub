@@ -5,8 +5,10 @@ import {
   RouteComponentProps,
   RouteProps,
 } from 'react-router-dom';
-import { AUTH_TOKEN_STORAGE_KEY } from '../../constants/authentication';
-import { authenticationRoutes } from '../AuthNavigation/authNavigation.constants';
+import {
+  AUTH_LOGIN_ROUTE,
+  AUTH_TOKEN_STORAGE_KEY,
+} from 'constants/authentication';
 
 interface IPrivateRoute extends RouteProps {
   component: FunctionComponent<RouteComponentProps>;
@@ -20,7 +22,7 @@ export interface IPrivateRouteRedirectLocationState {
 
 const PrivateRoute: FunctionComponent<IPrivateRoute> = ({
   component: Component,
-  redirectUrl = authenticationRoutes.login,
+  redirectUrl = AUTH_LOGIN_ROUTE,
   allowed = true,
   ...rest
 }) => {

@@ -3,7 +3,7 @@ import { ApolloClient, gql, NormalizedCacheObject } from '@apollo/client';
 import {
   AUTH_TOKEN_STORAGE_KEY,
   REFRESH_TOKEN_STORAGE_KEY,
-} from '../constants/authentication';
+} from 'constants/authentication';
 import {
   IRequestTokenRefreshInput,
   IRequestTokenRefreshResponse,
