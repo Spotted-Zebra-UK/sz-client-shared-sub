@@ -70,6 +70,9 @@ export const useGetStageCompanyRespondantForm = () => {
           associatedId: stageCompanyId,
           formOwnerId: stageCompanyId,
           formType,
+          projectId:
+          stageCandidateQueryResponse.data.StageCandidateFindOne?.stage
+            ?.projectId,
         },
       });
     }
@@ -118,6 +121,7 @@ interface IUseRespondantForm {
   formOwnerId: number;
   formType: FormType;
   respondantId?: number;
+  projectId?: number;
 }
 
 interface ISelectOption {
@@ -132,6 +136,7 @@ const useRespondantForm = ({
   formOwnerId,
   formType,
   respondantId,
+  projectId
 }: IUseRespondantForm): [
   QueryResult<IRespondantFormQueryResponse, IRespondantFormQueryInput>,
   TRespondantFormField[] | undefined,
@@ -150,6 +155,7 @@ const useRespondantForm = ({
       formOwnerId,
       formType,
       respondantId,
+      projectId
     },
     onError: () => {},
     onCompleted: data => {
@@ -264,6 +270,7 @@ const useRespondantForm = ({
             associatedId,
             formOwnerId,
             formType,
+            projectId
           },
           data: { respondantForm },
         });
