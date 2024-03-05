@@ -3,8 +3,8 @@ import {
   FieldType,
   FormManagerType,
   FormType,
-} from '../../../generated/graphql';
-import { TSelectOption } from '../components/atoms/Select/Select';
+} from "../../../generated/graphql";
+import { TSelectOption } from "../components/atoms/Select/Select";
 
 export type TRespondantFormField = {
   id: string;
@@ -56,6 +56,7 @@ export interface IRespondantFormQueryInput {
   formOwnerId: number;
   formType: FormType;
   respondantId?: number;
+  projectId?: number;
 }
 
 export interface IRespondantFormUpdateMutationResponse {
