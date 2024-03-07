@@ -1,6 +1,0 @@
-query GetInvitationStatus($invitationToken: String!) {
-  getInvitationStatus(invitationToken: $invitationToken) {
-    isExpired
-    isCompleted
-  }
-}
