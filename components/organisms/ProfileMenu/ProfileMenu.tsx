@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { User } from '../../../../../generated/graphql';
 import LogoutWithTextButton from '../LogoutWithTextButton/LogoutWithTextButton';
 import { Avatar } from '@spotted-zebra-uk/sz-ui-shared.ui.avatar';
+import { getInitialsInOrderFromLanguage } from 'helpers/locales';
 
 interface IProfileMenu {
   user: User;
@@ -14,8 +15,7 @@ const ProfileMenu: FC<IProfileMenu> = ({ user }) => {
       <div className="profile-name-container">
         <Avatar
           user={{
-            firstName: user.firstName,
-            lastName: user.lastName,
+            initials: getInitialsInOrderFromLanguage(user),
             imageUrl: user.avatarUrl as string,
           }}
           isInteractive={false}
