@@ -25,10 +25,10 @@ import {
   useStageCandidateUpdateMutation,
   useUserQuery,
 } from '../../../../../generated/graphql';
-import PerformanceIcon from '../../../icons/calibrate/ic_performance.svg';
-import PersonIconUrl from '../../../icons/calibrate/ic_person.svg';
-import PotentialIcon from '../../../icons/calibrate/ic_potential.svg';
-import ValuesIcon from '../../../icons/calibrate/ic_values.svg';
+import PerformanceIcon from 'icons/iconsSVG/ic_performance.svg';
+import PersonIconUrl from 'icons/iconsSVG/ic_person.svg';
+import PotentialIcon from 'icons/iconsSVG/ic_potential.svg';
+import ValuesIcon from 'icons/iconsSVG/ic_values.svg';
 
 interface IGrade {
   name: string;

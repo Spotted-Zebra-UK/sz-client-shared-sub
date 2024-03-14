@@ -7,7 +7,7 @@ import ReactTooltip from 'react-tooltip';
 import { MutationResult } from '@apollo/client';
 import FormBuilderField from '../../../components/molecules/FormBuilderField/FormBuilderField';
 import { useForm } from '../../../hooks/form';
-import { ReactComponent as HintIcon } from '../../../icons/ic_info.svg';
+import { ReactComponent as HintIcon } from 'icons/iconsSVG/ic_info.svg';
 import { TFormFieldValue } from '../../../interfaces/form';
 import {
   IRespondantFormUpdateMutationResponse,

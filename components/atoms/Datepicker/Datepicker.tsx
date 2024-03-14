@@ -5,7 +5,7 @@ import moment from 'moment';
 import { FC, forwardRef, RefObject } from 'react';
 import DatePicker from 'react-datepicker';
 import { DATE_FORMAT_DATE } from '../../../constants/dateFormats';
-import IC_CALENDAR from '../../../icons/ic_calendar_new.svg';
+import IC_CALENDAR from 'icons/iconsSVG/ic_calendar_new.svg';
 
 interface IDatepicker {
   className?: string;
