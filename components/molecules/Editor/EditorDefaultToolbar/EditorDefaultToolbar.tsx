@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { ReactComponent as RedoIcon } from '../../../../icons/Redo.svg';
-import { ReactComponent as UndoIcon } from '../../../../icons/Undo.svg';
+import { ReactComponent as RedoIcon } from '../../../../../../icons/Redo.svg';
+import { ReactComponent as UndoIcon } from '../../../../../../icons/Undo.svg';
 
 interface IEditorDefaultToolbar {
   onUndo: () => void;
