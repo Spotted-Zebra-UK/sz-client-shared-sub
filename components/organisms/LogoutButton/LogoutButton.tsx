@@ -9,7 +9,7 @@ import { IDeauthenticateInput } from '../../../interfaces/authentication';
 import IconButton from '../../atoms/IconButton/IconButton';
 import { AUTH_LOGIN_ROUTE } from '../../../../../constants/authentication';
 import { authCleanup } from 'helpers/authCleanup';
-import Cookies from 'js-cookie';
+import { getCookie } from 'helpers/cookies';
 
 interface ILogoutButton {}
 
@@ -28,7 +28,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
   );
 
   const handleLogout = () => {
-    const accessToken = Cookies.get(AUTH_TOKEN_STORAGE_KEY);
+    const accessToken = getCookie(AUTH_TOKEN_STORAGE_KEY);
     if (accessToken) {
       deauthenticate({
         variables: {
