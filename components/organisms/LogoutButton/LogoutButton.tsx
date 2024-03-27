@@ -3,27 +3,23 @@ import { ReactComponent as ExitIcon } from 'assets/icons/Exit.svg';
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import {
-  AUTH_TOKEN_STORAGE_KEY,
-  REFRESH_TOKEN_STORAGE_KEY,
-} from '../../../constants/authentication';
+import { AUTH_TOKEN_STORAGE_KEY } from '../../../constants/authentication';
 import { DEAUTHENTICATE_MUTATION } from '../../../graphql/authentication';
 import { IDeauthenticateInput } from '../../../interfaces/authentication';
 import IconButton from '../../atoms/IconButton/IconButton';
 import { AUTH_LOGIN_ROUTE } from '../../../../../constants/authentication';
+import { authCleanup } from 'helpers/authCleanup';
+import Cookies from 'js-cookie';
 
 interface ILogoutButton {}
 
 const LogoutButton: FC<ILogoutButton> = () => {
-  const accessToken = localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
   const history = useHistory();
   const [deauthenticate] = useMutation<{}, IDeauthenticateInput>(
     DEAUTHENTICATE_MUTATION,
     {
       onCompleted: () => {
-        localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
-        localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
-        localStorage.removeItem('filters');
+        authCleanup();
         history.push(AUTH_LOGIN_ROUTE);
         window.location.reload();
       },
@@ -32,6 +28,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
   );
 
   const handleLogout = () => {
+    const accessToken = Cookies.get(AUTH_TOKEN_STORAGE_KEY);
     if (accessToken) {
       deauthenticate({
         variables: {
