@@ -3,26 +3,23 @@ import IC_EXIT from 'assets/icons/ic_logout.svg';
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import {
-  AUTH_TOKEN_STORAGE_KEY,
-  REFRESH_TOKEN_STORAGE_KEY,
-} from '../../../constants/authentication';
+import { AUTH_TOKEN_STORAGE_KEY } from '../../../constants/authentication';
 import { DEAUTHENTICATE_MUTATION } from '../../../graphql/authentication';
 import { IDeauthenticateInput } from '../../../interfaces/authentication';
 import IconButton from '../../atoms/IconButton/IconButton';
 import { AUTH_LOGIN_ROUTE } from '../../../../../constants/authentication';
+import { authCleanup } from 'helpers/authCleanup';
+import { getCookie } from 'helpers/cookies';
 
 interface ILogoutButton {}
 
 const LogoutButton: FC<ILogoutButton> = () => {
-  const accessToken = localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
   const history = useHistory();
   const [deauthenticate] = useMutation<{}, IDeauthenticateInput>(
     DEAUTHENTICATE_MUTATION,
     {
       onCompleted: () => {
-        localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
-        localStorage.removeItem(REFRESH_TOKEN_STORAGE_KEY);
+        authCleanup();
         localStorage.removeItem('filters');
         let redirectFrom = localStorage.getItem('redirectFrom');
         let onCompleted = localStorage.getItem('onCompleted');
@@ -41,6 +38,7 @@ const LogoutButton: FC<ILogoutButton> = () => {
   );
 
   const handleLogout = () => {
+    const accessToken = getCookie(AUTH_TOKEN_STORAGE_KEY);
     if (accessToken) {
       deauthenticate({
         variables: {

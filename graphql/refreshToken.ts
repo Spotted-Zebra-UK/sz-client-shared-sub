@@ -8,6 +8,7 @@ import {
   IRequestTokenRefreshInput,
   IRequestTokenRefreshResponse,
 } from '../interfaces/authentication';
+import { getCookie, setCookie } from 'helpers/cookies';
 
 export const REQUEST_TOKEN_REFRESH = gql`
   mutation RequestTokenRefresh($accessToken: String!, $refreshToken: String!) {
@@ -24,8 +25,8 @@ export const REQUEST_TOKEN_REFRESH = gql`
 const requestTokenRefreshMutation = async (
   client: ApolloClient<NormalizedCacheObject>
 ): Promise<boolean> => {
-  const accessToken = localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
-  const refreshToken = localStorage.getItem(REFRESH_TOKEN_STORAGE_KEY);
+  const accessToken = getCookie(AUTH_TOKEN_STORAGE_KEY);
+  const refreshToken = getCookie(REFRESH_TOKEN_STORAGE_KEY);
 
   if (accessToken && refreshToken) {
     const response = await client.mutate<
@@ -40,11 +41,11 @@ const requestTokenRefreshMutation = async (
     });
 
     if (response.data) {
-      localStorage.setItem(
+      setCookie(
         AUTH_TOKEN_STORAGE_KEY,
         response.data.requestTokenRefresh.accessToken
       );
-      localStorage.setItem(
+      setCookie(
         REFRESH_TOKEN_STORAGE_KEY,
         response.data.requestTokenRefresh.refreshToken
       );
