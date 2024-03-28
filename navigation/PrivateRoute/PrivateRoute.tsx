@@ -9,6 +9,7 @@ import {
   AUTH_LOGIN_ROUTE,
   AUTH_TOKEN_STORAGE_KEY,
 } from 'constants/authentication';
+import { getCookie } from 'helpers/cookies';
 
 interface IPrivateRoute extends RouteProps {
   component: FunctionComponent<RouteComponentProps>;
@@ -26,7 +27,7 @@ const PrivateRoute: FunctionComponent<IPrivateRoute> = ({
   allowed = true,
   ...rest
 }) => {
-  const accessToken = localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
+  const accessToken = getCookie(AUTH_TOKEN_STORAGE_KEY);
 
   return (
     <Route
